@@ -1,0 +1,72 @@
+\documentclass[defaultstyle,11pt]{thesis}
+
+\usepackage{amssymb}                % to get all AMS symbols
+\usepackage{graphicx}               % to insert figures
+\usepackage{hyperref}               % PDF hyperreferences
+
+%%%%%%%%%%%%   All the preamble material:   %%%%%%%%%%%%
+
+\title{Local Fourier Analysis of Smoothers for P-Multgrid with High-Order Finite Elements}
+
+\author{Jeremy~L.}{Thompson}
+
+\otherdegrees{B.S., United States Air Force Academy, 2009\\
+	          M.Sc., University of Washington, 2010}
+
+\degree{Doctor of Philosophy}       %  #1 {long descr.}
+	   {Ph.D., Applied Mathematics} %  #2 {short descr.}
+
+\dept{Department of}                %  #1 {designation}
+	 {Applied Mathematics}          %  #2 {name}
+
+\advisor{Prof.}                     %  #1 {title}
+	    {Jed Brown}                 %  #2 {name}
+
+\reader{Rachel Goddard}             %  2nd person to sign thesis
+\readerThree{Thora Nea}             %  3rd person to sign thesis
+
+\abstract{  \OnePageChapter	% because it is very short
+
+	Often the abstract will be long enough to require
+	more than one page, in which case the macro
+	``$\backslash$OnePageChapter'' should {\it not}
+	be used.
+
+	But this one isn't, so it should.
+}
+
+% \IRBprotocol{E927F29.001X}	% optional!
+
+\ToCisShort	% use this only for 1-page Table of Contents
+
+\LoFisShort	% use this only for 1-page Table of Figures
+% \emptyLoF	% use this if there is no List of Figures
+
+\LoTisShort	% use this only for 1-page Table of Tables
+% \emptyLoT	% use this if there is no List of Tables
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%       BEGIN DOCUMENT...         %%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\input macros.tex
+\input 01-Introduction/introduction.tex
+\input 02-HighOrderFEM/highorderfem.tex
+\input 03-LocalFourierAnalysis/localfourieranalysis.tex
+\input 04-SolidMechanics/solidmechanics.tex
+\input 05-Conclusions/conclusions.tex
+
+%%%%%%%%%   then the Bibliography, if any   %%%%%%%%%
+\bibliographystyle{plain}           % or "siam", or "alpha", etc.
+\nocite{*}                          % list all refs in database, cited or not
+\bibliography{references}           % Bib database in "refs.bib"
+
+%%%%%%%%%   then the Appendices, if any   %%%%%%%%%
+%\appendix
+%\input appendixA.tex
+%\input appendixB.tex
+
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
