@@ -1,0 +1,28 @@
+Two key performance metrics for HPC hardware are FLOPs and memory and network bandwidth.
+FLOPs is the more widely popularized of these two metrics, but memory and network bandwidth is a common bottleneck in HPC application codes. 
+
+The Top 500 \cite{meuertop500} list tracks the 500 supercomputers with the highest peak  FLOPs, as measured by High-Performance Linpack (HPL) \cite{petitethpl}.
+HPL measures the performance when solving random dense linear systems in double precision via LU factorization and measures maximum achievable FLOPs.
+Other benchmarks, such as High-Performance Geometric Multigrid (HPGMG) \cite{adams2014hpgmg} and High-Performance Conjugate Gradient (HPCG) \cite{dongarra2016high}, measure performance based upon solving a more complex benchmark problem.
+The disparity between the FLOPs achieved in benchmarks such as HPGMG and HPCG and the peak FLOPs measured by HPL is partially explained by the growing gap between FLOPs and memory and network bandwidth.
+
+Over the last thirty years, the peak FLOPs for new HPC hardware has been increasing more rapidly than memory bandwidth and network bandwidth, for both CPUs and GPUs.
+As discussed in McCalpin's Supercomputing 2016 invited talk \cite{mccalpin2016memory}, peak FLOPs per socket have been increasing at a rate of 50-60\% per year while memory bandwidth has only been increasing at a rate of approximately 23\% per year and network bandwidth has only been increasing at a rate of approximately 20\% per year.
+FLOPs have improved twice as much as memory and network bandwidth.
+This problem is exacerbated by network latency, which is decreasing at a rate of approximately 20\% per year, and memory latency, which is \textit{increasing} at a rate of approximately 20\% per year.
+
+\begin{figure}
+\begin{subfigure}{.49\textwidth}
+\includegraphics[width=.99\linewidth]{../img/peakFlopsAndBandwidth}
+\caption{Peak FLOPs and Bandwidth}
+\end{subfigure}
+\begin{subfigure}{.49\textwidth}
+\includegraphics[width=.99\linewidth]{../img/peakRatio}
+\caption{Ratio Bandwidth to FLOPs}
+\end{subfigure}
+\caption{System Balance}
+\label{fig:peakratio}
+\end{figure}
+
+Using data from \cite{kruppcomparison}, we can see in Figure \ref{fig:peakratio} that AMD, NVIDIA, and Intel top of the line hardware has a steady decrease in the ratio of maximum memory bandwidth to FLOPs over the last 13 years.
+HPC applications need to be careful to control the memory bandwidth required for their codes to better realize the FLOPs capabilities of HPC hardware.

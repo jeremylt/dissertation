@@ -1,0 +1,11 @@
+Solid mechanics problems are commonly solved with finite element methods using sparse matrix representations of low order finite elements.
+However, solvers using assembled sparse matrices are memory bound for sufficiently large problems.
+We explore using high-order finite elements implemented in a matrix-free fashion with appropriate preconditioners to solve solid mechanics problems at large scale.
+
+High-order finite element methods offer advantages over low-order finite elements; $hp$ finite elements offer high accuracy and exponential convergence \cite{demkowicz1989toward}, \cite{oden1989toward}, \cite{rachowicz1989toward}.
+However, high-order finite elements are less common because a linear operator and or the Jacobian of a non-linear operator rapidly loses sparsity as the order is increased.
+Matrix-free implementation of high-order finite elements can provide the benefits of high-order methods without relying upon matrix sparsity for efficient implementation.
+
+High Performance Computing (HPC) hardware improvements in memory and network bandwidth have not kept up with improvements in Floating Point Operations per second (FLOPs), as highlighted in McCalpin's invited talk an Supercomputing 2016 \cite{mccalpin2016memory}.
+Under these hardware constraints, matrix-free operators offer superior performance, both with respect to the memory transfer and FLOPs needed for needed for evaluation of a matrix-vector product.
+However, iterative solvers are sensitive to the high condition numbers of high-order operators and require appropriate preconditioning to control total iterations and time to solution.

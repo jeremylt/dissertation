@@ -1,12 +1,15 @@
 \documentclass[defaultstyle,11pt]{thesis}
 
 \usepackage{amssymb}                % to get all AMS symbols
+\usepackage{amsfonts}               @ basic math fonts
 \usepackage{graphicx}               % to insert figures
+\usepackage{algpseudocode}          % pseudo code and algorithms
+\usepackage{subcaption}             % subfigures
 \usepackage{hyperref}               % PDF hyperreferences
 
 %%%%%%%%%%%%   All the preamble material:   %%%%%%%%%%%%
 
-\title{Local Fourier Analysis of Smoothers for P-Multgrid with High-Order Finite Elements}
+\title{Local Fourier Analysis of P-Multgrid and Domain Decomposition Methods for High-Order Finite Elements}
 
 \author{Jeremy~L.}{Thompson}
 
@@ -22,20 +25,24 @@
 \advisor{Prof.}                     %  #1 {title}
 	    {Jed Brown}                 %  #2 {name}
 
-\reader{Rachel Goddard}             %  2nd person to sign thesis
-\readerThree{Thora Nea}             %  3rd person to sign thesis
+\reader{Adrianna Gillman}           %  2nd person to sign thesis
+\readerThree{Ian Grooms}            %  3rd person to sign thesis
+\readerFour{Kenneth Jansen}         %  4th person to sign thesis
 
-\abstract{  \OnePageChapter	% because it is very short
-
-	Often the abstract will be long enough to require
-	more than one page, in which case the macro
-	``$\backslash$OnePageChapter'' should {\it not}
-	be used.
-
-	But this one isn't, so it should.
+\abstract{ %\OnePageChapter	% if this abstract goes under 1 page
+High-order matrix-free finite element operators offer superior performance on modern high performance computing hardware when compared to assembled sparse matrices, both with respect to floating point operations needed for operator evaluation and the memory transfer needed for a matrix-vector product.
+However, high-order matrix-free operators require iterative solvers, such as Krylov subspace methods, and these methods converge slowly for ill-conditioned operators, such as high-order finite element operators.
+Preconditioning techniques can improve the converge of these iterative solvers for high-order matrix-free finite element operators.
+In particular, p-multigrid and domain decomposition methods are particularly well suited for problems on unstructured meshes, but these methods have parameters that require careful tuning to ensure proper convergence.
+Local Fourier Analysis of these preconditioners analyzes the frequency modes found in the error on each iteration and can provide sharp convergence estimates.
+We present a representation of arbitrary second-order partial differential equations for high-order finite element discretizations that facilitates matrix-free implementation.
+We develop Local Fourier Analysis of finite element operators represented in this fashion, focusing on multigrid and domain decomposition preconditioning techniques.
+The performance of p-multigrid in parallel is partially determined by the number of multigrid levels.
+A larger number of multigrid levels requires additional global communication on parallel machines, but aggressive coarsening that is not supported by the smoother in the multigrid method can lead to gaps in the error frequency modes targeted by the total multigrid method, which results in degraded convergence.
+Balancing Domain Decomposition by Constraints can be used by a smoother to target a wider range of error mode frequencies and facilitate more aggressive coarsening.
+We provide Local Fourier Analysis of p-multigrid with Balancing Domain Decomposition by Constraints smoothing to demonstrate the suitability of this smoother for aggressive coarsening.
+Finally, we demonstrate the suitability of high-order matrix-free finite element operators with p-multigrid with Balancing Domain Decomposition by Constraints for practical problems by demonstrating the performance of these techniques on a solid mechanics problem with Neo-Hookean hyperelasticity at finite strain.
 }
-
-% \IRBprotocol{E927F29.001X}	% optional!
 
 \ToCisShort	% use this only for 1-page Table of Contents
 
@@ -46,7 +53,7 @@
 % \emptyLoT	% use this if there is no List of Tables
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%       BEGIN DOCUMENT...         %%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%       BEGIN DOCUMENT            %%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
