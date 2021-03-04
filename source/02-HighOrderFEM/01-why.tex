@@ -1,8 +1,9 @@
 Two key performance metrics for HPC hardware are FLOPs and memory and network bandwidth.
 FLOPs is the more widely popularized of these two metrics, but memory and network bandwidth is a common bottleneck in HPC application codes. 
 
-The Top 500 \cite{meuertop500} list tracks the 500 supercomputers with the highest peak  FLOPs, as measured by High-Performance Linpack (HPL) \cite{petitethpl}.
+The Top 500 \cite{meuertop500} list tracks the 500 supercomputers with the highest peak FLOPs, as measured by High-Performance Linpack (HPL) \cite{petitethpl}.
 HPL measures the performance when solving random dense linear systems in double precision via LU factorization and measures maximum achievable FLOPs.
+
 Other benchmarks, such as High-Performance Geometric Multigrid (HPGMG) \cite{adams2014hpgmg} and High-Performance Conjugate Gradient (HPCG) \cite{dongarra2016high}, measure performance based upon solving a more complex benchmark problem.
 The disparity between the FLOPs achieved in benchmarks such as HPGMG and HPCG and the peak FLOPs measured by HPL is partially explained by the growing gap between FLOPs and memory and network bandwidth.
 

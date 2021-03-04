@@ -1,11 +1,12 @@
-Solid mechanics problems are commonly solved with finite element methods using sparse matrix representations of low order finite elements.
-However, solvers using assembled sparse matrices are memory bound for sufficiently large problems.
-We explore using high-order finite elements implemented in a matrix-free fashion with appropriate preconditioners to solve solid mechanics problems at large scale.
-
-High-order finite element methods offer advantages over low-order finite elements; $hp$ finite elements offer high accuracy and exponential convergence \cite{demkowicz1989toward}, \cite{oden1989toward}, \cite{rachowicz1989toward}.
-However, high-order finite elements are less common because a linear operator and or the Jacobian of a non-linear operator rapidly loses sparsity as the order is increased.
-Matrix-free implementation of high-order finite elements can provide the benefits of high-order methods without relying upon matrix sparsity for efficient implementation.
-
-High Performance Computing (HPC) hardware improvements in memory and network bandwidth have not kept up with improvements in Floating Point Operations per second (FLOPs), as highlighted in McCalpin's invited talk an Supercomputing 2016 \cite{mccalpin2016memory}.
-Under these hardware constraints, matrix-free operators offer superior performance, both with respect to the memory transfer and FLOPs needed for needed for evaluation of a matrix-vector product.
-However, iterative solvers are sensitive to the high condition numbers of high-order operators and require appropriate preconditioning to control total iterations and time to solution.
+High-order matrix-free finite element operators offer superior performance on modern high performance computing (HPC) hardware when compared to assembled sparse matrices, both with respect to floating point operations needed for operator evaluation and the memory transfer needed for a matrix-vector product.
+However, high-order matrix-free operators require iterative solvers, such as Krylov subspace methods, and these methods converge slowly for ill-conditioned operators, such as high-order finite element operators.
+Preconditioning techniques can improve the converge of these iterative solvers for high-order matrix-free finite element operators.
+In particular, p-multigrid and domain decomposition methods are particularly well suited for problems on unstructured meshes, but these methods have parameters that require careful tuning to ensure proper convergence.
+Local Fourier Analysis of these preconditioners analyzes the frequency modes found in the error on each iteration and can provide sharp convergence estimates.
+We present a representation of arbitrary second-order partial differential equations for high-order finite element discretizations that facilitates matrix-free implementation.
+We develop Local Fourier Analysis of finite element operators represented in this fashion, focusing on multigrid and domain decomposition preconditioning techniques.
+The performance of p-multigrid in parallel is partially determined by the number of multigrid levels.
+A larger number of multigrid levels requires additional global communication on parallel machines, but aggressive coarsening that is not supported by the smoother in the multigrid method can lead to gaps in the error frequency modes targeted by the total multigrid method, which results in degraded convergence.
+Balancing Domain Decomposition by Constraints can be used by a smoother to target a wider range of error mode frequencies and facilitate more aggressive coarsening.
+We provide Local Fourier Analysis of p-multigrid with Balancing Domain Decomposition by Constraints smoothing to demonstrate the suitability of this smoother for aggressive coarsening.
+Finally, we demonstrate the suitability of high-order matrix-free finite element operators with p-multigrid with Balancing Domain Decomposition by Constraints for practical problems by demonstrating the performance of these techniques on a solid mechanics problem with Neo-Hookean hyperelasticity at finite strain.

@@ -1,11 +1,16 @@
 \documentclass[defaultstyle,11pt]{thesis}
 
 \usepackage{amssymb}                % to get all AMS symbols
-\usepackage{amsfonts}               @ basic math fonts
+\usepackage{amsfonts}               % basic math fonts
 \usepackage{graphicx}               % to insert figures
+\usepackage{xcolor}                 % colors for e-copies
 \usepackage{algpseudocode}          % pseudo code and algorithms
 \usepackage{subcaption}             % subfigures
 \usepackage{hyperref}               % PDF hyperreferences
+
+\definecolor{applegreen}{rgb}{0.55, 0.71, 0.0}
+\definecolor{blue(ncs)}{rgb}{0.0, 0.53, 0.74}
+\definecolor{burgundy}{rgb}{0.5, 0.0, 0.13}
 
 %%%%%%%%%%%%   All the preamble material:   %%%%%%%%%%%%
 
@@ -35,13 +40,17 @@ However, high-order matrix-free operators require iterative solvers, such as Kry
 Preconditioning techniques can improve the converge of these iterative solvers for high-order matrix-free finite element operators.
 In particular, p-multigrid and domain decomposition methods are particularly well suited for problems on unstructured meshes, but these methods have parameters that require careful tuning to ensure proper convergence.
 Local Fourier Analysis of these preconditioners analyzes the frequency modes found in the error on each iteration and can provide sharp convergence estimates.
+
 We present a representation of arbitrary second-order partial differential equations for high-order finite element discretizations that facilitates matrix-free implementation.
+This representation is used by the Center for Efficient Exascale Discretizations to provide performance portable high-order matrix-free implementations of finite element operators for arbitrary second order partial differential equations.
+
 We develop Local Fourier Analysis of finite element operators represented in this fashion, focusing on multigrid and domain decomposition preconditioning techniques.
 The performance of p-multigrid in parallel is partially determined by the number of multigrid levels.
 A larger number of multigrid levels requires additional global communication on parallel machines, but aggressive coarsening that is not supported by the smoother in the multigrid method can lead to gaps in the error frequency modes targeted by the total multigrid method, which results in degraded convergence.
 Balancing Domain Decomposition by Constraints can be used by a smoother to target a wider range of error mode frequencies and facilitate more aggressive coarsening.
 We provide Local Fourier Analysis of p-multigrid with Balancing Domain Decomposition by Constraints smoothing to demonstrate the suitability of this smoother for aggressive coarsening.
-Finally, we demonstrate the suitability of high-order matrix-free finite element operators with p-multigrid with Balancing Domain Decomposition by Constraints for practical problems by demonstrating the performance of these techniques on a solid mechanics problem with Neo-Hookean hyperelasticity at finite strain.
+
+Finally, we demonstrate the suitability of high-order matrix-free finite element operators with p-multigrid with Balancing Domain Decomposition by Constraints for practical problems at scale on modern parallel hardware by demonstrating the performance of these techniques on a solid mechanics problem with Neo-Hookean hyperelasticity at finite strain.
 }
 
 \ToCisShort	% use this only for 1-page Table of Contents
