@@ -5,9 +5,9 @@ As mentioned in Section \ref{02-01-why}, finite element discretizations with ten
 Therefore, this development will focus on arbitrary order tensor product bases, but this finite element operator representation does not depend upon the type of finite element.
 Simplices or mixed finite element discretizations may be used with this finite element operator representation, although the choice of finite element bases will have performance implications.
 
-Let $\lbrace X_i \rbrace_{i = 1}^P$ denote the Legendre-Gauss-Lobatto (LGL) nodes of degree $P - 1$ on the reference interval $\left[ -1, 1 \right]$ while $\lbrace q_i \rbrace_{i = 1}^Q$ and $\lbrace w_i \rbrace_{i = 1}^Q$ denote the quadrature points and quadrature weights corresponding to a $Q$ point quadrature rule.
-If we consider Lagrange basis functions $\lbrace \phi_i \rbrace_{i = 1}^P$, we can construct matrices $N_{i j} = \phi_j \left( q_i \right)$ and $D_{i j} = \partial_x \phi_j \left( q_i \right)$, representing interpolation of solution values to the quadrature points and computation of derivatives at the quadrature points, respectively.
-Additionally, the quadrature rule provides quadrature weights, given by $W_{i j} = w_i \delta_{i j}$.
+Let $\lbrace X_i \rbrace_{i = 1}^p$ denote the Legendre-Gauss-Lobatto (LGL) nodes of degree $p - 1$ on the reference interval $\left[ -1, 1 \right]$ while $\lbrace \xi_i \rbrace_{i = 1}^q$ and $\lbrace w_i \rbrace_{i = 1}^q$ denote the quadrature points and quadrature weights corresponding to a $q$ point quadrature rule.
+If we consider Lagrange basis functions $\lbrace \phi_i \rbrace_{i = 1}^p$, we can construct matrices $N_{i j} = \phi_j \left( \xi_i \right)$ and $D_{i j} = \partial_x \phi_j \left( \xi_i \right)$, representing interpolation of solution values to the quadrature points and computation of derivatives at the quadrature points, respectively.
+Additionally, the quadrature weight matrix is given by $W_{i j} = w_i \delta_{i j}$.
 
 We can define the corresponding matrices for problems in higher dimensions via tensor products.
 For the specific case of 3D, we have
@@ -21,7 +21,7 @@ For the specific case of 3D, we have
 \end{array}
 \label{basis_ops}
 \end{equation}
-The basis operations \ref{basis_ops} are defined on a reference element $\hat{K} = \left[ -1, 1 \right]^3$.
+These basis operations \ref{basis_ops} are defined on a reference element $\hat{K} = \left[ -1, 1 \right]^3$.
 
 In finite element and spectral element methods, we partition the domain $\Omega$ into a set of $E$ elements, denoted $\lbrace K^e \rbrace_{e = 1}^E$ with coordinate mapping to the reference element given by $X : \hat{K} \rightarrow K^e$.
 The Jacobian of this mapping is given by $J_{i j} = \partial x_i / \partial X_j$, where $X$ is the reference coordinates and $x$ the physical coordinates.
@@ -78,8 +78,8 @@ v^T & \left( \nabla v \right)^T
 f_{0, 0} & f_{0, 1}\\
 f_{1, 0} & f_{1, 1}
 \end{array} \right]
-\left[ \begin{array}{c c}
-w & \nabla w
+\left[ \begin{array}{c}
+w \\ \nabla w
 \end{array} \right]
 \label{jacobian_form}
 \end{equation}
@@ -93,8 +93,7 @@ Jacobian-free Newton-Krylov methods were summarized, with preconditioning strate
 \subsection{Computational Representation}
 
 We can represent the equations \ref{galerkin_form} and \ref{jacobian_form} as a series of computational kernels, which may be fused in certain implementations.
-This streamlined representation is used by libCEED to provide performance portable implementations.
-% CITE LIBCEED
+This streamlined representation is used by libCEED \cite{libceed-user-manual} to provide performance portable implementations.
 In Chapter \ref{03-LocalFourierAnalysis}, we use this representation to develop LFA of high-order finite element operators and preconditioning methods.
 
 The action of an arbitrary second-order finite element operator can be represented as
@@ -102,23 +101,35 @@ The action of an arbitrary second-order finite element operator can be represent
 {\color{burgundy}\mathbf{A}} = {\color{burgundy}\mathbf{P}}^T \mathbf{G}^T {\color{blue(ncs)}\mathbf{B}}^T {\color{applegreen}\mathbf{D}} {\color{blue(ncs)}\mathbf{B}} \mathbf{G} {\color{burgundy}\mathbf{P}}
 \label{libceed_representation}
 \end{equation}
-% LIBCEED DIAGRAM HERE
+
 where ${\color{burgundy}\mathbf{P}}$ represents the parallel communication portion of the global element restriction operator, $\mathbf{G}$ represents the device portion of the global element restriction operator, ${\color{blue(ncs)}\mathbf{B}}$ represents the basis action kernel that provides solution values and derivatives at the quadrature points, and ${\color{applegreen}\mathbf{D}}$ represents the pointwise representation of the weak form, given by $f_i$ or $f_{i, j}$ and the element quadrature weights and geometric factors.
 
+\begin{figure}
+\includegraphics[width=.99\linewidth]{img/libCEEDAPI}
+\caption{libCEED API}
+\label{fig:libceedapi}
+\end{figure}
+
+This representation is shown graphically in Figure \ref{fig:libceedapi}, where we can see the different spaces that each kernel operates upon.
+These flexible kernels will be used in Chapter \ref{04-SolidMechanics} in the implementation of the solid mechanics example for Neo-Hookean hyperelasticity at finite strain.
+\FloatBarrier
 % -- Performance ---------------------------------------------------------------
 \subsection{Performance}
 
-To demonstrate the performance benefits of high-order finite elements implemented in a matrix-free fashion, we consider the specific case of the screened Poisson equation, $\nabla^2 u - \alpha^2 u = f$.
-In this case, application of the finite element operator for a single element requires $\mathcal{O} \left( P^6 \right)$ matrix entries and $\mathcal{O} \left( P^6 \right)$ floating point operations.
-In contrast, application of the matrix-free operator for a single element requires $\mathcal{O} \left( P^3 \right)$ floating point values and $\mathcal{O} \left( P^{d + 1} \right)$ floating point operations.
+To demonstrate the performance benefits of high-order finite elements implemented in a matrix-free fashion, we consider the specific case of the scalar screened Poisson equation, $\nabla^2 u - \alpha^2 u = f$.
+The weak form of the screened Poisson equation is given by $\int_\Omega \nabla v : \nabla u - \alpha^2 v \cdot u = \int_\Omega f$, and therefore this equation can be represented in the form \ref{weak_form} with a Galerkin system given by \ref{galerkin_form}.
+
+In this case, application of the finite element operator for a single element requires $\mathcal{O} \left( p^6 \right)$ matrix entries and $\mathcal{O} \left( p^6 \right)$ floating point operations.
+In contrast, application of the matrix-free operator for a single element requires $\mathcal{O} \left( p^3 \right)$ floating point values and $\mathcal{O} \left( p^{d + 1} \right)$ floating point operations.
+When multiple components in the PDE use the same finite element bases, the coefficients in this complexity analysis further favor matrix-free operator implementations.
 
 \begin{figure}
 \begin{subfigure}{.495\textwidth}
-\includegraphics[width=.99\linewidth]{../img/assembledVsMatrixFree}
+\includegraphics[width=.99\linewidth]{img/assembledVsMatrixFree}
 \caption{FLOPs and Bytes per DoF}
 \end{subfigure}
 \begin{subfigure}{.495\textwidth}
-\includegraphics[width=.99\linewidth]{../img/assembledVsMatrixFreeBalance}
+\includegraphics[width=.99\linewidth]{img/assembledVsMatrixFreeBalance}
 \caption{Ratio of Bytes to FLOPs}
 \end{subfigure}
 \caption{Performance per DoF}
@@ -126,6 +137,7 @@ In contrast, application of the matrix-free operator for a single element requir
 \end{figure}
 
 As seen in Figure \ref{fig:assembledvsmatrixfree}, the balance between bandwidth and FLOPs for matrix-free implementations more closely agrees with current HPC hardware capabilities.
+Matrix-free finite element operator implementations allow for greater arithmetic intensity at high-order, which allows these operators to acheive performance that is closer to the peak performance for this hardware.
 
 In comparison to the generation of simplex meshes, generation of high quality hexahedral meshes is a time intensive process.
 However, it is possible to generate meshes comprised predominately of high quality hexahedral elements with initial refinement of a simplex mesh without the costly process of fully converting a simplex mesh into hexahedral elements.

@@ -1,18 +1,21 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \documentclass[defaultstyle,11pt]{thesis}
 
 \usepackage{amssymb}                % to get all AMS symbols
 \usepackage{amsfonts}               % basic math fonts
+\usepackage{amsmath}                % AMS math macros
 \usepackage{graphicx}               % to insert figures
 \usepackage{xcolor}                 % colors for e-copies
 \usepackage{algpseudocode}          % pseudo code and algorithms
 \usepackage{subcaption}             % subfigures
+\usepackage{placeins}               % Float barriers
 \usepackage{hyperref}               % PDF hyperreferences
 
 \definecolor{applegreen}{rgb}{0.55, 0.71, 0.0}
 \definecolor{blue(ncs)}{rgb}{0.0, 0.53, 0.74}
 \definecolor{burgundy}{rgb}{0.5, 0.0, 0.13}
 
-%%%%%%%%%%%%   All the preamble material:   %%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%  Preamble  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \title{Local Fourier Analysis of P-Multgrid and Domain Decomposition Methods for High-Order Finite Elements}
 
@@ -53,17 +56,21 @@ We provide Local Fourier Analysis of p-multigrid with Balancing Domain Decomposi
 Finally, we demonstrate the suitability of high-order matrix-free finite element operators with p-multigrid with Balancing Domain Decomposition by Constraints for practical problems at scale on modern parallel hardware by demonstrating the performance of these techniques on a solid mechanics problem with Neo-Hookean hyperelasticity at finite strain.
 }
 
-\ToCisShort	% use this only for 1-page Table of Contents
+\acknowledgements{	\OnePageChapter	% *MUST* BE ONLY ONE PAGE!
+This work is supported by the Exascale Computing Project (17-SC-20-SC), a collaborative effort of two U.S. Department of Energy organizations (Office of Science and the National Nuclear Security Administration) responsible for the planning and preparation of a capable exascale ecosystem, including software, applications, hardware, advanced system engineering and early testbed platforms, in support of the nation’s exascale computing imperative.
+}
 
-\LoFisShort	% use this only for 1-page Table of Figures
-% \emptyLoF	% use this if there is no List of Figures
+%\ToCisShort % use this only for 1-page Table of Contents
 
-\LoTisShort	% use this only for 1-page Table of Tables
-% \emptyLoT	% use this if there is no List of Tables
+\LoFisShort  % use this only for 1-page Table of Figures
+% \emptyLoF  % use this if there is no List of Figures
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%       BEGIN DOCUMENT            %%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\LoTisShort  % use this only for 1-page Table of Tables
+% \emptyLoT  % use this if there is no List of Tables
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%  DOCUMENT  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
 
@@ -74,15 +81,15 @@ Finally, we demonstrate the suitability of high-order matrix-free finite element
 \input 04-SolidMechanics/solidmechanics.tex
 \input 05-Conclusions/conclusions.tex
 
-%%%%%%%%%   then the Bibliography, if any   %%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%  Bibliography  %%%%%%%%%%%%%%%%%%%%%%%%%%
 \bibliographystyle{plain}           % or "siam", or "alpha", etc.
 \nocite{*}                          % list all refs in database, cited or not
 \bibliography{references}           % Bib database in "refs.bib"
 
-%%%%%%%%%   then the Appendices, if any   %%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%  Appendices  %%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\appendix
 %\input appendixA.tex
 %\input appendixB.tex
 
 \end{document}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

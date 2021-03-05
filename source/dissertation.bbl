@@ -1,0 +1,276 @@
+\begin{thebibliography}{10}
+
+\bibitem{libceed-user-manual}
+Ahmad Abdelfattah, Valeria Barra, Natalie Beams, Jed Brown, Jean-Sylvain
+  Camier, Veselin Dobrev, Yohann Dudouit, Leila Ghaffari, Tzanio Kolev, David
+  Medina, Thilina Rathnayake, Jeremy~L Thompson, and Stanimire Tomov.
+\newblock libceed user manual, September 2020.
+
+\bibitem{adams2003parallel}
+Mark Adams, Marian Brezina, Jonathan Hu, and Ray Tuminaro.
+\newblock Parallel multigrid smoothing: polynomial versus {Gauss-Seidel}.
+\newblock {\em Journal of Computational Physics}, 188(2):593--610, 2003.
+
+\bibitem{adams2014hpgmg}
+Mark Adams, Jed Brown, John Shalf, Brian Straalen, Erich Strohmaier, and Samuel
+  Williams.
+\newblock {HPGMG} 1.0: A benchmark for ranking high performance computing
+  systems.
+\newblock {\em LBNL Technical Report}, 05 2014.
+
+\bibitem{brandt1977multi}
+Achi Brandt.
+\newblock Multi-level adaptive solutions to boundary-value problems.
+\newblock {\em Mathematics of computation}, 31(138):333--390, 1977.
+
+\bibitem{brandt1982guide}
+Achi Brandt.
+\newblock Guide to multigrid development.
+\newblock In {\em Multigrid methods}, pages 220--312. Springer, 1982.
+
+\bibitem{brannick2015polynomial}
+James Brannick, Xiaozhe Hu, Carmen Rodrigo, and Ludmil Zikatanov.
+\newblock Local fourier analysis of multigrid methods with polynomial smoothers
+  and aggressive coarsening.
+\newblock {\em Numerical Mathematics: Theory, Methods and Applications},
+  8(1):1–21, 2015.
+
+\bibitem{brown2010efficient}
+Jed Brown.
+\newblock Efficient nonlinear solvers for nodal high-order finite elements in
+  3{D}.
+\newblock {\em Journal of Scientific Computing}, 45(1-3):48--63, 2010.
+
+\bibitem{brown2019local}
+Jed Brown, Yunhui He, and Scott MacLachlan.
+\newblock Local fourier analysis of balancing domain decomposition by
+  constraints algorithms.
+\newblock {\em SIAM Journal on Scientific Computing}, 41(5):S346--S369, 2019.
+
+\bibitem{brown2021tuning}
+Jed Brown, Yunhui He, Scott MacLachlan, Matt Menickelly, and Stefan~M. Wild.
+\newblock Tuning multigrid methods with robust optimization and local fourier
+  analysis.
+\newblock {\em SIAM Journal of Scientific Computing}, 43:A109--A138, 2021,
+  2021.
+
+\bibitem{davydov2019matrix}
+Denis Davydov, Jean-Paul Pelteret, Daniel Arndt, Martin Kronbichler, and Paul
+  Steinmann.
+\newblock A matrix-free approach for finite-strain hyperelastic problems using
+  geometric multigrid.
+\newblock {\em International Journal for Numerical Methods in Engineering},
+  2020.
+
+\bibitem{demkowicz1989toward}
+Leszek Demkowicz, J~Tinsely Oden, Waldemar Rachowicz, and O~Hardy.
+\newblock Toward a universal hp adaptive finite element strategy, part 1.
+  constrained approximation and data structure.
+\newblock {\em Computer Methods in Applied Mechanics and Engineering},
+  77(1-2):79--112, 1989.
+
+\bibitem{dohrmann2003preconditioner}
+Clark~R Dohrmann.
+\newblock A preconditioner for substructuring based on constrained energy
+  minimization.
+\newblock {\em SIAM Journal on Scientific Computing}, 25(1):246--258, 2003.
+
+\bibitem{dongarra2016high}
+Jack Dongarra, Michael~A Heroux, and Piotr Luszczek.
+\newblock High-performance conjugate-gradient benchmark.
+\newblock {\em International Journal of High Performance Computing
+  Applications}, 30(1):3--10, 2016.
+
+\bibitem{elman2008taxonomy}
+Howard Elman, Victoria~E Howle, John Shadid, Robert Shuttleworth, and Ray
+  Tuminaro.
+\newblock A taxonomy and comparison of parallel block multi-level
+  preconditioners for the incompressible {Navier-Stokes} equations.
+\newblock {\em Journal of Computational Physics}, 227(3):1790--1808, 2008.
+
+\bibitem{farhat1991method}
+Charbel Farhat and Francois-Xavier Roux.
+\newblock A method of finite element tearing and interconnecting and its
+  parallel solution algorithm.
+\newblock {\em International Journal for Numerical Methods in Engineering},
+  32(6):1205--1227, 1991.
+
+\bibitem{fischer1997overlapping}
+Paul~F Fischer.
+\newblock An overlapping {S}chwarz method for spectral element solution of the
+  incompressible {Navier-Stokes} equations.
+\newblock {\em Journal of Computational Physics}, 133(1):84--101, 1997.
+
+\bibitem{fischer2005hybrid}
+Paul~F Fischer and James~W Lottes.
+\newblock Hybrid {Schwarz}-multigrid methods for the spectral element method:
+  Extensions to {Navier-Stokes}.
+\newblock In {\em Domain Decomposition Methods in Science and Engineering},
+  pages 35--49. Springer, 2005.
+
+\bibitem{fischer2000overlapping}
+Paul~F Fischer, Henry~M Tufo, and NI~Miller.
+\newblock An overlapping {Schwarz} method for spectral element simulation of
+  three-dimensional incompressible flows.
+\newblock In {\em Parallel Solution of Partial Differential Equations}, pages
+  159--180. Springer, 2000.
+
+\bibitem{fragakis2003mosaic}
+Yannis Fragakis and Manolis Papadrakakis.
+\newblock The mosaic of high performance domain decomposition methods for
+  structural mechanics: Formulation, interrelation and numerical efficiency of
+  primal and dual methods.
+\newblock {\em Computer methods in applied mechanics and engineering},
+  192(35-36):3799--3830, 2003.
+
+\bibitem{golub1961chebyshev}
+Gene~H Golub and Richard~S Varga.
+\newblock Chebyshev semi-iterative methods, successive overrelaxation iterative
+  methods, and second order richardson iterative methods.
+\newblock 1961.
+
+\bibitem{gutknecht2002revisited}
+Martin~H. Gutknecht and Stefan Röllin.
+\newblock The chebyshev iteration revisited.
+\newblock {\em Parallel Computing}, 28(2):263--283, 2002.
+
+\bibitem{he2020two}
+Yunhui He and Scott MacLachlan.
+\newblock Two-level fourier analysis of multigrid for higher-order
+  finite-element discretizations of the laplacian.
+\newblock {\em Numerical Linear Algebra with Applications}, 27(3):e2285, 2020.
+
+\bibitem{hestenes1952methods}
+Magnus~R Hestenes and Eduard Stiefel.
+\newblock Methods of conjugate gradients for solving linear systems.
+\newblock {\em Journal of Research of the National Bureau of Standards}, 49(6),
+  1952.
+
+\bibitem{heys2005algebraic}
+JJ~Heys, TA~Manteuffel, Steve~F McCormick, and LN~Olson.
+\newblock Algebraic multigrid for higher-order finite elements.
+\newblock {\em Journal of computational Physics}, 204(2):520--532, 2005.
+
+\bibitem{holzapfel2000nonlinear}
+Gerhard Holzapfel.
+\newblock {\em Nonlinear solid mechanics: a continuum approach for
+  engineering}.
+\newblock Wiley, Chichester New York, 2000.
+
+\bibitem{hu1998bounds}
+Ning Hu, Xian-Zhong Guo, and I~Katz.
+\newblock Bounds for eigenvalues and condition numbers in the p-version of the
+  finite element method.
+\newblock {\em Mathematics of computation}, 67(224):1423--1450, 1998.
+
+\bibitem{hughes2012finite}
+Thomas~JR Hughes.
+\newblock {\em The finite element method: linear static and dynamic finite
+  element analysis}.
+\newblock Courier Corporation, 2012.
+
+\bibitem{klawonn2001feti}
+Axel Klawonn and Olof Widlund.
+\newblock {FETI} and {Neumann-Neumann} iterative substructuring methods:
+  connections and new results.
+\newblock {\em Communications on Pure and Applied Mathematics: A Journal Issued
+  by the Courant Institute of Mathematical Sciences}, 54(1):57--90, 2001.
+
+\bibitem{knoll2004jacobian}
+Dana~A Knoll and David~E Keyes.
+\newblock Jacobian-free {Newton--Krylov} methods: a survey of approaches and
+  applications.
+\newblock {\em Journal of Computational Physics}, 193(2):357--397, 2004.
+
+\bibitem{lanczos1950iteration}
+Cornelius Lanczos.
+\newblock {\em An iteration method for the solution of the eigenvalue problem
+  of linear differential and integral operators}.
+\newblock United States Governm. Press Office Los Angeles, CA, 1950.
+
+\bibitem{lanczos1952solution}
+Cornelius Lanczos.
+\newblock Solution of systems of linear equations by minimized iterations.
+\newblock {\em J. Res. Nat. Bur. Standards}, 49(1):33--53, 1952.
+
+\bibitem{li2007use}
+Jing Li and Olof~B Widlund.
+\newblock On the use of inexact subdomain solvers for {BDDC} algorithms.
+\newblock {\em Computer Methods in Applied Mechanics and Engineering},
+  196(8):1415--1428, 2007.
+
+\bibitem{luenberger1973introduction}
+David~G Luenberger.
+\newblock {\em Introduction to linear and nonlinear programming}, volume~28.
+\newblock Addison-Wesley Reading, MA, 1973.
+
+\bibitem{lynch1964direct}
+Robert~E Lynch, John~R Rice, and Donald~H Thomas.
+\newblock Direct solution of partial difference equations by tensor product
+  methods.
+\newblock {\em Numerische Mathematik}, 6(1):185--199, 1964.
+
+\bibitem{maclachlan2011lfa}
+Scott Maclachlan and Cornelis Oosterlee.
+\newblock A local fourier analysis framework for finite-element discretizations
+  of systems of pdes.
+\newblock {\em Numerical Linear Algebra With Applications - NUMER LINEAR ALGEBR
+  APPL}, 01 2011.
+
+\bibitem{may2016extreme}
+Dave~A May, Patrick Sanan, Karl Rupp, Matthew~G Knepley, and Barry~F Smith.
+\newblock Extreme-scale multigrid components within {PETSc}.
+\newblock In {\em Proceedings of the Platform for Advanced Scientific Computing
+  Conference}, pages 1--12, 2016.
+
+\bibitem{mccalpin2016memory}
+John~D McCalpin.
+\newblock Memory bandwidth and system balance in hpc systems.
+\newblock {\em Invited talk, Supercomputing}, 2016.
+
+\bibitem{meuertop500}
+Hans Meuer, Erich Strohmaier, Jack Dongarra, Horst Simon, and Martin Meuer.
+\newblock Top 500 list, 2020.
+
+\bibitem{oden1989toward}
+J~Tinsley Oden, L~Demkowicz, W~Rachowicz, and TA~Westermann.
+\newblock Toward a universal hp adaptive finite element strategy, part 2. a
+  posteriori error estimation.
+\newblock {\em Computer methods in applied mechanics and engineering},
+  77(1-2):113--180, 1989.
+
+\bibitem{petitethpl}
+Antoine Petitet, R.~Clint Whaley, Jack Dongarra, and Andrew Cleary.
+\newblock {HPL}-a portable implementation of the high-performance linpack
+  benchmark for distributed-memory computers.
+\newblock 2004.
+
+\bibitem{rachowicz1989toward}
+W~Rachowicz, J~Tinsley Oden, and L~Demkowicz.
+\newblock Toward a universal hp adaptive finite element strategy part 3. design
+  of hp meshes.
+\newblock {\em Computer Methods in Applied Mechanics and Engineering},
+  77(1-2):181--212, 1989.
+
+\bibitem{rixen1999theoretical}
+Daniel~J Rixen, Charbel Farhat, Radek Tezaur, and Jan Mandel.
+\newblock Theoretical comparison of the {FETI} and algebraically partitioned
+  {FETI} methods, and performance comparisons with a direct sparse solver.
+\newblock {\em International Journal for Numerical Methods in Engineering},
+  46(4):501--533, 1999.
+
+\bibitem{ronquist1987spectral}
+Einar~M R{\o}nquist and Anthony~T Patera.
+\newblock Spectral element multigrid. {I}. formulation and numerical results.
+\newblock {\em Journal of Scientific Computing}, 2(4):389--406, 1987.
+
+\bibitem{kruppcomparison}
+Karl Rupp.
+\newblock {CPU-GPU-MIC} comparision charts, 2020.
+
+\bibitem{wienands2004practical}
+Roman Wienands and Wolfgang Joppich.
+\newblock {\em Practical Fourier analysis for multigrid methods}.
+\newblock CRC press, 2004.
+
+\end{thebibliography}
