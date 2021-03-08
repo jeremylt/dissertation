@@ -34,7 +34,7 @@ Note that for a system of equations representing an error propagation operator i
 Low frequencies are given by $\theta \in T^{\text{low}} = \left[ - \pi / 2, \pi / 2 \right)$ and high frequencies are given by $\theta \in T^{\text{high}} = \left[ - \pi / 2, 3 \pi / 2 \right) \setminus T^{\text{low}}$.
 
 We can compute the symbol of a $p \times p$ linear system of operators representing a discretized PDE.
-We start with a system of equations ${\color{burgundy}\mathbf{A}}$ representing a Galerkin operator, such as in Equation \ref{eq:jacobian_form}.
+We start with a system of equations representing a Galerkin operator, such as in Equation \ref{eq:jacobian_form}.
 We omit boundary terms, as they are not present on the infinite uniform grid $G_h$.
 
 Using the algebraic representation of PDE operators given in Chapter \ref{ch:HighOrderFEM}, the PDE operator ${\color{burgundy}\mathbf{A}}$ is of the form
@@ -44,9 +44,9 @@ Using the algebraic representation of PDE operators given in Chapter \ref{ch:Hig
 {\color{burgundy}\mathbf{A}}_e = {\color{blue(ncs)}\mathbf{B}}^T {\color{applegreen}\mathbf{D}} {\color{blue(ncs)}\mathbf{B}}
 \end{split}
 \end{equation}
-where $\mathbf{P}$ and $\mathbf{G}$ represents the element assembly operator, ${\color{blue(ncs)}\mathbf{B}}$ is a basis operator which computes the values and derivatives of the basis functions at the quadrature points, and ${\color{applegreen}\mathbf{D}}$ is a block diagonal operator which provides the pointwise application of the bilinear form on the quadrature points, to include quadrature weights and the change in coordinates between the physical and reference space.
+where $\mathbf{P}$ and $\mathbf{G}$ represent the element assembly operators, ${\color{blue(ncs)}\mathbf{B}}$ is a basis operator which computes the values and derivatives of the basis functions at the quadrature points, and ${\color{applegreen}\mathbf{D}}$ is a block diagonal operator which provides the pointwise application of the bilinear form on the quadrature points, to include quadrature weights and the change in coordinates between the physical and reference space.
 
-We focus on Fourier Analysis of the local element operator, ${\color{burgundy}\mathbf{A}}_e$.
+We focus on Fourier analysis of the local element operator, ${\color{burgundy}\mathbf{A}}_e$.
 The nodes on the left and right boundaries of the element map to the same Fourier mode due to periodicity, so we can compute the symbol matrix as
 \begin{equation}
 \tilde{{\color{burgundy}\mathbf{A}}} = \mathbf{Q}^T \left( {\color{burgundy}\mathbf{A}}_e \odot \left[ e^{\imath \left( x_i - x_j \right) \theta / h} \right] \right) \mathbf{Q}
@@ -74,8 +74,7 @@ The computation of this symbol matrix extends to more complex PDE with multiple 
 Multiple components are supported by extending the $p \times p$ system of Toeplitz operators in Equation \ref{eq:symbolscalar1d} to a $\left( p \cdot ncomp \right) \times \left( p \cdot ncomp \right)$ system of operators.
 
 The infinite uniform grid $G_h$ is extended into higher dimensions by taking the direct sum of the one dimensional grid.
-Tensor product are used to extend the one dimensional bases into higher dimensions.
-The localization of Fourier modes in two dimensions is given by
+In a similar fashion to how tensor products are used to extend the one dimensional bases into higher dimensions, the localization of Fourier modes in two dimensions is given by
 \begin{equation}
 \mathbf{Q}_{\text{2d}} = \mathbf{Q} \otimes \mathbf{Q}
 \end{equation}
@@ -83,12 +82,12 @@ and the localization in three dimensions is given by
 \begin{equation}
 \mathbf{Q}_{\text{3d}} = \mathbf{Q} \otimes \mathbf{Q} \otimes \mathbf{Q}.
 \end{equation}
-In general, we will omit the subscript indicating the dimension.
+In general, we will omit the subscript indicating the dimension of the Fourier mode localization operator.
 
 \begin{definition}
 The symbol matrix of a finite element operator for an arbitrary second order PDE with any number of components, basis order, and dimension is given by
 \begin{equation}
-\tilde{{\color{burgundy}\mathbf{A}}} = \mathbf{Q}^T \left( {\color{burgundy}\mathbf{A}}_e \odot \left[ e^{\imath \sum_d \left( \mathbf{x}_i - \mathbf{x}_j \right) \mathbf{\theta} / \mathbf{h}} \right] \right) \mathbf{Q}
+\tilde{{\color{burgundy}\mathbf{A}}} \left( \mathbf{\theta} \right) = \mathbf{Q}^T \left( {\color{burgundy}\mathbf{A}}_e \odot \left[ e^{\imath \sum_d \left( \mathbf{x}_i - \mathbf{x}_j \right) \mathbf{\theta} / \mathbf{h}} \right] \right) \mathbf{Q}
 \label{eq:symbolhighorder}
 \end{equation}
 where $\odot$ represents pointwise multiplication of the elements, $\mathbf{h}$ is the length of the element in each dimension, $\mathbf{\theta}$ is the target frequency in each dimension, and $i, j \in \left[ 0, 1, \dots, p\right]$.

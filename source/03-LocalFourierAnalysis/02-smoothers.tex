@@ -1,20 +1,22 @@
 The error propagation operator for a smoother is given by ${\color{burgundy}\mathbf{S}} = I - {\color{burgundy}\mathbf{M}}^{-1} {\color{burgundy}\mathbf{A}}$.
+In this section, we will define the symbol of two common smoothers, weighted Jacobi and Chebyshev semi-iterative method, for comparison with the symbol of our BDDC smoother.
 
 % -- Jacobi -------------------------------------------------------------------
 \subsection{Jacobi}
 
-Following the derivation from Section \ref{sec:lfahighorder}, the symbol of the Jacobi error propagation operator is given by
+In weighted Jacobi, the preconditioning matrix is given by ${\color{burgundy}\mathbf{M}}^{-1} = \omega \left( \diag {\color{burgundy}\mathbf{A}} \right)^{-1}$, where $\omega$ is the weighting factor.
+Following the derivation from Section \ref{sec:lfahighorder}, the symbol of the weighted Jacobi error propagation operator is therefore given by
 \begin{equation}
-\tilde{{\color{burgundy}\mathbf{S}}} \left( \omega, \theta \right) = I - \tilde{{\color{burgundy}\mathbf{M}}}^{-1} \left( \theta \right) \tilde{{\color{burgundy}\mathbf{A}}} \left( \theta \right) = I - \left( \mathbf{Q}^T \diag \left( {\color{burgundy}\mathbf{A}}_e \right)^{-1} \mathbf{Q} \right) \tilde{{\color{burgundy}\mathbf{A}}} \left( \theta \right),
+\tilde{{\color{burgundy}\mathbf{S}}} \left( \omega, \theta \right) = I - \tilde{{\color{burgundy}\mathbf{M}}}^{-1} \left( \theta \right) \tilde{{\color{burgundy}\mathbf{A}}} \left( \theta \right) = I - \omega \left( \mathbf{Q}^T \diag \left( {\color{burgundy}\mathbf{A}}_e \right)^{-1} \mathbf{Q} \right) \tilde{{\color{burgundy}\mathbf{A}}} \left( \theta \right),
 \end{equation}
 where this expression has been simplified by the fact that $e^{\imath \left( x_i - x_i \right) \theta / h} = 1$.
 
 \begin{definition}
-The symbol of the error propagation operator for Jacobi smoothing is given by
+The symbol of the error propagation operator for weighted Jacobi smoothing is given by
 \begin{equation}
-\tilde{{\color{burgundy}\mathbf{S}}} \left( \nu, \omega, \theta \right) = \left( I - \left( \mathbf{Q}^T \diag \left( {\color{burgundy}\mathbf{A}}_e \right)^{-1} \mathbf{Q} \right) \tilde{{\color{burgundy}\mathbf{A}}} \left( \theta \right) \right)^\nu,
+\tilde{{\color{burgundy}\mathbf{S}}} \left( \nu, \omega, \theta \right) = \left( I - \omega \left( \mathbf{Q}^T \diag \left( {\color{burgundy}\mathbf{A}}_e \right)^{-1} \mathbf{Q} \right) \tilde{{\color{burgundy}\mathbf{A}}} \left( \theta \right) \right)^\nu,
 \end{equation}
-where $\nu$ is the number of smoothing passes.
+where $\nu$ is the number of smoothing passes and $\omega$ is the weighting parameter.
 \label{def:jacobi_symbol}
 \end{definition}
 
@@ -27,10 +29,9 @@ where $\nu$ is the number of smoothing passes.
 \end{figure}
 
 Using Definition \ref{def:jacobi_symbol}, we plot the eigenvalues of $\tilde{{\color{burgundy}\mathbf{M}}}^{-1} \tilde{{\color{burgundy}\mathbf{A}}} \left( \theta \right)$ in Figure \ref{fig:jacobi_spectrum} for the one dimensional Laplacian with a 4th order basis on Gauss-Lobatto points.
-In Figure \ref{fig:jacobi_smooth_factor} we plot the LFA smoothing factor for Jacobi smoothing as a function of the smoothing parameter $\omega$.
+In Figure \ref{fig:jacobi_smooth_factor} we plot the LFA smoothing factor for Jacobi smoothing as a function of the weighting parameter $\omega$.
 
 % -- Chebyshev ----------------------------------------------------------------
 \subsection{Chebyshev}
 
-It is well known that polynomial smoothers allow more aggressive coarsening than Jacobi \cite{brannick2015polynomial};
-however, for this analysis we use a simple Jacobi smoother, with $M = \diag \left( A \right)$.
+It is well known that polynomial smoothers allow more aggressive coarsening than Jacobi \cite{brannick2015polynomial}.
