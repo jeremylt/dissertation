@@ -1,6 +1,16 @@
-
-\newtheorem{theorem}{Theorem}
-
+\if@onethmnum
+  \newtheorem{theorem}{Theorem}
+  \newtheorem{lemma}[theorem]{Lemma}
+  \newtheorem{corollary}[theorem]{Corollary}
+  \newtheorem{proposition}[theorem]{Proposition}
+  \newtheorem{definition}[theorem]{Definition}
+\else
+  \newtheorem{theorem}{Theorem}[section]
+  \newtheorem{lemma}[theorem]{Lemma}
+  \newtheorem{corollary}[theorem]{Corollary}
+  \newtheorem{proposition}[theorem]{Proposition}
+  \newtheorem{definition}[theorem]{Definition}
+\fi
 
 \newcommand{\diff}[2]{\frac{\partial #1}{\partial #2}}
 \newcommand{\diffr}[1]{\diff{#1}{r}}
