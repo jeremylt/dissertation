@@ -2,8 +2,8 @@ In this section, we will discuss the benefits of high-order finite element opera
 First we will discuss how matrix-free implementation better agrees with system balance on modern HPC hardware.
 Then we will highlight the spectral convergence properties of high-order methods.
 
-% -- Performance --------------------------------------------------------------
-\subsection{Performance}
+% -- Storage and FLOPs --------------------------------------------------------
+\subsection{Storage and FLOPs}
 
 To demonstrate the performance benefits of high-order finite elements implemented in a matrix-free fashion, we consider the specific case of the scalar screened Poisson equation, $\nabla^2 u - \alpha^2 u = f$.
 We consider the approximate number of bytes required for storage and FLOPs required to apply a matrix-vector product representing a high-order finite element operator corresponding to the Galerkin system for the screened Poisson equation.
@@ -32,5 +32,5 @@ It is important to note that generation of high quality hexahedral meshes for te
 However, it is possible to generate meshes comprised predominately of high quality hexahedral elements with initial refinement of a simplex mesh without the costly process of fully converting a simplex mesh into hexahedral elements.
 Thus, the performance benefits of high-order matrix-free finite elements can be realized without the substantial additional effort required to generate a mesh exclusively composed of high quality hexahedral elements.
 
-% -- Accuracy -----------------------------------------------------------------
-\subsection{Accuracy}
+% -- Spectral Accuracy --------------------------------------------------------
+\subsection{Spectral Accuracy}
