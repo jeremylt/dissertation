@@ -1,6 +1,6 @@
 In this section, we will discuss the benefits of high-order finite element operators implemented in a matrix free fashion.
-First we will discuss how matrix-free implimentation better agreees with system balance on modern HPC hardware.
-Then we will highight the spectral convergence properties of high-order methods.
+First we will discuss how matrix-free implementation better agrees with system balance on modern HPC hardware.
+Then we will highlight the spectral convergence properties of high-order methods.
 
 % -- Performance --------------------------------------------------------------
 \subsection{Performance}
@@ -28,7 +28,7 @@ When multiple components in the PDE use the same finite element bases, the coeff
 As seen in Figure \ref{fig:assembledvsmatrixfree}, the balance between bandwidth and FLOPs for matrix-free implementations with tensor product finite elements more closely agrees with current HPC hardware capabilities shown in Figure \ref{fig:peakratio}.
 Matrix-free finite element operator implementations allow for greater arithmetic intensity at high-order, which allows these operators to achieve performance that is closer to the peak performance for this hardware.
 
-It is important to note that generation of high quality hexahedral meshes for tensor product finite elemnts is a time intensive process when compared to the generation of simplex meshes.
+It is important to note that generation of high quality hexahedral meshes for tensor product finite elements is a time intensive process when compared to the generation of simplex meshes.
 However, it is possible to generate meshes comprised predominately of high quality hexahedral elements with initial refinement of a simplex mesh without the costly process of fully converting a simplex mesh into hexahedral elements.
 Thus, the performance benefits of high-order matrix-free finite elements can be realized without the substantial additional effort required to generate a mesh exclusively composed of high quality hexahedral elements.
 
