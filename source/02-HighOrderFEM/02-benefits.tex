@@ -6,7 +6,7 @@ Then we will highight the spectral convergence properties of high-order methods.
 \subsection{Performance}
 
 To demonstrate the performance benefits of high-order finite elements implemented in a matrix-free fashion, we consider the specific case of the scalar screened Poisson equation, $\nabla^2 u - \alpha^2 u = f$.
-We consider the approximate number of bytes required for storage and FLOPs required to apply a matrix-vector product representing a high-order finite element operator corresponding to the Galerkin system for the screen Poisson equation.
+We consider the approximate number of bytes required for storage and FLOPs required to apply a matrix-vector product representing a high-order finite element operator corresponding to the Galerkin system for the screened Poisson equation.
 
 With a sparse matrix representation, application of the finite element operator for a single element requires $\mathcal{O} \left( p^6 \right)$ matrix entries and $\mathcal{O} \left( p^6 \right)$ floating point operations.
 In contrast, application of the matrix-free operator for a single tensor product element requires $\mathcal{O} \left( p^3 \right)$ floating point values and $\mathcal{O} \left( p^{d + 1} \right)$ floating point operations.
