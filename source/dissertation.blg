@@ -5,45 +5,45 @@ The style file: plain.bst
 Database file #1: references.bib
 Warning--empty journal in golub1961chebyshev
 Warning--empty journal in petitethpl
-You've used 45 entries,
+You've used 47 entries,
             2118 wiz_defined-function locations,
-            759 strings with 12228 characters,
-and the built_in function-call counts, 15229 in all, are:
-= -- 1487
-> -- 763
+            770 strings with 12451 characters,
+and the built_in function-call counts, 15879 in all, are:
+= -- 1555
+> -- 789
 < -- 5
-+ -- 312
-- -- 256
-* -- 1131
-:= -- 2569
-add.period$ -- 135
-call.type$ -- 45
-change.case$ -- 258
++ -- 323
+- -- 264
+* -- 1181
+:= -- 2677
+add.period$ -- 141
+call.type$ -- 47
+change.case$ -- 268
 chr.to.int$ -- 0
-cite$ -- 47
-duplicate$ -- 526
-empty$ -- 1160
-format.name$ -- 256
-if$ -- 3107
+cite$ -- 49
+duplicate$ -- 548
+empty$ -- 1212
+format.name$ -- 264
+if$ -- 3239
 int.to.chr$ -- 0
-int.to.str$ -- 45
-missing$ -- 47
-newline$ -- 225
-num.names$ -- 90
-pop$ -- 258
+int.to.str$ -- 47
+missing$ -- 49
+newline$ -- 235
+num.names$ -- 94
+pop$ -- 264
 preamble$ -- 1
-purify$ -- 218
+purify$ -- 226
 quote$ -- 0
-skip$ -- 364
+skip$ -- 380
 stack$ -- 0
-substring$ -- 995
-swap$ -- 75
+substring$ -- 1050
+swap$ -- 77
 text.length$ -- 5
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 170
+type$ -- 178
 warning$ -- 2
-while$ -- 150
-width$ -- 47
-write$ -- 480
+while$ -- 158
+width$ -- 49
+write$ -- 502
 (There were 2 warnings)

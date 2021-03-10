@@ -1,0 +1,8 @@
+LFA provides a tool to analyize and predict the convergence of preconditioning techniques for finite element and finite difference methods.
+LFA \cite{brandt1977multi} was originally developed in the context of analyzing h-multigrid methods for finite difference methods, but since then LFA has been used to analyze finite element methods and a variety of preconditioning techniques.
+Our development of LFA of p-multigrid is a novel addition to the field.
+
+In this chapter, we introduce the notation required to describe LFA of p-multigrid for high-order finite elements.
+In Section \ref{sec:lfahighorder} we develop the notation for LFA of high-order finite element methods using the matrix-free notation from Chapter \ref{ch:HighOrderFEM}.
+This notation is used to develop LFA of smoothers for high-order finite element operators in Section \ref{sec:lfasmoothers}, and these smoothers are used in a unified representation of LFA of multigrid methods for high-order finite elements in Section \ref{sec:lfamultigrid}.
+Finally, existing work on LFA of BDDC is reformulated with this new notation in Section \ref{sec:lfabddc}.

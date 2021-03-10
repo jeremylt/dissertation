@@ -18,6 +18,12 @@ Mark Adams, Jed Brown, John Shalf, Brian Straalen, Erich Strohmaier, and Samuel
   systems.
 \newblock {\em LBNL Technical Report}, 05 2014.
 
+\bibitem{babuska1982rates}
+Ivo Babuska and Barna Szabo.
+\newblock On the rates of convergence of the finite element method.
+\newblock {\em International Journal for Numerical Methods in Engineering},
+  18(3):323--341, 1982.
+
 \bibitem{brandt1977multi}
 Achi Brandt.
 \newblock Multi-level adaptive solutions to boundary-value problems.
@@ -128,6 +134,11 @@ Gene~H Golub and Richard~S Varga.
 \newblock Chebyshev semi-iterative methods, successive overrelaxation iterative
   methods, and second order richardson iterative methods.
 \newblock 1961.
+
+\bibitem{guo1986hp}
+B~Guo and I~Babu{\v{s}}ka.
+\newblock The hp version of the finite element method.
+\newblock {\em Computational Mechanics}, 1(1):21--41, 1986.
 
 \bibitem{gutknecht2002revisited}
 Martin~H. Gutknecht and Stefan Röllin.
