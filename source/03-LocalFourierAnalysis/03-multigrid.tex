@@ -31,6 +31,8 @@ The prolongation operator from the coarse to the fine grid can be represented by
 where ${\color{blue(ncs)}\mathbf{B}}_{ctof}$ is an interpolation operator from the coarse grid basis to the fine grid basis, $\mathbf{P}_f$ and $\mathbf{G}_f$ are the fine grid element assembly operators, $\mathbf{P}_c$ and $\mathbf{G}_c$ are the coarse grid element assembly operators, and ${\color{applegreen}\mathbf{D}}_{\text{scale}}$ is a scaling operator to account for node multiplicity across element interfaces.
 Restriction from the fine grid to the coarse grid is given by the transpose, ${\color{burgundy}\mathbf{R}}_{\text{ftoc}} = {\color{burgundy}\mathbf{P}}_{\text{ctof}}^T$.
 
+TODO: INSERT CHART SHOWING P-MULTIGRID PROLONGATION OPERATION
+
 Following the derivation from Section \ref{sec:lfahighorder}, we can derive the symbols of ${\color{burgundy}\mathbf{P}}_{\text{ctof}}$ and ${\color{burgundy}\mathbf{R}}_{\text{ftoc}}$.
 
 \begin{definition}

@@ -1,0 +1,47 @@
+In the total Lagrangian approach to Neo-Hookean hyperelasticity, the discrete equations are formulated with respect to the reference configuration; we solve for displacement $u \left( X \right)$ in the reference frame $X$.
+Our notation is inspired by \cite{holzapfel2000nonlinear}.
+
+The strong form of the static balance of linear-momentum at finite strain is
+\begin{equation}
+- \nabla_X \cdot \boldsymbol{P} - \rho_0 \boldsymbol{g} = 0
+\label{finite_strong}
+\end{equation}
+where $\nabla_X$ indicates that the gradient is calculated with respect to the reference configuration in the finite strain regime.
+$P$ and $\boldsymbol{g}$ are the first Piola-Kirchhoff stress tensor and the prescribed forcing function, respectively and $\rho_0$ is the reference mass density.
+The first Piola-Kirchhoff stress tensor is given by
+\begin{equation}
+\boldsymbol{P} = \boldsymbol{F} \, \boldsymbol{S},
+\label{first_pk}
+\end{equation}
+where $S$ is the second Piola-Kirchhoff stress tensor and $\boldsymbol{F} = \boldsymbol{I} + \nabla_X u$ is the deformation gradient.
+$\boldsymbol{S}$ is defined by the constitutive model.
+
+Integrating by parts, we have the weak form
+\begin{equation}
+\int_{\Omega}{\nabla_X \boldsymbol{v} \colon \boldsymbol{P}} - \int_{\Omega}{\boldsymbol{v} \cdot \rho_0 \boldsymbol{g}} - \int_{\partial \Omega}{\boldsymbol{v} \cdot (\boldsymbol{P} \cdot \hat{\boldsymbol{N}})} = 0
+\label{finite_weak}
+\end{equation}
+where $\boldsymbol{P} \cdot \hat{\boldsymbol{N}}|_{\partial\Omega}$ is replaced by any prescribed force/traction boundary conditions written in terms of the reference configuration.
+
+The Newton linearization of the volumentric term is given by
+\begin{equation}
+\int_{\Omega}{\nabla_X \boldsymbol{v} : d \boldsymbol{P}} = \int_{\Omega} d \boldsymbol{F} \boldsymbol{S} + \boldsymbol{F} d \boldsymbol{S}
+\label{finite_weak_linear}
+\end{equation}
+were $d \boldsymbol{S}$, as above, depends upon the constitutive model chosen to determine the second Piola-Kirchhoff stress tensor.
+
+TODO: UN-OMIT THE FULL DERIVATION FOR THE SAKE OF BREVITY
+
+Omitting the full derivation for the sake of brevity, we are currently interested in the Neo-Hookean constitutive model.
+\begin{equation}
+\boldsymbol{S} = \lambda \log \left( \lvert \boldsymbol{F} \rvert \right) \boldsymbol{C}^{-1} + 2 \mu \boldsymbol{C}^{-1} \boldsymbol{E}
+\label{constitutive}
+\end{equation}
+where $\boldsymbol{C} = \boldsymbol{F}^T \boldsymbol{F}$ is the right Cauchy-Green tensor and $\boldsymbol{E} = \frac{1}{2} \left( \boldsymbol{C} - \boldsymbol{I} \right)$ is the Green-Lagrange strain tensor.
+The Lam{\'e} parameters, $\lambda$ and $\mu$, are given by $\lambda = \frac{E \nu}{\left( 1 + \nu \right)\left( 1 - 2 \nu \right)}$ and $\mu = \frac{E}{2 \left( 1 + \nu \right)}$.
+
+We therefore have in our linearization
+\begin{equation}
+d \boldsymbol{S} = \frac{\partial \boldsymbol{S}}{\partial \boldsymbol{E}} : d \boldsymbol{E} = \lambda (\boldsymbol{C}^{-1} : d \boldsymbol{E}) \boldsymbol{C}^{-1} + 2 (\mu - \lambda \log \left( \lvert \boldsymbol{F} \rvert \right)) \boldsymbol{C}^{-1} d \boldsymbol{E} \boldsymbol{C}^{-1}
+\label{dconstitutive}
+\end{equation}

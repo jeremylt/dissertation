@@ -22,16 +22,29 @@ where $\nu$ is the number of smoothing passes and $\omega$ is the weighting para
 
 \begin{figure}[!tbp]
   \centering
-  \subfloat[Spectrum of Jacobi for $p = 4$]{\includegraphics[width=0.48\textwidth]{images/jacobi_spectrum_5}\label{fig:jacobi_spectrum}}
+  \subfloat[Spectrum of Jacobi for $p = 4$]{\includegraphics[width=0.48\textwidth]{../img/JacobiSymbol1D}\label{fig:jacobi_spectrum_1d}}
   \hfill
-  \subfloat[Smoothing Factor of Jacobi for $p = 4$]{\includegraphics[width=0.48\textwidth]{images/jacobi_smoothing_5}\label{fig:jacobi_smooth_factor}}
-  \caption{Jacobi smoothing for high-order finite elements}
+  \subfloat[Spectrum of Scalar Diffusion for $p = 4$]{\includegraphics[width=0.48\textwidth]{../img/JacobiSymbol2D}\label{fig:jacobi_spectrum_2d}}
+  \caption{Spectrum of Jacobi Preconditioner Symbol}
 \end{figure}
 
-Using Definition \ref{def:jacobi_symbol}, we plot the eigenvalues of $\tilde{{\color{burgundy}\mathbf{M}}}^{-1} \tilde{{\color{burgundy}\mathbf{A}}} \left( \theta \right)$ in Figure \ref{fig:jacobi_spectrum} for the one dimensional Laplacian with a 4th order basis on Gauss-Lobatto points.
-In Figure \ref{fig:jacobi_smooth_factor} we plot the LFA smoothing factor for Jacobi smoothing as a function of the weighting parameter $\omega$.
+Using Definition \ref{def:jacobi_symbol}, in Figures \ref{fig:jacobi_spectrum_1d} and \ref{fig:jacobi_spectrum_2d}, we see the spectral radius of the symbol of unweighted Jacobi preconditioning for the scalar diffusion operator with a fourth-order H1 Lagrange finite element basis on the Gauss-Lobatto points in one and two dimensions.
+
+TODO: INSERT DISCUSSION OF EFFECT OF WEIGHTING FACTOR
 
 % -- Chebyshev ----------------------------------------------------------------
 \subsection{Chebyshev}
 
 It is well known that polynomial smoothers allow more aggressive coarsening than Jacobi \cite{brannick2015polynomial}.
+
+TODO: INSERT DERIVATION
+
+\begin{figure}[!tbp]
+  \centering
+  \subfloat[Spectrum of Chebyshev for $p = 4$]{\includegraphics[width=0.48\textwidth]{../img/ChebyshevSymbol1D}\label{fig:chebyshev_spectrum_1d}}
+  \hfill
+  \subfloat[Spectrum of Scalar Diffusion for $p = 4$]{\includegraphics[width=0.48\textwidth]{../img/ChebyshevSymbol2D}\label{fig:chebyshev_spectrum_2d}}
+  \caption{Spectrum of Chebyshev Preconditioner Symbol}
+\end{figure}
+
+Using Definition \ref{def:chebyshev_symbol}, in Figures \ref{fig:chebyshev_spectrum_1d} and \ref{fig:chebyshev_spectrum_2d}, we see the spectral radius of the symbol of third order Chebyshev polynomial preconditioning for the scalar diffusion operator with a fourth-order H1 Lagrange finite element basis on the Gauss-Lobatto points in one and two dimensions.

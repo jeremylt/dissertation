@@ -95,3 +95,16 @@ ${\color{burgundy}\mathbf{A}}_e$ is the finite element operator for the element 
 
 Note that this LFA notation is applicable to any second-order PDE with a weak form that can be represented by Equation \ref{eq:jacobian_form}.
 This representation is used in LFAToolkit.jl, where the users provide the finite element basis ${\color{blue(ncs)}\mathbf{B}}$, the node to mode mapping $\mathbf{Q}$, and the pointwise representation of the weak form ${\color{applegreen}\mathbf{D}}$, and the software can provide the LFA of the PDE with various preconditioners.
+
+As we develop LFA of various preconditioners and smoothers in this notation throughout this chapter, we will the standard test problem of the scalar diffusion operator to illustrate the properties of this analysis for these techniques.
+
+\begin{figure}[!tbp]
+  \centering
+  \subfloat[Spectrum of Scalar Diffusion for $p = 4$]{\includegraphics[width=0.48\textwidth]{../img/diffusionSymbol1D}\label{fig:diffusion_spectrum_1d}}
+  \hfill
+  \subfloat[Spectrum of Scalar Diffusion for $p = 4$]{\includegraphics[width=0.48\textwidth]{../img/diffusionSymbol2D}\label{fig:diffusion_spectrum_2d}}
+  \caption{Spectrum of Scalar Diffusion Operator Symbol}
+\end{figure}
+
+In Figures \ref{fig:diffusion_spectrum_1d} and \ref{fig:diffusion_spectrum_2d}, we see the spectral radius of the symbol of scalar diffusion operator with a fourth-order H1 Lagrange finite element basis on the Gauss-Lobatto points in one and two dimensions.
+Various preconditioning techniques will reduce this spectral radius, with different effectiveness in different frequency ranges.
