@@ -39,7 +39,7 @@ Thus, the performance benefits of high-order matrix-free finite elements can be 
 
 High-order finite elements offer high accuracy and exponential convergence.
 The spectral convergence properties of high order finite elements have been extensively discussed, such as in \cite{guo1986hp}.
-In general
+In general, the discretization error in the finite element approximation is given by
 \begin{equation}
 E_{H^1 \left( \Omega \right)} \leq C \left( p \right) h^{\text{min} \left( k, p + 1 \right)}
 \label{eq:spectral_convergence}
@@ -53,4 +53,4 @@ The convergence of high-order methods have been extensively investigated; for fu
 
 Demkowicz, Oden, and Rachowicz, et al. discussed $hp$ adaptivity in the context of minimizing the total number of degrees of freedom (DoFs) required to achieve a target accuracy \cite{demkowicz1989toward}, \cite{oden1989toward}, \cite{rachowicz1989toward}.
 However, in $hp$ adaptivity, the polynomial order of each finite element may differ.
-While these meshes and discretizations can be implemented in a matrix-free fashion with the preconditioners discussed in Chapter \ref{ch:LocalFourierAnalysis}, we instead focus on meshes where all elements have the same polynomial order in order to simplify the analysis and implementation details.
+While problems utilizing these types of discretizations can be implemented in a matrix-free fashion with the preconditioners discussed in Chapter \ref{ch:LocalFourierAnalysis}, we instead focus on meshes where all elements have the same polynomial order in order to simplify the analysis and implementation details.
