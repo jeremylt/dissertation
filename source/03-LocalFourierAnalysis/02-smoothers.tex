@@ -20,31 +20,92 @@ where $\nu$ is the number of smoothing passes and $\omega$ is the weighting para
 \label{def:jacobi_symbol}
 \end{definition}
 
-\begin{figure}[!tbp]
+\begin{figure}[!ht]
   \centering
-  \subfloat[Spectrum of Jacobi for $p = 4$]{\includegraphics[width=0.48\textwidth]{../img/JacobiSymbol1D}\label{fig:jacobi_spectrum_1d}}
+  \subfloat[Spectrum of 1D Jacobi for $p = 4$]{\includegraphics[width=0.48\textwidth]{../img/JacobiSymbol1D}\label{fig:jacobi_spectrum_1d}}
   \hfill
-  \subfloat[Spectrum of Scalar Diffusion for $p = 4$]{\includegraphics[width=0.48\textwidth]{../img/JacobiSymbol2D}\label{fig:jacobi_spectrum_2d}}
+  \subfloat[Spectrum of 2D Jacobi for $p = 4$]{\includegraphics[width=0.48\textwidth]{../img/JacobiSymbol2D}\label{fig:jacobi_spectrum_2d}}
   \caption{Spectrum of Jacobi Preconditioner Symbol}
 \end{figure}
 
 Using Definition \ref{def:jacobi_symbol}, in Figures \ref{fig:jacobi_spectrum_1d} and \ref{fig:jacobi_spectrum_2d}, we see the spectral radius of the symbol of unweighted Jacobi preconditioning for the scalar diffusion operator with a fourth-order H1 Lagrange finite element basis on the Gauss-Lobatto points in one and two dimensions.
+In Figure \ref{fig:jacobi_spectrum_1d}, we see that the unweighted Jacobi still has a spectral radius greater than $1.0$; this spectral radius can be improved by changing the weighting factor, $\omega$.
 
-TODO: INSERT DISCUSSION OF EFFECT OF WEIGHTING FACTOR
+\begin{figure}[!ht]
+  \centering
+  \subfloat[Spectal Radius of Weighted Jacobi for $p = 4$]{\includegraphics[width=0.48\textwidth]{../img/weightedJacobiSymbol1D}\label{fig:weighted_jacobi_radius_1d}}
+  \hfill
+  \subfloat[Spectral Radius of Weighted Jacobi for $p = 4$]{\includegraphics[width=0.48\textwidth]{../img/weightedJacobiSymbol2D}\label{fig:weighted_jacobi_radius_2d}}
+  \caption{Spectral Radius of Weighted Jacobi Preconditioner Symbol}
+\end{figure}
+
+In Figures \ref{fig:weighted_jacobi_radius_1d} and \ref{fig:weighted_jacobi_radius_2d}, we see the spectral radius of the symbol of weighted Jacobi preconditioning for the scalar diffusion operator with a fourth-order H1 Lagrange finite element basis on the Gauss-Lobatto points in one and two dimensions as a function of the weighting parameter, $\omega$.
+In one dimension, the optimal smoothing parameter is approximately $\omega \approx 0.86$, while in two dimensions the optimal smoothing parameter is approximately $\omega \approx 1.0$.
+Both figures indicate that underestimating the optimal smoothing parameter has a relatively mild effect compared to the increase in the spectral radius of the symbol from overestimating the optimal smoothing parameter.
+
+As discussed in \cite{he2020two}, the classical optimal smoothing parameter is given by
+\begin{equation}
+\omega = \frac{2}{\lambda_{\text{min}, H} + \lambda_{\text{max}, H}}
+\end{equation}
+for weighted Jacobi, where $H$ indicates the high frequency range.
+Unfortunately, as noted by \cite{he2020two}, this optimal smoothing parameter does not result in optimal two-grid convergence.
+He and MacLachlan observed this discrepancy for h-multigrid on uniformly spaced nodes, but we will also observe this discrepancy for p-multigrid.
 
 % -- Chebyshev ----------------------------------------------------------------
 \subsection{Chebyshev}
 
 It is well known that polynomial smoothers allow more aggressive coarsening than Jacobi \cite{brannick2015polynomial}.
+For further discussion of the error propagation properties of the Chebyshev semi-iterative method, see \cite{gutknecht2002revisited}.
 
-TODO: INSERT DERIVATION
+The residual in the Chebyshev semi-iterative method can be modeled by the three term recurrence
+\begin{equation}
+\mathbf{e}_{n + 1} = \left( {\color{burgundy}\mathbf{A}} \mathbf{e}_n - \alpha \mathbf{e}_n - \beta_{n - 1} \mathbf{e}_{n - 1} \right) / \gamma_n
+\label{eq:chebyshev_recursive}
+\end{equation}
+where the spectrum of ${\color{burgundy}\mathbf{A}}$ lies on the line segment $\left[ \alpha - c, \alpha + c \right]$ and the parameters $\beta$ and $\gamma$ are given by the recurrence
+\begin{equation}
+\begin{tabular}{c c}
+$\beta_0 = - \frac{c^2}{2 \alpha}$ & $\gamma_0 = - \alpha$\\
+$\beta_n = \frac{c}{2} \frac{T_n \left( \eta \right)}{T_{n + 1} \left( \eta \right)} = \left( \frac{c}{2} \right)^2 \frac{1}{\gamma_n}$ & $\gamma_n = \frac{c}{2} \frac{T_{n + 1} \left( \eta \right)}{T_n \left( \eta \right)} = - \left( \alpha + \beta_{n - 1} \right)$
+\end{tabular}
+\end{equation}
+where $T_i \left( \zeta \right) = 2 \zeta T_{i - 1} \left( \zeta \right) - T_{i - 2} \left( \zeta \right)$ are the classical Chebyshev polynomials and $\eta = - \alpha / c$.
 
-\begin{figure}[!tbp]
+In a similar fashion to the discussion in \cite{adams2003parallel}, we use the Jacobi preconditioned operator, $\diag \left({\color{burgundy}\mathbf{A}}\right)^{-1} {\color{burgundy}\mathbf{A}}$, in this iteration in place of ${\color{burgundy}\mathbf{A}}$.
+Using this fact and the recurrence give in Equation \ref{eq:chebyshev_recursive}, we can define the error propagation of the $n$th order Chebyshev smoother in terms of the error in the first term:
+\begin{equation}
+\begin{tabular}{c}
+$\mathbf{E}_0 = \mathbf{I}$\\
+$\mathbf{E}_1 = \mathbf{I} - \alpha \diag \left( {\color{burgundy}\mathbf{A}} \right)^{-1} {\color{burgundy}\mathbf{A}}$\\
+$\mathbf{E}_n = \left( \alpha \mathbf{E}_{n - 1} + \beta_n \mathbf{E}_{n - 2} - \diag \left( {\color{burgundy}\mathbf{A}} \right)^{-1} {\color{burgundy}\mathbf{A}} \mathbf{E}_{n - 2} \right) / \gamma_{n - 1}$
+\end{tabular}
+\label{eq:chebyshev_error_propagation}
+\end{equation}
+With this recursive definition of the error propagation, we can define the symbol for Chebyshev smoothing.
+
+\begin{definition}
+The symbol of the error propagation operator for $n$th order Chebyshev smoothing based on the Jacobi preconditioned operator is given by
+\begin{equation}
+\tilde{{\color{burgundy}\mathbf{S}}} \left( \nu, n, \theta \right) = \left( \mathbf{Q}^T \left( \mathbf{E}_{n, e} \odot \left[ e^{\imath \sum_d \left( \mathbf{x}_i - \mathbf{x}_j \right) \mathbf{\theta} / \mathbf{h}} \right] \right) \mathbf{Q} \right)^\nu,
+\end{equation}
+where $\nu$ is the number of smoothing passes and $\mathbf{E}_n$ is given by the recursive definition
+\begin{equation}
+\begin{tabular}{c}
+$\mathbf{E}_{0, e} = \mathbf{I}$\\
+$\mathbf{E}_{1, e} = \mathbf{I} - \alpha \diag \left( {\color{burgundy}\mathbf{A}}_e \right)^{-1} {\color{burgundy}\mathbf{A}}_e$\\
+$\mathbf{E}_{n, e} = \left( \alpha \mathbf{E}_{n - 1, e} + \beta_n \mathbf{E}_{n - 2, e} - \diag \left( {\color{burgundy}\mathbf{A}}_e \right)^{-1} {\color{burgundy}\mathbf{A}}_e \mathbf{E}_{n - 2, e} \right) / \gamma_{n - 1}$
+\end{tabular}
+\end{equation}
+\label{def:chebyshev_symbol}
+\end{definition}
+
+\begin{figure}[!ht]
   \centering
-  \subfloat[Spectrum of Chebyshev for $p = 4$]{\includegraphics[width=0.48\textwidth]{../img/ChebyshevSymbol1D}\label{fig:chebyshev_spectrum_1d}}
+  \subfloat[Spectrum of 1D Chebyshev for $p = 4$]{\includegraphics[width=0.48\textwidth]{../img/ChebyshevSymbol1D}\label{fig:chebyshev_spectrum_1d}}
   \hfill
-  \subfloat[Spectrum of Scalar Diffusion for $p = 4$]{\includegraphics[width=0.48\textwidth]{../img/ChebyshevSymbol2D}\label{fig:chebyshev_spectrum_2d}}
+  \subfloat[Spectrum of 2D Chebyshev for $p = 4$]{\includegraphics[width=0.48\textwidth]{../img/ChebyshevSymbol2D}\label{fig:chebyshev_spectrum_2d}}
   \caption{Spectrum of Chebyshev Preconditioner Symbol}
 \end{figure}
 
 Using Definition \ref{def:chebyshev_symbol}, in Figures \ref{fig:chebyshev_spectrum_1d} and \ref{fig:chebyshev_spectrum_2d}, we see the spectral radius of the symbol of third order Chebyshev polynomial preconditioning for the scalar diffusion operator with a fourth-order H1 Lagrange finite element basis on the Gauss-Lobatto points in one and two dimensions.
+When compared to Figures \ref{fig:jacobi_spectrum_1d} and \ref{fig:jacobi_spectrum_2d}, we can see that smoothing based upon Chebyshev semi-iterative offers better error reduction than weighted or unweighted Jacobi, albeit at a higher computational cost.
