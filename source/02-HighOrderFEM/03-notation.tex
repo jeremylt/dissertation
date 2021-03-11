@@ -12,13 +12,13 @@ Additionally, the quadrature weight matrix is given by $W_{i j} = w_i \delta_{i 
 We can define the corresponding matrices for problems in higher dimensions via tensor products.
 For the specific case of 3D, we have
 \begin{equation}
-\begin{array}{c}
-\mathbf{N}   = N \otimes N \otimes N \hspace{5mm}
-\mathbf{D}_0 = D \otimes N \otimes N\\
-\mathbf{D}_1 = N \otimes D \otimes N \hspace{5mm}
-\mathbf{D}_2 = N \otimes N \otimes D\\
-\mathbf{W}   = W \otimes W \otimes W
-\end{array}
+\begin{tabular}{c}
+$\mathbf{N}   = N \otimes N \otimes N$ \\
+$\mathbf{D}_0 = D \otimes N \otimes N$ \hspace{5mm}
+$\mathbf{D}_1 = N \otimes D \otimes N$ \hspace{5mm}
+$\mathbf{D}_2 = N \otimes N \otimes D$ \\
+$\mathbf{W}   = W \otimes W \otimes W$
+\end{tabular}
 \label{eq:basis_ops}
 \end{equation}
 The basis operations in Equation \ref{eq:basis_ops} are defined on a reference element $\hat{K} = \left[ -1, 1 \right]^3$.
@@ -111,4 +111,5 @@ where $\mathbf{P}$ represents the parallel communication portion of the global e
 \end{figure}
 
 This representation is shown graphically in Figure \ref{fig:libceedapi}, where we can see the different spaces that each kernel operates upon.
-These flexible kernels will be used in Chapter \ref{ch:SolidMechanics} in the implementation of the solid mechanics example for Neo-Hookean hyperelasticity at finite strain.
+This flexible kernel representations will be used in Chapter \ref{ch:LocalFourierAnalysis}, where we develop Local Fourier Analysis of finite element operators that can be represented in this fashion, and in Chapter \ref{ch:SolidMechanics} in the implementation of the solid mechanics example for Neo-Hookean hyperelasticity at finite strain.
+{\bf \color{burgundy}Burgundy} text will be used to represent operators that can be implemented in this matrix-free representation.
