@@ -64,12 +64,12 @@ $\mathbf{Q}$ is a $\left( p + 1 \right) \times p$ matrix that localizes Fourier 
     0      && 0      && \cdots && 1      \\
     1      && 0      && \cdots && 0      \\
 \end{bmatrix}
-\label{eq:symbolscalar1d}
+\label{eq:fouriermodelocalization1d}
 \end{equation}
 
 The computation of this symbol matrix extends to more complex PDE with multiple components and in higher dimensions.
 
-Multiple components are supported by extending the $p \times p$ system of Toeplitz operators in Equation \ref{eq:symbolscalar1d} to a $\left( p \cdot ncomp \right) \times \left( p \cdot ncomp \right)$ system of operators.
+Multiple components are supported by extending the $p \times p$ system of Toeplitz operators in Equation \ref{eq:fouriermodelocalization1d} to a $\left( p \cdot ncomp \right) \times \left( p \cdot ncomp \right)$ system of operators.
 
 The infinite uniform grid $G_h$ is extended into higher dimensions by taking the direct sum of the one dimensional grid.
 In a similar fashion to how tensor products are used to extend the one dimensional bases into higher dimensions, the localization of Fourier modes in two dimensions is given by
@@ -88,7 +88,7 @@ The symbol matrix of a finite element operator for an arbitrary second order PDE
 \tilde{{\color{burgundy}\mathbf{A}}} \left( \mathbf{\theta} \right) = \mathbf{Q}^T \left( {\color{burgundy}\mathbf{A}}_e \odot \left[ e^{\imath \sum_d \left( \mathbf{x}_i - \mathbf{x}_j \right) \mathbf{\theta} / \mathbf{h}} \right] \right) \mathbf{Q}
 \label{eq:symbolhighorder}
 \end{equation}
-where $\odot$ represents pointwise multiplication of the elements, $\mathbf{h}$ is the length of the element in each dimension, $\mathbf{\theta}$ is the target frequency in each dimension, and $i, j \in \left[ 0, 1, \dots, p\right]$.
+where $\odot$ represents pointwise multiplication of the elements, $\mathbf{h}$ is the length of the element in each dimension, $\mathbf{\theta}$ is the target frequency in each dimension, $i, j \in \left[ 0, 1, \dots, p^d \right]$, and $d$ is the dimension of the finite element basis.
 ${\color{burgundy}\mathbf{A}}_e$ is the finite element operator for the element and $\mathbf{Q}$ is the localization operator for Fourier modes on an element.
 \label{def:high_order_symbol}
 \end{definition}
