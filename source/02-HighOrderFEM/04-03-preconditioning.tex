@@ -1,0 +1,25 @@
+The iteration count to reach convergence for Krylov subspace methods is based, in part, upon condition number of the operator \cite{luenberger1973introduction} and high-order finite element operators have notoriously poor condition numbers \cite{hu1998bounds}.
+Preconditioners help control the condition number of high-order finite elements implemented in a matrix-free fashion, and we can reduce total iteration count and thus total time to solution for these operators.
+
+EXPAND
+
+Suppose we are solving the linear system given by
+\begin{equation}
+{\color{burgundy}\mathbf{A}} \mathbf{x} = \mathbf{b}
+\label{linear_eqn}
+\end{equation}
+via a Krylov subspace method.
+This linear system may come from the Galerkin system of equations of our PDE of interest or the Jacobian of our PDE of interest, as in a Newton-Krylov method.
+We can improve the convergence of our Krylov iterations for this system by solving the preconditioned system
+\begin{equation}
+\left( \mathbf{M}_L^{-1} {\color{burgundy}\mathbf{A}} \mathbf{M}_R^{-1} \right) \left( \mathbf{M}_R \mathbf{x} \right) = \mathbf{M}_L^{-1} \mathbf{b}
+\label{precond_eqn}
+\end{equation}
+via our Krylov method instead.
+We will focus on left preconditioning, where $\mathbf{M}_R = \mathbf{I}$ and $\mathbf{M}_L^{-1} \approx {\color{burgundy}\mathbf{A}}^{-1}$.
+Therefore, we will adopt the notation $\mathbf{M}_L = \mathbf{M}$.
+
+Specifically, we will investigate preconditioning techniques that can implemented predominately or exclusively in a matrix-free fashion, again to retain the benefits offered by high-order matrix-free finite element discretizations on modern HPC hardware.
+
+Note that preconditioning CG is more restrictive than other Krylov methods as the CG algorithm requires preconditioners to preserve the symmetric positive definite property of the operator representing the Galerkin system.
+As a result, preconditioning methods for CG can be applied to more general Krylov methods, such as GMRES.

@@ -54,8 +54,8 @@ $\mathbf{Q}$ is a $\left( p + 1 \right) \times p$ matrix that localizes Fourier 
 \begin{equation}
 \mathbf{Q} =
 \begin{bmatrix}
-    I   \\
-    e_0 \\
+    \mathbf{I}   \\
+    \mathbf{e}_0 \\
 \end{bmatrix} =
 \begin{bmatrix}
     1      && 0      && \cdots && 0      \\
@@ -69,7 +69,7 @@ $\mathbf{Q}$ is a $\left( p + 1 \right) \times p$ matrix that localizes Fourier 
 
 The computation of this symbol matrix extends to more complex PDE with multiple components and in higher dimensions.
 
-Multiple components are supported by extending the $p \times p$ system of Toeplitz operators in Equation \ref{eq:fouriermodelocalization1d} to a $\left( p \cdot ncomp \right) \times \left( p \cdot ncomp \right)$ system of operators.
+Multiple components are supported by extending the $p \times p$ system of Toeplitz operators in Equation \ref{eq:fouriermodelocalization1d} to a $\left( p \cdot n \right) \times \left( p \cdot n \right)$ system of operators, where $n$ is the number of components.
 
 The infinite uniform grid $G_h$ is extended into higher dimensions by taking the direct sum of the one dimensional grid.
 In a similar fashion to how tensor products are used to extend the one dimensional bases into higher dimensions, the localization of Fourier modes in two dimensions is given by
@@ -94,7 +94,7 @@ ${\color{burgundy}\mathbf{A}}_e$ is the finite element operator for the element 
 \end{definition}
 
 Note that this LFA notation is applicable to any second-order PDE with a weak form that can be represented by Equation \ref{eq:jacobian_form}.
-This representation is used in LFAToolkit.jl, where the users provide the finite element basis ${\color{blue(ncs)}\mathbf{B}}$, the node to mode mapping $\mathbf{Q}$, and the pointwise representation of the weak form ${\color{applegreen}\mathbf{D}}$, and the software can provide the LFA of the PDE with various preconditioners.
+This representation is used in \href{https://www.github.com/jeremylt/LFAToolkit.jl}{LFAToolkit.jl}, where the users provide the finite element basis ${\color{blue(ncs)}\mathbf{B}}$, the node to mode mapping $\mathbf{Q}$, and the pointwise representation of the weak form ${\color{applegreen}\mathbf{D}}$, and the software can provide the LFA of the PDE with various preconditioners.
 
 As we develop LFA of various preconditioners and smoothers in this notation throughout this chapter, we will the standard test problem of the scalar diffusion operator to illustrate the properties of this analysis for these techniques.
 
@@ -107,4 +107,5 @@ As we develop LFA of various preconditioners and smoothers in this notation thro
 \end{figure}
 
 In Figures \ref{fig:diffusion_spectrum_1d} and \ref{fig:diffusion_spectrum_2d}, we see the spectral radius of the symbol of scalar diffusion operator with a fourth-order H1 Lagrange finite element basis on the Gauss-Lobatto points in one and two dimensions.
+These plots were generated with \href{https://www.github.com/jeremylt/LFAToolkit.jl}{LFAToolkit.jl}.
 Various preconditioning techniques will reduce this spectral radius, with different effectiveness in different frequency ranges.

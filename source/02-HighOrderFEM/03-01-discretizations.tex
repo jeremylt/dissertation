@@ -1,0 +1,58 @@
+Let $\lbrace X_i \rbrace_{i = 1}^{p + 1}$ denote the Legendre-Gauss-Lobatto (LGL) nodes of degree $p$ on the reference interval $\left[ -1, 1 \right]$ while $\lbrace \xi_i \rbrace_{i = 1}^q$ and $\lbrace w_i \rbrace_{i = 1}^q$ denote the quadrature points and quadrature weights corresponding to a $q$ point quadrature rule.
+If we consider Lagrange basis functions $\lbrace \phi_i \rbrace_{i = 1}^{p + 1}$, we can construct matrices $N_{i j} = \phi_j \left( \xi_i \right)$ and $D_{i j} = \partial_x \phi_j \left( \xi_i \right)$, representing interpolation of solution values to the quadrature points and computation of derivatives at the quadrature points, respectively.
+Additionally, the quadrature weight matrix is given by $W_{i j} = w_i \delta_{i j}$.
+
+We can define the corresponding matrices for problems in higher dimensions via tensor products.
+For the specific case of 3D, we have
+\begin{equation}
+\begin{tabular}{c}
+$\mathbf{N}   = N \otimes N \otimes N$ \\
+$\mathbf{D}_0 = D \otimes N \otimes N$ \hspace{5mm}
+$\mathbf{D}_1 = N \otimes D \otimes N$ \hspace{5mm}
+$\mathbf{D}_2 = N \otimes N \otimes D$ \\
+$\mathbf{W}   = W \otimes W \otimes W$
+\end{tabular}
+\label{eq:basis_ops}
+\end{equation}
+The basis operations in Equation \ref{eq:basis_ops} are defined on a reference element $\hat{K} = \left[ -1, 1 \right]^3$.
+
+In finite element and spectral element methods, we partition the domain $\Omega$ into a set of $E$ elements, denoted $\lbrace K^e \rbrace_{e = 1}^E$ with coordinate mapping to the reference element given by $X : \hat{K} \rightarrow K^e$.
+The Jacobian of this mapping is given by $J_{i j} = \partial x_i / \partial X_j$, where $X$ is the reference coordinates and $x$ the physical coordinates.
+We can invert the Jacobian and compute the derivatives of the physical coordinates in the reference space at every quadrature point.
+\begin{equation}
+\mathbf{D}_i^e = \Lambda \left( \frac{\partial X_0}{\partial x_i} \right) \mathbf{D}_0 + \Lambda \left( \frac{\partial X_1}{\partial x_i} \right) \mathbf{D}_1 + \Lambda \left( \frac{\partial X_2}{\partial x_i} \right) \mathbf{D}_2
+\end{equation}
+where $\Lambda \left( X \right)_{i j} = X_i \delta_{i j}$ expresses pointwise multiplication of $J_{i j}^{-1}$ at quadrature points as a diagonal matrix.
+With this coordinate mapping, element integration weights become $\mathbf{W}^e = W \Lambda \left( \lvert J^e \left( q \right) \rvert \right)$.
+
+A global assembly operator is defined as $\mathcal{E}^T = \left[ \mathcal{E}^e \right]^T$, where $\mathcal{E}^e$ represents local restriction operators extracting degrees of freedom that correspond to element $e$ from the global solution vector.
+When using an assembled matrix to represent a finite element operator, this global assembly operator is used to construct a global matrix representation of the finite element operator from the individual element operators.
+With matrix-free implementations, this global assembly operator is instead used to assemble the action of the finite element operator on each element into the action of the finite element operator on the entire mesh.
+Notice that the local restriction operators do not assume a structured mesh, a conforming mesh, or consistent polynomial order bases for each element.
+
+With these definitions, we can represent the Galerkin system of equations corresponding to the weak form of arbitrary second order PDEs.
+The weak form of PDEs is linear in test functions and can be expressed as pointwise operations where functions of $u$ and $\nabla u$ are contracted with $v$ and $\nabla v$.
+
+Consider the weak form of an arbitrary PDE
+\begin{equation}
+\begin{array}{c}
+\text{find } u \in V \text{ such that for all } v \in V\\
+\langle v, u \rangle = \int_{\Omega} v \cdot f_0 \left( u, \nabla u \right) + \nabla v : f_1 \left( u, \nabla u \right) = 0
+\end{array}
+\label{eq:weak_form}
+\end{equation}
+where $\cdot$ represents contraction over fields and $:$ represents contraction over fields and spatial dimensions.
+The pointwise representation of the weak form given by $f_0$ and $f_1$ does not depend upon discretization choices such as the geometry or polynomial degree of the bases.
+
+The corresponding Galerkin system of equations is
+\begin{equation}
+\sum_e \mathcal{E}^T \left[ \left( \mathbf{N}^e \right)^T \mathbf{W}^e \Lambda \left( f_0 \left( u^e, \nabla u^e \right) \right) + \sum_{i = 0}^{d - 1} \left( \mathbf{D}_i^e \right)^T \mathbf{W}^e \Lambda \left( f_1 \left( u^e, \nabla u^e \right) \right) \right] = 0
+\label{eq:galerkin_form}
+\end{equation}
+where $u^e = \mathbf{N}^e \mathcal{E}^e u$ and $\nabla u^e = \lbrace \mathbf{D}_i^e \mathcal{E}^e u \rbrace_{i = 0}^{d - 1}$.
+In this formulation, the element restriction operators and basis operators can represent different element geometries and different degree polynomial bases, providing a flexible description for arbitrary meshes.
+Furthermore, this notation can be extended to handle separate fields with different finite element bases, such as with mixed finite element methods.
+
+Dirichlet boundary conditions are represented in the element restriction operation by enforcing the specified values on the constrained nodes.
+Neumann or Robin boundary conditions are represented by adding boundary integral terms in the same form as Equation \ref{eq:galerkin_form} with appropriate basis and element restriction operators.
+Boundary integrals internal to the domain $\Omega$, such as face integrals in Discontinuous Galerkin methods, can also be represented using additional terms with corresponding bases and element restrictions.

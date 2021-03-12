@@ -4,53 +4,8 @@ Then we will highlight the spectral convergence properties of high-order methods
 
 % -- Storage and FLOPs --------------------------------------------------------
 \subsection{Storage and FLOPs}\label{sec:storageandflops}
-
-To demonstrate the performance benefits of high-order finite elements implemented in a matrix-free fashion, we consider the specific case of the scalar screened Poisson equation, $\nabla^2 u - \alpha^2 u = f$.
-We consider the approximate number of bytes required for storage and FLOPs required to apply a matrix-vector product representing a high-order finite element operator corresponding to the Galerkin system for the screened Poisson equation.
-High-order finite element discretizations are less common than low-order finite elements, in part, because a linear operator or the Jacobian of a non-linear operator rapidly loses sparsity in a sparse matrix representation.
-Matrix-free implementations with tensor product finite element bases can overcome this issue by exploiting the tensor product structure to reduce both the data storage requirements and the FLOPs required to apply a matrix-vector product.
-
-With a sparse matrix representation, application of the finite element operator for a single element requires $\mathcal{O} \left( p^6 \right)$ matrix entries and $\mathcal{O} \left( p^6 \right)$ floating point operations.
-In contrast, application of the matrix-free operator for a single tensor product element requires $\mathcal{O} \left( p^3 \right)$ floating point values and $\mathcal{O} \left( p^{d + 1} \right)$ floating point operations.
-When multiple components in the PDE use the same finite element bases, the coefficients in this complexity analysis further favor matrix-free operator implementations.
-
-\begin{figure}[h!]
-\begin{subfigure}{.495\textwidth}
-\includegraphics[width=.99\linewidth]{../img/assembledVsMatrixFree}
-\caption{FLOPs and Bytes per DoF}
-\end{subfigure}
-\begin{subfigure}{.495\textwidth}
-\includegraphics[width=.99\linewidth]{../img/assembledVsMatrixFreeBalance}
-\caption{Ratio of Bytes to FLOPs}
-\end{subfigure}
-\caption{Performance per DoF}
-\label{fig:assembledvsmatrixfree}
-\end{figure}
-
-As seen in Figure \ref{fig:assembledvsmatrixfree}, the balance between bandwidth and FLOPs for matrix-free implementations with tensor product finite elements more closely agrees with current HPC hardware capabilities shown in Figure \ref{fig:peakratio}.
-Matrix-free finite element operator implementations allow for greater arithmetic intensity at high-order, which allows these operators to achieve performance that is closer to the peak performance for this hardware.
-
-It is important to note that generation of high quality hexahedral meshes for tensor product finite elements is a time intensive process when compared to the generation of simplex meshes.
-However, it is possible to generate meshes comprised predominately, but not necessarily exclusively, of high quality hexahedral elements with initial refinement of a simplex mesh without the costly process of fully converting a simplex mesh into only hexahedral elements.
-Thus, the performance benefits of high-order matrix-free finite elements can be realized without the substantial additional effort required to generate a mesh exclusively composed of high quality hexahedral elements.
+\input 02-HighOrderFEM/02-01-storageandflops
 
 % -- Spectral Accuracy --------------------------------------------------------
 \subsection{Spectral Accuracy}
-
-High-order finite elements offer high accuracy and exponential convergence.
-The spectral convergence properties of high order finite elements have been extensively discussed, such as in \cite{guo1986hp}.
-In general, the discretization error in the finite element approximation is given by
-\begin{equation}
-E_{H^1 \left( \Omega \right)} \leq C \left( p \right) h^{\text{min} \left( k, p + 1 \right)}
-\label{eq:spectral_convergence}
-\end{equation}
-where $p$ is the polynomial order of the mesh, $h$ is the size of the finite elements, and $k$ is the order of the Sobolev space to which the true solution belongs.
-The coefficient $C$ does depend upon the polynomial order of the finite element basis, but in practice the exponential term dominates this error approximation.
-
-In practical problems, the smoothness of the solution may prevent spectral convergence from being achieved; however, high-order finite elements will still offer convergence that is no worse than the convergence on a comparable low-order mesh with a larger number of elements.
-In those cases, high-order finite elements implemented in a matrix-free fashion still offer the storage and FLOPs benefits detailed above in Section \ref{sec:storageandflops}.
-The convergence of high-order methods have been extensively investigated; for further discussion, see \cite{babuska1982rates}, among others.
-
-Demkowicz, Oden, and Rachowicz, et al. discussed $hp$ adaptivity in the context of minimizing the total number of degrees of freedom (DoFs) required to achieve a target accuracy \cite{demkowicz1989toward}, \cite{oden1989toward}, \cite{rachowicz1989toward}.
-However, in $hp$ adaptivity, the polynomial order of each finite element may differ.
-While problems utilizing these types of discretizations can be implemented in a matrix-free fashion with the preconditioners discussed in Chapter \ref{ch:LocalFourierAnalysis}, we instead focus on meshes where all elements have the same polynomial order in order to simplify the analysis and implementation details.
+\input 02-HighOrderFEM/02-02-spectral

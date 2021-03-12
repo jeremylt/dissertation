@@ -1,0 +1,10 @@
+Krylov subspace methods are a natural fit for matrix-free finite elements, as these methods only require matrix-vector products to populate the Krylov subspace
+\begin{equation}
+\mathcal{K} \left( \mathbf{r}_0, {\color{burgundy}\mathbf{A}}, \mathbf{k} \right) = \lbrace \mathbf{r}_0, {\color{burgundy}\mathbf{A}} \mathbf{r}_0, \dots, {\color{burgundy}\mathbf{A}}^{k - 1} \mathbf{r}_0 \rbrace.
+\label{krylov_space}
+\end{equation}
+The Krylov subspace is used to construct increasingly accurate iterates $\mathbf{x}^k$ that approach the true solution $\mathbf{x}$.
+
+CG
+
+GMRES
