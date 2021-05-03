@@ -38,16 +38,17 @@ We omit boundary terms, as they are not present on the infinite uniform grid $G_
 Using the algebraic representation of PDE operators given in Chapter \ref{ch:HighOrderFEM}, the PDE operator ${\color{burgundy}\mathbf{A}}$ is of the form
 \begin{equation}
 \begin{tabular}{c}
-${\color{burgundy}\mathbf{A}} = \mathbf{P}^T \mathbf{G}^T {\color{burgundy}\mathbf{A}}_e \mathbf{G} \mathbf{P}$\\
-${\color{burgundy}\mathbf{A}}_e = {\color{blue(ncs)}\mathbf{B}}^T {\color{applegreen}\mathbf{D}} {\color{blue(ncs)}\mathbf{B}}$
+${\color{burgundy}\mathbf{A}} = \mathbf{P}^T \mathbf{G}^T {\color{burgundy}\mathbf{A}}^e \mathbf{G} \mathbf{P}$\\
+${\color{burgundy}\mathbf{A}}^e = {\color{blue(ncs)}\mathbf{B}}^T {\color{applegreen}\mathbf{D}} {\color{blue(ncs)}\mathbf{B}}$
 \end{tabular}
+\label{eq:localoperator}
 \end{equation}
 where $\mathbf{P}$ and $\mathbf{G}$ represent the element assembly operators, ${\color{blue(ncs)}\mathbf{B}}$ is a basis operator which computes the values and derivatives of the basis functions at the quadrature points, and ${\color{applegreen}\mathbf{D}}$ is a block diagonal operator which provides the pointwise application of the bilinear form on the quadrature points, to include quadrature weights and the change in coordinates between the physical and reference space.
 
-We focus on Fourier analysis of the local element operator, ${\color{burgundy}\mathbf{A}}_e$.
+We focus on Fourier analysis of the local element operator, ${\color{burgundy}\mathbf{A}}^e$.
 The nodes on the left and right boundaries of the element map to the same Fourier mode due to periodicity, so we can compute the symbol matrix as
 \begin{equation}
-\tilde{{\color{burgundy}\mathbf{A}}} = \mathbf{Q}^T \left( {\color{burgundy}\mathbf{A}}_e \odot \left[ e^{\imath \left( x_i - x_j \right) \theta / h} \right] \right) \mathbf{Q}
+\tilde{{\color{burgundy}\mathbf{A}}} = \mathbf{Q}^T \left( {\color{burgundy}\mathbf{A}}^e \odot \left[ e^{\imath \left( x_i - x_j \right) \theta / h} \right] \right) \mathbf{Q}
 \end{equation}
 where $\odot$ represents pointwise multiplication of the elements, $h$ is the length of the element, and $i, j \in \left[ 0, 1, \dots, p\right]$.
 $\mathbf{Q}$ is a $\left( p + 1 \right) \times p$ matrix that localizes Fourier modes to each element.
@@ -85,11 +86,11 @@ In general, we will omit the subscript indicating the dimension of the Fourier m
 \begin{definition}
 The symbol matrix of a finite element operator for an arbitrary second order PDE with any number of components, basis order, and dimension is given by
 \begin{equation}
-\tilde{{\color{burgundy}\mathbf{A}}} \left( \mathbf{\theta} \right) = \mathbf{Q}^T \left( {\color{burgundy}\mathbf{A}}_e \odot \left[ e^{\imath \sum_d \left( \mathbf{x}_i - \mathbf{x}_j \right) \mathbf{\theta} / \mathbf{h}} \right] \right) \mathbf{Q}
+\tilde{{\color{burgundy}\mathbf{A}}} \left( \mathbf{\theta} \right) = \mathbf{Q}^T \left( {\color{burgundy}\mathbf{A}}^e \odot \left[ e^{\imath \sum_d \left( \mathbf{x}_i - \mathbf{x}_j \right) \mathbf{\theta} / \mathbf{h}} \right] \right) \mathbf{Q}
 \label{eq:symbolhighorder}
 \end{equation}
 where $\odot$ represents pointwise multiplication of the elements, $\mathbf{h}$ is the length of the element in each dimension, $\mathbf{\theta}$ is the target frequency in each dimension, $i, j \in \left[ 0, 1, \dots, p^d \right]$, and $d$ is the dimension of the finite element basis.
-${\color{burgundy}\mathbf{A}}_e$ is the finite element operator for the element and $\mathbf{Q}$ is the localization operator for Fourier modes on an element.
+${\color{burgundy}\mathbf{A}}^e$ is the finite element operator for the element and $\mathbf{Q}$ is the localization operator for Fourier modes on an element.
 \label{def:high_order_symbol}
 \end{definition}
 

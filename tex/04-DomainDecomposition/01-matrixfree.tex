@@ -1,0 +1,46 @@
+For high-order matrix-free BDDC, we decompose the domain $\Omega$ into a series of subdomains $\Omega^i$ given by the individual elements.
+With BDDC, we utilize four spaces on each subdomain.
+The interface between subdomains is given by $\Gamma = \bigcup \partial \Omega^i \backslash \partial \Omega$ and the interface of subdomain $\Omega^i$ is given by $\Gamma^i = \delta \Omega^i \bigcup \Gamma$.
+The interior of each subdomain, $\text{I}$, is given by the remaining degrees of freedom on the element.
+
+Each subdomain problem can therefore be written as
+\begin{equation}
+{\color{burgundy}\mathbf{A}}^e =
+\left( \begin{array}{c c}
+{\color{burgundy}\mathbf{A}}_{\text{I}, \text{I}}^e  &  {\color{burgundy}\mathbf{A}}_{\Gamma, \text{I}}^{e, T}  \\
+{\color{burgundy}\mathbf{A}}_{\Gamma, \text{I}}^e    &  {\color{burgundy}\mathbf{A}}_{\Gamma, \Gamma}^e         \\
+\end{array} \right)
+\end{equation}
+where ${\color{burgundy}\mathbf{A}}^e = {\color{blue(ncs)}\mathbf{B}}^T {\color{applegreen}\mathbf{D}} {\color{blue(ncs)}\mathbf{B}}$, as shown in Equation \ref{eq:localoperator}.
+
+This subdomain problem is assembled into the global problem in the typical finite element approach given by Equation \ref{eq:libceed_representation}, but in BDDC we create a subassembled problem that is easier to invert than the global problem by duplicating broken degrees of freedom along the subdomain boundaries.
+Only the corner, or vertex, degrees of freedom from each element are assembled into a global coarse problem, and the solutions on the global coarse problem and broken subdomain problems are assembled into an approximate solution to the global problem.
+
+The coarse grid subdomain nodes $\Pi^i$ are given by the corners, so we have $4$ coarse grid subdomain nodes for each element in two dimensions and $8$ coarse grid subdomain nodes in three dimensions.
+The remainder of the subdomain we denote with $\text{r}$.
+The subassembled problem is therefore given by
+\begin{equation}
+\hat{\color{burgundy}\mathbf{A}} = \sum_{e = 1}^N \mathbf{R}^{e, T} \hat{\color{burgundy}\mathbf{A}}^e \mathbf{R}^e
+\label{eq:subassembled}
+\end{equation}
+where
+\begin{equation}
+\hat{\color{burgundy}\mathbf{A}}^e =
+\left( \begin{array}{c c}
+{\color{burgundy}\mathbf{A}}_{\text{r}, \text{r}}^e  &  {\color{burgundy}\mathbf{A}}_{\Pi, \text{r}}^{e, T}  \\
+{\color{burgundy}\mathbf{A}}_{\Pi, \text{r}}^e       &  {\color{burgundy}\mathbf{A}}_{\Pi, \Pi}^e            \\
+\end{array} \right).
+\end{equation}
+In this formulation, the broken degrees of freedom found in $\Gamma^i - \Pi^i$ are duplicated for each subdomain in contrast to overlapping domain decomposition methods, where only one degree of freedom would be used at these locations.
+
+% -- Injection -----------------------------------------------------------------
+\subsection{Injection Operators}
+\input 04-DomainDecomposition/01-01-injection
+
+% -- Saddle Point Problem ------------------------------------------------------
+\subsection{Saddle Point Problem}
+\input 04-DomainDecomposition/01-02-saddle
+
+% -- Fast Diagonalization ------------------------------------------------------
+\subsection{Subdomain Solver with Fast Diagonalization}
+\input 04-DomainDecomposition/01-03-fastdiagonalization
