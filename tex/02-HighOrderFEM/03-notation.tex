@@ -3,10 +3,10 @@ The development of this notation will largely follow \cite{brown2010efficient}.
 
 As mentioned in Section \ref{sec:highorderwhy}, finite element discretizations with tensor product bases offer performance benefits on modern HPC software.
 Therefore, this development will focus on arbitrary order tensor product bases on unstructured meshes, but this finite element operator representation does not depend upon the type of finite element discretization or the mesh used for the PDE under investigation.
-Simplices or mixed finite element discretizations on arbitrary meshes may be used with this finite element operator representation, although the choice of finite element bases will have performance implications.
+Simplices or mixed finite element discretizations on arbitrary meshes may be used with this finite element operator representation, although the choice of finite element bases does have performance implications.
 
 % -- High-Order Discretizations -----------------------------------------------
-\subsection{High-Order Discretizations}
+\subsection{High-Order Discretizations} \label{sec:highorderdiscretizations}
 \input 02-HighOrderFEM/03-01-discretizations
 
 % -- Linearization ------------------------------------------------------------
@@ -16,3 +16,7 @@ Simplices or mixed finite element discretizations on arbitrary meshes may be use
 % -- Computational Representation ---------------------------------------------
 \subsection{Computational Representation}
 \input 02-HighOrderFEM/03-03-computational
+
+% -- Solid Mechanics ----------------------------------------------------------
+\subsection{Neo-Hookean Hyperelasticity}
+\input 02-HighOrderFEM/03-04-solids

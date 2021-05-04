@@ -1,0 +1,89 @@
+Inexact solvers for the subdomain problems ${\color{burgundy}\mathbf{A}}_{\text{r}, \text{r}}^{-1}$ was discussed by Li and Widlund in \cite{li2007use}.
+Here, we introduce an inexact subdomain solver based on the Fast Diagonalization Method.
+
+The Fast Diagonalization Method is a fast exact solver for separable problems with a tensor product representation introduced by Lynch, Rice, and Thomas \cite{lynch1964direct}.
+Fast diagonalization has been an effective inexact solver as part of additive overlapping Schwarz problems for spectral element discretizations for Poisson and Helmholtz equations as well as Naiver-Stokes problems, as shown by Fischer and Lottes \cite{fischer2005hybrid}.
+
+Let $M$ and $K$ be the one dimensional mass and stiffness matrices, respectively, given by
+\begin{equation}
+\begin{array}{c c}
+M = N^T W N  &  K = D^T W D
+\end{array}
+\end{equation}
+where $N$, $D$, and $W$ are the elemnt interpolation, derivative, and quadrature weight matrices, as given in Section \ref{sec:highorderdiscretizations}.
+Mass and stiffness matrices in higher dimensions can be given by tensor products.
+\begin{equation}
+\begin{array}{c}
+\mathbf{M} = M \otimes M \otimes M  \\
+\mathbf{K} = K \otimes M \otimes M + M \otimes K \otimes M + M \otimes M \otimes K  \\
+\end{array}
+\end{equation}
+
+As $M$ is symmetric positive definite and $K$ is symmetric, the one dimensional mass and stiffness matrices can be simultaneously diagonalized, which is to say that there exists a unitary matrix $S$ of eignvectors and a set of eigenvalues $\Lambda$ such that
+\begin{equation}
+\begin{array}{c c}
+S^T M S = I  &  S^T K S = \Lambda.
+\end{array}
+\end{equation}
+With this diagonalization, we have
+\begin{equation}
+\begin{array}{c}
+\mathbf{S}       = S \otimes S \otimes S                                                                     \\
+\mathbf{I}       = I \otimes I \otimes I                                                                     \\
+\mathbf{\Lambda} = \Lambda \otimes I \otimes  I + I \otimes \Lambda \otimes I + I \otimes I \otimes \Lambda  \\
+\end{array}
+\end{equation}
+and therefore
+\begin{equation}
+\begin{array}{c c}
+\mathbf{M}   = \mathbf{S} \mathbf{I} \mathbf{S}^T  &  \mathbf{K} = \mathbf{S} \mathbf{\Lambda} \mathbf{S}^T  \\
+\end{array}
+\end{equation}
+
+The inverse of $\mathbf{M}$ and pesudo-inverse of $\mathbf{K}$ are given by
+\begin{equation}
+\begin{array}{c c}
+\mathbf{M}^{-1} = \mathbf{S}^T \mathbf{I} \mathbf{S}  &  \mathbf{K}^{\dagger} = \mathbf{S}^T \mathbf{\Lambda}^{\dagger} \mathbf{S}
+\end{array}
+\label{eq:fdminverse}
+\end{equation}
+where $\mathbf{\Lambda}^{\dagger}$ is given by taking the reciprocal of the non-zero values in $\mathbf{\Lambda}$, as discussed by Fischer and Lottes in \cite{fischer2005hybrid}.
+In problems where the stiffness matrix is invertible, then the Fast Diagonalization Method provides a fast direct solver with a tensor product representation.
+
+Note that the inverse given in Equation \ref{eq:fdminverse} is similar to the form given in Equation \ref{eq:localoperator}.
+If we have an element operator defined by ${\color{burgundy}\mathbf{A}}^e = \mathbf{M}$, then we can define an element inverse operator as ${\color{burgundy}\mathbf{A}}^{e, -1} = {\color{blue(ncs)}\mathbf{B}}^T {\color{applegreen}\mathbf{D}} {\color{blue(ncs)}\mathbf{B}}$, with ${\color{blue(ncs)}\mathbf{B}} = \mathbf{S}$ and ${\color{applegreen}\mathbf{D}} = \mathbf{I}$.
+Additionally, if we have an element operator defined by ${\color{burgundy}\mathbf{A}}^e = \mathbf{K}$, then we can define an element pesudo-inverse operator as ${\color{burgundy}\mathbf{A}}^{e, \dagger} = {\color{blue(ncs)}\mathbf{B}}^T {\color{applegreen}\mathbf{D}} {\color{blue(ncs)}\mathbf{B}}$, with ${\color{blue(ncs)}\mathbf{B}} = \mathbf{S}$ and ${\color{applegreen}\mathbf{D}} = \mathbf{\Lambda}^{\dagger}$.
+
+This discussion of the Fast Diagonalization Method has, thus far, neglegted the effects of irregular geometry, varying coefficents, or more complex PDEs.
+These effects destroy the separability of this problem and the Fast Diagonalization Method cannot be used as fast direct solver for these problems.
+However, as disussed by Li and Widlund in \cite{li2007use}, an inexact subdomain solver is adequate when BDDC is used as a preconditioner.
+
+Couzy in \cite{couzy1995spectral} and Fischer, Miller, and Tofu in \cite{fischer2000overlapping} presented a simple modification to address irregular geometry.
+The Poisson problem is defined on a regular parallelepiped with the correct average dimensions in each coordinate direction.
+Here we present a further generalization to create an approximate Fast Diagonalization Method subdomain solver, ${\color{burgundy}\mathbf{A}}_{\text{r}, \text{r}}^{-1}$.
+
+First we compute the fast diagonalization of the mass and stiffness matrices, as given in Equation \ref{eq:fdminverse}.
+Our goal is to provide an adequate diagonal operator ${\color{applegreen}\mathbf{D}}$ to create a sufficiently accurate approximate Fast Diagonalization Method subdomain solver.
+
+Recall that the operator representing the application of the weak form at quadrature points, ${\color{applegreen}\mathbf{D}}$, is block diagonal with the action of the PDE on each quadrature point independent from the other quadrature points.
+We denote the diagonal block for quadrature point $i$ by ${\color{applegreen}\mathbf{D}}_i$ and compute an \textit{average element coefficient} as
+\begin{equation}
+\bar{k}^e = \sum_{i \in 1, ..., q^d} \sum_{j, k \in 1, ..., m} \frac{\left( {\color{applegreen}\mathbf{D}}_{i} \right)_{j, k}}{\text{nnz} \left( {\color{applegreen}\mathbf{D}} \right)}
+\end{equation}
+where $\text{nnz} \left( {\color{applegreen}\mathbf{D}} \right)$ is the number of nonzero entries in the sparse matrix representation of the diagonal operator and $m$ is the number of evaluation modes for the operator, 1 for interpolated values and $d$ for derivatives in $d$ dimensions.
+
+This average element coefficient is used to compute the scaled pesudo-inverse diagonal
+\begin{equation}
+\begin{array}{c c}
+\mathbf{\Lambda}^e = \bar{k}^e \mathbf{\Lambda}  &  \mathbf{\Lambda}^{e, \dagger} = \frac{1}{\bar{k}^e} \mathbf{\Lambda}^{\dagger}
+\end{array}
+\end{equation}
+where the value of $\mathbf{\Lambda}$ is given by
+\begin{equation}
+\begin{array}{c}
+\mathbf{\Lambda}_N      = I \otimes I \otimes I                                                                                             \\
+\mathbf{\Lambda}_D      = \Lambda \otimes I \otimes I + I \otimes \Lambda \otimes I + I \otimes I \otimes \Lambda                           \\
+\mathbf{\Lambda}_{N, D} = I \otimes I \otimes I + \Lambda \otimes I \otimes  I + I \otimes \Lambda \otimes I + I \otimes I \otimes \Lambda  \\
+\end{array}
+\end{equation}
+based upon if the diagonal operator ${\color{applegreen}\mathbf{D}}$ has interpolated values, derivatives, or both, respectively, at quadrature points.
