@@ -52,11 +52,12 @@ For separable problems that can be expressed as a linear combination of the mass
 \begin{equation}
 \mathbf{A} = a \mathbf{M} + b \mathbf{K}
 \end{equation}
-the Fast Diagonalization Method can provide a fast direct solver if the problem in invertible or a fast pseudo-inverse if the problem is not.
+the Fast Diagonalization Method can provide a fast direct solver if the problem is invertible or a fast pseudo-inverse if the problem is not.
 \begin{equation}
 \mathbf{A}^{-1} = \mathbf{S}^T \left( a \mathbf{I} + b \mathbf{\Lambda} \right)^{-1} \mathbf{S}
 \label{eq:fdminverse}
 \end{equation}
+Separable problems of this form can easily be expressed in the form of Equation \ref{eq:libceed_representation}.
 
 Note that the inverse given in Equation \ref{eq:fdminverse} is similar to the element operator form given in Equation \ref{eq:localoperator}.
 If we have an element operator defined by ${\color{burgundy}\mathbf{A}}^e = a \mathbf{M} + b \mathbf{K}$, then we can define an element inverse operator as ${\color{burgundy}\mathbf{A}}^{e, -1} = {\color{blue(ncs)}\mathbf{B}}^T {\color{applegreen}\mathbf{D}} {\color{blue(ncs)}\mathbf{B}}$, with ${\color{blue(ncs)}\mathbf{B}} = \mathbf{S}$ and ${\color{applegreen}\mathbf{D}} = \left( a \mathbf{I} + b \mathbf{\Lambda} \right)^{-1}$.
