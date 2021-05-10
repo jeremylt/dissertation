@@ -56,7 +56,7 @@ The inverse of the subassembled problem is computed by Schur complement
 -\hat{\color{burgundy}\mathbf{A}}_{\Pi, \text{r}} {\color{burgundy}\mathbf{A}}_{\text{r}, \text{r}}^{-1}  &  \mathbf{I}  \\
 \end{array} \right]
 \end{equation}
-where $\hat{\mathbf{S}}_{\Pi} = \hat{\color{burgundy}\mathbf{A}}_{\Pi, \Pi} - \hat{\color{burgundy}\mathbf{A}}_{\Pi, \text{r}} {\color{burgundy}\mathbf{A}}_{\text{r}, \text{r}}^{-1} \hat{\color{burgundy}\mathbf{A}}_{\text{r}, \Pi}^T$.
+where $\hat{\mathbf{S}}_{\Pi} = \hat{\color{burgundy}\mathbf{A}}_{\Pi, \Pi} - \hat{\color{burgundy}\mathbf{A}}_{\Pi, \text{r}} {\color{burgundy}\mathbf{A}}_{\text{r}, \text{r}}^{-1} \hat{\color{burgundy}\mathbf{A}}_{\Pi, \text{r}}^T$.
 $\Pi$ denotes degrees of freedom on the assembled subdomain vertex space, while $r$ denotes degrees of freedom on the broken space given by the subdomain interior and duplicated portions of the subdomain interface.
 \label{def:bddcpreconditioner}
 \end{definition}

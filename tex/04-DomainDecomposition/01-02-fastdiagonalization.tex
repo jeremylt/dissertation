@@ -110,7 +110,7 @@ We form a saddle point problem to constrain the subdomain vertex nodes and form 
 \end{array} \right]
 \mathcal{R}
 \end{equation}
-where $\mathcal{R}$ is an injection operator from the broken element space to the full element and $\mathcal{V}$ is vertex restriction operator, which restricts to the interface vertices from the full broken space.
+where $\mathcal{R}$ is an injection operator from the broken element space to the full element augmented with duplicate vertex nodes to constrain and $\mathcal{V}$ is vertex restriction operator, which restricts to the duplicated interface vertices from the full broken space.
 
 \begin{definition}
 The Fast Diagonalization Method approximate pseudo-inverse subdomain solver is given by the direct sum of element subdomain solvers of the form
