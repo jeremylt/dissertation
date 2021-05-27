@@ -4,14 +4,14 @@ Here, we introduce an inexact subdomain solver based on the Fast Diagonalization
 The Fast Diagonalization Method is a fast exact solver for separable problems with a tensor product representation introduced by Lynch, Rice, and Thomas \cite{lynch1964direct}.
 Fast diagonalization has been an effective inexact solver as part of additive overlapping Schwarz problems for spectral element discretizations for Poisson and Helmholtz equations as well as Naiver-Stokes problems, as shown by Fischer and Lottes \cite{fischer2005hybrid}.
 
-Let $M$ and $K$ be the one dimensional mass and stiffness matrices, respectively, given by
+Let $M$ and $K$ be the one dimensional mass and Laplacian matrices, respectively, given by
 \begin{equation}
 \begin{array}{c c}
 M = N^T W N,  &  K = D^T W D
 \end{array}
 \end{equation}
 where $N$, $D$, and $W$ are the element interpolation, derivative, and quadrature weight matrices, as given in Section \ref{sec:highorderdiscretizations}.
-Mass and stiffness matrices in higher dimensions can be given by tensor products.
+Mass and Laplacian matrices in higher dimensions can be given by tensor products.
 \begin{equation}
 \begin{array}{c}
 \mathbf{M} = \left( M \otimes M \otimes M \right)  \\
@@ -19,7 +19,7 @@ Mass and stiffness matrices in higher dimensions can be given by tensor products
 \end{array}
 \end{equation}
 
-As $M$ is symmetric positive definite and $K$ is symmetric, the one dimensional mass and stiffness matrices can be simultaneously diagonalized, which is to say that there exists a non-singular matrix $S$ and diagonal matrix $\Lambda$ such that
+As $M$ is symmetric positive definite and $K$ is symmetric, the one dimensional mass and Laplacian matrices can be simultaneously diagonalized, which is to say that there exists a non-singular matrix $S$ and diagonal matrix $\Lambda$ such that
 \begin{equation}
 \begin{array}{c c}
 S M S^T = I,  &  S K S^T = \Lambda.
@@ -40,19 +40,25 @@ where
 \end{array}
 \end{equation}
 
-The inverse of $\mathbf{M}$ and pseudo-inverse of $\mathbf{K}$ are given by
+The inverse of $\mathbf{M}$ and $\mathbf{K}$ are given by
 \begin{equation}
 \begin{array}{c c}
-\mathbf{M}^{-1} = \mathbf{S}^T \mathbf{I} \mathbf{S},  &  \mathbf{K}^{+} = \mathbf{S}^T \mathbf{\Lambda}^{+} \mathbf{S}
+\mathbf{M}^{-1} = \mathbf{S}^T \mathbf{I} \mathbf{S},  &  \mathbf{K}^{+} = \mathbf{S}^T \mathbf{\Lambda}^{+} \mathbf{S}.
 \end{array}
 \end{equation}
-where $\mathbf{\Lambda}^{+}$ is given by taking the reciprocal of the non-zero values in $\mathbf{\Lambda}$, as discussed by Fischer and Lottes in \cite{fischer2005hybrid}.
 
-For separable problems that can be expressed as a linear combination of the mass and stiffness matrices
+However, for a single element with no boundary conditions, the Laplacian is singular and no inverse exists.
+Fischer and Lottes, \cite{fischer2005hybrid}, take the pseudo-inverse $\mathbf{\Lambda}^{+}$, which is given by taking the reciprocal of the non-zero values in $\mathbf{\Lambda}$.
+We instead compute the true inverse of a perturbed version of the Laplacian, given by $\mathcal{K} = \mathbf{K} + \epsilon \mathbf{I}$.
+We denote this approximate inverse by $\mathcal{K}^+$.
+
+ToDo: ADD FIGURE SHOWING EFFECT OF PSEUDO-INVERSE VS INVERSE OF PERTURBED OPERATOR.
+
+For separable problems that can be expressed as a linear combination of the mass and Laplacian matrices
 \begin{equation}
 \mathbf{A} = a \mathbf{M} + b \mathbf{K}
 \end{equation}
-the Fast Diagonalization Method can provide a fast direct solver if the problem is invertible or a fast pseudo-inverse if the problem is not.
+the Fast Diagonalization Method can provide a fast direct solver if the problem is invertible or a fast approximate inverse if the problem is not.
 \begin{equation}
 \mathbf{A}^{-1} = \mathbf{S}^T \left( a \mathbf{I} + b \mathbf{\Lambda} \right)^{-1} \mathbf{S}
 \label{eq:fdminverse}
@@ -61,7 +67,7 @@ Separable problems of this form can easily be expressed in the form of Equation 
 
 Note that the inverse given in Equation \ref{eq:fdminverse} is similar to the element operator form given in Equation \ref{eq:localoperator}.
 If we have an element operator defined by ${\color{burgundy}\mathbf{A}}^e = a \mathbf{M} + b \mathbf{K}$, then we can define an element inverse operator as ${\color{burgundy}\mathbf{A}}^{e, -1} = {\color{blue(ncs)}\mathbf{B}}^T {\color{applegreen}\mathbf{D}} {\color{blue(ncs)}\mathbf{B}}$, with ${\color{blue(ncs)}\mathbf{B}} = \mathbf{S}$ and ${\color{applegreen}\mathbf{D}} = \left( a \mathbf{I} + b \mathbf{\Lambda} \right)^{-1}$.
-If the operator is not invertible, we can still compute the element pseudo-inverse in this form.
+If the operator is not invertible, we can still compute the approximate element inverse in this form.
 
 This discussion of the Fast Diagonalization Method has, thus far, neglected the effects of irregular geometry, varying coefficients, or more complex PDEs.
 These effects destroy the separability of this problem and the Fast Diagonalization Method cannot be used as fast direct solver for these problems.
@@ -71,9 +77,9 @@ Couzy in \cite{couzy1995spectral} and Fischer, Miller, and Tofu in \cite{fischer
 In their work, the Poisson problem is defined on a regular parallelepiped with the correct average dimensions in each coordinate direction.
 Here we present a further generalization to create an approximate Fast Diagonalization Method subdomain solver, ${\color{burgundy}\mathbf{A}}_{\text{r}, \text{r}}^{-1}$.
 
-First we compute the simultaneous diagonalization of the mass and stiffness matrices, as given in Equation \ref{eq:fdminverse}.
+First we compute the simultaneous diagonalization of the mass and peturbed Laplacian matrices, as given in Equation \ref{eq:fdminverse}.
 The eigenvectors from the diagonalization become the basis interpolation operator for our approximate Fast Diagonalization Method subdomain solver.
-Our goal is to provide an adequate diagonal operator ${\color{applegreen}\mathbf{D}}$ to create a sufficiently accurate approximate pseudo-inverse.
+Our goal is to provide an adequate diagonal operator ${\color{applegreen}\mathbf{D}}$ to create a sufficiently accurate approximate subdomain inverse.
 
 Recall that the operator representing the application of the weak form at quadrature points, ${\color{applegreen}\mathbf{D}}$, is block diagonal with the action of the PDE on each quadrature point independent from the other quadrature points.
 We denote the diagonal block for quadrature point $i$ by ${\color{applegreen}\mathbf{D}}_i$ and compute an \textit{average element coefficient} as
@@ -82,7 +88,7 @@ We denote the diagonal block for quadrature point $i$ by ${\color{applegreen}\ma
 \end{equation}
 where $\text{nnz} \left( {\color{applegreen}\mathbf{D}} \right)$ is the number of nonzero entries in the sparse matrix representation of the diagonal operator, $\mathbf{W}_i$ is the quadrature weight for quadrature point $i$, and $m$ is the number of evaluation modes for the operator, $1$ for interpolated values, $d$ for derivatives in $d$ dimensions, and $1 + d$ for a weak form with both interpolated values and derivatives at quadrature points.
 
-This average element coefficient is used to compute the approximate pseudo-inverse diagonal
+This average element coefficient is used to compute the approximate subdomain inverse diagonal
 \begin{equation}
 \begin{array}{c c}
 \mathbf{\Lambda}^e = \bar{k}^e \mathbf{\Lambda},  &  \mathbf{\Lambda}^{e, +} = \frac{1}{\bar{k}^e} \mathbf{\Lambda}^{+}
@@ -97,9 +103,8 @@ where the value of $\mathbf{\Lambda}$ is given by
 \end{array}
 \end{equation}
 based upon if the diagonal operator ${\color{applegreen}\mathbf{D}}$ has interpolated values, derivatives, or both, respectively, at quadrature points.
-As above, only the pseudo-inverse of this diagonal matrix is formed by taking the reciprocal of the non-zero elements.
 
-We have an approximate Fast Diagonalization Method pseudo-inverse for the entire subdomain, ${\color{burgundy}\mathbf{A}}^{e, +} = {\color{blue(ncs)}\mathbf{B}}^T {\color{applegreen}\mathbf{D}} {\color{blue(ncs)}\mathbf{B}}$, but we need a subdomain solver for only the broken space, ${\color{burgundy}\mathbf{A}}^{-1, e}_{\text{r}, \text{r}}$.
+We have an approximate Fast Diagonalization Method inverse for the entire subdomain, ${\color{burgundy}\mathbf{A}}^{e, +} = {\color{blue(ncs)}\mathbf{B}}^T {\color{applegreen}\mathbf{D}} {\color{blue(ncs)}\mathbf{B}}$, but we need a subdomain solver for only the broken space, ${\color{burgundy}\mathbf{A}}^{-1, e}_{\text{r}, \text{r}}$.
 We form a saddle point problem to constrain the subdomain vertex nodes and form a Dirichlet problem from the full subdomain Neumann problem.
 
 \begin{equation}
@@ -113,7 +118,7 @@ We form a saddle point problem to constrain the subdomain vertex nodes and form 
 where $\mathcal{R}$ is an injection operator from the broken element space to the full element augmented with duplicate vertex nodes to constrain and $\mathcal{V}$ is vertex restriction operator, which restricts to the duplicated interface vertices from the full broken space.
 
 \begin{definition}
-The Fast Diagonalization Method approximate pseudo-inverse subdomain solver is given by the direct sum of element subdomain solvers of the form
+The Fast Diagonalization Method approximate inverse subdomain solver is given by the direct sum of element subdomain solvers of the form
 \begin{equation}
 {\color{burgundy}\mathbf{A}}^{e, -}_{\text{r}, \text{r}} \approx {\color{burgundy}\mathbf{A}}^{e, +}_{\text{r}, \text{r}} = \mathcal{R}^T
 \left[ \begin{array}{c c}
@@ -127,11 +132,11 @@ The Fast Diagonalization Method approximate pseudo-inverse subdomain solver is g
 \mathcal{R}
 \end{equation}
 where $\mathbf{S} = - \mathcal{V} {\color{burgundy}\mathbf{A}}^{e, +} \mathcal{V}^T$, $\mathcal{R}$ is an injection operator from the broken element space to the full element, and $\mathcal{V}$ is vertex restriction operator, which restricts to the interface vertices from the full broken space.
-The approximate pseudo-inverse for each subdomain is given by
+The approximate inverse for each subdomain is given by
 \begin{equation}
 {\color{burgundy}\mathbf{A}}^{e, +} = {\color{blue(ncs)}\mathbf{B}}^T {\color{applegreen}\mathbf{D}} {\color{blue(ncs)}\mathbf{B}}
 \end{equation}
-where ${\color{blue(ncs)}\mathbf{B}}$ is a basis interpolating to the eigenspace of the simultaneous diagonalization of the mass and stiffness matrices $\mathbf{M} = \mathbf{N}^T \mathbf{W} \mathbf{N}$ and $\mathbf{K} = \mathbf{D}^T \mathbf{W} \mathbf{D}$.
+where ${\color{blue(ncs)}\mathbf{B}}$ is a basis interpolating to the eigenspace of the simultaneous diagonalization of the mass and Laplacian matrices $\mathbf{M} = \mathbf{N}^T \mathbf{W} \mathbf{N}$ and $\mathbf{K} = \mathbf{D}^T \mathbf{W} \mathbf{D}$.
 ${\color{applegreen}\mathbf{D}}$ is computed from the eigenvalues of this diagonalization and the average element coefficient value
 \begin{equation}
 \begin{array}{c c}
