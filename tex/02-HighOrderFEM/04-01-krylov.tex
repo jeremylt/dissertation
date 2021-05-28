@@ -3,8 +3,32 @@ Krylov subspace methods are a natural fit for matrix-free finite elements, as th
 \mathcal{K} \left( \mathbf{r}_0, {\color{burgundy}\mathbf{A}}, \mathbf{k} \right) = \lbrace \mathbf{r}_0, {\color{burgundy}\mathbf{A}} \mathbf{r}_0, \dots, {\color{burgundy}\mathbf{A}}^{k - 1} \mathbf{r}_0 \rbrace.
 \label{krylov_space}
 \end{equation}
-The Krylov subspace is used to construct increasingly accurate iterates $\mathbf{x}^k$ that approach the true solution $\mathbf{x}$.
+The Krylov subspace is used to construct increasingly accurate iterates $\mathbf{x}_k$ that approach the true solution $\mathbf{x}$.
 
-CG
+Specifically, we focus on the Conjugate Gradient (CG) method \cite{hestenes1952methods, shewchuk1994introduction} for solving symmetric positive-definite linear systems.
+CG relies upon the observation that for symmetric posititve-definite systems, solving the linear problem ${\color{burgundy}\mathbf{A}} \mathbf{x} = \mathbf{b}$ is equivalent to minimizing the quadratic form given by
+\begin{equation}
+\phi \left( \mathbf{x} \right) = \frac{1}{2} \mathbf{x}^T {\color{burgundy}\mathbf{A}} \mathbf{x} - \mathbf{x}^T \mathbf{b}.
+\end{equation}
 
-GMRES
+The gradient of this quadratic form is given by $\phi' \left( \mathbf{x}_k \right) = \mathbf{b} - {\color{burgundy}\mathbf{A}} \mathbf{x}_k$.
+This gradient provides the direction of steepest descent, so CG chooses the appropriate step size in the direction of the gradient, which is equivalent to choosing the appropriate weight for each basis vector in the current Krylov subspace.
+
+In the method of Steepest Descent, the iterates $\mathbf{x}^k$ are given by traversing the direction of steepest descent until the gradient of the orthogonal to the search direction.
+\begin{equation}
+\mathbf{x}_{k + 1} = \mathbf{x}_k + \alpha_k \mathbf{x}_k, \hspace{4mm}
+\alpha_k = \frac{\mathbf{r}_k^T \mathbf{r}_k}{\mathbf{r}_k^T {\color{burgundy}\mathbf{A}} \mathbf{r}_k}
+\end{equation}
+The convergence of the method of Steepest Descent can be slow, especially when the condition number of the operator is large, such as with high order finite element operators.
+
+CG improves upon Steepest Descent by taking the search directions to be A-orthogonal, which helps improve convergence.
+\begin{equation}
+\mathbf{x}_{k + 1} = \mathbf{x}_k + \alpha_k + \mathbf{d}_k, \hspace{4mm}
+\alpha_k  = \frac{\mathbf{r}_k^T \mathbf{r}_k}{\mathbf{d}_k^T {\color{burgundy}\mathbf{A}} \mathbf{d}_k}, \hspace{4mm}
+\mathbf{d}_{k + 1} = \mathbf{r}_{k + 1} + \beta_{k + 1} \mathbf{d}_k, \hspace{4mm}
+\beta_{k + 1} = \frac{\mathbf{r}_k^T \mathbf{r}_k}{\mathbf{r}_k^T \mathbf{r}_k}
+\end{equation}
+
+There are more flexible Krylov methods that work for a more general set of operators, such as Generalized Minimum Residual (GMRES).
+We restrict ourselves to CG; however, many of our observations and techniques are applicable to a wider range of Krylov methods or iterative solvers.
+We will note when our analysis or techniques can be easily generalized.
