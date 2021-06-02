@@ -43,12 +43,13 @@ where $\nu$ is the number of smoothing passes and $\tilde{\mathbf{E}}_n \left( \
 \begin{equation}
 \begin{tabular}{c}
 $\tilde{\mathbf{E}}_0 \left( \mathbf{\theta} \right) = \mathbf{I}$\\
-$\tilde{\mathbf{E}}_1 \left( \mathbf{\theta} \right) = \mathbf{I} - \alpha \left( \diag \tilde{\color{burgundy}\mathbf{A}} \right)^{-1} \tilde{\color{burgundy}\mathbf{A}} \left( \mathbf{\theta} \right)$\\
-$\tilde{\mathbf{E}}_n \left( \mathbf{\theta} \right) = \left( \alpha \tilde{\mathbf{E}}_{n - 1} \left( \mathbf{\theta} \right) + \beta_{n - 2} \tilde{\mathbf{E}}_{n - 2} \left( \mathbf{\theta} \right) - \left( \diag \tilde{\color{burgundy}\mathbf{A}} \right)^{-1} \tilde{\color{burgundy}\mathbf{A}} \left( \mathbf{\theta} \right) \tilde{\mathbf{E}}_{n - 2} \left( \mathbf{\theta} \right) \right) / \gamma_{n - 1}$
+$\tilde{\mathbf{E}}_1 \left( \mathbf{\theta} \right) = \mathbf{I} - \alpha \tilde{\color{burgundy}\mathbf{A}}_J \tilde{\color{burgundy}\mathbf{A}} \left( \mathbf{\theta} \right)$\\
+$\tilde{\mathbf{E}}_n \left( \mathbf{\theta} \right) = \left( \alpha \tilde{\mathbf{E}}_{n - 1} \left( \mathbf{\theta} \right) + \beta_{n - 2} \tilde{\mathbf{E}}_{n - 2} \left( \mathbf{\theta} \right) - \tilde{\color{burgundy}\mathbf{A}}_J \tilde{\color{burgundy}\mathbf{A}} \left( \mathbf{\theta} \right) \tilde{\mathbf{E}}_{n - 2} \left( \mathbf{\theta} \right) \right) / \gamma_{n - 1}$
 \end{tabular}
 \end{equation}
 \label{def:chebyshev_symbol}
 \end{definition}
+with $\tilde{\color{burgundy}\mathbf{A}}_J = \left( \mathbf{Q}^T \diag \left( {\color{burgundy}\mathbf{A}}^e \right) \mathbf{Q} \right)^{-1}$ giving the symbol of the Jacobi smoother.
 
 \begin{figure}[!ht]
   \centering
