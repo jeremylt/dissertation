@@ -3,14 +3,14 @@ Preconditioners help control the condition number of high-order finite elements 
 
 Suppose we are solving the linear system given by
 \begin{equation}
-{\color{burgundy}\mathbf{A}} \mathbf{x} = \mathbf{b}
+{\color{burgundy}\mathbf{A}} \mathbf{u} = \mathbf{b}
 \label{linear_eqn}
 \end{equation}
 via a Krylov subspace method.
 This linear system may come from the Galerkin system of equations of our PDE of interest or the Jacobian of our PDE of interest, as in a Newton-Krylov method.
 We can improve the convergence of our Krylov iterations for this system by solving the preconditioned system
 \begin{equation}
-\left( \mathbf{M}_L^{-1} {\color{burgundy}\mathbf{A}} \mathbf{M}_R^{-1} \right) \left( \mathbf{M}_R \mathbf{x} \right) = \mathbf{M}_L^{-1} \mathbf{b}
+\left( \mathbf{M}_L^{-1} {\color{burgundy}\mathbf{A}} \mathbf{M}_R^{-1} \right) \left( \mathbf{M}_R \mathbf{u} \right) = \mathbf{M}_L^{-1} \mathbf{b}
 \label{precond_eqn}
 \end{equation}
 via our Krylov method instead.

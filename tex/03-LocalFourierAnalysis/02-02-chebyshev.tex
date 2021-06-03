@@ -5,46 +5,46 @@ We use the Jacobi preconditioned operator, $\left( \diag {\color{burgundy}\mathb
 
 The terms in the Chebyshev semi-iterative method can be modeled by the three term recurrence relation given by
 \begin{equation}
-\mathbf{x}_{n + 1} = - \left( \mathbf{r}_n + \alpha \mathbf{x}_n + \beta_{n - 1} \mathbf{x}_{n - 1} \right) / \gamma_{n - 1}
+\mathbf{u}_{k + 1} = - \left( \mathbf{r}_k + \alpha \mathbf{u}_k + \beta_{k - 1} \mathbf{u}_{k - 1} \right) / \gamma_{k - 1}
 \label{eq:chebyshev_recursive}
 \end{equation}
 where the spectrum of $\left( \diag {\color{burgundy}\mathbf{A}} \right)^{-1} {\color{burgundy}\mathbf{A}}$ lies on the line segment $\left[ \alpha - c, \alpha + c \right]$ and the parameters $\beta$ and $\gamma$ are given by the recurrence
 \begin{equation}
 \begin{tabular}{c c}
 $\beta_0 = - \frac{c^2}{2 \alpha}$ & $\gamma_0 = - \alpha$\\
-$\beta_n = \frac{c}{2} \frac{T_n \left( \eta \right)}{T_{n + 1} \left( \eta \right)} = \left( \frac{c}{2} \right)^2 \frac{1}{\gamma_n}$ & $\gamma_n = \frac{c}{2} \frac{T_{n + 1} \left( \eta \right)}{T_n \left( \eta \right)} = - \left( \alpha + \beta_{n - 1} \right)$.
+$\beta_k = \frac{c}{2} \frac{T_k \left( \eta \right)}{T_{k + 1} \left( \eta \right)} = \left( \frac{c}{2} \right)^2 \frac{1}{\gamma_k}$ & $\gamma_k = \frac{c}{2} \frac{T_{k + 1} \left( \eta \right)}{T_k \left( \eta \right)} = - \left( \alpha + \beta_{k - 1} \right)$.
 \end{tabular}
 \end{equation}
 In this equation, $T_i \left( \zeta \right) = 2 \zeta T_{i - 1} \left( \zeta \right) - T_{i - 2} \left( \zeta \right)$ are the classical Chebyshev polynomials, which are evaluated at the point $\eta = - \alpha / c$.
 
 The residual in the Chebyshev semi-iterative method can therefore be modeled by the three term recurrence
 \begin{equation}
-\mathbf{r}_{n + 1} = \left( \left( \diag {\color{burgundy}\mathbf{A}} \right)^{-1} {\color{burgundy}\mathbf{A}} \mathbf{r}_n - \alpha \mathbf{r}_n - \beta_{n - 1} \mathbf{r}_{n - 1} \right) / \gamma_{n - 1}.
+\mathbf{r}_{k + 1} = \left( \left( \diag {\color{burgundy}\mathbf{A}} \right)^{-1} {\color{burgundy}\mathbf{A}} \mathbf{r}_k - \alpha \mathbf{r}_k - \beta_{k - 1} \mathbf{r}_{k - 1} \right) / \gamma_{k - 1}.
 \label{eq:chebyshev_error_recursive}
 \end{equation}
 
-Using the recurrence relation given in Equation \ref{eq:chebyshev_error_recursive}, we can define the error propagation of the $n$th order Chebyshev smoother in terms of the error in the first term:
+Using the recurrence relation given in Equation \ref{eq:chebyshev_error_recursive}, we can define the error propagation of the $k$th order Chebyshev smoother in terms of the error in the first term:
 \begin{equation}
 \begin{tabular}{c}
 $\mathbf{E}_0 = \mathbf{I}$\\
 $\mathbf{E}_1 = \mathbf{I} - \alpha \left( \diag {\color{burgundy}\mathbf{A}} \right)^{-1} {\color{burgundy}\mathbf{A}}$\\
-$\mathbf{E}_n = \left( \alpha \mathbf{E}_{n - 1} + \beta_{n - 2} \mathbf{E}_{n - 2} - \left( \diag {\color{burgundy}\mathbf{A}} \right)^{-1} {\color{burgundy}\mathbf{A}} \mathbf{E}_{n - 2} \right) / \gamma_{n - 1}$
+$\mathbf{E}_k = \left( \alpha \mathbf{E}_{k - 1} + \beta_{k - 2} \mathbf{E}_{k - 2} - \left( \diag {\color{burgundy}\mathbf{A}} \right)^{-1} {\color{burgundy}\mathbf{A}} \mathbf{E}_{k - 2} \right) / \gamma_{k - 1}$
 \end{tabular}
 \label{eq:chebyshev_error_propagation}
 \end{equation}
 With this recursive definition of the error propagation operator, we can define the symbol for Chebyshev smoothing.
 
 \begin{definition}
-The symbol of the error propagation operator for $n$th order Chebyshev smoothing based on the Jacobi preconditioned operator is given by
+The symbol of the error propagation operator for $k$th order Chebyshev smoothing based on the Jacobi preconditioned operator is given by
 \begin{equation}
-\tilde{\mathbf{S}} \left( \nu, n, \theta \right) = \left( \tilde{\mathbf{E}}_n \right)^\nu,
+\tilde{\mathbf{S}} \left( \nu, n, \boldsymbol{\theta} \right) = \left( \tilde{\mathbf{E}}_k \right)^\nu,
 \end{equation}
-where $\nu$ is the number of smoothing passes and $\tilde{\mathbf{E}}_n \left( \mathbf{\theta} \right)$ is given by the recursive definition
+where $\nu$ is the number of smoothing passes and $\tilde{\mathbf{E}}_k \left( \boldsymbol{\theta} \right)$ is given by the recursive definition
 \begin{equation}
 \begin{tabular}{c}
-$\tilde{\mathbf{E}}_0 \left( \mathbf{\theta} \right) = \mathbf{I}$\\
-$\tilde{\mathbf{E}}_1 \left( \mathbf{\theta} \right) = \mathbf{I} - \alpha \tilde{\color{burgundy}\mathbf{A}}_J \tilde{\color{burgundy}\mathbf{A}} \left( \mathbf{\theta} \right)$\\
-$\tilde{\mathbf{E}}_n \left( \mathbf{\theta} \right) = \left( \alpha \tilde{\mathbf{E}}_{n - 1} \left( \mathbf{\theta} \right) + \beta_{n - 2} \tilde{\mathbf{E}}_{n - 2} \left( \mathbf{\theta} \right) - \tilde{\color{burgundy}\mathbf{A}}_J \tilde{\color{burgundy}\mathbf{A}} \left( \mathbf{\theta} \right) \tilde{\mathbf{E}}_{n - 2} \left( \mathbf{\theta} \right) \right) / \gamma_{n - 1}$
+$\tilde{\mathbf{E}}_0 \left( \boldsymbol{\theta} \right) = \mathbf{I}$\\
+$\tilde{\mathbf{E}}_1 \left( \boldsymbol{\theta} \right) = \mathbf{I} - \alpha \tilde{\color{burgundy}\mathbf{A}}_J \tilde{\color{burgundy}\mathbf{A}} \left( \boldsymbol{\theta} \right)$\\
+$\tilde{\mathbf{E}}_k \left( \boldsymbol{\theta} \right) = \left( \alpha \tilde{\mathbf{E}}_{k - 1} \left( \boldsymbol{\theta} \right) + \beta_{k - 2} \tilde{\mathbf{E}}_{k - 2} \left( \boldsymbol{\theta} \right) - \tilde{\color{burgundy}\mathbf{A}}_J \tilde{\color{burgundy}\mathbf{A}} \left( \boldsymbol{\theta} \right) \tilde{\mathbf{E}}_{k - 2} \left( \boldsymbol{\theta} \right) \right) / \gamma_{k - 1}$
 \end{tabular}
 \end{equation}
 \label{def:chebyshev_symbol}

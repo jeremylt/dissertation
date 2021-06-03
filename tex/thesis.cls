@@ -1278,5 +1278,6 @@
 	\@shortLoTtrue
 	\typeout{Putting page number on short LoT}
 }
+
 \endinput
 %%%%%%%%%%%%%%%% End of file ``thesis.cls''

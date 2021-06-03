@@ -19,7 +19,7 @@ On the left linear micro-element, there are two basis functions which are zero o
 The element level operator, ${\color{burgundy}\mathbf{A}}_e$, on the fine grid macro-element assembles the element level operator for each micro-element into the action of the PDE operator on the full macro-element.
 
 With this macro-element structure, we can form the Fourier mode localization operator for the macro-element in the same fashion as the Fourier mode localization operator for high-order elements given in Equation \ref{eq:fouriermodelocalization1d}.
-With macro-elements, there are $n * p$ columns in the localization operator for a one dimensional scalar PDE on a marco-element with $n$ micro-elements instead of $p$ columns for a one dimensional scalar PDE on a single high order element.
+With macro-elements, there are $m p$ columns in the localization operator for a one dimensional scalar PDE on a marco-element with $m$ micro-elements instead of $p$ columns for a one dimensional scalar PDE on a single high order element.
 \begin{equation}
 \mathbf{Q} =
 \begin{bmatrix}
@@ -40,9 +40,9 @@ Following the derivation from Section \ref{sec:lfahighorder}, we can derive the 
 \begin{definition}
 The symbol of the h-prolongation operator is given by
 \begin{equation}
-\tilde{{\color{burgundy}\mathbf{P}}}_{\text{ctof}} \left( \theta \right) = \mathbf{Q}_f^T \left( {\color{burgundy}\mathbf{P}}_e \odot \left[ e^{\imath \sum_d \left( \mathbf{x}_{i, f} - \mathbf{x}_{j, c} \right) \mathbf{\theta} / \mathbf{h}} \right] \right) \mathbf{Q}_c
+\tilde{{\color{burgundy}\mathbf{P}}}_{\text{ctof}} \left( \boldsymbol{\theta} \right) = \mathbf{Q}_f^T \left( {\color{burgundy}\mathbf{P}}_e \odot \left[ e^{\imath \left( \mathbf{x}_{j, c} - \mathbf{x}_{i, f} \right) \cdot \mathbf{\theta} / \mathbf{h}} \right] \right) \mathbf{Q}_c
 \end{equation}
-where $i \in \left[ 0, 1, \dots, \left( p * n \right)^d \right]$, $h$ is the length of the macro-element, $j \in \left[ 0, 1, \dots, p^d \right]$, $d$ is the dimension of the finite element bases, and $n$ is the number of micro-elements in each fine grid macro-element.
+where $i \in \left\lbrace 0, 1, \dots, m \left( n \cdot p \right)^d \right\rbrace$, $\mathbf{h}$ is the length of the macro-element, $j \in \left\lbrace 0, 1, \dots, m \cdot p^d \right\rbrace$, $d$ is the dimension of the finite element bases, $n$ is the number of components, and $m$ is the number of micro-elements in each fine grid macro-element.
 The matrices $\mathbf{Q}_f$ and $\mathbf{Q}_c$ are the localization mappings for the fine and coarse grid, respectively, and the macro-element h-prolongation operator is given by ${\color{burgundy}\mathbf{P}}_e = {\color{blue(ncs)}\mathbf{I}} {\color{applegreen}\mathbf{D}}_{\text{scale}} {\color{blue(ncs)}\mathbf{B}}_{\text{ctof}}$.
 \label{def:h_prolongation_symbol}
 \end{definition}
@@ -50,9 +50,9 @@ The matrices $\mathbf{Q}_f$ and $\mathbf{Q}_c$ are the localization mappings for
 \begin{definition}
 The symbol of h-restriction operator is given by the expression
 \begin{equation}
-\tilde{{\color{burgundy}\mathbf{R}}}_{\text{ftoc}} \left( \theta \right) = \mathbf{Q}_c^T \left( {\color{burgundy}\mathbf{R}}_e \odot \left[ e^{\imath \sum_d \left( \mathbf{x}_{i, c} - \mathbf{x}_{j, f} \right) \mathbf{\theta} / \mathbf{h}} \right] \right) \mathbf{Q}_f
+\tilde{{\color{burgundy}\mathbf{R}}}_{\text{ftoc}} \left( \boldsymbol{\theta} \right) = \mathbf{Q}_c^T \left( {\color{burgundy}\mathbf{R}}_e \odot \left[ e^{\imath \left( \mathbf{x}_{j, f} - \mathbf{x}_{i, c} \right) \cdot \boldsymbol{\theta} / \mathbf{h}} \right] \right) \mathbf{Q}_f
 \end{equation}
-where $i \in \left[ 0, 1, \dots, p^d \right]$, $h$ is the length of the macro-element, $j \in \left[ 0, 1, \dots, \left( p * n \right)^d \right]$, $d$ is the dimension of the finite element bases, and $n$ is the number of micro-elements in each fine grid macro-element.
+where $i \in \left\lbrace 0, 1, \dots, n \cdot p^d \right\rbrace$, $\mathbf{h}$ is the length of the macro-element, $j \in \left\lbrace 0, 1, \dots, m \left( n \cdot p \right)^d \right\rbrace$, $d$ is the dimension of the finite element bases, $n$ is the number of components, and $m$ is the number of micro-elements in each fine grid macro-element.
 The matrices $\mathbf{Q}_f$ and $\mathbf{Q}_c$ are the localization mappings for the fine and coarse grid, respectively, and the macro-element h-restriction operator is given by ${\color{burgundy}\mathbf{R}}_e = {\color{burgundy}\mathbf{P}}_e^T = {\color{blue(ncs)}\mathbf{B}}_{\text{ctof}}^T {\color{applegreen}\mathbf{D}}_{\text{scale}} {\color{blue(ncs)}\mathbf{I}}$.
 \label{def:h_restriction_symbol}
 \end{definition}

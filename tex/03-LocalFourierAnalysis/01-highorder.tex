@@ -14,7 +14,7 @@ If for all grid functions $\varphi \left( \theta, x \right)$ we have
 \begin{equation}
 L_h \varphi \left( \theta, x \right) = \tilde{L}_h \left( \theta \right) \varphi \left( \theta, x \right)
 \end{equation}
-then we define $\tilde{L}_h \left( \theta \right) = \sum_{\kappa \in V} s_\kappa e^{\imath \theta \kappa}$ as the symbol of $L_h$.
+then we define $\tilde{L}_h \left( \theta \right) = \sum_{\kappa \in V} s_\kappa e^{\imath \theta \kappa}$ as the symbol of $L_h$, where $\imath^2 = -1$.
 \end{definition}
 
 This definition can be extended to a $p \times p$ linear system of operators by
@@ -26,7 +26,7 @@ This definition can be extended to a $p \times p$ linear system of operators by
     \tilde{L}_h^{p, 1} && \cdots && \tilde{L}_h^{p, p} \\
 \end{bmatrix}
 \end{equation}
-where $\tilde{L}_h^{i, j}$, $i, j \in \left[1, 2, \dots, p \right]$ is given by scalar Toeplitz operators describing how component $j$ appears in the equation for component $i$.
+where $\tilde{L}_h^{i, j}$, $i, j \in \left\lbrace 1, 2, \dots, p \right\rbrace$ is given by scalar Toeplitz operators describing how component $j$ appears in the equation for component $i$.
 
 Note that for a system of equations representing an error propagation operator in a relaxation scheme, the spectral radius of the symbol matrix determines now rapidly the scheme decreases error at a target frequency.
 Low frequencies are given by $\theta \in T^{\text{low}} = \left[ - \pi / 2, \pi / 2 \right)$ and high frequencies are given by $\theta \in T^{\text{high}} = \left[ - \pi / 2, 3 \pi / 2 \right) \setminus T^{\text{low}}$.
@@ -48,9 +48,9 @@ where $\mathbf{P}$ and $\mathbf{G}$ represent the element assembly operators, ${
 We focus on Fourier analysis of the local element operator, ${\color{burgundy}\mathbf{A}}^e$.
 The nodes on the left and right boundaries of the element map to the same Fourier mode due to periodicity, so we can compute the symbol matrix as
 \begin{equation}
-\tilde{{\color{burgundy}\mathbf{A}}} = \mathbf{Q}^T \left( {\color{burgundy}\mathbf{A}}^e \odot \left[ e^{\imath \left( x_i - x_j \right) \theta / h} \right] \right) \mathbf{Q}
+\tilde{{\color{burgundy}\mathbf{A}}} = \mathbf{Q}^T \left( {\color{burgundy}\mathbf{A}}^e \odot \left[ e^{\imath \left( x_j - x_i \right) \theta / h} \right] \right) \mathbf{Q}
 \end{equation}
-where $\odot$ represents pointwise multiplication of the elements, $h$ is the length of the element, and $i, j \in \left[ 0, 1, \dots, p\right]$.
+where $\odot$ represents pointwise multiplication of the elements, $h$ is the length of the element, and $i, j \in \left\lbrace 0, 1, \dots, p \right\rbrace$.
 $\mathbf{Q}$ is a $\left( p + 1 \right) \times p$ matrix that localizes Fourier modes to each element.
 \begin{equation}
 \mathbf{Q} =
@@ -86,10 +86,10 @@ In general, we will omit the subscript indicating the dimension of the Fourier m
 \begin{definition}
 The symbol matrix of a finite element operator for an arbitrary second order PDE with any number of components, basis order, and dimension is given by
 \begin{equation}
-\tilde{{\color{burgundy}\mathbf{A}}} \left( \mathbf{\theta} \right) = \mathbf{Q}^T \left( {\color{burgundy}\mathbf{A}}^e \odot \left[ e^{\imath \sum_d \left( \mathbf{x}_i - \mathbf{x}_j \right) \mathbf{\theta} / \mathbf{h}} \right] \right) \mathbf{Q}
+\tilde{{\color{burgundy}\mathbf{A}}} \left( \boldsymbol{\theta} \right) = \mathbf{Q}^T \left( {\color{burgundy}\mathbf{A}}^e \odot \left[ e^{\imath \left( \mathbf{x}_j - \mathbf{x}_i \right) \cdot \boldsymbol{\theta} / \mathbf{h}} \right] \right) \mathbf{Q}
 \label{eq:symbolhighorder}
 \end{equation}
-where $\odot$ represents pointwise multiplication of the elements, $\mathbf{h}$ is the length of the element in each dimension, $\mathbf{\theta}$ is the target frequency in each dimension, $i, j \in \left[ 0, 1, \dots, p^d \right]$, and $d$ is the dimension of the finite element basis.
+where $\odot$ represents pointwise multiplication of the elements, $\mathbf{h}$ is the length of the element in each dimension, $\boldsymbol{\theta}$ is the target frequency in each dimension, $i, j \in \left\lbrace 0, 1, \dots, n \cdot p^d \right\rbrace$, $n$ is the number of components, and $d$ is the dimension of the finite element basis.
 ${\color{burgundy}\mathbf{A}}^e$ is the finite element operator for the element and $\mathbf{Q}$ is the localization operator for Fourier modes on an element.
 \label{def:high_order_symbol}
 \end{definition}
