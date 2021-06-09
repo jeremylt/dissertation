@@ -2,7 +2,7 @@ In order to compute the symbol of the BDDC preconditioners, we will find the sym
 
 The inverse of the subassembled problem requires both modes in the broken element space and the global primal variable space.
 
-The Fouier modes on each broken element subdomain are separate, so the mode mapping operator $\mathbf{Q}$ is not used for the symbol of the subdomain solver.
+The Fourier modes on each broken element subdomain are separate, so the mode mapping operator $\mathbf{Q}$ is not used for the symbol of the subdomain solver.
 The subdomain solver is completely in the broken element space therefore has a very straightforward symbol, given by
 \begin{equation}
 \tilde{\color{burgundy}\mathbf{A}}_{\text{r}, \text{r}}^{-1} \left( \boldsymbol{\theta} \right) = {\color{burgundy}\mathbf{A}}_{\text{r}, \text{r}}^{-1} \odot \left[ e^{\imath \left( \mathbf{x}_j - \mathbf{x}_i \right) \cdot \boldsymbol{\theta} / \mathbf{h}} \right]

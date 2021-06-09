@@ -9,7 +9,7 @@ The scaled injection operator, $\mathbf{R}_1$ is defined as the mapping between 
 For interior and vertex degrees of freedom, the sparse matrix representation of $\mathbf{R}_1$ would contain a single entry with a value of $1$, while each column corresponding to a duplicated degree of freedom has $\lvert \mathcal{N} \left( x \right) \rvert$ entries, each given by $1 / \lvert \mathcal{N} \left( x \right) \rvert$.
 
 \begin{definition}
-Let the scaled injection operator, $\mathbf{R}_1$, be given by the mapping from the global problem space to the broken space where each degree of freedom is sacled by its multiplity in the broken space, denoted by $\lvert \mathcal{N} \left( x \right) \rvert$.
+Let the scaled injection operator, $\mathbf{R}_1$, be given by the mapping from the global problem space to the broken space where each degree of freedom is scaled by its multiplicity in the broken space, denoted by $\lvert \mathcal{N} \left( x \right) \rvert$.
 The lumped BDDC preconditioner is given by $\mathbf{M}^{-1}_1 = \mathbf{R}_1^T \hat{\color{burgundy}\mathbf{A}} \mathbf{R}_1$, where $\mathbf{R}_1$ is the scaled injection operator.
 \label{def:lumpedbddc}
 \end{definition}

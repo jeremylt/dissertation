@@ -7,7 +7,7 @@ The total multigrid error propagation operator is given by
 where ${\color{burgundy}\mathbf{S}}_f$ represents the smoother error propagation operator, while ${\color{burgundy}\mathbf{P}}_{\text{ctof}}$ and ${\color{burgundy}\mathbf{R}}_{\text{ftoc}}$ represent the grid prolongation and restriction operators between the coarse and fine grids, respectively.
 
 \begin{definition}
-The symbol of total multigrid error propegation operator for a finite element operator ${\color{burgundy}\mathbf{A}}$ is given by
+The symbol of total multigrid error propagation operator for a finite element operator ${\color{burgundy}\mathbf{A}}$ is given by
 \begin{equation}
 \tilde{\mathbf{E}}_{\text{TMG}} \left( \boldsymbol{\theta} \right) = \tilde{{\color{burgundy}\mathbf{S}}}_f \left( \boldsymbol{\theta}, \omega \right) \left( \mathbf{I} - \tilde{{\color{burgundy}\mathbf{P}}}_{\text{ctof}} \left( \boldsymbol{\theta} \right) \left(\tilde{{\color{burgundy}\mathbf{A}}}_c \left( \boldsymbol{\theta} \right) \right)^{-1} \tilde{{\color{burgundy}\mathbf{R}}}_{\text{ftoc}} \left( \boldsymbol{\theta} \right) \tilde{{\color{burgundy}\mathbf{A}}}_f \left( \boldsymbol{\theta} \right) \right) \tilde{{\color{burgundy}\mathbf{S}}}_f \left( \boldsymbol{\theta}, \omega \right)
 \end{equation}

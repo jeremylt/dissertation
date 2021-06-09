@@ -6,7 +6,7 @@ Krylov subspace methods are a natural fit for matrix-free finite elements, as th
 The Krylov subspace is used to construct increasingly accurate iterates $\mathbf{u}_k$ that approach the true solution $\mathbf{u}$.
 
 Specifically, we focus on the Conjugate Gradient (CG) method \cite{hestenes1952methods, shewchuk1994introduction} for solving symmetric positive-definite linear systems.
-CG relies upon the observation that for symmetric posititve-definite systems, solving the linear problem ${\color{burgundy}\mathbf{A}} \mathbf{u} = \mathbf{b}$ is equivalent to minimizing the quadratic form given by
+CG relies upon the observation that for symmetric positive-definite systems, solving the linear problem ${\color{burgundy}\mathbf{A}} \mathbf{u} = \mathbf{b}$ is equivalent to minimizing the quadratic form given by
 \begin{equation}
 \phi \left( \mathbf{u} \right) = \frac{1}{2} \mathbf{u}^T {\color{burgundy}\mathbf{A}} \mathbf{u} - \mathbf{u}^T \mathbf{b}.
 \end{equation}
