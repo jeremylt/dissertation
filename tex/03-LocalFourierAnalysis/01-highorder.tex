@@ -19,17 +19,18 @@ then we define $\tilde{L}_h \left( \theta \right) = \sum_{\kappa \in V} s_\kappa
 
 This definition can be extended to a $p \times p$ linear system of operators by
 \begin{equation}
-\tilde{\mathbf{L}}_h =
+\mathbf{L} =
 \begin{bmatrix}
-    \tilde{L}_h^{1, 1} && \cdots && \tilde{L}_h^{1, p} \\
-    \vdots             && \vdots && \vdots             \\
-    \tilde{L}_h^{p, 1} && \cdots && \tilde{L}_h^{p, p} \\
+    L^{1, 1} && \cdots && L^{1, p}          \\
+    \vdots             && \vdots && \vdots  \\
+    L^{p, 1} && \cdots && L^{p, p}          \\
 \end{bmatrix}
 \end{equation}
-where $\tilde{L}_h^{i, j}$, $i, j \in \left\lbrace 1, 2, \dots, p \right\rbrace$ is given by scalar Toeplitz operators describing how component $j$ appears in the equation for component $i$.
-
+where $L^{i, j}$, $i, j \in \left\lbrace 1, 2, \dots, p \right\rbrace$ is given by scalar Toeplitz operators describing how component $j$ appears in the equation for component $i$.
+The symbol of $\mathbf{L}$, denoted $\tilde{\mathbf{L}}_h$, is a $p \times p$ matrix valued function of $\theta$ given by $\left[ \tilde{\mathbf{L}}_h \right]_{i, j} = \tilde{L}_h^{i, j} \left( \theta \right)$.
 Note that for a system of equations representing an error propagation operator in a relaxation scheme, the spectral radius of the symbol matrix determines now rapidly the scheme decreases error at a target frequency.
-Low frequencies are given by $\theta \in T^{\text{low}} = \left[ - \pi / 2, \pi / 2 \right)$ and high frequencies are given by $\theta \in T^{\text{high}} = \left[ - \pi / 2, 3 \pi / 2 \right) \setminus T^{\text{low}}$.
+
+Low frequencies are given by $\theta \in T^{\text{low}} = \left[ - \pi / 2, \pi / 2 \right)$ and high frequencies are given by $\theta \in T^{\text{high}} = \left[ - \pi / 2, 3 \pi / 2 \right) \setminus T^{\text{low}}$ in one dimension, and in higher dimensions $\theta \in T^{\text{low}} = \left[ - \pi / 2, \pi / 2 \right)^d$ and $\theta \in T^{\text{high}} = \left[ - \pi / 2, 3 \pi / 2 \right)^d \setminus T^{\text{low}}$, where $d$ is the dimension.
 
 We can compute the symbol of a $p \times p$ linear system of operators representing a discretized PDE.
 We start with a system of equations representing a Galerkin operator, such as in Equation \ref{eq:jacobian_form}.
@@ -45,12 +46,12 @@ ${\color{burgundy}\mathbf{A}}^e = {\color{blue(ncs)}\mathbf{B}}^T {\color{appleg
 \end{equation}
 where $\mathbf{P}$ and $\mathbf{G}$ represent the element assembly operators, ${\color{blue(ncs)}\mathbf{B}}$ is a basis operator which computes the values and derivatives of the basis functions at the quadrature points, and ${\color{applegreen}\mathbf{D}}$ is a block diagonal operator which provides the pointwise application of the bilinear form on the quadrature points, to include quadrature weights and the change in coordinates between the physical and reference space.
 
-We focus on Fourier analysis of the local element operator, ${\color{burgundy}\mathbf{A}}^e$.
+We focus on Fourier analysis of the local element operator, ${\color{burgundy}\mathbf{A}}^e$, on the mesh grid with points given by $x_i$, for $i \in \left\lbrace 1, 2, \dots, p + 1 \right\rbrace$, where $p$ is the polynomial order of the basis.
 The nodes on the left and right boundaries of the element map to the same Fourier mode due to periodicity, so we can compute the symbol matrix as
 \begin{equation}
 \tilde{{\color{burgundy}\mathbf{A}}} = \mathbf{Q}^T \left( {\color{burgundy}\mathbf{A}}^e \odot \left[ e^{\imath \left( x_j - x_i \right) \theta / h} \right] \right) \mathbf{Q}
 \end{equation}
-where $\odot$ represents pointwise multiplication of the elements, $h$ is the length of the element, and $i, j \in \left\lbrace 0, 1, \dots, p \right\rbrace$.
+where $\odot$ represents pointwise multiplication of the elements, $h$ is the length of the element, and $i, j \in \left\lbrace 1, 2, \dots, p + 1 \right\rbrace$.
 $\mathbf{Q}$ is a $\left( p + 1 \right) \times p$ matrix that localizes Fourier modes to each element.
 \begin{equation}
 \mathbf{Q} =
@@ -89,7 +90,7 @@ The symbol matrix of a finite element operator for an arbitrary second order PDE
 \tilde{{\color{burgundy}\mathbf{A}}} \left( \boldsymbol{\theta} \right) = \mathbf{Q}^T \left( {\color{burgundy}\mathbf{A}}^e \odot \left[ e^{\imath \left( \mathbf{x}_j - \mathbf{x}_i \right) \cdot \boldsymbol{\theta} / \mathbf{h}} \right] \right) \mathbf{Q}
 \label{eq:symbolhighorder}
 \end{equation}
-where $\odot$ represents pointwise multiplication of the elements, $\mathbf{h}$ is the length of the element in each dimension, $\boldsymbol{\theta}$ is the target frequency in each dimension, $i, j \in \left\lbrace 0, 1, \dots, n \cdot p^d \right\rbrace$, $n$ is the number of components, and $d$ is the dimension of the finite element basis.
+where $\odot$ represents pointwise multiplication of the elements, $\mathbf{h}$ is the length of the element in each dimension, $\boldsymbol{\theta}$ is the target frequency in each dimension, $i, j \in \left\lbrace 1, 2, \dots, n \cdot \left( p + 1 \right)^d \right\rbrace$, $n$ is the number of components, $p$ is the polynomial order of the discretization, and $d$ is the dimension of the finite element basis.
 ${\color{burgundy}\mathbf{A}}^e$ is the finite element operator for the element and $\mathbf{Q}$ is the localization operator for Fourier modes on an element.
 \label{def:high_order_symbol}
 \end{definition}
