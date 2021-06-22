@@ -19,7 +19,7 @@ In this equation, $T_i \left( \zeta \right) = 2 \zeta T_{i - 1} \left( \zeta \ri
 
 The residual in the Chebyshev semi-iterative method can therefore be modeled by the three term recurrence
 \begin{equation}
-\mathbf{r}_{k + 1} = \left( \left( \diag {\color{burgundy}\mathbf{A}} \right)^{-1} {\color{burgundy}\mathbf{A}} \mathbf{r}_k - \alpha \mathbf{r}_k - \beta_{k - 1} \mathbf{r}_{k - 1} \right) / \gamma_{k - 1}.
+\mathbf{r}_k = \left( \left( \diag {\color{burgundy}\mathbf{A}} \right)^{-1} {\color{burgundy}\mathbf{A}} \mathbf{r}_{k - 1} - \alpha \mathbf{r}_{k - 1} - \beta_{k - 2} \mathbf{r}_{k - 2} \right) / \gamma_{k - 1}.
 \label{eq:chebyshev_error_recursive}
 \end{equation}
 
@@ -27,8 +27,8 @@ Using the recurrence relation given in Equation \ref{eq:chebyshev_error_recursiv
 \begin{equation}
 \begin{tabular}{c}
 $\mathbf{E}_0 = \mathbf{I}$\\
-$\mathbf{E}_1 = \mathbf{I} - \alpha \left( \diag {\color{burgundy}\mathbf{A}} \right)^{-1} {\color{burgundy}\mathbf{A}}$\\
-$\mathbf{E}_k = \left( \alpha \mathbf{E}_{k - 1} + \beta_{k - 2} \mathbf{E}_{k - 2} - \left( \diag {\color{burgundy}\mathbf{A}} \right)^{-1} {\color{burgundy}\mathbf{A}} \mathbf{E}_{k - 2} \right) / \gamma_{k - 1}$
+$\mathbf{E}_1 = \mathbf{I} - \frac{1}{\alpha} \left( \diag {\color{burgundy}\mathbf{A}} \right)^{-1} {\color{burgundy}\mathbf{A}}$\\
+$\mathbf{E}_k = \left( \left( \diag {\color{burgundy}\mathbf{A}} \right)^{-1} {\color{burgundy}\mathbf{A}} \mathbf{E}_{k - 2} - \alpha \mathbf{E}_{k - 1} - \beta_{k - 2} \mathbf{E}_{k - 2} \right) / \gamma_{k - 1}$
 \end{tabular}
 \label{eq:chebyshev_error_propagation}
 \end{equation}
@@ -43,8 +43,8 @@ where $\nu$ is the number of smoothing passes and $\tilde{\mathbf{E}}_k \left( \
 \begin{equation}
 \begin{tabular}{c}
 $\tilde{\mathbf{E}}_0 \left( \boldsymbol{\theta} \right) = \mathbf{I}$\\
-$\tilde{\mathbf{E}}_1 \left( \boldsymbol{\theta} \right) = \mathbf{I} - \alpha \tilde{\color{burgundy}\mathbf{A}}_J \tilde{\color{burgundy}\mathbf{A}} \left( \boldsymbol{\theta} \right)$\\
-$\tilde{\mathbf{E}}_k \left( \boldsymbol{\theta} \right) = \left( \alpha \tilde{\mathbf{E}}_{k - 1} \left( \boldsymbol{\theta} \right) + \beta_{k - 2} \tilde{\mathbf{E}}_{k - 2} \left( \boldsymbol{\theta} \right) - \tilde{\color{burgundy}\mathbf{A}}_J \tilde{\color{burgundy}\mathbf{A}} \left( \boldsymbol{\theta} \right) \tilde{\mathbf{E}}_{k - 2} \left( \boldsymbol{\theta} \right) \right) / \gamma_{k - 1}$
+$\tilde{\mathbf{E}}_1 \left( \boldsymbol{\theta} \right) = \mathbf{I} - \frac{1}{\alpha} \tilde{\color{burgundy}\mathbf{A}}_J \tilde{\color{burgundy}\mathbf{A}} \left( \boldsymbol{\theta} \right)$\\
+$\tilde{\mathbf{E}}_k \left( \boldsymbol{\theta} \right) = \left( \tilde{\color{burgundy}\mathbf{A}}_J \tilde{\color{burgundy}\mathbf{A}} \left( \boldsymbol{\theta} \right) \tilde{\mathbf{E}}_{k - 2} \left( \boldsymbol{\theta} \right) - \alpha \tilde{\mathbf{E}}_{k - 1} \left( \boldsymbol{\theta} \right) - \beta_{k - 2} \tilde{\mathbf{E}}_{k - 2} \left( \boldsymbol{\theta} \right) \right) / \gamma_{k - 1}$
 \end{tabular}
 \end{equation}
 \label{def:chebyshev_symbol}
