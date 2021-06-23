@@ -5,7 +5,7 @@ We use the Jacobi preconditioned operator, $\left( \diag {\color{burgundy}\mathb
 
 The terms in the Chebyshev semi-iterative method can be modeled by the three term recurrence relation given by
 \begin{equation}
-\mathbf{u}_{k + 1} = - \left( \mathbf{r}_k + \alpha \mathbf{u}_k + \beta_{k - 1} \mathbf{u}_{k - 1} \right) / \gamma_{k - 1}
+\mathbf{u}_k = - \left( \mathbf{r}_{k - 1} + \alpha \mathbf{u}_{k - 1} + \beta_{k - 2} \mathbf{u}_{k - 2} \right) / \gamma_{k - 1}
 \label{eq:chebyshev_recursive}
 \end{equation}
 where the spectrum of $\left( \diag {\color{burgundy}\mathbf{A}} \right)^{-1} {\color{burgundy}\mathbf{A}}$ lies on the line segment $\left[ \alpha - c, \alpha + c \right]$ and the parameters $\beta$ and $\gamma$ are given by the recurrence
@@ -28,7 +28,7 @@ Using the recurrence relation given in Equation \ref{eq:chebyshev_error_recursiv
 \begin{tabular}{c}
 $\mathbf{E}_0 = \mathbf{I}$\\
 $\mathbf{E}_1 = \mathbf{I} - \frac{1}{\alpha} \left( \diag {\color{burgundy}\mathbf{A}} \right)^{-1} {\color{burgundy}\mathbf{A}}$\\
-$\mathbf{E}_k = \left( \left( \diag {\color{burgundy}\mathbf{A}} \right)^{-1} {\color{burgundy}\mathbf{A}} \mathbf{E}_{k - 2} - \alpha \mathbf{E}_{k - 1} - \beta_{k - 2} \mathbf{E}_{k - 2} \right) / \gamma_{k - 1}$
+$\mathbf{E}_k = \left( \left( \diag {\color{burgundy}\mathbf{A}} \right)^{-1} {\color{burgundy}\mathbf{A}} \mathbf{E}_{k - 1} - \alpha \mathbf{E}_{k - 1} - \beta_{k - 2} \mathbf{E}_{k - 2} \right) / \gamma_{k - 1}$
 \end{tabular}
 \label{eq:chebyshev_error_propagation}
 \end{equation}
@@ -44,7 +44,7 @@ where $\nu$ is the number of smoothing passes and $\tilde{\mathbf{E}}_k \left( \
 \begin{tabular}{c}
 $\tilde{\mathbf{E}}_0 \left( \boldsymbol{\theta} \right) = \mathbf{I}$\\
 $\tilde{\mathbf{E}}_1 \left( \boldsymbol{\theta} \right) = \mathbf{I} - \frac{1}{\alpha} \tilde{\color{burgundy}\mathbf{A}}_J \tilde{\color{burgundy}\mathbf{A}} \left( \boldsymbol{\theta} \right)$\\
-$\tilde{\mathbf{E}}_k \left( \boldsymbol{\theta} \right) = \left( \tilde{\color{burgundy}\mathbf{A}}_J \tilde{\color{burgundy}\mathbf{A}} \left( \boldsymbol{\theta} \right) \tilde{\mathbf{E}}_{k - 2} \left( \boldsymbol{\theta} \right) - \alpha \tilde{\mathbf{E}}_{k - 1} \left( \boldsymbol{\theta} \right) - \beta_{k - 2} \tilde{\mathbf{E}}_{k - 2} \left( \boldsymbol{\theta} \right) \right) / \gamma_{k - 1}$
+$\tilde{\mathbf{E}}_k \left( \boldsymbol{\theta} \right) = \left( \tilde{\color{burgundy}\mathbf{A}}_J \tilde{\color{burgundy}\mathbf{A}} \left( \boldsymbol{\theta} \right) \tilde{\mathbf{E}}_{k - 1} \left( \boldsymbol{\theta} \right) - \alpha \tilde{\mathbf{E}}_{k - 1} \left( \boldsymbol{\theta} \right) - \beta_{k - 2} \tilde{\mathbf{E}}_{k - 2} \left( \boldsymbol{\theta} \right) \right) / \gamma_{k - 1}$
 \end{tabular}
 \end{equation}
 \label{def:chebyshev_symbol}
@@ -59,5 +59,15 @@ with $\tilde{\color{burgundy}\mathbf{A}}_J = \left( \mathbf{Q}^T \diag \left( {\
   \caption{Spectrum of Chebyshev Preconditioner Symbol}
 \end{figure}
 
-Using Definition \ref{def:chebyshev_symbol}, in Figures \ref{fig:chebyshev_spectrum_1d} and \ref{fig:chebyshev_spectrum_2d}, we see the spectral radius of the symbol of third order Chebyshev polynomial preconditioning for the scalar diffusion operator with a fourth-order H1 Lagrange finite element basis on the Gauss-Lobatto points in one and two dimensions.
+Using Definition \ref{def:chebyshev_symbol}, in Figure \ref{fig:chebyshev_spectrum_1d} we see the spectrum of the symbol of third order Chebyshev polynomial smoothing for the 1D scalar diffusion operator and in \ref{fig:chebyshev_spectrum_2d} we see the spectral radius of the symbol of third order Chebyshev polynomial smoothing for the 2D scalar diffusion operator.
+Again, in both cases we use a fourth-order H1 Lagrange finite element basis on the Gauss-Lobatto points.
 When compared to Figures \ref{fig:jacobi_spectrum_1d} and \ref{fig:jacobi_spectrum_2d}, we can see that smoothing based upon Chebyshev semi-iterative offers better error reduction than weighted or unweighted Jacobi, albeit at a higher computational cost.
+
+Note that first order Chebyshev smoothing is equivalent to Jacobi smoothing with the classical choice of parameter value of $\omega = 1 / \alpha$.
+
+The Chebyshev semi-iterative method is known to be sensitive to the quality of the estimates of the extremal eigenvalues $\lambda_{\text{min}}$ and $\lambda_{\text{max}}$.
+PETSc \cite{petsc-user-ref} estimates the eigenvalues of the preconditioned operator via Krylov iterations, yielding an estimate of the maximal eigenvalue, $\hat{\lambda}_{\text{max}}$.
+This estimate is used to target the upper part of the spectrum of the error, with $\lambda_{\text{min}} = 0.1 \hat{\lambda}_{\text{max}}$ and $\lambda_{\text{max}} = 1.1 \hat{\lambda}_{\text{max}}$.
+
+In LFAToolkit, we also want to target the upper part of the spectrum of the error; we estimate the spectral radius of the symbol of the Jacobi preconditioned operator by sampling the the frequencies at a small number of values to compute $\hat{\lambda}_{\text{max}}$.
+We then take $\lambda_{\text{min}} = 0.1 \hat{\lambda}_{\text{max}}$ and $\lambda_{\text{max}} = 1.0 \hat{\lambda}_{\text{max}}$.

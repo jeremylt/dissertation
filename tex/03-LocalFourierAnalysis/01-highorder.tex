@@ -6,7 +6,6 @@ L_h w_h \left( x \right) = \sum_{\kappa \in V} s_\kappa w_h \left( x + \kappa h 
 \end{split}
 \end{equation}
 where $V \subset \mathbb{Z}$ is a finite index set, $s_\kappa \in \mathbb{R}$ are constant coefficients, and $w_h \left( x \right)$ is a $l^2$ function on $G_h$.
-
 Since $L_h$ is Toeplitz, it can be diagonalized by the standard Fourier modes $\varphi \left( \theta, x \right) = e^{\imath \theta x / h}$.
 
 \begin{definition}[Symbol of $L_h$]\label{def:symbol}
@@ -19,15 +18,15 @@ then we define $\tilde{L}_h \left( \theta \right) = \sum_{\kappa \in V} s_\kappa
 
 This definition can be extended to a $p \times p$ linear system of operators by
 \begin{equation}
-\mathbf{L} =
+\mathbf{L}_h =
 \begin{bmatrix}
-    L^{1, 1} && \cdots && L^{1, p}          \\
-    \vdots             && \vdots && \vdots  \\
-    L^{p, 1} && \cdots && L^{p, p}          \\
+    L_h^{1, 1} && \cdots && L_h^{1, p}        \\
+    \vdots               && \vdots && \vdots  \\
+    L_h^{p, 1} && \cdots && L_h^{p, p}        \\
 \end{bmatrix}
 \end{equation}
-where $L^{i, j}$, $i, j \in \left\lbrace 1, 2, \dots, p \right\rbrace$ is given by scalar Toeplitz operators describing how component $j$ appears in the equation for component $i$.
-The symbol of $\mathbf{L}$, denoted $\tilde{\mathbf{L}}_h$, is a $p \times p$ matrix valued function of $\theta$ given by $\left[ \tilde{\mathbf{L}}_h \right]_{i, j} = \tilde{L}_h^{i, j} \left( \theta \right)$.
+where $L_h^{i, j}$, $i, j \in \left\lbrace 1, 2, \dots, p \right\rbrace$ is given by scalar Toeplitz operators describing how component $j$ appears in the equation for component $i$.
+The symbol of $\mathbf{L}_h$, denoted $\tilde{\mathbf{L}}_h$, is a $p \times p$ matrix valued function of $\theta$ given by $\left[ \tilde{\mathbf{L}}_h \right]_{i, j} = \tilde{L}_h^{i, j} \left( \theta \right)$.
 Note that for a system of equations representing an error propagation operator in a relaxation scheme, the spectral radius of the symbol matrix determines now rapidly the scheme decreases error at a target frequency.
 
 Low frequencies are given by $\theta \in T^{\text{low}} = \left[ - \pi / 2, \pi / 2 \right)$ and high frequencies are given by $\theta \in T^{\text{high}} = \left[ - \pi / 2, 3 \pi / 2 \right) \setminus T^{\text{low}}$ in one dimension, and in higher dimensions $\theta \in T^{\text{low}} = \left[ - \pi / 2, \pi / 2 \right)^d$ and $\theta \in T^{\text{high}} = \left[ - \pi / 2, 3 \pi / 2 \right)^d \setminus T^{\text{low}}$, where $d$ is the dimension.
@@ -98,7 +97,7 @@ ${\color{burgundy}\mathbf{A}}^e$ is the finite element operator for the element 
 Note that this LFA notation is applicable to any second-order PDE with a weak form that can be represented by Equation \ref{eq:jacobian_form}.
 This representation is used in \href{https://www.github.com/jeremylt/LFAToolkit.jl}{LFAToolkit.jl}, where the users provide the finite element basis ${\color{blue(ncs)}\mathbf{B}}$, the node to mode mapping $\mathbf{Q}$, and the pointwise representation of the weak form ${\color{applegreen}\mathbf{D}}$, and the software can provide the LFA of the PDE with various preconditioners.
 
-As we develop LFA of various preconditioners and smoothers in this notation throughout this chapter, we will the standard test problem of the scalar diffusion operator to illustrate the properties of this analysis for these techniques.
+As we develop LFA of various preconditioners and smoothers in this notation throughout this chapter and the following chapters, we will the standard test problem of the scalar diffusion operator to illustrate the properties of this analysis for these techniques.
 
 \begin{figure}[!h]
   \centering
@@ -108,6 +107,7 @@ As we develop LFA of various preconditioners and smoothers in this notation thro
   \caption{Spectrum of Scalar Diffusion Operator Symbol}
 \end{figure}
 
-In Figures \ref{fig:diffusion_spectrum_1d} and \ref{fig:diffusion_spectrum_2d}, we see the spectral radius of the symbol of scalar diffusion operator with a fourth-order H1 Lagrange finite element basis on the Gauss-Lobatto points in one and two dimensions.
+We see the spectrum of the 1D scalar diffusion operator in Figure \ref{fig:diffusion_spectrum_1d} and the spectral radius of the symbol of the 2D scalar diffusion operator in Figure \ref{fig:diffusion_spectrum_2d}.
+In both cases, we used a fourth-order H1 Lagrange finite element basis on the Gauss-Lobatto points.
 These plots were generated with \href{https://www.github.com/jeremylt/LFAToolkit.jl}{LFAToolkit.jl}.
-Various preconditioning techniques will reduce this spectral radius, with different effectiveness in different frequency ranges.
+Various preconditioning techniques will reduce the spectral radius of this symbol, each with different effectiveness in different frequency ranges.

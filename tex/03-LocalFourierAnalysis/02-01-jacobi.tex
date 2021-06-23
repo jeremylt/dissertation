@@ -22,8 +22,9 @@ where $\nu$ is the number of smoothing passes and $\omega$ is the weighting para
   \caption{Spectrum of Jacobi Preconditioner Symbol}
 \end{figure}
 
-Using Definition \ref{def:jacobi_symbol}, in Figures \ref{fig:jacobi_spectrum_1d} and \ref{fig:jacobi_spectrum_2d}, we see the spectral radius of the symbol of unweighted Jacobi preconditioning for the scalar diffusion operator with a fourth-order H1 Lagrange finite element basis on the Gauss-Lobatto points in one and two dimensions.
-In Figure \ref{fig:jacobi_spectrum_1d}, we see that the unweighted Jacobi still has a spectral radius greater than $1.0$; this spectral radius can be improved by changing the weighting factor, $\omega$.
+Using Definition \ref{def:jacobi_symbol}, in Figure \ref{fig:jacobi_spectrum_1d} we see the spectrum of the 1D unweighted Jacobi error symbol for the 1D scalar diffusion operator and in \ref{fig:jacobi_spectrum_2d} we see the spectral radius of the symbol of unweighted Jacobi error symbol for the scalar diffusion operator.
+In both cases we use a fourth-order H1 Lagrange finite element basis on the Gauss-Lobatto points.
+In Figure \ref{fig:jacobi_spectrum_1d}, we see that the unweighted Jacobi error symbol still has a spectral radius greater than $1.0$; this spectral radius can be improved by changing the weighting factor, $\omega$.
 
 \begin{figure}[!ht]
   \centering
@@ -33,9 +34,15 @@ In Figure \ref{fig:jacobi_spectrum_1d}, we see that the unweighted Jacobi still 
   \caption{Spectral Radius of Weighted Jacobi Preconditioner Symbol}
 \end{figure}
 
-In Figures \ref{fig:weighted_jacobi_radius_1d} and \ref{fig:weighted_jacobi_radius_2d}, we see the spectral radius of the symbol of weighted Jacobi preconditioning for the scalar diffusion operator with a fourth-order H1 Lagrange finite element basis on the Gauss-Lobatto points in one and two dimensions as a function of the weighting parameter, $\omega$.
+The smoothing factor is defined as the spectral radius of the error symbol over the high frequency range,
+\begin{equation}
+\mu = \max_{\boldsymbol{\theta} \in T^{\text{high}}} \rho \left( \tilde{\mathbf{S}} \left( \nu, \omega, \boldsymbol{\theta} \right) \right)
+\end{equation}
+where $\rho$ denotes the spectral radius of the matrix symbol $\tilde{\mathbf{S}}$.
+
+In Figure \ref{fig:weighted_jacobi_radius_1d} and \ref{fig:weighted_jacobi_radius_2d}, we see the smoothing factor of the symbol of weighted Jacobi preconditioning for the scalar diffusion operator with a fourth-order H1 Lagrange finite element basis on the Gauss-Lobatto points in one and two dimensions as a function of the weighting parameter, $\omega$.
 In one dimension, the optimal smoothing parameter is approximately $\omega \approx 0.86$, while in two dimensions the optimal smoothing parameter is approximately $\omega \approx 1.0$.
-Both figures indicate that underestimating the optimal smoothing parameter has a relatively mild effect compared to the increase in the spectral radius of the symbol from overestimating the optimal smoothing parameter.
+Both figures indicate that underestimating the optimal smoothing parameter has a relatively mild effect compared to the increase in the spectral radius of the error symbol from overestimating the optimal smoothing parameter.
 
 As discussed in \cite{he2020two}, the classical optimal smoothing parameter is given by
 \begin{equation}
