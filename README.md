@@ -1,10 +1,10 @@
-# PhD Dissertation
+# PhD Dissertation - Jeremy L Thompson
 
 ## Organization
 
 The raw LaTeX source for this dissertation can be found in the `tex` folder.
 The images and charts can be found in the `img` folder.
-The data and scripts for all charts and analysis in this dissertation can be found in the `data` folder.
+The data and scripts for all charts and analysis in this dissertation can be found in the `data`, `scripts` and `jupyter` folders.
 
 ## Reproducibility
 
