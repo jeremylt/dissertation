@@ -33,7 +33,7 @@ Low frequencies are given by $\theta \in T^{\text{low}} = \left[ - \pi / 2, \pi 
 
 We can compute the symbol of a $p \times p$ linear system of operators representing a discretized PDE.
 We start with a system of equations representing a Galerkin operator, such as in Equation \ref{eq:jacobian_form}.
-We omit boundary terms, as they are not present on the infinite uniform grid $G_h$.
+We omit boundary terms in this derivation, as they are not present on the infinite uniform grid $G_h$.
 
 Using the algebraic representation of PDE operators given in Chapter \ref{ch:HighOrderFEM}, the PDE operator ${\color{burgundy}\mathbf{A}}$ is of the form
 \begin{equation}
@@ -45,12 +45,15 @@ ${\color{burgundy}\mathbf{A}}^e = {\color{blue(ncs)}\mathbf{B}}^T {\color{appleg
 \end{equation}
 where $\mathbf{P}$ and $\mathbf{G}$ represent the element assembly operators, ${\color{blue(ncs)}\mathbf{B}}$ is a basis operator which computes the values and derivatives of the basis functions at the quadrature points, and ${\color{applegreen}\mathbf{D}}$ is a block diagonal operator which provides the pointwise application of the bilinear form on the quadrature points, to include quadrature weights and the change in coordinates between the physical and reference space.
 
-We focus on Fourier analysis of the local element operator, ${\color{burgundy}\mathbf{A}}^e$, on the mesh grid with points given by $x_i$, for $i \in \left\lbrace 1, 2, \dots, p + 1 \right\rbrace$, where $p$ is the polynomial order of the basis.
-The nodes on the left and right boundaries of the element map to the same Fourier mode due to periodicity, so we can compute the symbol matrix as
+We focus on local Fourier analysis of the element operator, ${\color{burgundy}\mathbf{A}}^e$, on the mesh grid with points given by $x_i$, for $i \in \left\lbrace 1, 2, \dots, p + 1 \right\rbrace$, where $p$ is the polynomial order of the basis.
+We first develop the local Fourier analysis in 1D for scalar operators and then extend this analysis to more general operators.
+
+In one dimension, the nodes on the left and right boundaries of the element correspond to the same Fourier mode due to periodicity, so we can compute the symbol matrix as
 \begin{equation}
 \tilde{{\color{burgundy}\mathbf{A}}} = \mathbf{Q}^T \left( {\color{burgundy}\mathbf{A}}^e \odot \left[ e^{\imath \left( x_j - x_i \right) \theta / h} \right] \right) \mathbf{Q}
 \end{equation}
 where $\odot$ represents pointwise multiplication of the elements, $h$ is the length of the element, and $i, j \in \left\lbrace 1, 2, \dots, p + 1 \right\rbrace$.
+In the pointwise product ${\color{burgundy}\mathbf{A}}^e \odot \left[ e^{\imath \left( x_j - x_i \right) \theta / h} \right]$, the $\left( i, j \right)$ entry is given by $\left[ {\color{burgundy}\mathbf{A}}^e \right]_{i, j} e^{\imath \left( x_j - x_i \right) \theta / h}$.
 $\mathbf{Q}$ is a $\left( p + 1 \right) \times p$ matrix that localizes Fourier modes to each element.
 \begin{equation}
 \mathbf{Q} =
@@ -70,7 +73,9 @@ $\mathbf{Q}$ is a $\left( p + 1 \right) \times p$ matrix that localizes Fourier 
 
 The computation of this symbol matrix extends to more complex PDE with multiple components and in higher dimensions.
 
-Multiple components are supported by extending the $p \times p$ system of Toeplitz operators in Equation \ref{eq:fouriermodelocalization1d} to a $\left( p \cdot n \right) \times \left( p \cdot n \right)$ system of operators, where $n$ is the number of components.
+Multiple components are supported by extending the $p \times p$ system of Toeplitz operators in Equation \ref{eq:fouriermodelocalization1d} to a $\left( n \cdot p \right) \times \left( n \cdot p \right)$ system of operators, where $n$ is the number of components in the PDE.
+The localization operator $\mathbf{Q}$ for a multi-component PDE is given by $\mathbf{Q}_n = \mathbf{I}_n \otimes \mathbf{Q}$.
+In general, we omit the subscript indicating the number of components for the localization operator.
 
 The infinite uniform grid $G_h$ is extended into higher dimensions by taking the direct sum of the one dimensional grid.
 In a similar fashion to how tensor products are used to extend the one dimensional bases into higher dimensions, the localization of Fourier modes in two dimensions is given by
@@ -81,7 +86,7 @@ and the localization in three dimensions is given by
 \begin{equation}
 \mathbf{Q}_{\text{3d}} = \mathbf{Q} \otimes \mathbf{Q} \otimes \mathbf{Q}.
 \end{equation}
-In general, we will omit the subscript indicating the dimension of the Fourier mode localization operator.
+Again, we generally omit the subscript indicating the dimension of the Fourier mode localization operator.
 
 \begin{definition}
 The symbol matrix of a finite element operator for an arbitrary second order PDE with any number of components, basis order, and dimension is given by

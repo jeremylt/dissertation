@@ -1,14 +1,14 @@
 In weighted Jacobi, the preconditioning matrix is given by $\mathbf{M}^{-1} = \omega \left( \diag {\color{burgundy}\mathbf{A}} \right)^{-1}$, where $\omega$ is the weighting factor.
 Following the derivation from Section \ref{sec:lfahighorder}, the symbol of the weighted Jacobi error propagation operator is therefore given by
 \begin{equation}
-\tilde{\mathbf{S}} \left( \omega, \boldsymbol{\theta} \right) = I - \tilde{\mathbf{M}}^{-1} \left( \omega, \boldsymbol{\theta} \right) \tilde{{\color{burgundy}\mathbf{A}}} \left( \boldsymbol{\theta} \right) = I - \omega \left( \mathbf{Q}^T \left( \diag {\color{burgundy}\mathbf{A}}^e \right)^{-1} \mathbf{Q} \right) \tilde{{\color{burgundy}\mathbf{A}}} \left( \boldsymbol{\theta} \right),
+\tilde{\mathbf{S}} \left( \omega, \boldsymbol{\theta} \right) = \mathbf{I} - \tilde{\mathbf{M}}^{-1} \left( \omega, \boldsymbol{\theta} \right) \tilde{{\color{burgundy}\mathbf{A}}} \left( \boldsymbol{\theta} \right) = \mathbf{I} - \omega \left( \mathbf{Q}^T \left( \diag {\color{burgundy}\mathbf{A}}^e \right)^{-1} \mathbf{Q} \right) \tilde{{\color{burgundy}\mathbf{A}}} \left( \boldsymbol{\theta} \right),
 \end{equation}
 where this expression has been simplified by the fact that $e^{\imath \left( x_i - x_i \right) \theta / h} = 1$.
 
 \begin{definition}
 The symbol of the error propagation operator for weighted Jacobi smoothing is given by
 \begin{equation}
-\tilde{\mathbf{S}} \left( \nu, \omega, \boldsymbol{\theta} \right) = \left( I - \omega \left( \mathbf{Q}^T \left( \diag {\color{burgundy}\mathbf{A}}^e \right) \mathbf{Q} \right)^{-1} \tilde{{\color{burgundy}\mathbf{A}}} \left( \boldsymbol{\theta} \right) \right)^\nu,
+\tilde{\mathbf{S}} \left( \nu, \omega, \boldsymbol{\theta} \right) = \left( \mathbf{I} - \omega \left( \mathbf{Q}^T \left( \diag {\color{burgundy}\mathbf{A}}^e \right) \mathbf{Q} \right)^{-1} \tilde{{\color{burgundy}\mathbf{A}}} \left( \boldsymbol{\theta} \right) \right)^\nu,
 \end{equation}
 where $\nu$ is the number of smoothing passes and $\omega$ is the weighting parameter.
 \label{def:jacobi_symbol}
