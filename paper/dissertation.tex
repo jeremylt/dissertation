@@ -49,15 +49,22 @@ In particular, p-multigrid and domain decomposition methods are particularly wel
 Local Fourier Analysis of these preconditioners analyzes the frequency modes found in the error on each iteration and can provide sharp convergence estimates.
 
 We present a representation of arbitrary second-order partial differential equations for high-order finite element discretizations that facilitates matrix-free implementation.
-This representation is used by the Center for Efficient Exascale Discretizations to provide performance portable high-order matrix-free implementations of finite element operators for arbitrary second order partial differential equations.
+This representation is used by the Center for Efficient Exascale Discretizations to provide performance portable high-order matrix-free implementations of finite element operators for arbitrary second-order partial differential equations.
 
-We develop Local Fourier Analysis of finite element operators represented in this fashion, focusing on multigrid and domain decomposition preconditioning techniques.
-The performance of p-multigrid in parallel is partially determined by the number of multigrid levels.
-A larger number of multigrid levels requires additional global communication on parallel machines, but aggressive coarsening that is not supported by the smoother in the multigrid method can lead to gaps in the error frequency modes targeted by the total multigrid method, which results in degraded convergence.
-Balancing Domain Decomposition by Constraints can be used by a smoother to target a wider range of error mode frequencies and facilitate more aggressive coarsening.
-We provide Local Fourier Analysis of p-multigrid with Balancing Domain Decomposition by Constraints smoothing to demonstrate the suitability of this smoother for aggressive coarsening.
+We develop Local Fourier Analysis of finite element operators represented in this fashion.
+Specifically, we develop Local Fourier Analysis of arbitrary second-order partial differential equations for multigrid methods with Jacobi and Chebyshev semi-iterative method smoothers.
+The Local Fourier Analysis of p-multigrid for continuous Galerkin discretizations is novel and we validate this analysis with numerical experiments.
+This analysis is generalized to represent h-multigrid on macro-elements, and this generalization is validated against previous work.
 
-Finally, we demonstrate the suitability of high-order matrix-free finite element operators with p-multigrid with Balancing Domain Decomposition by Constraints for practical problems at scale on modern parallel hardware by demonstrating the performance of these techniques on a solid mechanics problem with Neo-Hookean hyperelasticity at finite strain.
+This Local Fourier Analysis framework can also be used to represent previous work on the analysis of Balancing Domain Decomposition by Constraints.
+We validate this analysis with previous work on the Local Fourier Analysis of Balancing Domain Decomposition by Constraints for low-order macro-element patches for both lumped and Dirichlet variants.
+This analysis is extended to provide Local Fourier Analysis of Balancing Domain Decomposition by Constraints with single high-order element subdomains.
+
+The performance of p-multigrid in parallel is partially determined by the amount of global communication.
+A larger number of multigrid levels requires additional global communication on parallel machines, but aggressive coarsening that is not supported by the smoother in the multigrid method can lead to gaps in the error frequency modes targeted by the total multigrid method, which results in degraded convergence and an additional number of multigrid cycles.
+Balancing Domain Decomposition by Constraints can be used as smoother to target a wider range of error mode frequencies than more common polynomial smoothers and thus facilitate more aggressive coarsening.
+Additionally, Balancing Domain Decomposition by Constraints requires less global communication than higher order Chebyshev smoothing.
+We provide Local Fourier Analysis of p-multigrid with Balancing Domain Decomposition by Constraints as a smoother.
 }
 
 \acknowledgements{	\OnePageChapter	% *MUST* BE ONLY ONE PAGE!

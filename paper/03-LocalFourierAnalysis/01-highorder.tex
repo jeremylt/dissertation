@@ -16,17 +16,17 @@ L_h \varphi \left( \theta, x \right) = \tilde{L}_h \left( \theta \right) \varphi
 then we define $\tilde{L}_h \left( \theta \right) = \sum_{\kappa \in V} s_\kappa e^{\imath \theta \kappa}$ as the symbol of $L_h$, where $\imath^2 = -1$.
 \end{definition}
 
-This definition can be extended to a $p \times p$ linear system of operators by
+This definition can be extended to a $q \times q$ linear system of operators by
 \begin{equation}
 \mathbf{L}_h =
 \begin{bmatrix}
-    L_h^{1, 1} && \cdots && L_h^{1, p}        \\
+    L_h^{1, 1} && \cdots && L_h^{1, q}        \\
     \vdots               && \vdots && \vdots  \\
-    L_h^{p, 1} && \cdots && L_h^{p, p}        \\
+    L_h^{q, 1} && \cdots && L_h^{q, q}        \\
 \end{bmatrix}
 \end{equation}
-where $L_h^{i, j}$, $i, j \in \left\lbrace 1, 2, \dots, p \right\rbrace$ is given by scalar Toeplitz operators describing how component $j$ appears in the equation for component $i$.
-The symbol of $\mathbf{L}_h$, denoted $\tilde{\mathbf{L}}_h$, is a $p \times p$ matrix valued function of $\theta$ given by $\left[ \tilde{\mathbf{L}}_h \right]_{i, j} = \tilde{L}_h^{i, j} \left( \theta \right)$.
+where $L_h^{i, j}$, $i, j \in \left\lbrace 1, 2, \dots, q \right\rbrace$ is given by scalar Toeplitz operators describing how component $j$ appears in the equation for component $i$.
+The symbol of $\mathbf{L}_h$, denoted $\tilde{\mathbf{L}}_h$, is a $q \times q$ matrix valued function of $\theta$ given by $\left[ \tilde{\mathbf{L}}_h \right]_{i, j} = \tilde{L}_h^{i, j} \left( \theta \right)$.
 Note that for a system of equations representing an error propagation operator in a relaxation scheme, the spectral radius of the symbol matrix determines now rapidly the scheme decreases error at a target frequency.
 
 Low frequencies are given by $\theta \in T^{\text{low}} = \left[ - \pi / 2, \pi / 2 \right)$ and high frequencies are given by $\theta \in T^{\text{high}} = \left[ - \pi / 2, 3 \pi / 2 \right) \setminus T^{\text{low}}$ in one dimension, and in higher dimensions $\theta \in T^{\text{low}} = \left[ - \pi / 2, \pi / 2 \right)^d$ and $\theta \in T^{\text{high}} = \left[ - \pi / 2, 3 \pi / 2 \right)^d \setminus T^{\text{low}}$, where $d$ is the dimension.
