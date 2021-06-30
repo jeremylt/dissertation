@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.1.8)  30 JUN 2021 15:23
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.1.8)  30 JUN 2021 15:45
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1229,217 +1229,219 @@ Dictionary: translator-theorem-dictionary, Language: English
 
 ] [4
 
+] [5
+
 ]
-<../img/peakFlopsAndBandwidth_tall.png, id=186, 596.2275pt x 635.37375pt>
+<../img/peakFlopsAndBandwidth_tall.png, id=217, 596.2275pt x 635.37375pt>
 File: ../img/peakFlopsAndBandwidth_tall.png Graphic file (type png)
 <use ../img/peakFlopsAndBandwidth_tall.png>
 Package pdftex.def Info: ../img/peakFlopsAndBandwidth_tall.png  used on input l
-ine 172.
+ine 207.
 (pdftex.def)             Requested size: 146.84576pt x 156.49014pt.
-<../img/peakRatio_tall.png, id=188, 555.07375pt x 640.3925pt>
+<../img/peakRatio_tall.png, id=219, 555.07375pt x 640.3925pt>
 File: ../img/peakRatio_tall.png Graphic file (type png)
 <use ../img/peakRatio_tall.png>
-Package pdftex.def Info: ../img/peakRatio_tall.png  used on input line 172.
+Package pdftex.def Info: ../img/peakRatio_tall.png  used on input line 207.
 (pdftex.def)             Requested size: 135.63428pt x 156.49014pt.
- [5
+ [6
 
  <../img/peakFlopsAndBandwidth_tall.png> <../img/peakRatio_tall.png>]
-<../img/assembledVsMatrixFree_tall.png, id=221, 596.2275pt x 635.37375pt>
+<../img/assembledVsMatrixFree_tall.png, id=252, 596.2275pt x 635.37375pt>
 File: ../img/assembledVsMatrixFree_tall.png Graphic file (type png)
 <use ../img/assembledVsMatrixFree_tall.png>
 Package pdftex.def Info: ../img/assembledVsMatrixFree_tall.png  used on input l
-ine 189.
+ine 224.
 (pdftex.def)             Requested size: 146.84576pt x 156.49014pt.
-<../img/assembledVsMatrixFreeBalance_tall.png, id=222, 524.96124pt x 635.37375p
+<../img/assembledVsMatrixFreeBalance_tall.png, id=253, 524.96124pt x 635.37375p
 t>
 File: ../img/assembledVsMatrixFreeBalance_tall.png Graphic file (type png)
 <use ../img/assembledVsMatrixFreeBalance_tall.png>
 Package pdftex.def Info: ../img/assembledVsMatrixFreeBalance_tall.png  used on 
-input line 189.
+input line 224.
 (pdftex.def)             Requested size: 129.29349pt x 156.49014pt.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 189
+LaTeX Font Info:    Trying to load font information for U+msa on input line 224
 .
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 189
+LaTeX Font Info:    Trying to load font information for U+msb on input line 224
 .
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Trying to load font information for OT1+mathkerncmss on inp
-ut line 189.
+ut line 224.
 
 (/usr/share/texlive/texmf-dist/tex/latex/sansmathaccent/ot1mathkerncmss.fd
 File: ot1mathkerncmss.fd 2020/01/31 Fontinst v1.933 font definitions for OT1/ma
 thkerncmss.
 )
-[6
+[7
 
  <../img/assembledVsMatrixFree_tall.png> <../img/assembledVsMatrixFreeBalance_t
-all.png>] [7
+all.png>] [8
 
 ]
 
 LaTeX Font Warning: Font shape `T1/cmss/b/n' undefined
-(Font)              using `T1/cmss/m/n' instead on input line 246.
+(Font)              using `T1/cmss/m/n' instead on input line 281.
 
-[8
+[9
 
 ]
-<../img/libCEEDAPI.png, id=322, 1204.5pt x 615.29875pt>
+<../img/libCEEDAPI.png, id=353, 1204.5pt x 615.29875pt>
 File: ../img/libCEEDAPI.png Graphic file (type png)
 <use ../img/libCEEDAPI.png>
-Package pdftex.def Info: ../img/libCEEDAPI.png  used on input line 269.
+Package pdftex.def Info: ../img/libCEEDAPI.png  used on input line 304.
 (pdftex.def)             Requested size: 250.63669pt x 128.0374pt.
- [9
+ [10
 
- <../img/libCEEDAPI.png>] [10
-
-] [11
+ <../img/libCEEDAPI.png>] [11
 
 ] [12
+
+] [13
 
 ]
 
 LaTeX Font Warning: Font shape `OT1/cmss/b/n' undefined
-(Font)              using `OT1/cmss/m/n' instead on input line 396.
+(Font)              using `OT1/cmss/m/n' instead on input line 431.
 
-[13
+[14
 
-] [14
+] [15
 
 ]
 \openout4 = `presentation.vrb'.
 
  (./presentation.vrb)
-Overfull \vbox (10.06747pt too high) detected at line 468
+Overfull \vbox (10.06747pt too high) detected at line 503
  []
 
-[15
+[16
 
 ]
-<../img/diffusionSymbol1D.png, id=527, 602.25pt x 401.5pt>
+<../img/diffusionSymbol1D.png, id=558, 602.25pt x 401.5pt>
 File: ../img/diffusionSymbol1D.png Graphic file (type png)
 <use ../img/diffusionSymbol1D.png>
-Package pdftex.def Info: ../img/diffusionSymbol1D.png  used on input line 488.
+Package pdftex.def Info: ../img/diffusionSymbol1D.png  used on input line 523.
 (pdftex.def)             Requested size: 166.45091pt x 110.96556pt.
-<../img/diffusionSymbol2D.png, id=528, 602.25pt x 401.5pt>
+<../img/diffusionSymbol2D.png, id=559, 602.25pt x 401.5pt>
 File: ../img/diffusionSymbol2D.png Graphic file (type png)
 <use ../img/diffusionSymbol2D.png>
-Package pdftex.def Info: ../img/diffusionSymbol2D.png  used on input line 488.
+Package pdftex.def Info: ../img/diffusionSymbol2D.png  used on input line 523.
 (pdftex.def)             Requested size: 166.45091pt x 110.96556pt.
- [16
+ [17
 
  <../img/diffusionSymbol1D.png> <../img/diffusionSymbol2D.png>]
-[17
+[18
 
-] [18
+] [19
 
 ]
-<../img/JacobiSymbol1D.png, id=611, 602.25pt x 401.5pt>
+<../img/JacobiSymbol1D.png, id=643, 602.25pt x 401.5pt>
 File: ../img/JacobiSymbol1D.png Graphic file (type png)
 <use ../img/JacobiSymbol1D.png>
-Package pdftex.def Info: ../img/JacobiSymbol1D.png  used on input line 550.
+Package pdftex.def Info: ../img/JacobiSymbol1D.png  used on input line 585.
 (pdftex.def)             Requested size: 166.45091pt x 110.96556pt.
-<../img/JacobiSymbol2D.png, id=612, 602.25pt x 401.5pt>
+<../img/JacobiSymbol2D.png, id=644, 602.25pt x 401.5pt>
 File: ../img/JacobiSymbol2D.png Graphic file (type png)
 <use ../img/JacobiSymbol2D.png>
-Package pdftex.def Info: ../img/JacobiSymbol2D.png  used on input line 550.
+Package pdftex.def Info: ../img/JacobiSymbol2D.png  used on input line 585.
 (pdftex.def)             Requested size: 166.45091pt x 110.96556pt.
- [19
+ [20
 
- <../img/JacobiSymbol1D.png> <../img/JacobiSymbol2D.png>] [20
-
-]
-[21
+ <../img/JacobiSymbol1D.png> <../img/JacobiSymbol2D.png>] [21
 
 ]
-<../img/ChebyshevSymbol1D.png, id=695, 602.25pt x 401.5pt>
+[22
+
+]
+<../img/ChebyshevSymbol1D.png, id=727, 602.25pt x 401.5pt>
 File: ../img/ChebyshevSymbol1D.png Graphic file (type png)
 <use ../img/ChebyshevSymbol1D.png>
-Package pdftex.def Info: ../img/ChebyshevSymbol1D.png  used on input line 620.
+Package pdftex.def Info: ../img/ChebyshevSymbol1D.png  used on input line 655.
 (pdftex.def)             Requested size: 166.45091pt x 110.96556pt.
-<../img/ChebyshevSymbol2D.png, id=696, 602.25pt x 401.5pt>
+<../img/ChebyshevSymbol2D.png, id=728, 602.25pt x 401.5pt>
 File: ../img/ChebyshevSymbol2D.png Graphic file (type png)
 <use ../img/ChebyshevSymbol2D.png>
-Package pdftex.def Info: ../img/ChebyshevSymbol2D.png  used on input line 620.
+Package pdftex.def Info: ../img/ChebyshevSymbol2D.png  used on input line 655.
 (pdftex.def)             Requested size: 166.45091pt x 110.96556pt.
- [22
+ [23
 
  <../img/ChebyshevSymbol1D.png> <../img/ChebyshevSymbol2D.png>]
-[23
+[24
 
-] [24
+] [25
 
 ]
-<../img/pProlongation.png, id=778, 722.7pt x 578.16pt>
+<../img/pProlongation.png, id=810, 722.7pt x 578.16pt>
 File: ../img/pProlongation.png Graphic file (type png)
 <use ../img/pProlongation.png>
-Package pdftex.def Info: ../img/pProlongation.png  used on input line 714.
+Package pdftex.def Info: ../img/pProlongation.png  used on input line 749.
 (pdftex.def)             Requested size: 154.09483pt x 123.26979pt.
- [25
-
- <../img/pProlongation.png>]
-<../img/pmultigridSymbol1D.png, id=810, 602.25pt x 401.5pt>
-File: ../img/pmultigridSymbol1D.png Graphic file (type png)
-<use ../img/pmultigridSymbol1D.png>
-Package pdftex.def Info: ../img/pmultigridSymbol1D.png  used on input line 734.
-
-(pdftex.def)             Requested size: 166.45091pt x 110.96556pt.
-<../img/pmultigridSymbol2D.png, id=811, 602.25pt x 401.5pt>
-File: ../img/pmultigridSymbol2D.png Graphic file (type png)
-<use ../img/pmultigridSymbol2D.png>
-Package pdftex.def Info: ../img/pmultigridSymbol2D.png  used on input line 734.
-
-(pdftex.def)             Requested size: 166.45091pt x 110.96556pt.
  [26
 
- <../img/pmultigridSymbol1D.png> <../img/pmultigridSymbol2D.png>] [27
+ <../img/pProlongation.png>]
+<../img/pmultigridSymbol1D.png, id=842, 602.25pt x 401.5pt>
+File: ../img/pmultigridSymbol1D.png Graphic file (type png)
+<use ../img/pmultigridSymbol1D.png>
+Package pdftex.def Info: ../img/pmultigridSymbol1D.png  used on input line 769.
+
+(pdftex.def)             Requested size: 166.45091pt x 110.96556pt.
+<../img/pmultigridSymbol2D.png, id=843, 602.25pt x 401.5pt>
+File: ../img/pmultigridSymbol2D.png Graphic file (type png)
+<use ../img/pmultigridSymbol2D.png>
+Package pdftex.def Info: ../img/pmultigridSymbol2D.png  used on input line 769.
+
+(pdftex.def)             Requested size: 166.45091pt x 110.96556pt.
+ [27
+
+ <../img/pmultigridSymbol1D.png> <../img/pmultigridSymbol2D.png>] [28
 
 ]
-Overfull \hbox (0.34938pt too wide) in paragraph at lines 807--807
+Overfull \hbox (0.34938pt too wide) in paragraph at lines 842--842
  [] 
  []
 
-[28
+[29
 
 ]
-<../img/hProlongation.png, id=897, 722.7pt x 578.16pt>
+<../img/hProlongation.png, id=929, 722.7pt x 578.16pt>
 File: ../img/hProlongation.png Graphic file (type png)
 <use ../img/hProlongation.png>
-Package pdftex.def Info: ../img/hProlongation.png  used on input line 837.
+Package pdftex.def Info: ../img/hProlongation.png  used on input line 872.
 (pdftex.def)             Requested size: 154.09483pt x 123.26979pt.
- [29
-
- <../img/hProlongation.png>]
-<../img/hmultigridSymbol1D.png, id=928, 602.25pt x 401.5pt>
-File: ../img/hmultigridSymbol1D.png Graphic file (type png)
-<use ../img/hmultigridSymbol1D.png>
-Package pdftex.def Info: ../img/hmultigridSymbol1D.png  used on input line 857.
-
-(pdftex.def)             Requested size: 166.45091pt x 110.96556pt.
-<../img/hmultigridSymbol2D.png, id=929, 602.25pt x 401.5pt>
-File: ../img/hmultigridSymbol2D.png Graphic file (type png)
-<use ../img/hmultigridSymbol2D.png>
-Package pdftex.def Info: ../img/hmultigridSymbol2D.png  used on input line 857.
-
-(pdftex.def)             Requested size: 166.45091pt x 110.96556pt.
  [30
 
- <../img/hmultigridSymbol1D.png> <../img/hmultigridSymbol2D.png>] [31
+ <../img/hProlongation.png>]
+<../img/hmultigridSymbol1D.png, id=959, 602.25pt x 401.5pt>
+File: ../img/hmultigridSymbol1D.png Graphic file (type png)
+<use ../img/hmultigridSymbol1D.png>
+Package pdftex.def Info: ../img/hmultigridSymbol1D.png  used on input line 892.
 
-] [32
+(pdftex.def)             Requested size: 166.45091pt x 110.96556pt.
+<../img/hmultigridSymbol2D.png, id=960, 602.25pt x 401.5pt>
+File: ../img/hmultigridSymbol2D.png Graphic file (type png)
+<use ../img/hmultigridSymbol2D.png>
+Package pdftex.def Info: ../img/hmultigridSymbol2D.png  used on input line 892.
+
+(pdftex.def)             Requested size: 166.45091pt x 110.96556pt.
+ [31
+
+ <../img/hmultigridSymbol1D.png> <../img/hmultigridSymbol2D.png>] [32
 
 ] [33
 
 ] [34
 
-] (./presentation.bbl) [35
+] [35
 
- </usr/share/texlive/texmf-dist/tex/latex/beamer/beamericonarticle.pdf>] [36
+] (./presentation.bbl) [36
+
+ </usr/share/texlive/texmf-dist/tex/latex/beamer/beamericonarticle.pdf>] [37
 
 ]
 \tf@nav=\write6
@@ -1451,24 +1453,25 @@ Package pdftex.def Info: ../img/hmultigridSymbol2D.png  used on input line 857.
 \tf@snm=\write8
 \openout8 = `presentation.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 982.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 982.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1017.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1017.
 
 (./presentation.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 982.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 982.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1017.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1017.
+
 Package rerunfilecheck Info: File `presentation.out' has not changed.
-(rerunfilecheck)             Checksum: BE2CFF14B5BC0F7D3C2A70567F413175;445.
+(rerunfilecheck)             Checksum: 5734734DFCD032559ED9DD26D2B46391;433.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 26984 strings out of 481239
- 492276 string characters out of 5920378
- 921039 words of memory out of 5000000
- 41562 multiletter control sequences out of 15000+600000
+ 26988 strings out of 481239
+ 492313 string characters out of 5920378
+ 919956 words of memory out of 5000000
+ 41564 multiletter control sequences out of 15000+600000
  557382 words of font info for 88 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  58i,15n,67p,798b,4179s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1494,10 +1497,10 @@ super/sfss1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfss1095.pfb><
 ts/type1/public/cm-super/sfsx1095.pfb></usr/share/texlive/texmf-dist/fonts/type
 1/urw/courier/ucrb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier
 /ucrr8a.pfb>
-Output written on presentation.pdf (36 pages, 1148930 bytes).
+Output written on presentation.pdf (37 pages, 1151543 bytes).
 PDF statistics:
- 1227 PDF objects out of 1440 (max. 8388607)
- 1114 compressed objects within 12 object streams
- 94 named destinations out of 1000 (max. 500000)
+ 1261 PDF objects out of 1440 (max. 8388607)
+ 1147 compressed objects within 12 object streams
+ 96 named destinations out of 1000 (max. 500000)
  228 words of extra memory for PDF output out of 10000 (max. 10000000)
 
