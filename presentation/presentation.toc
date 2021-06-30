@@ -1,8 +1,0 @@
-\beamer@sectionintoc {1}{Introduction}{4}{0}{1}
-\beamer@sectionintoc {2}{High-Order Matrix-Free FEM}{6}{0}{2}
-\beamer@sectionintoc {3}{LFA of High-Order FEM}{11}{0}{3}
-\beamer@sectionintoc {4}{LFA of Multigrid Methods}{24}{0}{4}
-\beamer@subsectionintoc {4}{1}{P-Multigrid}{26}{0}{4}
-\beamer@subsectionintoc {4}{2}{H-Multigrid}{30}{0}{4}
-\beamer@sectionintoc {5}{LFA of BDDC}{33}{0}{5}
-\beamer@sectionintoc {6}{Summary}{34}{0}{6}
