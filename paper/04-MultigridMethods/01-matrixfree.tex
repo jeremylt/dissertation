@@ -1,0 +1,24 @@
+Application of multigrid follows the algorithm \ref{def:multigrid_algorithm}, similar to the presentation in \cite{brandt1982guide}.
+\begin{definition}Multigrid Algorithm \label{def:multigrid_algorithm}
+\begin{algorithmic}[1]
+\State Compute $\mathbf{u}_k$
+\State $\mathbf{u}_k \gets \mathbf{u}_k + \hat{\mathbf{M}}^{-1} \left( \mathbf{b} - {\color{burgundy}\mathbf{A}}_f \mathbf{u}_k \right)$ \Comment{pre-smooth $\nu$ times}
+\State $\mathbf{r} = {\color{burgundy}\mathbf{R}}_{\text{ftoc}} \left( \mathbf{b} - {\color{burgundy}\mathbf{A}}_f \mathbf{u}_k \right)$ \Comment{restrict the residual}
+\State ${\color{burgundy}\mathbf{A}}_c \mathbf{e} = \mathbf{r}$                                                                          \Comment{Solve on coarse grid (may involve additional levels)}
+\State $\mathbf{u}_k \gets \mathbf{u}_k + {\color{burgundy}\mathbf{P}}_{\text{ctof}} \mathbf{e}$                                         \Comment{prolong error correction}
+\State $\mathbf{u}_k \gets \mathbf{u}_k + \hat{\mathbf{M}}^{-1} \left( \mathbf{b} - {\color{burgundy}\mathbf{A}}_f \mathbf{u}_k \right)$ \Comment{post-smooth $\nu$ times}
+\end{algorithmic}
+\end{definition}
+where ${\color{burgundy}\mathbf{A}}_f$ is the operator on the fine grid, ${\color{burgundy}\mathbf{P}}_{\text{ctof}}$ is the coarse to fine grid prolongation operator, ${\color{burgundy}\mathbf{R}}_{\text{ftoc}}$ the fine to coarse grid restriction operator, $\hat{\mathbf{M}}$ a separate preconditioner used for smoothing, and ${\color{burgundy}\mathbf{A}}_c$ represents solving the error correction problem on the coarse grid, which may involve recursively applying $p$-multigrid.
+
+For $p$-multigrid with nodal bases, the prolongation operator interpolates using the lower order basis functions to the higher order basis nodes and is defined by
+\begin{equation}
+\mathbf{P}_{p - 1}^p = \Lambda \left( m_p^{-1} \right) \mathcal{E}_p^T \sum_e \mathbf{B}_{p - 1}^p \mathcal{E}^e_{p - 1}
+\label{mg_prolong}
+\end{equation}
+where $\mathbf{B}_{p - 1}^p$ interpolates from a basis of degree $p - 1$ to degree $p$ and $m_p = \mathcal{E}_p^T \mathcal{E}_p 1$ counts the multiplicity of shared nodes between elements.
+To preserve symmetry and prevent aliasing, the restriction operator is defined as the transpose of the prolongation operator, $\mathbf{R}_{p - 1}^p = \left( \mathbf{P}_{p - 1}^p \right)^T$.
+These operators can be implemented in a matrix-free fashion.
+
+Even modest order finite elements, such as degree $4$, $p$-multigrid can substantially reduce the size of the global solution vector by a factor of approximately $P^3 / 8$.
+Thus, assembly of the finite element operator on the coarse grid, ${\color{burgundy}\mathbf{A}}_c$, becomes tractable and direct solvers can be used to solve the coarse problem.
