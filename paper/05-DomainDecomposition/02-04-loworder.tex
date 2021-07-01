@@ -1,4 +1,5 @@
-By using low-order macro-elements, as shown with h-multigrid in Section \ref{sec:h-multigrid}, this LFA framework can reproduce previous work on LFA of BDDC on subdomains consisting of multiple linear elements by Brown, He, and MacLachlan \cite{brown2019local}.
+Previous work by Brown, He, and MacLachlan \cite{brown2019local} provided LFA of lumped and Dirichlet BDDC on subdomains consisting of multiple low-order finite elements.
+This previous work provided very sharp LFA convergence estimates when compared to numerical experiments with PETSc \cite{petsc-user-ref} on a periodic mesh.
 
 \begin{table}[ht!]
 \begin{center}
@@ -15,8 +16,15 @@ By using low-order macro-elements, as shown with h-multigrid in Section \ref{sec
   \bottomrule
 \end{tabular}
 \end{center}
-\caption{Condition number and maximal eigenvalues for low-order macro-elements}
+\caption{Condition numbers and maximal eigenvalues for low-order macro-elements}
 \label{table:macro_element_bddc}
 \end{table}
 
-This previous work provided very sharp convergence estimates when compared to numerical experiments with PETSc \cite{petsc-user-ref}.
+Table \ref{table:macro_element_bddc} shows the maximal eigenvalues and condition numbers for the symbol of the BDDC preconditioned operator $\tilde{\mathbf{M}}^{-1}_i \left( \boldsymbol{\theta} \right) \tilde{{\color{burgundy}\mathbf{A}}} \left( \boldsymbol{\theta} \right)$ for the two dimensional Poisson problem on linear macro-element subdomains with varying numbers of elements in one dimension.
+The maximal eigenvalues were computed across $64$ uniformly spaced frequencies.
+These values exactly agree with the previous work by Brown, He, and MacLachlan \cite{brown2019local}.
+
+It is important to note the significantly improved condition number and resulting improved convergence for the Dirichlet BDDC.
+Lumped BDDC has approximately half of the setup costs when compared to Dirichlet BDDC when using assembled exact inverses.
+Brown, He, and MachLachlan investigated the use of multiplicative combinations of the lumped BDDC operator with a diagonal scaling operator.
+This technique helped mitigate the growth of the condition number for the lumped BDDC as the subdomain size grew, but the resulting condition number was still larger than the condition number for Dirichlet BDDC.
