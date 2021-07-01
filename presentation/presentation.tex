@@ -537,7 +537,7 @@ Error propagation operator for smoothers given by
 with a symbol given by
 
 \begin{equation}
-\tilde{\mathbf{S}} \left( \omega, \boldsymbol{\theta} \right) = \mathbf{I} - \tilde{\mathbf{M}}^{-1} \left( \omega, \boldsymbol{\theta} \right) \tilde{{\color{burgundy}A}} \left( \boldsymbol{\theta} \right)
+\tilde{\mathbf{S}} \left( \boldsymbol{\theta}, \omega \right) = \mathbf{I} - \tilde{\mathbf{M}}^{-1} \left( \boldsymbol{\theta}, \omega \right) \tilde{{\color{burgundy}A}} \left( \boldsymbol{\theta} \right)
 \end{equation}
 
 \end{center}
@@ -558,7 +558,7 @@ Jacobi smoothing given by
 with an error symbol given by
 
 \begin{equation}
-\tilde{\mathbf{S}} \left( \omega, \boldsymbol{\theta} \right) = \mathbf{I} - \omega \hspace{1mm} \left( \mathbf{Q}^T \diag \left( {\color{burgundy}A}^e \right) \mathbf{Q} \right)^{-1} \tilde{{\color{burgundy}A}} \left( \boldsymbol{\theta} \right)
+\tilde{\mathbf{S}} \left( \boldsymbol{\theta}, \omega \right) = \mathbf{I} - \omega \hspace{1mm} \left( \mathbf{Q}^T \diag \left( {\color{burgundy}A}^e \right) \mathbf{Q} \right)^{-1} \tilde{{\color{burgundy}A}} \left( \boldsymbol{\theta} \right)
 \end{equation}
 
 \end{center}
@@ -895,7 +895,7 @@ high frequencies - $\theta \in T^{\text{high}} = \left[ - \pi / 2, 3 \pi / 2 \ri
 
 \begin{frame}
 \begin{center}
-\frametitle{Validation: P-Multigrid}
+\frametitle{Validation: H-Multigrid}
 
 \begin{table}[ht!]
 \begin{center}
