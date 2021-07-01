@@ -1,0 +1,22 @@
+By using low-order macro-elements, as shown with h-multigrid in Section \ref{sec:h-multigrid}, this LFA framework can reproduce previous work on LFA of BDDC on subdomains consisting of multiple linear elements by Brown, He, and MacLachlan \cite{brown2019local}.
+
+\begin{table}[ht!]
+\begin{center}
+\begin{tabular}{l ccc ccc}
+  \toprule
+  $m$  &  \multicolumn{3}{c}{Lumped BDDC}  &  \multicolumn{3}{c}{Dirichlet BDDC}  \\
+  %\cmidrule(lr){2-3} \cmidrule(lr){4-5} \cmidrule(lr){6-7}
+                      &  $\lambda_{\min}$  &  $\lambda_{\max}$  &  $\kappa$ & $\lambda_{\min}$  &  $\lambda_{\max}$ & $\kappa$  \\
+  \toprule
+  $m = 4$   &  1.000  &   4.444  &   4.444  &  1.000  &  2.351  &  2.351  \\
+  $m = 8$   &  1.000  &  12.269  &  12.269  &  1.000  &  3.196  &  3.196  \\
+  $m = 16$  &  1.000  &  31.179  &  31.179  &  1.000  &  4.188  &  4.188  \\
+  $m = 32$  &  1.000  &  75.761  &  75.761  &  1.000  &  5.335  &  5.335  \\
+  \bottomrule
+\end{tabular}
+\end{center}
+\caption{Condition number and maximal eigenvalues for low-order macro-elements}
+\label{table:macro_element_bddc}
+\end{table}
+
+This previous work provided very sharp convergence estimates when compared to numerical experiments with PETSc \cite{petsc-user-ref}.
