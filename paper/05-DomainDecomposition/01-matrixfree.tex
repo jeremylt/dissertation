@@ -1,9 +1,8 @@
-For high-order matrix-free BDDC, we decompose the domain $\Omega$ into a series of subdomains $\Omega^e$ given by the individual elements.
-With BDDC, we utilize four spaces on each subdomain.
+For high-order matrix-free BDDC, we decompose the domain $\Omega$ into a series of subdomains $\Omega^e$ given by the individual elements and we utilize four non-exclusive spaces on each subdomain.
 The interface between subdomains is given by $\Gamma = \bigcup \partial \Omega^e \backslash \partial \Omega$ and the interface of subdomain $\Omega^e$ is given by $\Gamma^e = \delta \Omega^e \bigcap \Gamma$.
 The interior of each subdomain, $\text{I}$, is given by the remaining degrees of freedom on the element.
 
-Each subdomain problem can therefore be written as
+Each subdomain problem could therefore be written as
 \begin{equation}
 {\color{burgundy}\mathbf{A}}^e =
 \left[ \begin{array}{c c}
@@ -14,10 +13,11 @@ Each subdomain problem can therefore be written as
 where ${\color{burgundy}\mathbf{A}}^e = {\color{blue(ncs)}\mathbf{B}}^T {\color{applegreen}\mathbf{D}} {\color{blue(ncs)}\mathbf{B}}$, as shown in Equation \ref{eq:localoperator}.
 
 This subdomain problem is assembled into the global problem in the typical finite element approach given by Equation \ref{eq:libceed_representation}, but in BDDC we create a subassembled problem that is easier to invert than the global problem by duplicating broken degrees of freedom along the subdomain boundaries.
-Only the corner, or vertex, degrees of freedom from each element are assembled into a global coarse problem, and the solutions on the global coarse problem and broken subdomain problems are used to construct an approximate solution to the global problem.
+Only the corner, or vertex, degrees of freedom from each element are assembled into a global coarse problem while the remaining degreees of freedom on the subdomain interfaces are duplicated in each subdomain.
+The solutions on the global coarse problem and broken subdomain problems are used to construct an approximate solution to the true assembled global problem.
 
-The coarse grid subdomain nodes $\Pi^e$ are given by the corners, so we have $4$ coarse grid subdomain nodes for each element in two dimensions and $8$ coarse grid subdomain nodes in three dimensions.
-The remainder of the subdomain we denote with a $\text{r}$.
+The coarse grid, or primal, nodes $\Pi^e$ are given by the corners of the subdomain, so we have $4$ primal nodes for each element in two dimensions and $8$ primal nodes in three dimensions.
+The remainder of the subdomain we denote with an $\text{r}$.
 The subassembled problem is therefore given by
 \begin{equation}
 \hat{\color{burgundy}\mathbf{A}} = \sum_{e = 1}^N \mathbf{R}^{e, T} \hat{\color{burgundy}\mathbf{A}}^e \mathbf{R}^e
@@ -29,9 +29,10 @@ where
 \left[ \begin{array}{c c}
 {\color{burgundy}\mathbf{A}}_{\text{r}, \text{r}}^e  &  \hat{\color{burgundy}\mathbf{A}}_{\Pi, \text{r}}^{e, T}  \\
 \hat{\color{burgundy}\mathbf{A}}_{\Pi, \text{r}}^e   &  \hat{\color{burgundy}\mathbf{A}}_{\Pi, \Pi}^e            \\
-\end{array} \right].
+\end{array} \right]
 \end{equation}
-In this formulation, the broken degrees of freedom found on the portion of subdomain interface given by $\Gamma^e - \Pi^e$ are duplicated for each subdomain, in contrast to overlapping domain decomposition methods, where only one degree of freedom would be used at these locations.
+and $\mathbf{R}^e$ is the subdomain injection operator. 
+In this formulation, the broken degrees of freedom found on the portion of subdomain interface given by $\Gamma^e - \Pi^e$ are duplicated for each subdomain.
 This duplication reduces the amount of global communication required to solve the subassemebled problem, which makes BDDC attractive as a preconditioner for high-order finite element methods.
 
 \begin{definition}

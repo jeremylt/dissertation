@@ -49,8 +49,8 @@ The inverse of $\mathbf{M}$ and $\mathbf{K}$ are given by
 
 However, for a single element with no boundary conditions, the Laplacian is singular and no inverse exists.
 Fischer and Lottes, \cite{fischer2005hybrid}, take the pseudo-inverse $\mathbf{\Lambda}^{+}$, which is given by taking the reciprocal of the non-zero values in $\mathbf{\Lambda}$.
-We instead compute the true inverse of a perturbed version of the Laplacian, given by $\mathcal{K} = \mathbf{K} + \epsilon \mathbf{I}$.
-We denote this approximate inverse by $\mathcal{K}^+$.
+We instead compute the true inverse of a perturbed Laplacian, given by $\boldsymbol{\mathcal{K}} = \mathbf{K} + \epsilon \mathbf{I}$.
+We denote this approximate inverse by $\boldsymbol{\mathcal{K}}^+$.
 
 ToDo: ADD FIGURE SHOWING EFFECT OF PSEUDO-INVERSE VS INVERSE OF PERTURBED OPERATOR.
 
@@ -108,35 +108,75 @@ We have an approximate Fast Diagonalization Method inverse for the entire subdom
 We form a saddle point problem to constrain the subdomain vertex nodes and form a Dirichlet problem from the full subdomain Neumann problem.
 
 \begin{equation}
-{\color{burgundy}\mathbf{A}}^e_{\text{r}, \text{r}} = \mathcal{R}^T
+{\color{burgundy}\mathbf{A}}^e_{\text{r}, \text{r}} = \boldsymbol{\mathcal{R}}^T
 \left[ \begin{array}{c c}
-{\color{burgundy}\mathbf{A}}^e  &  \mathcal{V}^T  \\
-\mathcal{V}                     &  \mathbf{0}     \\
+{\color{burgundy}\mathbf{A}}^e  &  \boldsymbol{\mathcal{V}}^T  \\
+\boldsymbol{\mathcal{V}}        &  \mathbf{0}                  \\
 \end{array} \right]
-\mathcal{R}
+\boldsymbol{\mathcal{R}}
 \end{equation}
-where $\mathcal{R}$ is an injection operator from the broken element space to the full element augmented with duplicate vertex nodes to constrain and $\mathcal{V}$ is vertex restriction operator, which restricts to the duplicated interface vertices from the full broken space.
+where $\boldsymbol{\mathcal{R}}$ is an injection operator from the broken element space to the full element augmented with duplicate primal nodes to constrain and $\boldsymbol{\mathcal{V}}$ is the primal restriction operator, which restricts to the duplicated primal vertices from the full broken space.
 
 \begin{definition}
 The Fast Diagonalization Method approximate inverse subdomain solver is given by the direct sum of element subdomain solvers of the form
 \begin{equation}
-{\color{burgundy}\mathbf{A}}^{e, -}_{\text{r}, \text{r}} \approx {\color{burgundy}\mathbf{A}}^{e, +}_{\text{r}, \text{r}} = \mathcal{R}^T
+{\color{burgundy}\mathbf{A}}^{e, -1}_{\text{r}, \text{r}} \approx {\color{burgundy}\mathbf{A}}^{e, +}_{\text{r}, \text{r}} = \boldsymbol{\mathcal{R}}^T
 \left[ \begin{array}{c c}
-{\color{burgundy}\mathbf{A}}^{e, +}  &  -{\color{burgundy}\mathbf{A}}^{e, +} \mathcal{V^T} \mathbf{S}^{-1}  \\
+{\color{burgundy}\mathbf{A}}^{e, +}  &  -{\color{burgundy}\mathbf{A}}^{e, +} \boldsymbol{\mathcal{V}}^T \mathbf{S}^{-1}  \\
 \mathbf{0}                           &  \mathbf{S}^{-1}                                                     \\
 \end{array} \right]
 \left[ \begin{array}{c c}
-\mathbf{I}                                         &  \mathbf{0}  \\
-- \mathcal{V} {\color{burgundy}\mathbf{A}}^{e, +}  &  \mathbf{I}  \\
+\mathbf{I}                                                      &  \mathbf{0}  \\
+- \boldsymbol{\mathcal{V}} {\color{burgundy}\mathbf{A}}^{e, +}  &  \mathbf{I}  \\
 \end{array} \right]
-\mathcal{R}
+\boldsymbol{\mathcal{R}}
 \end{equation}
-where $\mathbf{S} = - \mathcal{V} {\color{burgundy}\mathbf{A}}^{e, +} \mathcal{V}^T$, $\mathcal{R}$ is an injection operator from the broken element space to the full element, and $\mathcal{V}$ is vertex restriction operator, which restricts to the interface vertices from the full broken space.
+where $\mathbf{S} = - \boldsymbol{\mathcal{V}} {\color{burgundy}\mathbf{A}}^{e, +} \boldsymbol{\mathcal{V}}^T$, $\boldsymbol{\mathcal{R}}$ is an injection operator from the duplicate primal vertices to the full element, and $\boldsymbol{\mathcal{V}}$ is the primal restriction operator, which restricts to the primal vertices from the full element.
 The approximate inverse for each subdomain is given by
 \begin{equation}
 {\color{burgundy}\mathbf{A}}^{e, +} = {\color{blue(ncs)}\mathbf{B}}^T {\color{applegreen}\mathbf{D}} {\color{blue(ncs)}\mathbf{B}}
 \end{equation}
-where ${\color{blue(ncs)}\mathbf{B}}$ is a basis interpolating to the eigenspace of the simultaneous diagonalization of the mass and Laplacian matrices $\mathbf{M} = \mathbf{N}^T \mathbf{W} \mathbf{N}$ and $\mathbf{K} = \mathbf{D}^T \mathbf{W} \mathbf{D}$.
+where ${\color{blue(ncs)}\mathbf{B}}$ is a basis interpolating to the eigenspace of the simultaneous diagonalization of the mass and perturbed Laplacian matrices $\mathbf{M} = \mathbf{N}^T \mathbf{W} \mathbf{N}$ and $\boldsymbol{\mathcal{K}} = \mathbf{D}^T \mathbf{W} \mathbf{D} + \epsilon \mathbf{I}$.
+${\color{applegreen}\mathbf{D}}$ is computed from the eigenvalues of this diagonalization and the average element coefficient value
+\begin{equation}
+\begin{array}{c c}
+\mathbf{\Lambda}^e = \bar{k}^e \mathbf{\Lambda},  &  \mathbf{\Lambda}^{e, +} = \frac{1}{\bar{k}^e} \mathbf{\Lambda}^{+}
+\end{array}
+\end{equation}
+where the value of $\mathbf{\Lambda}$ is given by
+\begin{equation}
+\begin{array}{c}
+\mathbf{\Lambda}_N      = \left( I \otimes I \otimes I \right)  \\
+\mathbf{\Lambda}_D      = \left( \Lambda \otimes I \otimes I\right) + \left( I \otimes \Lambda \otimes I\right) + \left( I \otimes I \otimes \Lambda \right)  \\
+\mathbf{\Lambda}_{N, D} = \mathbf{\Lambda}_N + \mathbf{\Lambda}_D  \\
+\end{array}
+\end{equation}
+based upon if the weak form for operator ${\color{burgundy}\mathbf{A}}^e$ has interpolated values, derivatives, or both, respectively, at quadrature points.
+\end{definition}
+
+The subdomain interior solver can be provided from the same fast diagonalization of the element matrix.
+Reusing the fast diagonalization for both the subdomain solver and subdomain interior eliminates the higher setup cost of the Dirichlet BDDC compared to the lumped BDDC.
+
+\begin{definition}
+The Fast Diagonalization Method approximate inverse subdomain interior solver is given by the direct sum of element subdomain solvers of the form
+\begin{equation}
+{\color{burgundy}\mathbf{A}}^{e, -1}_{\text{r}, \text{r}} \approx {\color{burgundy}\mathbf{A}}^{e, +}_{\text{r}, \text{r}} = \boldsymbol{\mathcal{R}}^T
+\left[ \begin{array}{c c}
+{\color{burgundy}\mathbf{A}}^{e, +}  &  -{\color{burgundy}\mathbf{A}}^{e, +} \boldsymbol{\mathcal{V}}^T \mathbf{S}^{-1}  \\
+\mathbf{0}                           &  \mathbf{S}^{-1}                                                     \\
+\end{array} \right]
+\left[ \begin{array}{c c}
+\mathbf{I}                                                      &  \mathbf{0}  \\
+- \boldsymbol{\mathcal{V}} {\color{burgundy}\mathbf{A}}^{e, +}  &  \mathbf{I}  \\
+\end{array} \right]
+\boldsymbol{\mathcal{R}}
+\end{equation}
+where $\mathbf{S} = - \boldsymbol{\mathcal{V}} {\color{burgundy}\mathbf{A}}^{e, +} \boldsymbol{\mathcal{V}}^T$, $\boldsymbol{\mathcal{R}}$ is an injection operator from the duplicate interface vertices to the full element, and $\boldsymbol{\mathcal{V}}$ is the interface restriction operator, which restricts to the interface vertices from the element.
+The approximate inverse for each subdomain is given by
+\begin{equation}
+{\color{burgundy}\mathbf{A}}^{e, +} = {\color{blue(ncs)}\mathbf{B}}^T {\color{applegreen}\mathbf{D}} {\color{blue(ncs)}\mathbf{B}}
+\end{equation}
+where ${\color{blue(ncs)}\mathbf{B}}$ is a basis interpolating to the eigenspace of the simultaneous diagonalization of the mass and perturbed Laplacian matrices $\mathbf{M} = \mathbf{N}^T \mathbf{W} \mathbf{N}$ and $\boldsymbol{\mathcal{K}} = \mathbf{D}^T \mathbf{W} \mathbf{D} + \epsilon \mathbf{I}$.
 ${\color{applegreen}\mathbf{D}}$ is computed from the eigenvalues of this diagonalization and the average element coefficient value
 \begin{equation}
 \begin{array}{c c}

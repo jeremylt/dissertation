@@ -1,57 +1,9 @@
 In order to compute the symbol of the BDDC preconditioners, we will find the symbol of the injection operator and subassembled inverse separately.
 
-The inverse of the subassembled problem requires both modes in the broken element space and the global primal variable space.
+% -- Subassembled --------------------------------------------------------------
+\subsection{Subassembled Operator}
+\input 05-DomainDecomposition/02-01-subassembled
 
-The Fourier modes on each broken element subdomain are separate, so the mode mapping operator $\mathbf{Q}$ is not used for the symbol of the subdomain solver.
-The subdomain solver is completely in the broken element space therefore has a very straightforward symbol, given by
-\begin{equation}
-\tilde{\color{burgundy}\mathbf{A}}_{\text{r}, \text{r}}^{-1} \left( \boldsymbol{\theta} \right) = {\color{burgundy}\mathbf{A}}_{\text{r}, \text{r}}^{-1} \odot \left[ e^{\imath \left( \mathbf{x}_j - \mathbf{x}_i \right) \cdot \boldsymbol{\theta} / \mathbf{h}} \right]
-\end{equation}
-where $\mathbf{x}_i$ and $\mathbf{x}_j$ are only the coordinates for the nodes in the subassembled space.
-
-The Schur complement has as similarly straightforward symbol, given by
-\begin{equation}
-\tilde{\hat{\mathbf{S}}}_{\Pi}^{-1} \left( \boldsymbol{\theta} \right) = \left( \mathbf{Q}^T \left( \hat{\mathbf{S}}_{\Pi} \odot \left[ e^{\imath \left( \mathbf{x}_j - \mathbf{x}_i \right) \cdot \boldsymbol{\theta} / \mathbf{h}} \right] \right) \mathbf{Q} \right)^{-1}.
-\end{equation}
-The primal vertex solve is global across the entire problem, so the corresponding Fourier modes are mapped to the global problem before being solved exactly.
-
-For the mixed primal and subdomain operators, we use the Fourier mode mapping only on the modes corresponding to the primal vertices, giving us
-\begin{equation}
-\tilde{\hat{\color{burgundy}\mathbf{A}}}\color{black}_{\text{r}, \Pi} \left( \boldsymbol{\theta} \right) = \left( \hat{\color{burgundy}\mathbf{A}}_{\text{r}, \Pi} \odot \left[ e^{\imath \left( \mathbf{x}_j - \mathbf{x}_i \right) \cdot \boldsymbol{\theta} / \mathbf{h}} \right] \right) \mathbf{Q}
-\end{equation}
-where $x_i$ come from the broken element space and $x_j$ come from the primal variable space.
-
-\begin{definition}
-The symbol of the inverse of the subassembled problem is given by
-\begin{equation}
-\tilde{\hat{\color{burgundy} \mathbf{A}}}\color{black}^{-1} =
-\left[ \begin{array}{c c}
-\mathbf{I}  &  -\tilde{\color{burgundy}\mathbf{A}}_{\text{r}, \text{r}}^{-1} \tilde{\hat{\color{burgundy}\mathbf{A}}}\color{black}_{\Pi, \text{r}}^T  \\
-\mathbf{0}  &  \mathbf{I}                                                                                                                             \\
-\end{array} \right]
-\left[ \begin{array}{c c}
-\tilde{\color{burgundy}\mathbf{A}}_{\text{r}, \text{r}}^{-1}  &  \mathbf{0}                                        \\
-\mathbf{0}                                                    &  \tilde{\hat{\mathbf{S}}}\color{black}_{\Pi}^{-1}  \\
-\end{array} \right]
-\left[ \begin{array}{c c}
-\mathbf{I}                                                                                                                           &  \mathbf{0}  \\
--\tilde{\color{burgundy}\mathbf{A}}_{\Pi, \text{r}} \tilde{\hat{\color{burgundy}\mathbf{A}}}\color{black}_{\text{r}, \text{r}}^{-1}  &  \mathbf{I}  \\
-\end{array} \right]
-\end{equation}
-In this notation, $\tilde{\color{burgundy}\mathbf{A}}$ indicates Fourier modes on the broken element space, while $\tilde{\hat{\color{burgundy}\mathbf{A}}}$ indicates Fourier modes on the global primal variable space.
-
-The symbol of the subdomain solver is given by
-\begin{equation}
-\tilde{\color{burgundy}\mathbf{A}}_{\text{r}, \text{r}}^{-1} \left( \boldsymbol{\theta} \right) = {\color{burgundy}\mathbf{A}}_{\text{r}, \text{r}}^{-1} \odot \left[ e^{\imath \left( \mathbf{x}_j - \mathbf{x}_i \right) \cdot \boldsymbol{\theta} / \mathbf{h}} \right]
-\end{equation}
-while the symbol of the Schur compliment solve is given by
-\begin{equation}
-\tilde{\hat{\mathbf{S}}}_{\Pi}^{-1} \left( \boldsymbol{\theta} \right) = \left( \mathbf{Q}^T \left( \hat{\mathbf{S}}_{\Pi} \odot \left[ e^{\imath \left( \mathbf{x}_j - \mathbf{x}_i \right) \cdot \boldsymbol{\theta} / \mathbf{h}} \right] \right) \mathbf{Q} \right)^{-1}
-\end{equation}
-and the symbol of the mixed primal and subdomain operators are given by
-\begin{equation}
-\tilde{\hat{\color{burgundy}\mathbf{A}}}\color{black}_{\text{r}, \Pi} \left( \boldsymbol{\theta} \right) = \left( \hat{\color{burgundy}\mathbf{A}}_{\text{r}, \Pi} \odot \left[ e^{\imath \left( \mathbf{x}_j - \mathbf{x}_i \right) \cdot \boldsymbol{\theta} / \mathbf{h}} \right] \right) \mathbf{Q}
-\end{equation}
-and $\tilde{\hat{\color{burgundy}\mathbf{A}}}\color{black}_{\text{r}, \Pi}^T \left( \boldsymbol{\theta} \right)$ is given by the conjugate transpose.
-\label{def:subassembled_symbol}
-\end{definition}
+% -- Fast Diagonalization ------------------------------------------------------
+\subsection{Injection Operators}
+\input 05-DomainDecomposition/02-02-injection
