@@ -1,0 +1,90 @@
+The injection operators map the global degrees of freedom to the broken spaces on each subdomain, and the symbols of the injection operators map the Fourier modes on the global space to the Fourier modes on the broken element space.
+
+The scaled injection operator, $\mathbf{R}_1$, is a pointwise scaling operator, so the operator is its own symbol.
+We can partition $\mathbf{R}_1$ into its action on primal and subassembled nodes on each element,
+\begin{equation}
+\mathbf{R}_1^e =
+\begin{bmatrix}
+\mathbf{R}_{1, \Pi} &                    \\
+                    & \mathbf{R}_{1, r}  \\
+\end{bmatrix}.
+\end{equation}
+
+In the symbol of the subassembled inverse, the Fourier modes on the primal nodes have already been localized to Fourier modes in the global space, so we only need the Fourier mode localization operator on the subassembled nodes, denoted $\mathbf{Q}_r$.
+
+\begin{definition}
+The symbol of the scaled injection operator is given by
+\begin{equation}
+\tilde{\mathbf{R}}_1 \left( \boldsymbol{\theta} \right) =
+\begin{bmatrix}
+\mathbf{I} &                    \\
+           & \mathbf{R}_{1, r}  \\
+\end{bmatrix}
+\begin{bmatrix}
+\mathbf{I} &                 \\
+           & \mathbf{Q}_{r}  \\
+\end{bmatrix}
+\end{equation}
+where $\mathbf{R}_{1, r}$ gives the portion of the scaled injection operator acting on the subassembled nodes and $\mathbf{Q}_r$ gives the portion of the Fourier mode localization operator that localizes the Fourier modes on the subassembled nodes.
+\label{def:scaled_injection_symbol}
+\end{definition}
+
+For the symbol of the harmonic injection operator, we need the symbol of the harmonic extension and jump mapping.
+
+The symbol of the harmonic extension is given by the symbols of the local operators,
+\begin{equation}
+\tilde{\boldsymbol{\mathcal{H}}} = - \tilde{{\color{burgundy}\mathbf{A}}}_{I, I}^{-1} \tilde{{\color{burgundy}\mathbf{A}}}_{\Gamma, I}^T
+\end{equation}
+where
+\begin{equation}
+\tilde{{\color{burgundy}\mathbf{A}}}_{I, I}^{-1} \left( \boldsymbol{\theta} \right) = {\color{burgundy}\mathbf{A}}_{I, I}^{e, -1} \odot \left[ e^{\imath \left( \mathbf{x}_j - \mathbf{x}_i \right) \cdot \boldsymbol{\theta} / \mathbf{h}} \right],
+\hspace{5mm}
+\tilde{{\color{burgundy}\mathbf{A}}}_{\Gamma, I}^T \left( \boldsymbol{\theta} \right) = {\color{burgundy}\mathbf{A}}_{\Gamma, I}^{e, T} \odot \left[ e^{\imath \left( \mathbf{x}_j - \mathbf{x}_i \right) \cdot \boldsymbol{\theta} / \mathbf{h}} \right]
+\end{equation}
+
+The jump mapping is a pointwise scaling operator, so it is its own symbol, just as $\mathbf{R}_1$ is its own symbol.
+The symbol $\tilde{\mathbf{J}}$ is a operator with entries on the diagonal given by
+\begin{equation}
+\tilde{\mathbf{J}}_{i, i} = - \frac{\lvert \mathcal{N} \left( x_i \right) - 1}{\lvert \mathcal{N} \left( x_i \right) \rvert}
+\end{equation}
+and off diagonal entries given by
+\begin{equation}
+\tilde{\mathbf{J}}_{i, j} = - \frac{1}{\lvert \mathcal{N} \left( x_i \right) \rvert} \hspace{2mm} \text{if} \hspace{2mm} x_j \in \mathcal{N} \left( x_i \right).
+\end{equation}
+
+\begin{definition}
+The symbol of the harmonic injection operator is given by
+\begin{equation}
+\tilde{\mathbf{R}}_2 \left( \boldsymbol{\theta} \right) =
+\begin{bmatrix}
+\mathbf{I} &                                                                  \\
+           & \mathbf{R}_{1, r} - \mathbf{J}^T_r \boldsymbol{\mathcal{H}}^T_r  \\
+\end{bmatrix}
+\begin{bmatrix}
+\mathbf{I} &                 \\
+           & \mathbf{Q}_{r}  \\
+\end{bmatrix}
+\end{equation}
+where $\mathbf{R}_{1, r}$ gives the portion of the scaled injection operator acting on the subassembled nodes, $\mathbf{J}^T_r$ gives the portion of the jump mapping acting on the subassembled nodes, $\boldsymbol{\mathcal{H}}^T_r$ gives the portion of the harmonic extension acting on subassembled nodes, and $\mathbf{Q}_r$ gives the portion of the Fourier mode localization operator that localizes the Fourier modes on the subassembled nodes.
+
+The symbol of the harmonic extension is given by the symbols of the local operators,
+\begin{equation}
+\tilde{\boldsymbol{\mathcal{H}}} = - \tilde{{\color{burgundy}\mathbf{A}}}_{I, I}^{-1} \tilde{{\color{burgundy}\mathbf{A}}}_{\Gamma, I}^T
+\end{equation}
+where
+\begin{equation}
+\tilde{{\color{burgundy}\mathbf{A}}}_{I, I}^{-1} \left( \boldsymbol{\theta} \right) = {\color{burgundy}\mathbf{A}}_{I, I}^{e, -1} \odot \left[ e^{\imath \left( \mathbf{x}_j - \mathbf{x}_i \right) \cdot \boldsymbol{\theta} / \mathbf{h}} \right],
+\hspace{5mm}
+\tilde{{\color{burgundy}\mathbf{A}}}_{\Gamma, I}^T \left( \boldsymbol{\theta} \right) = {\color{burgundy}\mathbf{A}}_{\Gamma, I}^{e, T} \odot \left[ e^{\imath \left( \mathbf{x}_j - \mathbf{x}_i \right) \cdot \boldsymbol{\theta} / \mathbf{h}} \right]
+\end{equation}
+
+The symbol of the jump mapping, $\tilde{\mathbf{J}}$, is a operator with entries on the diagonal given by
+\begin{equation}
+\tilde{\mathbf{J}}_{i, i} = - \frac{\lvert \mathcal{N} \left( x_i \right) - 1}{\lvert \mathcal{N} \left( x_i \right) \rvert}
+\end{equation}
+and off diagonal entries given by
+\begin{equation}
+\tilde{\mathbf{J}}_{i, j} = - \frac{1}{\lvert \mathcal{N} \left( x_i \right) \rvert} \hspace{2mm} \text{if} \hspace{2mm} x_j \in \mathcal{N} \left( x_i \right).
+\end{equation}
+\label{def:harmonic_injection_symbol}
+\end{definition}

@@ -19,7 +19,7 @@ An operator preconditioned with the lumped BDDC preconditioner has the same eige
 The second injection operator, $\mathbf{R}_2$, is the harmonic injection operator, which results in the Dirichlet BDDC preconditioner, $\mathbf{M}^{-1}_2$.
 
 This injection operator uses a discrete harmonic extension of the interface values to minimize the energy norm of the result, which leads to a better stability bound, as shown by Toselli and Widlund \cite{toselli2006domain}.
-Let $\mathcal{H}$ be given by a direct sum of local operators $\mathcal{H}^e = - {\color{burgundy}\mathbf{A}}_{\text{I}, \text{I}}^{e, -1} {\color{burgundy}\mathbf{A}}_{\Gamma, \text{I}}^{e, T}$.
+Let $\boldsymbol{\mathcal{H}}$ be given by a direct sum of local operators $\boldsymbol{\mathcal{H}}^e = - {\color{burgundy}\mathbf{A}}_{\text{I}, \text{I}}^{e, -1} {\color{burgundy}\mathbf{A}}_{\Gamma, \text{I}}^{e, T}$.
 This operator solves a local Dirichlet problem given by mapping the jump over subdomain interfaces for duplicated values to the subdomain interior.
 The jump mapping is given by
 \begin{equation}
@@ -27,11 +27,11 @@ The jump mapping is given by
 \end{equation}
 
 \begin{definition}
-Let the harmonic injection operator be given by $\mathbf{R}_2 = \mathbf{R}_1 - \mathbf{J}^T \mathcal{H}^T$, where $\mathcal{H}$ is given by a direct sum of local operators $\mathcal{H}^e = - {\color{burgundy}\mathbf{A}}_{\text{I}, \text{I}}^{e, -1} {\color{burgundy}\mathbf{A}}_{\Gamma, \text{I}}^{e, T}$ and
+Let the harmonic injection operator be given by $\mathbf{R}_2 = \mathbf{R}_1 - \mathbf{J}^T \boldsymbol{\mathcal{H}}^T$, where $\boldsymbol{\mathcal{H}}$ is given by a direct sum of local operators $\boldsymbol{\mathcal{H}}^e = - {\color{burgundy}\mathbf{A}}_{\text{I}, \text{I}}^{e, -1} {\color{burgundy}\mathbf{A}}_{\Gamma, \text{I}}^{e, T}$ and
 \begin{equation}
 \mathbf{J}^{e, T} v \left( x \right) = \sum_{i \in \mathcal{N} \left( x \right)} \left( \frac{v^e \left( x \right)}{\lvert \mathcal{N} \left( x \right) \rvert} - \frac{v^i \left( x \right)}{\lvert \mathcal{N} \left( x \right) \rvert} \right), \forall x \in \Gamma^e.
 \end{equation}
-The lumped BDDC preconditioner is given by $\mathbf{M}^{-1}_2 = \mathbf{R}_2^T \hat{\color{burgundy}\mathbf{A}} \mathbf{R}_2$, where $\mathbf{R}_2$ is the harmonic injection operator.
+The Dirichlet BDDC preconditioner is given by $\mathbf{M}^{-1}_2 = \mathbf{R}_2^T \hat{\color{burgundy}\mathbf{A}} \mathbf{R}_2$, where $\mathbf{R}_2$ is the harmonic injection operator.
 \label{def:dirichletbddc}
 \end{definition}
 

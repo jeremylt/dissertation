@@ -1,0 +1,19 @@
+The symbol of the lumped and Dirichled variants of BDDC are given by the symbol of the subassembled inverse and the respective injection operators.
+
+\begin{definition}
+The symbol of the lumped BDDC preconditioner is given by
+\begin{equation}
+\tilde{\mathbf{M}}^{-1}_1 = \tilde{\mathbf{R}}^T_1 \tilde{\hat{{\color{burgundy}\mathbf{A}}}}^{-1} \tilde{\mathbf{R}}_1
+\end{equation}
+where $\tilde{\mathbf{R}}_1$ is the symbol of the scaled injection operator, given by Definition \ref{def:scaled_injection_symbol}, and $\tilde{\hat{{\color{burgundy}\mathbf{A}}}}^{-1}$ is the symbol of the inverse of the subassembled problem, given by Definition \ref{def:subassembled_symbol}. 
+\label{def:lumped_bddc_symbol}
+\end{definition}
+
+\begin{definition}
+The symbol of the Dirichlet BDDC preconditioner is given by
+\begin{equation}
+\tilde{\mathbf{M}}^{-1}_2 = \tilde{\mathbf{R}}^T_2 \tilde{\hat{{\color{burgundy}\mathbf{A}}}}^{-1} \tilde{\mathbf{R}}_2
+\end{equation}
+where $\tilde{\mathbf{R}}_2$ is the symbol of the harmonic injection operator, given by Definition \ref{def:harmonic_injection_symbol}, and $\tilde{\hat{{\color{burgundy}\mathbf{A}}}}^{-1}$ is the symbol of the inverse of the subassembled problem, given by Definition \ref{def:subassembled_symbol}. 
+\label{def:dirichlet_bddc_symbol}
+\end{definition}
