@@ -12,13 +12,13 @@ Each subdomain problem could therefore be written as
 \end{equation}
 where ${\color{burgundy}\mathbf{A}}^e = {\color{blue(ncs)}\mathbf{B}}^T {\color{applegreen}\mathbf{D}} {\color{blue(ncs)}\mathbf{B}}$, as shown in Equation \ref{eq:localoperator}.
 
-This subdomain problem is assembled into the global problem in the typical finite element approach given by Equation \ref{eq:libceed_representation}, but in BDDC we create a subassembled problem that is easier to invert than the global problem by duplicating broken degrees of freedom along the subdomain boundaries.
-Only the corner, or vertex, degrees of freedom from each element are assembled into a global coarse problem while the remaining degreees of freedom on the subdomain interfaces are duplicated in each subdomain.
+This subdomain problem can be assembled into the global problem in the typical finite element approach given by Equation \ref{eq:libceed_representation}, but in BDDC we create a partially subassembled problem that is easier to invert than the global problem by duplicating broken degrees of freedom along the subdomain boundaries.
+Only the corner, or vertex, degrees of freedom from each element are assembled into a global coarse problem while the remaining degrees of freedom on the subdomain interfaces are duplicated in each subdomain.
 The solutions on the global coarse problem and broken subdomain problems are used to construct an approximate solution to the true assembled global problem.
 
 The coarse grid, or primal, nodes $\Pi^e$ are given by the corners of the subdomain, so we have $4$ primal nodes for each element in two dimensions and $8$ primal nodes in three dimensions.
 The remainder of the subdomain we denote with an $\text{r}$.
-The subassembled problem is therefore given by
+The partially subassembled problem is therefore given by
 \begin{equation}
 \hat{\color{burgundy}\mathbf{A}} = \sum_{e = 1}^N \mathbf{R}^{e, T} \hat{\color{burgundy}\mathbf{A}}^e \mathbf{R}^e
 \label{eq:subassembled}
@@ -35,13 +35,16 @@ and $\mathbf{R}^e$ is the subdomain injection operator.
 In this formulation, the broken degrees of freedom found on the portion of subdomain interface given by $\Gamma^e - \Pi^e$ are duplicated for each subdomain.
 This duplication reduces the amount of global communication required to solve the subassemebled problem, which makes BDDC attractive as a preconditioner for high-order finite element methods.
 
-\begin{definition}
+There are BDDC formulations which enrich the primal space with edge or face averages to improve convergence.
+We forgo these formulations to simplify the analysis; however these formulations can become increasingly attractive with large, high-order subdomains in three dimensions.
+
+\begin{definition}[Balancing Domain Decomposition by Constraints Preconditioner]
 The action of the BDDC preconditioner is given by
 \begin{equation}
 \mathbf{M}^{-1} = \mathbf{R}^T \hat{\color{burgundy}\mathbf{A}}^{-1} \mathbf{R}
 \end{equation}
 where $\mathbf{R}$ is the subassembly injection operator.
-The inverse of the subassembled problem is computed by Schur complement
+The inverse of the partially subassembled problem is computed by Schur complement
 \begin{equation}
 \hat{\color{burgundy}\mathbf{A}}^{-1} =
 \left[ \begin{array}{c c}

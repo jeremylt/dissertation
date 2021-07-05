@@ -24,3 +24,17 @@ Table \ref{table:high_order_element_bddc} shows the maximal eigenvalues and cond
 
 The improved condition number, and therefore convergence, of the Dirichlet BDDC compared to the lumped BDDC is more significant for high-order elements.
 With single high-order element subdomains, the Fast Diagonalization Method approximate inverse subdomain solver can be used for both the subdomain subassembled inverse and subdomain interior inverse, which eliminates the advantage in reduced setup costs for lumped BDDC.
+
+\begin{figure}[!ht]
+  \centering
+  \subfloat[Lumped BDDC]{\includegraphics[width=0.48\textwidth]{../img/lowVsHighLumped}\label{fig:lumped_bddc_comparison}}
+  \hfill
+  \subfloat[Dirichlet BDDC]{\includegraphics[width=0.48\textwidth]{../img/lowVsHighDirichlet}\label{fig:dirichlet_bddc_comparison}}
+  \caption{Low-Order and High-Order Subdomain Condition Number Comparison}
+\end{figure}
+
+In Figure \ref{fig:lumped_bddc_comparison} we compare the growth of the condition number for the lumped BDDC preconditioned operator for a subdomain consisting of several linear elements and a subdomain consisting of a single high-order element.
+The condition number grows much more rapidly for a high-order subdomain with an equivalent number of degrees of freedom.
+
+In Figure \ref{fig:dirichlet_bddc_comparison} we compare the growth of the condition number for the Dirichlet BDDC preconditioned operator for a subdomain consisting of several linear elements and a subdomain consisting of a single high-order element.
+In contrast with Figure \ref{fig:lumped_bddc_comparison}, we see that the condition number of the preconditioned operator on the high-order subdomain grows only slighty faster than the condition number of the low-order subdomain.

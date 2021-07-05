@@ -11,7 +11,7 @@ mesh = Mesh2D(1.0, 1.0)
 conditionnumbers = DataFrame()
 
 # test range
-for numberfineelements1d in [4, 8, 16, 32]
+for numberfineelements1d in [4, 6, 8, 10, 12, 14, 16, 32]
     println("m = ", numberfineelements1d)
     # setup
     # -- diffusion operators
@@ -25,7 +25,7 @@ for numberfineelements1d in [4, 8, 16, 32]
 
     # compute smoothing factor
     # -- setup
-    numbersteps = 64
+    numbersteps = 32
     θ_min = -π / 2
     θ_max = 3π / 2
     θ_step = 2π / numbersteps

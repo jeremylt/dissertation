@@ -1,8 +1,8 @@
-Inexact solvers for the subdomain problems ${\color{burgundy}\mathbf{A}}_{\text{r}, \text{r}}^{-1}$ was discussed by Li and Widlund in \cite{li2007use}.
-Here, we introduce an inexact subdomain solver based on the Fast Diagonalization Method.
+Inexact solvers for the subdomain problems ${\color{burgundy}\mathbf{A}}_{\text{r}, \text{r}}^{-1}$ were discussed by Li and Widlund in \cite{li2007use}.
+Here we introduce an inexact subdomain solver based on the Fast Diagonalization Method (FDM).
 
-The Fast Diagonalization Method is a fast exact solver for separable problems with a tensor product representation introduced by Lynch, Rice, and Thomas \cite{lynch1964direct}.
-Fast diagonalization has been an effective inexact solver as part of additive overlapping Schwarz problems for spectral element discretizations for Poisson and Helmholtz equations as well as Naiver-Stokes problems, as shown by Fischer and Lottes \cite{fischer2005hybrid}.
+The FDM is a fast exact solver for separable problems with a tensor product representation introduced by Lynch, Rice, and Thomas \cite{lynch1964direct}.
+Fast diagonalization has been an effective inexact solver as part of additive overlapping Schwarz problems for spectral element discretizations for Poisson and Helmholtz equations, as well as Naiver-Stokes problems, as shown by Fischer and Lottes \cite{fischer2005hybrid}.
 
 Let $M$ and $K$ be the one dimensional mass and Laplacian matrices, respectively, given by
 \begin{equation}
@@ -19,13 +19,14 @@ Mass and Laplacian matrices in higher dimensions can be given by tensor products
 \end{array}
 \end{equation}
 
-As $M$ is symmetric positive definite and $K$ is symmetric, the one dimensional mass and Laplacian matrices can be simultaneously diagonalized, which is to say that there exists a non-singular matrix $S$ and diagonal matrix $\Lambda$ such that
+Because $M$ is symmetric positive definite and $K$ is symmetric, the one dimensional mass and Laplacian matrices can be simultaneously diagonalized.
+This means that there exists a non-singular matrix $S$ and diagonal matrix $\Lambda$ such that
 \begin{equation}
 \begin{array}{c c}
 S M S^T = I,  &  S K S^T = \Lambda.
 \end{array}
 \end{equation}
-With this diagonalization, we have
+In higher dimensions this diagonalization is given by tensor products of the one dimensional diagonalization, and we have
 \begin{equation}
 \begin{array}{c c}
 \mathbf{M}   = \mathbf{S}^{-1} \mathbf{I} \mathbf{S}^{-T},  &  \mathbf{K} = \mathbf{S}^{-1} \mathbf{\Lambda} \mathbf{S}^{-T}  \\
@@ -40,16 +41,16 @@ where
 \end{array}
 \end{equation}
 
-The inverse of $\mathbf{M}$ and $\mathbf{K}$ are given by
+If $\mathbf{M}$ and $\mathbf{K}$ are invertible on the domain, then the inverse of $\mathbf{M}$ and $\mathbf{K}$ are given by
 \begin{equation}
 \begin{array}{c c}
-\mathbf{M}^{-1} = \mathbf{S}^T \mathbf{I} \mathbf{S},  &  \mathbf{K}^{+} = \mathbf{S}^T \mathbf{\Lambda}^{+} \mathbf{S}.
+\mathbf{M}^{-1} = \mathbf{S}^T \mathbf{I} \mathbf{S},  &  \mathbf{K}^{-1} = \mathbf{S}^T \mathbf{\Lambda}^{+} \mathbf{S}.
 \end{array}
 \end{equation}
 
 However, for a single element with no boundary conditions, the Laplacian is singular and no inverse exists.
-Fischer and Lottes, \cite{fischer2005hybrid}, take the pseudo-inverse $\mathbf{\Lambda}^{+}$, which is given by taking the reciprocal of the non-zero values in $\mathbf{\Lambda}$.
-We instead compute the true inverse of a perturbed Laplacian, given by $\boldsymbol{\mathcal{K}} = \mathbf{K} + \epsilon \mathbf{I}$.
+Fischer and Lottes \cite{fischer2005hybrid} compute the pseudo-inverse of the diagonal $\mathbf{\Lambda}^{+}$, which is given by taking the reciprocal of the non-zero values in $\mathbf{\Lambda}$.
+We instead compute an approximate inverse to the Laplacian by finding the true inverse of a perturbed Laplacian, given by $\boldsymbol{\mathcal{K}} = \mathbf{K} + \epsilon \mathbf{I}$.
 We denote this approximate inverse by $\boldsymbol{\mathcal{K}}^+$.
 
 ToDo: ADD FIGURE SHOWING EFFECT OF PSEUDO-INVERSE VS INVERSE OF PERTURBED OPERATOR.
@@ -58,35 +59,38 @@ For separable problems that can be expressed as a linear combination of the mass
 \begin{equation}
 \mathbf{A} = a \mathbf{M} + b \mathbf{K}
 \end{equation}
-the Fast Diagonalization Method can provide a fast direct solver if the problem is invertible or a fast approximate inverse if the problem is not.
+the FDM can provide a fast direct solver if the problem is invertible or a fast approximate inverse if the problem is not.
 \begin{equation}
 \mathbf{A}^{-1} = \mathbf{S}^T \left( a \mathbf{I} + b \mathbf{\Lambda} \right)^{-1} \mathbf{S}
 \label{eq:fdminverse}
 \end{equation}
-Separable problems of this form can easily be expressed in the form of Equation \ref{eq:libceed_representation}.
 
 Note that the inverse given in Equation \ref{eq:fdminverse} is similar to the element operator form given in Equation \ref{eq:localoperator}.
 If we have an element operator defined by ${\color{burgundy}\mathbf{A}}^e = a \mathbf{M} + b \mathbf{K}$, then we can define an element inverse operator as ${\color{burgundy}\mathbf{A}}^{e, -1} = {\color{blue(ncs)}\mathbf{B}}^T {\color{applegreen}\mathbf{D}} {\color{blue(ncs)}\mathbf{B}}$, with ${\color{blue(ncs)}\mathbf{B}} = \mathbf{S}$ and ${\color{applegreen}\mathbf{D}} = \left( a \mathbf{I} + b \mathbf{\Lambda} \right)^{-1}$.
-If the operator is not invertible, we can still compute the approximate element inverse in this form.
+If the operator is not invertible, such as the Laplacian on a single element subdomain, we can still compute the approximate element inverse in this form.
 
-This discussion of the Fast Diagonalization Method has, thus far, neglected the effects of irregular geometry, varying coefficients, or more complex PDEs.
-These effects destroy the separability of this problem and the Fast Diagonalization Method cannot be used as fast direct solver for these problems.
+This discussion of the FDM has, thus far, neglected the effects of irregular geometry, varying coefficients, or more complex PDEs.
+These effects destroy the separability of this problem and the FDM cannot be used as fast direct solver for these problems.
 However, as discussed by Li and Widlund in \cite{li2007use}, an inexact subdomain solver is adequate when BDDC is used as a preconditioner.
 
-Couzy in \cite{couzy1995spectral} and Fischer, Miller, and Tofu in \cite{fischer2000overlapping} presented a simple modification to address irregular geometry.
-In their work, the Poisson problem is defined on a regular parallelepiped with the correct average dimensions in each coordinate direction.
-Here we present a further generalization to create an approximate Fast Diagonalization Method subdomain solver, ${\color{burgundy}\mathbf{A}}_{\text{r}, \text{r}}^{-1}$.
+Couzy in \cite{couzy1995spectral} and Fischer, Miller, and Tofu in \cite{fischer2000overlapping} presented a simple modification to the FDM to address irregular geometry.
+In their work, the Poisson problem is defined on a regular parallelepiped with average dimensions in each coordinate direction that match the finite element with the more complex geometry.
+Here we present a further generalization which allows us to create an approximate FDM subdomain solver, ${\color{burgundy}\mathbf{A}}_{\text{r}, \text{r}}^{-1}$.
 
 First we compute the simultaneous diagonalization of the mass and perturbed Laplacian matrices, as given in Equation \ref{eq:fdminverse}.
-The eigenvectors from the diagonalization become the basis interpolation operator for our approximate Fast Diagonalization Method subdomain solver.
+The eigenvectors from the diagonalization become the basis interpolation operator for our approximate FDM subdomain solver.
 Our goal is to provide an adequate diagonal operator ${\color{applegreen}\mathbf{D}}$ to create a sufficiently accurate approximate subdomain inverse.
 
 Recall that the operator representing the application of the weak form at quadrature points, ${\color{applegreen}\mathbf{D}}$, is block diagonal with the action of the PDE on each quadrature point independent from the other quadrature points.
+We compute an average element coefficient by dividing out the quadrature weight for each entry in ${\color{applegreen}\mathbf{D}}$ and averaging the resulting matrix entries.
+
+\begin{definition}[Average Element Coefficient]\label{def:averageelementcoefficient}
 We denote the diagonal block for quadrature point $i$ by ${\color{applegreen}\mathbf{D}}_i$ and compute an \textit{average element coefficient} as
 \begin{equation}
 \bar{k}^e = \sum_{i \in 1, ..., q^d} \sum_{j, k \in 1, ..., m} \frac{\left( {\color{applegreen}\mathbf{D}}_{i} \right)_{j, k}}{\text{nnz} \left( {\color{applegreen}\mathbf{D}} \right) \mathbf{W}_i}
 \end{equation}
 where $\text{nnz} \left( {\color{applegreen}\mathbf{D}} \right)$ is the number of nonzero entries in the sparse matrix representation of the diagonal operator, $\mathbf{W}_i$ is the quadrature weight for quadrature point $i$, and $m$ is the number of evaluation modes for the operator, $1$ for interpolated values, $d$ for derivatives in $d$ dimensions, and $1 + d$ for a weak form with both interpolated values and derivatives at quadrature points.
+\end{definition}
 
 This average element coefficient is used to compute the approximate subdomain inverse diagonal
 \begin{equation}
@@ -104,7 +108,7 @@ where the value of $\mathbf{\Lambda}$ is given by
 \end{equation}
 based upon if the diagonal operator ${\color{applegreen}\mathbf{D}}$ has interpolated values, derivatives, or both, respectively, at quadrature points.
 
-We have an approximate Fast Diagonalization Method inverse for the entire subdomain, ${\color{burgundy}\mathbf{A}}^{e, +} = {\color{blue(ncs)}\mathbf{B}}^T {\color{applegreen}\mathbf{D}} {\color{blue(ncs)}\mathbf{B}}$, but we need a subdomain solver for only the broken space, ${\color{burgundy}\mathbf{A}}^{-1, e}_{\text{r}, \text{r}}$.
+We have an approximate FDM inverse for the entire subdomain, ${\color{burgundy}\mathbf{A}}^{e, +} = {\color{blue(ncs)}\mathbf{B}}^T {\color{applegreen}\mathbf{D}} {\color{blue(ncs)}\mathbf{B}}$, but we need a subdomain solver for only the broken space, ${\color{burgundy}\mathbf{A}}^{-1, e}_{\text{r}, \text{r}}$.
 We form a saddle point problem to constrain the subdomain vertex nodes and form a Dirichlet problem from the full subdomain Neumann problem.
 
 \begin{equation}
@@ -117,7 +121,7 @@ We form a saddle point problem to constrain the subdomain vertex nodes and form 
 \end{equation}
 where $\boldsymbol{\mathcal{R}}$ is an injection operator from the broken element space to the full element augmented with duplicate primal nodes to constrain and $\boldsymbol{\mathcal{V}}$ is the primal restriction operator, which restricts to the duplicated primal vertices from the full broken space.
 
-\begin{definition}
+\begin{definition}[Fast Diagonalization Method Approximate Subdomain Solver]
 The Fast Diagonalization Method approximate inverse subdomain solver is given by the direct sum of element subdomain solvers of the form
 \begin{equation}
 {\color{burgundy}\mathbf{A}}^{e, -1}_{\text{r}, \text{r}} \approx {\color{burgundy}\mathbf{A}}^{e, +}_{\text{r}, \text{r}} = \boldsymbol{\mathcal{R}}^T
@@ -137,7 +141,7 @@ The approximate inverse for each subdomain is given by
 {\color{burgundy}\mathbf{A}}^{e, +} = {\color{blue(ncs)}\mathbf{B}}^T {\color{applegreen}\mathbf{D}} {\color{blue(ncs)}\mathbf{B}}
 \end{equation}
 where ${\color{blue(ncs)}\mathbf{B}}$ is a basis interpolating to the eigenspace of the simultaneous diagonalization of the mass and perturbed Laplacian matrices $\mathbf{M} = \mathbf{N}^T \mathbf{W} \mathbf{N}$ and $\boldsymbol{\mathcal{K}} = \mathbf{D}^T \mathbf{W} \mathbf{D} + \epsilon \mathbf{I}$.
-${\color{applegreen}\mathbf{D}}$ is computed from the eigenvalues of this diagonalization and the average element coefficient value
+${\color{applegreen}\mathbf{D}}$ is computed from the eigenvalues of this diagonalization and the average element coefficient value, from Definition \ref{def:averageelementcoefficient},
 \begin{equation}
 \begin{array}{c c}
 \mathbf{\Lambda}^e = \bar{k}^e \mathbf{\Lambda},  &  \mathbf{\Lambda}^{e, +} = \frac{1}{\bar{k}^e} \mathbf{\Lambda}^{+}
@@ -154,10 +158,10 @@ where the value of $\mathbf{\Lambda}$ is given by
 based upon if the weak form for operator ${\color{burgundy}\mathbf{A}}^e$ has interpolated values, derivatives, or both, respectively, at quadrature points.
 \end{definition}
 
-The subdomain interior solver can be provided from the same fast diagonalization of the element matrix.
+The subdomain interior solver can also be computed from this fast diagonalization of the element matrix.
 Reusing the fast diagonalization for both the subdomain solver and subdomain interior eliminates the higher setup cost of the Dirichlet BDDC compared to the lumped BDDC.
 
-\begin{definition}
+\begin{definition}[Fast Diagonalization Method Approximate Subdomain Interior Solver]
 The Fast Diagonalization Method approximate inverse subdomain interior solver is given by the direct sum of element subdomain solvers of the form
 \begin{equation}
 {\color{burgundy}\mathbf{A}}^{e, -1}_{\text{r}, \text{r}} \approx {\color{burgundy}\mathbf{A}}^{e, +}_{\text{r}, \text{r}} = \boldsymbol{\mathcal{R}}^T
@@ -177,7 +181,7 @@ The approximate inverse for each subdomain is given by
 {\color{burgundy}\mathbf{A}}^{e, +} = {\color{blue(ncs)}\mathbf{B}}^T {\color{applegreen}\mathbf{D}} {\color{blue(ncs)}\mathbf{B}}
 \end{equation}
 where ${\color{blue(ncs)}\mathbf{B}}$ is a basis interpolating to the eigenspace of the simultaneous diagonalization of the mass and perturbed Laplacian matrices $\mathbf{M} = \mathbf{N}^T \mathbf{W} \mathbf{N}$ and $\boldsymbol{\mathcal{K}} = \mathbf{D}^T \mathbf{W} \mathbf{D} + \epsilon \mathbf{I}$.
-${\color{applegreen}\mathbf{D}}$ is computed from the eigenvalues of this diagonalization and the average element coefficient value
+${\color{applegreen}\mathbf{D}}$ is computed from the eigenvalues of this diagonalization and the average element coefficient value, from Definition \ref{def:averageelementcoefficient},
 \begin{equation}
 \begin{array}{c c}
 \mathbf{\Lambda}^e = \bar{k}^e \mathbf{\Lambda},  &  \mathbf{\Lambda}^{e, +} = \frac{1}{\bar{k}^e} \mathbf{\Lambda}^{+}
