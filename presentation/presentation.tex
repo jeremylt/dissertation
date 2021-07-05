@@ -143,11 +143,11 @@ This work is supported by the Exascale Computing Project (17-SC-20-SC), a collab
 
 ~\\
 
-\item We develop LFA of p-multigrid and Balancing Domain Decomposition by Constraints (BDDC) on high-order element subdomains\\
+\item We develop LFA of $p$-multigrid and Balancing Domain Decomposition by Constraints (BDDC) on high-order element subdomains\\
 
 ~\\
 
-\item Further, we investigate LFA of p-multigrid with a BDDC smoother
+\item Further, we investigate LFA of $p$-multigrid with a BDDC smoother
 
 \end{itemize}
 
@@ -684,7 +684,7 @@ Multigrid methods target the low frequency error\\
 
 ~\\
 
-Grid transfer operators and coarse representation differentiate\\h-multigrid and p-multigrid
+Grid transfer operators and coarse representation differentiate\\$h$-multigrid and $p$-multigrid
 
 \end{center}
 \end{frame}
@@ -720,13 +720,13 @@ The definition of the symbol follows naturally\\
 
 %------------------------------------------------
 
-\subsection{P-Multigrid}
+\subsection{$P$-Multigrid}
 
 \begin{frame}
 \begin{center}
-\frametitle{P-Multigrid Transfer Operators}
+\frametitle{$P$-Multigrid Transfer Operators}
 
-P-multigrid prolongation can be represented as an interpolation\\from the coarse to fine grid\\
+$p$-multigrid prolongation can be represented as an interpolation\\from the coarse to fine grid\\
 
 \begin{columns}[onlytextwidth]
   \begin{column}{0.45\textwidth}
@@ -752,12 +752,12 @@ P-multigrid prolongation can be represented as an interpolation\\from the coarse
 
 \begin{frame}
 \begin{center}
-\frametitle{Example: P-Multigrid}
+\frametitle{Example: $P$-Multigrid}
 
 \includegraphics[height=3.9cm]{../img/pmultigridSymbol1D}
 \includegraphics[height=3.9cm]{../img/pmultigridSymbol2D}
 
-p-multigrid with third order Chebyshev on quadratic to linear elements\\
+$p$-multigrid with third order Chebyshev on quadratic to linear elements\\
 
 ~\\
 
@@ -772,7 +772,7 @@ high frequencies - $\theta \in T^{\text{high}} = \left[ - \pi / 2, 3 \pi / 2 \ri
 
 \begin{frame}
 \begin{center}
-\frametitle{Validation: P-Multigrid}
+\frametitle{Validation: $P$-Multigrid}
 
 \begin{table}[ht!]
 \begin{center}
@@ -812,7 +812,7 @@ f \left( x, y, z \right) = x y z \sin \left( \pi x \right) \sin \left( \pi \left
 
 \begin{frame}
 \begin{center}
-\frametitle{Validation: P-Multigrid}
+\frametitle{Validation: $P$-Multigrid}
 
 \begin{table}[ht!]
 \begin{center}
@@ -843,13 +843,13 @@ LFA and experimental two-grid convergence factors with Chebyshev smoothing for 3
 
 %------------------------------------------------
 
-\subsection{H-Multigrid}
+\subsection{$H$-Multigrid}
 
 \begin{frame}
 \begin{center}
-\frametitle{H-Multigrid Transfer Operators}
+\frametitle{$H$-Multigrid Transfer Operators}
 
-H-multigrid prolongation can be represented as an interpolation\\from the coarse grid to fine grid macro-elements\\
+$h$-multigrid prolongation can be represented as an interpolation\\from the coarse grid to fine grid macro-elements\\
 
 \begin{columns}[onlytextwidth]
   \begin{column}{0.45\textwidth}
@@ -875,12 +875,12 @@ H-multigrid prolongation can be represented as an interpolation\\from the coarse
 
 \begin{frame}
 \begin{center}
-\frametitle{Example: H-Multigrid}
+\frametitle{Example: $H$-Multigrid}
 
 \includegraphics[height=3.9cm]{../img/hmultigridSymbol1D}
 \includegraphics[height=3.9cm]{../img/hmultigridSymbol2D}
 
-h-multigrid with third order Chebyshev on linear elements\\
+$h$-multigrid with third order Chebyshev on linear elements\\
 
 ~\\
 
@@ -895,7 +895,7 @@ high frequencies - $\theta \in T^{\text{high}} = \left[ - \pi / 2, 3 \pi / 2 \ri
 
 \begin{frame}
 \begin{center}
-\frametitle{Validation: H-Multigrid}
+\frametitle{Validation: $H$-Multigrid}
 
 \begin{table}[ht!]
 \begin{center}
@@ -920,7 +920,7 @@ high frequencies - $\theta \in T^{\text{high}} = \left[ - \pi / 2, 3 \pi / 2 \ri
 \label{table:two_grid_hmultigrid}
 \end{table}
 
-Two-grid convergence factor and Jacobi smoothing parameter\\for high-order h-multigrid\\
+Two-grid convergence factor and Jacobi smoothing parameter\\for high-order $h$-multigrid\\
 
 ~\\
 
@@ -935,29 +935,159 @@ Results agree with previous work \cite{he2020two}\\
 
 \begin{frame}
 \begin{center}
-\frametitle{Big Picture}
+\frametitle{Subassembled Problem}
 
-\begin{itemize}
+Domain Decomposition Diagram Goes Here\\
 
-\item High-order matrix-free representations of PDEs are better suited to modern hardware than sparse matrices\\
+\begin{equation}
+\hat{\color{burgundy}\mathbf{A}} = \sum_{e = 1}^N \mathbf{R}^{e, T} \hat{\color{burgundy}\mathbf{A}}^e \mathbf{R}^e, \hspace{10mm}
+\hat{\color{burgundy}\mathbf{A}}^e =
+\left[ \begin{array}{c c}
+{\color{burgundy}\mathbf{A}}_{\text{r}, \text{r}}^e  &  \hat{\color{burgundy}\mathbf{A}}_{\Pi, \text{r}}^{e, T}  \\
+\hat{\color{burgundy}\mathbf{A}}_{\Pi, \text{r}}^e   &  \hat{\color{burgundy}\mathbf{A}}_{\Pi, \Pi}^e            \\
+\end{array} \right]
+\end{equation}
+
+\end{center}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\begin{center}
+\frametitle{Lumped BDDC}
+
+\begin{equation}
+\mathbf{R}_1 = \diag \left( \left[ \frac{1}{\lvert \mathcal{N} \left( x_i \right) \rvert} \right] \right)
+\end{equation}
+
+where $\lvert \mathcal{N} \left( x_i \right) \rvert$ is multiplicity across broken spaces\\
 
 ~\\
 
-\item High-order matrix-free representations require preconditioned iterative solvers\\
+Equivalent to FETI-DP, except for some eigenvalues equal to $0$ and $1$ \cite{li2007use}\\
 
 ~\\
 
-\item Local Fourier Analysis (LFA) provides sharp convergence estimates for these preconditioners\\
+Cheaper setup than original BDDC but worse conditioning
+
+\end{center}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\begin{center}
+\frametitle{Dirichlet BDDC}
+
+\begin{equation}
+\begin{gathered}
+\mathbf{R}_2 = \mathbf{R}_1 - \mathbf{J}^T \boldsymbol{\mathcal{H}}^T, \hspace{10mm} \boldsymbol{\mathcal{H}}^e = - {\color{burgundy}\mathbf{A}}_{\text{I}, \text{I}}^{e, -1} {\color{burgundy}\mathbf{A}}_{\Gamma, \text{I}}^{e, T}\\
+\mathbf{J}^{e, T} v \left( x \right) = \sum_{i \in \mathcal{N} \left( x \right)} \left( \frac{v^e \left( x \right)}{\lvert \mathcal{N} \left( x \right) \rvert} - \frac{v^i \left( x \right)}{\lvert \mathcal{N} \left( x \right) \rvert} \right), \forall x \in \Gamma^e
+\end{gathered}
+\end{equation}
 
 ~\\
 
-\item We develop LFA of p-multigrid and Balancing Domain Decomposition by Constraints (BDDC) on high-order element subdomains\\
+Harmonic extension with mapping of jump over broken interfaces to minimize energy norm\\
 
 ~\\
 
-\item Further, we investigate LFA of p-multigrid with a BDDC smoother
+Equivalent to original BDDC, except for some eigenvalues equal to $1$ \cite{li2007use}
 
-\end{itemize}
+\end{center}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\begin{center}
+\frametitle{Low-Order Validation}
+
+\begin{table}[ht!]
+\begin{center}
+\begin{tabular}{l ccc ccc}
+  \toprule
+  $m$  &  \multicolumn{3}{c}{Lumped BDDC}  &  \multicolumn{3}{c}{Dirichlet BDDC}  \\
+  %\cmidrule(lr){2-3} \cmidrule(lr){4-5} \cmidrule(lr){6-7}
+                      &  $\lambda_{\min}$  &  $\lambda_{\max}$  &  $\kappa$ & $\lambda_{\min}$  &  $\lambda_{\max}$ & $\kappa$  \\
+  \toprule
+  $m = 4$   &  1.000  &   4.444  &   4.444  &  1.000  &  2.351  &  2.351  \\
+  $m = 8$   &  1.000  &  12.269  &  12.269  &  1.000  &  3.196  &  3.196  \\
+  $m = 16$  &  1.000  &  31.179  &  31.179  &  1.000  &  4.188  &  4.188  \\
+  $m = 32$  &  1.000  &  75.761  &  75.761  &  1.000  &  5.335  &  5.335  \\
+  \bottomrule
+\end{tabular}
+\end{center}
+\label{table:macro_element_bddc}
+\end{table}
+Condition numbers and maximal eigenvalues for low-order macro-elements\\
+
+~\\
+
+Exactly reproduces original work on LFA of low-order subdomains
+
+\end{center}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\begin{center}
+\frametitle{High-Order Experiments}
+
+\begin{table}[ht!]
+\begin{center}
+\begin{tabular}{l ccc ccc}
+  \toprule
+  $p$  &  \multicolumn{3}{c}{Lumped BDDC}  &  \multicolumn{3}{c}{Dirichlet BDDC}  \\
+  %\cmidrule(lr){2-3} \cmidrule(lr){4-5} \cmidrule(lr){6-7}
+                      &  $\lambda_{\min}$  &  $\lambda_{\max}$  &  $\kappa$ & $\lambda_{\min}$  &  $\lambda_{\max}$ & $\kappa$  \\
+  \toprule
+  $p = 2$   &  1.000  &    2.800  &    2.800  &  1.000  &  2.042  &  2.042  \\
+  $p = 4$   &  1.000  &   12.948  &   12.948  &  1.000  &  3.242  &  3.242  \\
+  $p = 8$   &  1.000  &   59.563  &   59.563  &  1.000  &  5.197  &  5.197  \\
+  $p = 16$  &  1.000  &  289.678  &  289.678  &  1.000  &  7.761  &  7.761  \\
+  \bottomrule
+\end{tabular}
+\end{center}
+\label{table:high_order_element_bddc}
+\end{table}
+Condition numbers and maximal eigenvalues for single high-order element subdomains\\
+
+~\\
+
+Single high-order element subdomains less well conditioned
+
+\end{center}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\begin{center}
+\frametitle{High vs Low Order BDDC}
+
+\includegraphics[height=5.3cm]{../img/lowVsHighLumped_tall}
+\hspace{0.3cm}
+\includegraphics[height=5.3cm]{../img/lowVsHighDirichlet_tall}
+
+{\small Low-Order and High-Order Subdomain Condition Number}\\
+
+~\\
+
+Dirichlet BDDC important for single high-order element subdomains
+
+\end{center}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\begin{center}
+\frametitle{BDDC Smoother for $P$-Multigrid}
+
+New Data Goes Here\\
 
 \end{center}
 \end{frame}
@@ -968,7 +1098,7 @@ Results agree with previous work \cite{he2020two}\\
 
 \begin{frame}
 \begin{center}
-\frametitle{Big Picture}
+\frametitle{Summary}
 
 \begin{itemize}
 
@@ -984,11 +1114,11 @@ Results agree with previous work \cite{he2020two}\\
 
 ~\\
 
-\item We develop LFA of p-multigrid and Balancing Domain Decomposition by Constraints (BDDC) on high-order element subdomains\\
+\item We developed LFA of $p$-multigrid and Balancing Domain Decomposition by Constraints (BDDC) on high-order element subdomains\\
 
 ~\\
 
-\item Further, we investigate LFA of p-multigrid with a BDDC smoother
+\item Further, we investigated LFA of $p$-multigrid with a BDDC smoother
 
 \end{itemize}
 
