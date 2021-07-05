@@ -1,3 +1,8 @@
+Damped Jacobi is based on the degree 1 polynomial with the root at $\alpha = 1 / \omega > 0$.
+For $\nu = 1$ smoothing passes, this polynomial is minimal on the interval $\left[ \alpha - c, \alpha + c \right]$, for any $c > 0$.
+However, for $\nu \geq 2$ smoothing passes, the Jacobi smoother is a degree $\nu$ polynomial that is not minimal on this interval.
+Chebyshev smoothers are based on a stable recurrence relation for any polynomial order that is minimal for a target interval on the positive real axis, which should include all eigenvalues corresponding to Fourier modes that the smoother is responsible for reducing.
+
 It is well known that polynomial smoothers allow more aggressive coarsening than Jacobi \cite{brannick2015polynomial}.
 For further discussion of the error propagation properties of the Chebyshev semi-iterative method, see \cite{gutknecht2002revisited}.
 
@@ -34,7 +39,7 @@ $\mathbf{E}_k = \left( \left( \diag {\color{burgundy}\mathbf{A}} \right)^{-1} {\
 \end{equation}
 With this recursive definition of the error propagation operator, we can define the symbol for Chebyshev smoothing.
 
-\begin{definition}
+\begin{definition}[Symbol of Chebyshev Preconditioner Error Operator]
 The symbol of the error propagation operator for $k$th order Chebyshev smoothing based on the Jacobi preconditioned operator is given by
 \begin{equation}
 \tilde{\mathbf{S}} \left( \nu, n, \boldsymbol{\theta} \right) = \left( \tilde{\mathbf{E}}_k \right)^\nu,
@@ -55,19 +60,24 @@ with $\tilde{\color{burgundy}\mathbf{A}}_J = \left( \mathbf{Q}^T \diag \left( {\
   \centering
   \subfloat[Spectrum of 1D Chebyshev for $p = 4$]{\includegraphics[width=0.48\textwidth]{../img/ChebyshevSymbol1D}\label{fig:chebyshev_spectrum_1d}}
   \hfill
-  \subfloat[Spectrum of 2D Chebyshev for $p = 4$]{\includegraphics[width=0.48\textwidth]{../img/ChebyshevSymbol2D}\label{fig:chebyshev_spectrum_2d}}
+  \subfloat[Spectral Radius of 2D Chebyshev for $p = 4$]{\includegraphics[width=0.48\textwidth]{../img/ChebyshevSymbol2D}\label{fig:chebyshev_spectrum_2d}}
   \caption{Spectrum of Chebyshev Preconditioner Symbol}
 \end{figure}
 
-Using Definition \ref{def:chebyshev_symbol}, in Figure \ref{fig:chebyshev_spectrum_1d} we see the spectrum of the symbol of third order Chebyshev polynomial smoothing for the 1D scalar diffusion operator and in \ref{fig:chebyshev_spectrum_2d} we see the spectral radius of the symbol of third order Chebyshev polynomial smoothing for the 2D scalar diffusion operator.
-Again, in both cases we use a fourth-order H1 Lagrange finite element basis on the Gauss-Lobatto points.
+Using Definition \ref{def:chebyshev_symbol}, in Figure \ref{fig:chebyshev_spectrum_1d} we see the spectrum of the symbol of third order Chebyshev polynomial smoothing for the one dimensional scalar diffusion operator and in \ref{fig:chebyshev_spectrum_2d} we see the spectral radius of the symbol of third order Chebyshev polynomial smoothing for the two dimensional scalar diffusion operator.
+Again, in both cases we use a fourth-order $H^1$ Lagrange finite element basis on the Gauss-Lobatto points.
 When compared to Figures \ref{fig:jacobi_spectrum_1d} and \ref{fig:jacobi_spectrum_2d}, we can see that smoothing based upon Chebyshev semi-iterative offers better error reduction than weighted or unweighted Jacobi, albeit at a higher computational cost.
 
 Note that first order Chebyshev smoothing is equivalent to Jacobi smoothing with the classical choice of parameter value of $\omega = 1 / \alpha$.
 
 The Chebyshev semi-iterative method is known to be sensitive to the quality of the estimates of the extremal eigenvalues $\lambda_{\text{min}}$ and $\lambda_{\text{max}}$.
+Large eigenvalues are associated with higher frequencies for differential operators, so $\lambda_{\text{min}}$ for effective smoothing as a part of  multigrid methods is not the minimal eigenvalue.
+Additionally, the true minimal eigenvalue is difficult to compute and goes to zero under grid refinement.
+
 PETSc \cite{petsc-user-ref} estimates the eigenvalues of the preconditioned operator via Krylov iterations, yielding an estimate of the maximal eigenvalue, $\hat{\lambda}_{\text{max}}$.
 This estimate is used to target the upper part of the spectrum of the error, with $\lambda_{\text{min}} = 0.1 \hat{\lambda}_{\text{max}}$ and $\lambda_{\text{max}} = 1.1 \hat{\lambda}_{\text{max}}$.
+This default lower bound was chosen based upon empirical experiments for rapid coarsening with smoothed aggregation algebraic multigrid (AMG), and the upper bound incorporates a safety factor due to the fact that the maximum eigenvalue estimate from the Krylov iterations tends to be an underestimate of the true maximum eigenvalue.
 
 In LFAToolkit.jl, we also want to target the upper part of the spectrum of the error; we estimate the spectral radius of the symbol of the Jacobi preconditioned operator by sampling the the frequencies at a small number of values to compute $\hat{\lambda}_{\text{max}}$.
 We then take $\lambda_{\text{min}} = 0.1 \hat{\lambda}_{\text{max}}$ and $\lambda_{\text{max}} = 1.0 \hat{\lambda}_{\text{max}}$.
+Adjusting this lower bound has different consequences when using conservative and aggressive coarsening strategies with $p$-multigrid, as we will investigate in the next chapter.

@@ -6,16 +6,16 @@ The total multigrid error propagation operator is given by
 \end{equation}
 where ${\color{burgundy}\mathbf{A}}_f$ represents the fine grid operator, ${\color{burgundy}\mathbf{A}}_c^{-1}$ represents the coarse grid solve, ${\color{burgundy}\mathbf{S}}_f$ represents the smoother error propagation operator, while ${\color{burgundy}\mathbf{P}}_{\text{ctof}}$ and ${\color{burgundy}\mathbf{R}}_{\text{ftoc}}$ represent the grid prolongation and restriction operators between the coarse and fine grids, respectively.
 
-\begin{definition}
+\begin{definition}[Symbol of Multigrid Error Operator]
 The symbol of total multigrid error propagation operator for a finite element operator ${\color{burgundy}\mathbf{A}}$ is given by
 \begin{equation}
 \tilde{\mathbf{E}}_{\text{2MG}} \left( \boldsymbol{\theta} \right) = \tilde{{\color{burgundy}\mathbf{S}}}_f \left( \boldsymbol{\theta}, \omega \right) \left( \mathbf{I} - \tilde{{\color{burgundy}\mathbf{P}}}_{\text{ctof}} \left( \boldsymbol{\theta} \right) \left(\tilde{{\color{burgundy}\mathbf{A}}}_c \left( \boldsymbol{\theta} \right) \right)^{-1} \tilde{{\color{burgundy}\mathbf{R}}}_{\text{ftoc}} \left( \boldsymbol{\theta} \right) \tilde{{\color{burgundy}\mathbf{A}}}_f \left( \boldsymbol{\theta} \right) \right) \tilde{{\color{burgundy}\mathbf{S}}}_f \left( \boldsymbol{\theta}, \omega \right)
 \end{equation}
-where $\tilde{\color{burgundy}\mathbf{A}}_f$ represents the fine grid operator symbol, $\tilde{\color{burgundy}\mathbf{A}}_c^{-1}$ represents the symbol of the coarse grid solve, $\tilde{{\color{burgundy}\mathbf{S}}}_f$ represents the smoother error propagation symbol with any additional parameters $\omega$, while $\tilde{{\color{burgundy}\mathbf{P}}}_{\text{ctof}}$ and $\tilde{{\color{burgundy}\mathbf{R}}}_{\text{ftoc}}$ represent the grid prolongation and restriction symbols, respectively.
+where $\tilde{\color{burgundy}\mathbf{A}}_f$ represents the fine grid operator symbol, $\tilde{\color{burgundy}\mathbf{A}}_c^{-1}$ represents the symbol of the coarse grid solve, $\tilde{{\color{burgundy}\mathbf{S}}}_f$ represents the smoother error propagation symbol with any additional parameters $\omega$, while $\tilde{{\color{burgundy}\mathbf{P}}}_{\text{ctof}}$ and $\tilde{{\color{burgundy}\mathbf{R}}}_{\text{ftoc}}$ represent the symbols of the grid prolongation and restriction operators, respectively.
 \label{def:multigrid_symbol}
 \end{definition}
 
-This error propagation operator can represent both h-multigrid and p-multigrid, depending upon the grid transfer operators and coarse grid representation chosen.
+This error propagation operator can represent both $h$-multigrid and $p$-multigrid, depending upon the grid transfer operators and coarse grid representation chosen.
 
 % -- P-Multigrid --------------------------------------------------------------
 \subsection{P-Multigrid}

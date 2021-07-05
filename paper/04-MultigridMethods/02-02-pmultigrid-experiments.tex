@@ -1,4 +1,4 @@
-In this section, we present numerical results for this analysis for the scalar Laplacian in one and two dimensions with H1 Lagrange bases on Gauss-Lobatto points with Gauss-Legendre quadrature.
+In this section, we present numerical results for this analysis for the scalar Laplacian in one and two dimensions with $H^1$ Lagrange bases on Gauss-Lobatto points with Gauss-Legendre quadrature.
 Next, we validate these results with numerical experiments for the scalar Laplacian in three dimensions.
 Lastly, we consider linear elasticity in three dimensions.
 
@@ -12,38 +12,20 @@ Lastly, we consider linear elasticity in three dimensions.
 
 \begin{figure}[!tbp]
   \centering
-    \subfloat[Convergence for $p = 4$ to $p = 2$, $\nu = 1$]{\includegraphics[width=0.48\textwidth]{../img/two_grid_converge_5_to_3}\label{fig:two_grid_5_3}}
-    \subfloat[Convergence for $p = 4$ to $p = 1$, $\nu = 1$]{\includegraphics[width=0.48\textwidth]{../img/two_grid_converge_5_to_2}\label{fig:two_grid_5_2}} \\
-    \subfloat[Convergence for $p = 4$ to $p = 2$, $\nu = 2$]{\includegraphics[width=0.48\textwidth]{../img/two_grid_converge_5_to_3_2smooth}\label{fig:two_grid_5_3_2smooth}}
-    \subfloat[Convergence for $p = 4$ to $p = 1$, $\nu = 2$]{\includegraphics[width=0.48\textwidth]{../img/two_grid_converge_5_to_2_2smooth}\label{fig:two_grid_5_2_2smooth}} \\
+    \subfloat[Convergence for $p = 4$ to $p = 2$, $\nu = 1$]{\includegraphics[width=0.48\textwidth]{../img/two_grid_converge_4_to_2}\label{fig:two_grid_4_2}}
+    \subfloat[Convergence for $p = 4$ to $p = 1$, $\nu = 1$]{\includegraphics[width=0.48\textwidth]{../img/two_grid_converge_4_to_1}\label{fig:two_grid_4_1}} \\
+    \subfloat[Convergence for $p = 4$ to $p = 2$, $\nu = 2$]{\includegraphics[width=0.48\textwidth]{../img/two_grid_converge_4_to_2_2smooth}\label{fig:two_grid_4_2_2smooth}}
+    \subfloat[Convergence for $p = 4$ to $p = 1$, $\nu = 2$]{\includegraphics[width=0.48\textwidth]{../img/two_grid_converge_4_to_1_2smooth}\label{fig:two_grid_4_1_2smooth}} \\
   \caption{Two-grid analysis for Jacobi smoothing for high-order finite elements for the 1D Laplacian}
 \end{figure}
 
-In Figure \ref{fig:two_grid_5_3} and Figure \ref{fig:two_grid_5_2} we plot the two-grid convergence factor for p-multigrid with a single iteration of Jacobi pre and post-smoothing for the one dimensional Laplacian as a function of the Jacobi smoothing parameter $\omega$,
-and in Figure \ref{fig:two_grid_5_3_2smooth} and Figure \ref{fig:two_grid_5_2_2smooth} we plot the two-grid convergence factor for p-multigrid with two iterations of Jacobi pre and post-smoothing for the one dimensional Laplacian as a function of the Jacobi smoothing parameter $\omega$.
+In Figure \ref{fig:two_grid_4_2} and Figure \ref{fig:two_grid_4_1} we plot the two-grid convergence factor for $p$-multigrid with a single iteration of Jacobi pre and post-smoothing for the one dimensional Laplacian as a function of the Jacobi smoothing parameter $\omega$,
+and in Figure \ref{fig:two_grid_4_2_2smooth} and Figure \ref{fig:two_grid_4_1_2smooth} we plot the two-grid convergence factor for $p$-multigrid with two iterations of Jacobi pre and post-smoothing for the one dimensional Laplacian as a function of the Jacobi smoothing parameter $\omega$.
 On the left we show conservative coarsening from quartic to quadratic elements and on the right we show more aggressive coarsening from quartic to linear elements.
 As expected, the two-grid convergence factor decreases as we coarsen more rapidly.
 Also, the effect of underestimating the optimal Jacobi smoothing parameter, $\omega$, is less pronounced than the effect of overestimating the smoothing parameter, especially with a higher number of pre and post-smooths.
 
-In contrast to the previous work on h-multigrid for high-order finite elements, \cite{he2020two}, poorly chosen values of $\omega < 1.0$ can result in a spectral radius of the p-multigrid error propagation symbol that is greater than $1$, indicating that application of p-multigrid with Jacobi smoothing at these parameter values will result in increased error.
-
-\begin{table}[ht!]
-\begin{center}
-\begin{tabular}{l c c c c}
-  \toprule
-  $p$       &  $\omega_{\min}$  &  $\rho_{\min}$  &  $\omega_{\text{classical}}$  &  $\omega_{\text{highorder}}$  \\
-  %\cmidrule(lr){2-3} \cmidrule(lr){4-5} \cmidrule(lr){6-7}
-  \midrule
-  $p = 2$   &  1.00  &  0.756  & 1.000  &  0.838  \\
-  $p = 4$   &  0.91  &  0.955  & 0.911  &  0.855  \\
-  $p = 8$   &  0.82  &  0.992  & 0.824  &  0.807  \\
-  $p = 16$  &  0.75  &  0.998  & 0.752  &  0.749  \\
-  \bottomrule
-\end{tabular}
-\end{center}
-\caption{Jacobi smoothing factor for 1D Laplacian}
-\label{table:smoothing_factor_1d_jacobi}
-\end{table}
+In contrast to the previous work on $h$-multigrid for high-order finite elements, \cite{he2020two}, poorly chosen values of $\omega < 1.0$ can result in a spectral radius of the $p$-multigrid error propagation symbol that is greater than $1$, indicating that application of $p$-multigrid with Jacobi smoothing at these parameter values will result in increased error.
 
 \begin{table}[ht!]
 \begin{center}
@@ -73,17 +55,10 @@ In contrast to the previous work on h-multigrid for high-order finite elements, 
 \label{table:two_grid_1d}
 \end{table}
 
-The results in Table \ref{table:two_grid_1d} provide the LFA convergence factor and optimal values of $\omega$ for two-grid high-order p-multigrid for a variety of polynomial orders and coarsening factors.
+The results in Table \ref{table:two_grid_1d} provide the LFA convergence factor and optimal values of $\omega$ for two-grid high-order $p$-multigrid for a variety of polynomial orders and coarsening factors.
 
-For low order h-multigrid, the classical estimate of the optimal Jacobi smoothing parameter is given by $\omega = 2 / \left( \lambda_{\text{max, high}} + \lambda_{\text{min, high}} \right)$, where $\lambda_{\text{max, high}}$ and $\lambda_{\text{min, high}}$ are the maximum and minimum eigenvalues of $\tilde{S}_f \left( \boldsymbol{\theta} \right)$ for $\boldsymbol{\theta} \in T^{\text{high}}$.
-The modified estimate from \cite{he2020two} for h-multigrid for high-order finite elements is given by $\omega = 2 / \left( \lambda_{\text{max}} + \lambda_{\text{min, high}} \right)$, where $\lambda_{\text{max}}$ is the maximum eigenvalue of $\tilde{S}_f \left( \boldsymbol{\theta} \right)$ for $\boldsymbol{\theta} \in T^{\text{low}} \cup T^{\text{high}}$.
-
-In Table \ref{table:smoothing_factor_1d_jacobi} we compare the value of $\omega$ that results in the smallest Jacobi smoothing factor, $\omega_{\min}$, the value given by the classical estimate $\omega_{\text{classical}}$, and the high-order h-multigrid value given by \cite{he2020two}, $\omega_{\text{highorder}}$.
-The classical and high-order h-multigrid estimates of the optimal smoothing parameter closely agree as $p$ increases, however these values all overestimate the true optimal smoothing parameter value.
-
-The high-order h-multigrid estimate for $\omega$ provides the best estimate of the optimal value of $\omega$ for two-grid convergence; however, this estimate still overestimates the true optimal smoothing parameter and the quality of this estimate degrades as $p$ increases.
-
-Optimal parameter estimation is an open question for high-order p-multigrid, but optimization techniques, such as those discussed in \cite{brown2021tuning}, can be used to tune these parameters, especially for more complex PDEs.
+Traditional estimates of the optimal smoothing parameter based upon extremal eigevalues of the preconditioned operatro are incompatible with this LFA framework.
+Optimal parameter estimation is an open question for high-order $p$-multigrid, but optimization techniques, such as those discussed in \cite{brown2021tuning}, can be used to tune these parameters, especially for more complex PDEs.
 
 % -----------------------------------------------------------------------------
 % Chebyshev Smoothing
@@ -91,12 +66,12 @@ Optimal parameter estimation is an open question for high-order p-multigrid, but
 
 \begin{figure}[!tbp]
   \centering
-    \subfloat[Convergence for $p = 4$ to $p = 2$, $\nu = 1$]{\includegraphics[width=0.48\textwidth]{../img/two_grid_converge_5_to_3_chebyshev}\label{fig:two_grid_5_3_chebyshev}}
-    \subfloat[Convergence for $p = 4$ to $p = 1$, $\nu = 1$]{\includegraphics[width=0.48\textwidth]{../img/two_grid_converge_5_to_2_chebyshev}\label{fig:two_grid_5_2_chebyshev}}
+    \subfloat[Convergence for $p = 4$ to $p = 2$, $\nu = 1$]{\includegraphics[width=0.48\textwidth]{../img/two_grid_converge_4_to_2_chebyshev}\label{fig:two_grid_4_2_chebyshev}}
+    \subfloat[Convergence for $p = 4$ to $p = 1$, $\nu = 1$]{\includegraphics[width=0.48\textwidth]{../img/two_grid_converge_4_to_1_chebyshev}\label{fig:two_grid_4_1_chebyshev}}
   \caption{Two-grid analysis for Chebyshev smoothing for high-order finite elements for the 1D Laplacian}
 \end{figure}
 
-In Figure \ref{fig:two_grid_5_3_chebyshev} and Figure \ref{fig:two_grid_5_2_chebyshev} we plot the two-grid convergence factor for p-multigrid with Chebyshev pre and post-smoothing for the one dimensional Laplacian as a function of the Chebyshev order, $k$.
+In Figure \ref{fig:two_grid_4_2_chebyshev} and Figure \ref{fig:two_grid_4_1_chebyshev} we plot the two-grid convergence factor for $p$-multigrid with Chebyshev pre and post-smoothing for the one dimensional Laplacian as a function of the Chebyshev order, $k$.
 On the left we show conservative coarsening from quartic to quadratic elements and on the right we show more aggressive coarsening from quartic to linear elements.
 As expected, the two-grid convergence factor decreases as we coarsen more rapidly.
 
@@ -127,8 +102,48 @@ As expected, the two-grid convergence factor decreases as we coarsen more rapidl
 \label{table:two_grid_1d_chebyshev}
 \end{table}
 
-The results in Table \ref{table:two_grid_1d_chebyshev} provide the LFA convergence factor and optimal values of $k$ for two-grid high-order p-multigrid for a variety of coarsening rates and orders of Chebyshev smoother.
+The results in Table \ref{table:two_grid_1d_chebyshev} provide the LFA convergence factor and optimal values of $k$ for two-grid high-order $p$-multigrid for a variety of coarsening rates and orders of Chebyshev smoother.
 From this table, we can see that the effectiveness of higher order Chebyshev smoothers degrades as we coarsen more aggressively, but Chebyshev smoothing still provides better two-grid convergence than multiple pre and post-smoothing Jacobi iterations.
+
+\begin{table}[ht!]
+\begin{center}
+\begin{tabular}{l c c c c}
+  \toprule
+  \multicolumn{5}{c}{$\lambda_{\min} = 0.2 \hat{\lambda}_{\max}$} \\
+  \toprule
+  $p_{\text{fine}}$ to $p_{\text{coarse}}$  &  $k = 1$   &  $k = 2$   &  $k = 3$   &  $k = 4$   \\
+  \toprule
+  $p = 4$ to $p = 2$   &  0.410  &  0.093  &  0.043  &  0.024  \\
+  $p = 4$ to $p = 1$   &  0.611  &  0.250  &  0.106  &  0.071  \\
+  \midrule
+  $p = 8$ to $p = 4$   &  0.435  &  0.081  &  0.016  &  0.007  \\
+  $p = 8$ to $p = 1$   &  0.891  &  0.739  &  0.623  &  0.529  \\
+  \midrule
+  $p = 16$ to $p = 8$  &  0.443  &  0.081  &  0.015  &  0.006  \\
+  $p = 16$ to $p = 1$  &  0.973  &  0.931  &  0.894  &  0.861  \\
+  \toprule
+  \multicolumn{5}{c}{$\lambda_{\min} = 0.3 \hat{\lambda}_{\max}$} \\
+  \toprule
+  $p_{\text{fine}}$ to $p_{\text{coarse}}$  &  $k = 1$   &  $k = 2$   &  $k = 3$   &  $k = 4$   \\
+  \toprule
+  $p = 4$ to $p = 2$   &  0.279  &  0.070  &  0.042  &  0.031  \\
+  $p = 4$ to $p = 1$   &  0.638  &  0.332  &  0.184  &  0.104  \\
+  \midrule
+  $p = 8$ to $p = 4$   &  0.289  &  0.050  &  0.023  &  0.012  \\
+  $p = 8$ to $p = 1$   &  0.899  &  0.777  &  0.682  &  0.599  \\
+  \midrule
+  $p = 16$ to $p = 8$  &  0.294  &  0.055  &  0.020  &  0.010  \\
+  $p = 16$ to $p = 1$  &  0.975  &  0.942  &  0.913  &  0.885  \\
+  \bottomrule
+\end{tabular}
+\end{center}
+\caption{Two-grid convergence factor with Chebyshev smoothing for 1D Laplacian with modified lower eigenvalue bound.}
+\label{table:two_grid_1d_chebyshev_eigenvalues}
+\end{table}
+
+The results in Table \ref{table:two_grid_1d_chebyshev_eigenvalues} provide the LFA-predicted convergence factor for two-grid high-order $p$-multigrid for a variety of coarsening rates and orders of Chebyshev smoother with different scaling factors for the minimum eigenvalue estimate used in the Chebyshev iterations.
+Increasing the lower eigenvalue estimate results in the Chebyshev method better targeting high frequency error modes, which results in improved two-grid convergence when halving the polynomial degree of the basis functions.
+However, increasing the lower eigenvalue estimate results in worse two-grid convergence for aggressive coarsening directly to linear elements.
 
 % -----------------------------------------------------------------------------
 \subsubsection{Scalar Laplacian - 2D Convergence Factors}\label{sec:2dresults}
@@ -138,33 +153,15 @@ From this table, we can see that the effectiveness of higher order Chebyshev smo
 % Jacobi Smoothing
 % -----------------------------------------------------------------------------
 
-In Figure \ref{fig:jacobi_smooth_factor_2d} and Figure \ref{fig:two_grid_5_to_3_2d} we show the Jacobi smoothing factor and two-grid convergence factor for p-multigrid with one iteration of Jacobi smoothing for the two dimensional Laplacian as a function of the Jacobi smoothing parameter $\omega$, while Table \ref{table:smoothing_factor_2d_jacobi} shows estimates of optimal the Jacobi smoothing factor for two-grid convergence.
-These values generally fail to accurately estimate the true optimal smoothing parameter value, again providing over-estimates to the true optimal smoothing parameter in most cases.
+In Figure \ref{fig:two_grid_converge_4_to_1_1_smooth_2d} and Figure \ref{fig:two_grid_converge_4_to_1_2_smooth_2d} we show the two-grid convergence factor for p-multigrid with one and two iterations of Jacobi smoothing, respectively, for the two dimensional Laplacian as a function of the Jacobi smoothing parameter $\omega$.
 
 \begin{figure}[!tbp]
   \centering
-  \subfloat[Smoothing Factor of 2D Jacobi for $p = 4$, $\nu = 1$]{\includegraphics[width=0.48\textwidth]{../img/jacobi_smoothing_5_2d}\label{fig:jacobi_smooth_factor_2d}}
+  \subfloat[Convergence for $p = 4$ to $p = 1$, $\nu = 1$]{\includegraphics[width=0.48\textwidth]{../img/two_grid_converge_4_to_1_1_smooth_2d}\label{fig:two_grid_converge_4_to_1_1_smooth_2d}}
   \hfill
-  \subfloat[Convergence for $p = 4$ to $p = 2$, $\nu = 1$]{\includegraphics[width=0.48\textwidth]{../img/two_grid_converge_5_to_3_2d}\label{fig:two_grid_5_to_3_2d}}
+  \subfloat[Convergence for $p = 4$ to $p = 1$, $\nu = 2$]{\includegraphics[width=0.48\textwidth]{../img/two_grid_converge_4_to_1_2_smooth_2d}\label{fig:two_grid_converge_4_to_1_2_smooth_2d}}
   \caption{Convergence for high-order finite elements for the 2D Laplacian}
 \end{figure}
-
-\begin{table}[ht!]
-\begin{center}
-\begin{tabular}{l c c c c}
-  \toprule
-  $p$       &  $\omega_{\min}$  &  $\rho_{\min}$  &  $\omega_{\text{classical}}$  &  $\omega_{\text{highorder}}$  \\
-  %\cmidrule(lr){2-3} \cmidrule(lr){4-5} \cmidrule(lr){6-7}
-  \midrule
-  $p = 2$   &  1.05  &  0.839  & 1.218  &  1.173  \\
-  $p = 4$   &  1.00  &  0.972  & 1.009  &  1.001  \\
-  $p = 8$   &  0.87  &  0.955  & 0.880  &  0.880  \\
-  \bottomrule
-\end{tabular}
-\end{center}
-\caption{Jacobi smoothing factor for 2D Laplacian}
-\label{table:smoothing_factor_2d_jacobi}
-\end{table}
 
 \begin{table}[ht!]
 \begin{center}
@@ -189,7 +186,7 @@ These values generally fail to accurately estimate the true optimal smoothing pa
 \label{table:two_grid_2d}
 \end{table}
 
-The results in Table \ref{table:two_grid_2d} provide the LFA convergence factor and optimal values of $\omega$ for two-grid high-order p-multigrid for a variety of polynomial orders and coarsening factors.
+The results in Table \ref{table:two_grid_2d} provide the LFA convergence factor and optimal values of $\omega$ for two-grid high-order $p$-multigrid for a variety of polynomial orders and coarsening factors.
 
 % -----------------------------------------------------------------------------
 % Chebyshev Smoothing
@@ -222,8 +219,41 @@ The results in Table \ref{table:two_grid_2d} provide the LFA convergence factor 
 \label{table:two_grid_2d_chebyshev}
 \end{table}
 
-The results in Table \ref{table:two_grid_2d_chebyshev} provide the LFA convergence factor and optimal values of $k$ for two-grid high-order p-multigrid for a variety of coarsening rates and orders of Chebyshev smoother.
+The results in Table \ref{table:two_grid_2d_chebyshev} provide the LFA convergence factor and optimal values of $k$ for two-grid high-order $p$-multigrid for a variety of coarsening rates and orders of Chebyshev smoother.
 The two-grid convergence factor still degrades and the effectiveness of higher order Chebyshev smoothers is again reduced as we coarsen more aggressively.
+
+\begin{table}[ht!]
+\begin{center}
+\begin{tabular}{l c c c c}
+  \toprule
+  \multicolumn{5}{c}{$\lambda_{\min} = 0.2 \hat{\lambda}_{\max}$} \\
+  \toprule
+  $p_{\text{fine}}$ to $p_{\text{coarse}}$  &  $k = 1$   &  $k = 2$   &  $k = 3$   &  $k = 4$   \\
+  \toprule
+  $p = 4$ to $p = 2$   &  0.450  &  0.137  &  0.067  &  0.050  \\
+  $p = 4$ to $p = 1$   &  0.786  &  0.525  &  0.362  &  0.255  \\
+  \midrule
+  $p = 8$ to $p = 4$   &  0.668  &  0.330  &  0.172  &  0.106  \\
+  $p = 8$ to $p = 1$   &  0.960  &  0.899  &  0.848  &  0.801  \\
+  \toprule
+  \multicolumn{5}{c}{$\lambda_{\min} = 0.3 \hat{\lambda}_{\max}$} \\
+  \toprule
+  $p_{\text{fine}}$ to $p_{\text{coarse}}$  &  $k = 1$   &  $k = 2$   &  $k = 3$   &  $k = 4$   \\
+  \toprule
+  $p = 4$ to $p = 2$   &  0.407  &  0.106  &  0.073  &  0.059  \\
+  $p = 4$ to $p = 1$   &  0.803  &  0.590  &  0.447  &  0.341  \\
+  \midrule
+  $p = 8$ to $p = 4$   &  0.691  &  0.409  &  0.256  &  0.164  \\
+  $p = 8$ to $p = 1$   &  0.963  &  0.915  &  0.874  &  0.835  \\
+  \bottomrule
+\end{tabular}
+\end{center}
+\caption{Two-grid convergence factor with Chebyshev smoothing for 2D Laplacian with modified lower eigenvalue bound.}
+\label{table:two_grid_2d_chebyshev_eigenvalues}
+\end{table}
+
+The results in Table \ref{table:two_grid_2d_chebyshev_eigenvalues} provide the LFA-predicted convergence factor and optimal values of $k$ for two-grid high-order p-multigrid for a variety of coarsening rates and orders of Chebyshev smoother with different scaling factors for the minimum eigenvalue estimate used in the Chebyshev iterations.
+As in one dimension, increasing the lower eigenvalue estimate results in better two-grid convergence when conventional coarsening by halving the polynomial degree of the basis functions but results in worse two-grid convergence with aggressive coarsening.
 
 % -----------------------------------------------------------------------------
 \subsubsection{Linear Elasticity - 3D Convergence Factors}\label{sec:solidsresults}
@@ -289,4 +319,4 @@ and the linear elasticity constitutive law is given by $\boldsymbol{\sigma} = \m
 \label{table:two_grid_3d_linear_elasticity}
 \end{table}
 
-The results in Table \ref{table:two_grid_3d_linear_elasticity} provide the LFA convergence factor and optimal values of $k$ for two-grid high-order p-multigrid for a variety of coarsening rates and orders of Chebyshev smoother.
+The results in Table \ref{table:two_grid_3d_linear_elasticity} provide the LFA convergence factor and optimal values of $k$ for two-grid high-order $p$-multigrid for a variety of coarsening rates and orders of Chebyshev smoother.
