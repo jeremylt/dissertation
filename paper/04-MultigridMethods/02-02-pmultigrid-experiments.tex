@@ -153,13 +153,18 @@ However, increasing the lower eigenvalue estimate results in worse two-grid conv
 % Jacobi Smoothing
 % -----------------------------------------------------------------------------
 
-In Figure \ref{fig:two_grid_converge_4_to_1_1_smooth_2d} and Figure \ref{fig:two_grid_converge_4_to_1_2_smooth_2d} we show the two-grid convergence factor for p-multigrid with one and two iterations of Jacobi smoothing, respectively, for the two dimensional Laplacian as a function of the Jacobi smoothing parameter $\omega$.
+In Figure \ref{fig:two_grid_converge_4_to_1_1_smooth_2d} and Figure \ref{fig:two_grid_converge_4_to_2_1_smooth_2d} we plot the two-grid convergence factor for $p$-multigrid with a single iteration of Jacobi pre and post-smoothing for the two dimensional Laplacian as a function of the Jacobi smoothing parameter $\omega$,
+and in Figure \ref{fig:two_grid_converge_4_to_1_2_smooth_2d} and Figure \ref{fig:two_grid_converge_4_to_2_2_smooth_2d} we plot the two-grid convergence factor for $p$-multigrid with two iterations of Jacobi pre and post-smoothing for the two dimensional Laplacian as a function of the Jacobi smoothing parameter $\omega$.
+On the left we show conservative coarsening from quartic to quadratic elements and on the right we show more aggressive coarsening from quartic to linear elements.
+As we saw with one dimension, the two-grid convergence factor decreases as we coarsen more rapidly.
+Also, the effect of underestimating the optimal Jacobi smoothing parameter, $\omega$, is less pronounced than the effect of overestimating the smoothing parameter, especially with a higher number of pre and post-smooths.
 
 \begin{figure}[!tbp]
   \centering
-  \subfloat[Convergence for $p = 4$ to $p = 1$, $\nu = 1$]{\includegraphics[width=0.48\textwidth]{../img/two_grid_converge_4_to_1_1_smooth_2d}\label{fig:two_grid_converge_4_to_1_1_smooth_2d}}
-  \hfill
-  \subfloat[Convergence for $p = 4$ to $p = 1$, $\nu = 2$]{\includegraphics[width=0.48\textwidth]{../img/two_grid_converge_4_to_1_2_smooth_2d}\label{fig:two_grid_converge_4_to_1_2_smooth_2d}}
+  \subfloat[Convergence for $p = 4$ to $p = 2$, $\nu = 1$]{\includegraphics[width=0.48\textwidth]{../img/two_grid_converge_4_to_1_1_smooth_2d}\label{fig:two_grid_converge_4_to_2_1_smooth_2d}}
+  \subfloat[Convergence for $p = 4$ to $p = 1$, $\nu = 1$]{\includegraphics[width=0.48\textwidth]{../img/two_grid_converge_4_to_1_1_smooth_2d}\label{fig:two_grid_converge_4_to_1_1_smooth_2d}} \\
+  \subfloat[Convergence for $p = 4$ to $p = 2$, $\nu = 2$]{\includegraphics[width=0.48\textwidth]{../img/two_grid_converge_4_to_1_2_smooth_2d}\label{fig:two_grid_converge_4_to_2_2_smooth_2d}}
+  \subfloat[Convergence for $p = 4$ to $p = 1$, $\nu = 2$]{\includegraphics[width=0.48\textwidth]{../img/two_grid_converge_4_to_1_2_smooth_2d}\label{fig:two_grid_converge_4_to_1_2_smooth_2d}} \\
   \caption{Convergence for high-order finite elements for the 2D Laplacian}
 \end{figure}
 
