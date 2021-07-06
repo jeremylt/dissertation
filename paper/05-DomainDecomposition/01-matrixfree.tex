@@ -1,6 +1,20 @@
-For high-order matrix-free BDDC, we decompose the domain $\Omega$ into a series of subdomains $\Omega^e$ given by the individual elements and we utilize four non-exclusive spaces on each subdomain.
+For high-order matrix-free BDDC, we decompose the domain $\Omega$ into a series of subdomains $\Omega^e$ given by the individual elements, and we utilize four non-exclusive spaces on each subdomain.
+Figure \ref{fig:bddc_mesh_not_decomposed} shows a global mesh before decomposition, consisting of four quadratic elements in two dimensions, in this example.
+
 The interface between subdomains is given by $\Gamma = \bigcup \partial \Omega^e \backslash \partial \Omega$ and the interface of subdomain $\Omega^e$ is given by $\Gamma^e = \delta \Omega^e \bigcap \Gamma$.
 The interior of each subdomain, $\text{I}$, is given by the remaining degrees of freedom on the element.
+In Figure \ref{fig:bddc_mesh_interface}, the interface degrees of freedom, $\Gamma$, for each subdomain have been highlighted and the interior $\text{I}$ is given by the remainder of each subdomain.
+
+\begin{figure}[!ht]
+  \centering
+  \subfloat[Global Problem Mesh]{\includegraphics[width=0.48\textwidth]{../img/HighOrderBDDCMesh}\label{fig:bddc_mesh_not_decomposed}}
+  \hfill
+  \subfloat[Subdomain Interfaces]{\includegraphics[width=0.48\textwidth]{../img/HighOrderBDDCMeshInterface}\label{fig:bddc_mesh_interface}}\\
+  \subfloat[BDDC Primal Nodes]{\includegraphics[width=0.48\textwidth]{../img/HighOrderBDDCMeshPrimal}\label{fig:bddc_mesh_primal}}
+  \hfill
+  \subfloat[BDDC Duplicated Interface Nodes]{\includegraphics[width=0.48\textwidth]{../img/HighOrderBDDCMeshInterfaceBroken}\label{fig:bddc_mesh_broken_interface}}
+  \caption{Non-Overlapping Decomposition of Domain for BDDC}
+\end{figure}
 
 Each subdomain problem could therefore be written as
 \begin{equation}
@@ -18,6 +32,8 @@ The solutions on the global coarse problem and broken subdomain problems are use
 
 The coarse grid, or primal, nodes $\Pi^e$ are given by the corners of the subdomain, so we have $4$ primal nodes for each element in two dimensions and $8$ primal nodes in three dimensions.
 The remainder of the subdomain we denote with an $\text{r}$.
+In Figure \ref{fig:bddc_mesh_primal} the primal nodes have been highlighted.
+
 The partially subassembled problem is therefore given by
 \begin{equation}
 \hat{\color{burgundy}\mathbf{A}} = \sum_{e = 1}^N \mathbf{R}^{e, T} \hat{\color{burgundy}\mathbf{A}}^e \mathbf{R}^e
@@ -33,6 +49,7 @@ where
 \end{equation}
 and $\mathbf{R}^e$ is the subdomain injection operator. 
 In this formulation, the broken degrees of freedom found on the portion of subdomain interface given by $\Gamma^e - \Pi^e$ are duplicated for each subdomain.
+In Figure \ref{fig:bddc_mesh_broken_interface} the duplicated degrees of freedom across each subdomain interface have been highlighted.
 This duplication reduces the amount of global communication required to solve the subassemebled problem, which makes BDDC attractive as a preconditioner for high-order finite element methods.
 
 There are BDDC formulations which enrich the primal space with edge or face averages to improve convergence.
