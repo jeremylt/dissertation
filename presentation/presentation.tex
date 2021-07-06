@@ -164,7 +164,7 @@ Transparency and reproducibility are the lifeblood of scientific advancement\\
 
 ~\\
 
-All software and data used in this dissertation is all open source\\
+All software and data used in this dissertation is open source\\
 
 ~\\
 
@@ -218,7 +218,7 @@ Modern hardware has lower memory bandwidth than FLOPs \cite{kruppcomparison}
 
 {\small Requirements for matrix-vector product with sparse matrix vs matrix-free\\ for screened Poisson $\nabla^2 u - \alpha^2 u = f$ in 3D}\\
 
-{\bf Matrix-free representations using tensor product bases better match modern hardware limitations}
+{\bf Matrix-free representations using tensor product bases\\better match modern hardware limitations}
 
 \end{center}
 \end{frame}
@@ -304,6 +304,37 @@ Galerkin form for an arbitrary second order PDE:\\
 \end{frame}
 
 %------------------------------------------------
+
+\begin{frame}
+\begin{center}
+\frametitle{Preconditioning Required}
+
+\begin{itemize}
+
+\item Matrix-free representations require iterative solvers\\
+
+~\\
+
+\item Iterative solvers are sensitive to conditioning of the operator\\(among other factors)\\
+
+~\\
+
+\item High-order operators are ill conditioned\\
+
+~\\
+
+\item Preconditioners are required for good convergence\\
+
+~\\
+
+\item LFA helps us tune these preconditioners\\
+
+\end{itemize}
+
+\end{center}
+\end{frame}
+
+%------------------------------------------------
 \section{LFA of High-Order FEM}
 %------------------------------------------------
 
@@ -326,9 +357,9 @@ where
 
 \begin{itemize}
 
-\item $V \subset \mathcal{Z}$ is an index set
+\item $V \subset \mathbb{Z}$ is an index set
 
-\item $s_k \in \mathcal{R}$ are constant coefficients
+\item $s_\kappa \in \mathbb{R}$ are constant coefficients
 
 \item $w_h \left( x \right)$ is a $l^2$ function on $G_h$
 
@@ -343,6 +374,10 @@ where
 \begin{center}
 \frametitle{LFA Background}
 
+Our function can be diagonalized by the standard Fourier modes:
+
+~\\
+
 If for all grid functions $\varphi \left( \theta, x \right)$
 
 \begin{equation}
@@ -352,10 +387,6 @@ L_h \varphi \left( \theta, x \right) = \tilde{L}_h \left( \theta \right) \varphi
 ~\\
 
 then $\tilde{L}_h \left( \theta \right) = \sum_{\kappa \in V} s_\kappa e^{\imath \theta \kappa}$ is the {\bf symbol} of $L_h$\\
-
-~\\
-
-Our function can be diagonalized by the standard Fourier modes
 
 \end{center}
 \end{frame}
@@ -398,7 +429,7 @@ For a $q \times q$ system of equations, the matrix symbol is given by
 For a scalar PDE operator on a single 1D finite element
 
 \begin{equation}
-\tilde{{\color{burgundy}\mathbf{A}}} \left( \boldsymbol{\theta} \right) = \mathbf{Q}^T \left( {\color{burgundy}\mathbf{A}}^e \odot \left[ e^{\imath \left( \mathbf{x}_j - \mathbf{x}_i \right) \cdot \boldsymbol{\theta} / \mathbf{h}} \right] \right) \mathbf{Q}
+\tilde{{\color{burgundy}\mathbf{A}}} \left( \theta \right) = \mathbf{Q}^T \left( {\color{burgundy}\mathbf{A}}^e \odot \left[ e^{\imath \left( x_j - x_i \right) \theta / h} \right] \right) \mathbf{Q}
 \label{eq:symbolhighorder}
 \end{equation}
 
@@ -437,6 +468,13 @@ where
 \frametitle{LFA of High-Order FEM}
 
 Symbol naturally extends to multiple components and higher dimensions\\
+
+~\\
+
+\begin{equation}
+\tilde{{\color{burgundy}\mathbf{A}}} \left( \boldsymbol{\theta} \right) = \mathbf{Q}^T \left( {\color{burgundy}\mathbf{A}}^e \odot \left[ e^{\imath \left( \mathbf{x}_j - \mathbf{x}_i \right) \cdot \boldsymbol{\theta} / \mathbf{h}} \right] \right) \mathbf{Q}
+\label{eq:symbolhighorder}
+\end{equation}
 
 ~\\
 
@@ -667,7 +705,7 @@ Multigrid methods target the low frequency error\\
 
 \begin{itemize}
 
-\item ${\color{burgundy}\mathbf{A}}_f$ - fine grid PDE operator
+\item ${\color{burgundy}\mathbf{A}}_f$ - fine grid operator
 
 \item ${\color{burgundy}\mathbf{A}}_c^{-1}$ - coarse grid solve (low frequency error)
 
@@ -700,15 +738,15 @@ The definition of the symbol follows naturally\\
 
 \begin{itemize}
 
-\item ${\color{burgundy}\mathbf{A}}_f$ - fine grid PDE operator
+\item $\tilde{{\color{burgundy}\mathbf{A}}}_f$ - fine grid symbol
 
-\item ${\color{burgundy}\mathbf{A}}_c^{-1}$ - coarse grid solve (low frequency error)
+\item $\tilde{{\color{burgundy}\mathbf{A}}}_c^{-1}$ - coarse grid symbol inverse (low frequency error)
 
-\item ${\color{burgundy}\mathbf{S}}_f$ - fine grid smoother (high frequency error)
+\item $\tilde{{\color{burgundy}\mathbf{S}}}_f$ - fine grid smoother symbol (high frequency error)
 
-\item ${\color{burgundy}\mathbf{P}}_{\text{ctof}}$ - coarse to fine grid prolongation operator
+\item $\tilde{{\color{burgundy}\mathbf{P}}}_{\text{ctof}}$ - coarse to fine grid prolongation symbol
 
-\item ${\color{burgundy}\mathbf{R}}_{\text{ftoc}}$ - fine to coarse grid restriction operator
+\item $\tilde{{\color{burgundy}\mathbf{R}}}_{\text{ftoc}}$ - fine to coarse grid restriction symbol
 
 \end{itemize}
 
@@ -934,7 +972,7 @@ Results agree with previous work \cite{he2020two}\\
 
 ~\\
 
-BDDC is non-overlapping domain decomposition method from Dohrmann \cite{dohrmann2003preconditioner}
+BDDC is non-overlapping domain decomposition method by Dohrmann \cite{dohrmann2003preconditioner}
 
 \end{center}
 \end{frame}
@@ -1002,7 +1040,7 @@ Cheaper setup than original BDDC but worse conditioning
 
 ~\\
 
-Harmonic extension with mapping of jump over broken interfaces to minimize energy norm\\
+Harmonic extension with mapping of jump over broken interfaces\\to minimize energy norm\\
 
 ~\\
 
