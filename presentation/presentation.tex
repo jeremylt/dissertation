@@ -733,7 +733,7 @@ Grid transfer operators and coarse representation differentiate\\$h$-multigrid a
 The definition of the symbol follows naturally\\
 
 \begin{equation}
-\tilde{\mathbf{E}}_{\text{2MG}} \left( \boldsymbol{\theta} \right) = \tilde{{\color{burgundy}\mathbf{S}}}_f \left( \boldsymbol{\theta}, \omega \right) \left( \mathbf{I} - \tilde{{\color{burgundy}\mathbf{P}}}_{\text{ctof}} \left( \boldsymbol{\theta} \right) \left(\tilde{{\color{burgundy}\mathbf{A}}}_c \left( \boldsymbol{\theta} \right) \right)^{-1} \tilde{{\color{burgundy}\mathbf{R}}}_{\text{ftoc}} \left( \boldsymbol{\theta} \right) \tilde{{\color{burgundy}\mathbf{A}}}_f \left( \boldsymbol{\theta} \right) \right) \tilde{{\color{burgundy}\mathbf{S}}}_f \left( \boldsymbol{\theta}, \omega \right)
+\tilde{\mathbf{E}}_{\text{2MG}} \left( \boldsymbol{\theta} \right) = \tilde{{\color{burgundy}\mathbf{S}}}_f \left( \boldsymbol{\theta}, \omega \right) \left( \mathbf{I} - \tilde{{\color{burgundy}\mathbf{P}}}_{\text{ctof}} \left( \boldsymbol{\theta} \right) \tilde{{\color{burgundy}\mathbf{A}}}_c^{-1} \left( \boldsymbol{\theta} \right) \tilde{{\color{burgundy}\mathbf{R}}}_{\text{ftoc}} \left( \boldsymbol{\theta} \right) \tilde{{\color{burgundy}\mathbf{A}}}_f \left( \boldsymbol{\theta} \right) \right) \tilde{{\color{burgundy}\mathbf{S}}}_f \left( \boldsymbol{\theta}, \omega \right)
 \end{equation}
 
 \begin{itemize}
@@ -1047,6 +1047,46 @@ Harmonic extension with mapping of jump over broken interfaces\\to minimize ener
 ~\\
 
 Equivalent to original BDDC, except for some eigenvalues equal to $1$ \cite{li2007use}
+
+\end{center}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\begin{center}
+\frametitle{LFA of BDDC}
+
+\begin{equation}
+\tilde{\hat{\color{burgundy} \mathbf{A}}}\color{black}^{-1} =
+\left[ \begin{array}{c c}
+\mathbf{I}  &  -\tilde{\color{burgundy}\mathbf{A}}_{\text{r}, \text{r}}^{-1} \tilde{\hat{\color{burgundy}\mathbf{A}}}\color{black}_{\Pi, \text{r}}^T  \\
+\mathbf{0}  &  \mathbf{I}                                                                                                                             \\
+\end{array} \right]
+\left[ \begin{array}{c c}
+\tilde{\color{burgundy}\mathbf{A}}_{\text{r}, \text{r}}^{-1}  &  \mathbf{0}                                        \\
+\mathbf{0}                                                    &  \tilde{\hat{\mathbf{S}}}\color{black}_{\Pi}^{-1}  \\
+\end{array} \right]
+\left[ \begin{array}{c c}
+\mathbf{I}                                                                                                                           &  \mathbf{0}  \\
+-\tilde{\color{burgundy}\mathbf{A}}_{\Pi, \text{r}} \tilde{\hat{\color{burgundy}\mathbf{A}}}\color{black}_{\text{r}, \text{r}}^{-1}  &  \mathbf{I}  \\
+\end{array} \right]
+\end{equation}
+
+\begin{equation}
+\begin{gathered}
+\tilde{\color{burgundy}\mathbf{A}}_{\text{r}, \text{r}}^{-1} \left( \boldsymbol{\theta} \right) = {\color{burgundy}\mathbf{A}}_{\text{r}, \text{r}}^{-1} \odot \left[ e^{\imath \left( \mathbf{x}_j - \mathbf{x}_i \right) \cdot \boldsymbol{\theta} / \mathbf{h}} \right],
+\hspace{5mm}
+\tilde{\hat{\color{burgundy}\mathbf{A}}}\color{black}_{\text{r}, \Pi} \left( \boldsymbol{\theta} \right) = \left( \hat{\color{burgundy}\mathbf{A}}_{\text{r}, \Pi} \odot \left[ e^{\imath \left( \mathbf{x}_j - \mathbf{x}_i \right) \cdot \boldsymbol{\theta} / \mathbf{h}} \right] \right) \mathbf{Q}_{\Pi},\\
+\tilde{\hat{\mathbf{S}}}_{\Pi}^{-1} \left( \boldsymbol{\theta} \right) = \left( \mathbf{Q}_{\Pi}^T \left( \hat{\mathbf{S}}_{\Pi} \odot \left[ e^{\imath \left( \mathbf{x}_j - \mathbf{x}_i \right) \cdot \boldsymbol{\theta} / \mathbf{h}} \right] \right) \mathbf{Q}_{\Pi} \right)^{-1}
+\end{gathered}
+\end{equation}
+
+Only primal modes are localized for subassembled operator symbol\\
+
+~\\
+
+Symbols of injection operators are relatively straightforward\\
 
 \end{center}
 \end{frame}

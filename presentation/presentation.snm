@@ -8,5 +8,5 @@
 \beamer@slide {table:two_grid_3d_jacobi}{29}
 \beamer@slide {table:two_grid_3d_chebyshev}{30}
 \beamer@slide {table:two_grid_hmultigrid}{33}
-\beamer@slide {table:macro_element_bddc}{38}
-\beamer@slide {table:high_order_element_bddc}{39}
+\beamer@slide {table:macro_element_bddc}{39}
+\beamer@slide {table:high_order_element_bddc}{40}
