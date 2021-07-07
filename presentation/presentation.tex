@@ -11,9 +11,9 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%----------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
 %	PACKAGES AND THEMES
-%----------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
 
 \documentclass{beamer}
 \usepackage{xcolor}
@@ -31,28 +31,6 @@
 
 \definecolor{cadet}{rgb}{0.33, 0.41, 0.47}
 \definecolor{airforceblue}{rgb}{0.36, 0.54, 0.66}
-
-\lstdefinestyle{C}{
-  language=C,
-  emptylines=1,
-  breaklines=true,
-  basicstyle=\ttfamily\color{black},
-  identifierstyle=\ttfamily,
-  keywordstyle=\color[rgb]{0.0, 0.0, 1.0},
-  stringstyle=\color[rgb]{1.0, 0.0, 0.0},
-  commentstyle=\color{gray}\slshape,
-}
-
-\lstdefinestyle{assembly}{
-  emptylines=1,
-  breaklines=true,
-  basicstyle=\ttfamily\color{black},
-  identifierstyle=\ttfamily,
-  keywordstyle=\color[rgb]{1.0, 0.0, 1.0},
-  stringstyle=\color[rgb]{1.0, 0.0, 0.0},
-  commentstyle=\color{gray}\slshape,
-  morekeywords={vmovapd, vfmadd231pd,vfnmadd213pd, vmulpd},
-}
 
 \mode<presentation> {
 
@@ -79,9 +57,9 @@
 \usepackage{graphicx} % Allows including images
 \usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
 
-%----------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
 %	TITLE PAGE
-%----------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
 
 \title[LFA of High-Order Matrix-Free FEM]{Local Fourier Analysis of Domain Decomposition and Multigrid Methods for High-Order Matrix-Free Finite Elements} % The short title appears at the bottom of every slide, the full title is only on the title page
 
@@ -99,7 +77,7 @@
 \titlepage % Print the title page as the first slide
 \end{frame}
 
-%------------------------------------------------
+%-------------------------------------------------------------------------------
 
 \begin{frame}
 \begin{center}
@@ -110,20 +88,20 @@ This work is supported by the Exascale Computing Project (17-SC-20-SC), a collab
 \end{center}
 \end{frame}
  
-%------------------------------------------------
+%-------------------------------------------------------------------------------
 
 \begin{frame}
 \frametitle{Overview} % Table of contents slide, comment this block out to remove it
 \tableofcontents % Throughout your presentation, if you choose to use \section{} and \subsection{} commands, these will automatically be printed on this slide as an overview of your presentation
 \end{frame}
 
-%----------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
 %	PRESENTATION SLIDES
-%----------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
 
-%------------------------------------------------
+%-------------------------------------------------------------------------------
 \section{Introduction}
-%------------------------------------------------
+%-------------------------------------------------------------------------------
 
 \begin{frame}
 \begin{center}
@@ -154,7 +132,7 @@ This work is supported by the Exascale Computing Project (17-SC-20-SC), a collab
 \end{center}
 \end{frame}
 
-%------------------------------------------------
+%-------------------------------------------------------------------------------
 
 \begin{frame}
 \begin{center}
@@ -189,9 +167,9 @@ All software and data used in this dissertation is open source\\
 \end{center}
 \end{frame}
 
-%------------------------------------------------
+%-------------------------------------------------------------------------------
 \section{High-Order Matrix-Free FEM}
-%------------------------------------------------
+%-------------------------------------------------------------------------------
 
 \begin{frame}
 \begin{center}
@@ -206,7 +184,7 @@ Modern hardware has lower memory bandwidth than FLOPs \cite{kruppcomparison}
 \end{center}
 \end{frame}
 
-%------------------------------------------------
+%-------------------------------------------------------------------------------
 
 \begin{frame}
 \begin{center}
@@ -223,7 +201,7 @@ Modern hardware has lower memory bandwidth than FLOPs \cite{kruppcomparison}
 \end{center}
 \end{frame}
 
-%------------------------------------------------
+%-------------------------------------------------------------------------------
 
 \begin{frame}
 \begin{center}
@@ -258,7 +236,7 @@ Note: pointwise functions $f_0$ and $f_1$ do not depend upon discretization\\
 \end{center}
 \end{frame}
 
-%------------------------------------------------
+%-------------------------------------------------------------------------------
 
 \begin{frame}
 \begin{center}
@@ -290,7 +268,7 @@ Galerkin form for an arbitrary second order PDE:\\
 \end{center}
 \end{frame}
 
-%------------------------------------------------
+%-------------------------------------------------------------------------------
 
 \begin{frame}
 \begin{center}
@@ -313,7 +291,7 @@ Galerkin form for an arbitrary second order PDE:\\
 \end{center}
 \end{frame}
 
-%------------------------------------------------
+%-------------------------------------------------------------------------------
 
 \begin{frame}
 \begin{center}
@@ -344,9 +322,9 @@ Galerkin form for an arbitrary second order PDE:\\
 \end{center}
 \end{frame}
 
-%------------------------------------------------
+%-------------------------------------------------------------------------------
 \section{LFA of High-Order FEM}
-%------------------------------------------------
+%-------------------------------------------------------------------------------
 
 \begin{frame}
 \begin{center}
@@ -378,7 +356,7 @@ where
 \end{center}
 \end{frame}
 
-%------------------------------------------------
+%-------------------------------------------------------------------------------
 
 \begin{frame}
 \begin{center}
@@ -403,7 +381,7 @@ then $\tilde{L}_h \left( \theta \right) = \sum_{\kappa \in V} s_\kappa e^{\imath
 \end{center}
 \end{frame}
 
-%------------------------------------------------
+%-------------------------------------------------------------------------------
 
 \begin{frame}
 \begin{center}
@@ -432,7 +410,7 @@ For a $q \times q$ system of equations, the matrix symbol is given by:
 \end{center}
 \end{frame}
 
-%------------------------------------------------
+%-------------------------------------------------------------------------------
 
 \begin{frame}
 \begin{center}
@@ -469,7 +447,7 @@ where
 \end{center}
 \end{frame}
 
-%------------------------------------------------
+%-------------------------------------------------------------------------------
 
 \begin{frame}
 \begin{center}
@@ -509,7 +487,7 @@ Symbol naturally extends to multiple components and higher dimensions\\
 \end{center}
 \end{frame}
 
-%------------------------------------------------
+%-------------------------------------------------------------------------------
 
 \begin{frame}[fragile]
 \begin{center}
@@ -521,7 +499,7 @@ Symbol naturally extends to multiple components and higher dimensions\\
 
 \begin{itemize}
 
-\item ${\color{blue(ncs)}\mathbf{B}}$ - given by tensor H1 Lagrange basis\\
+\item ${\color{blue(ncs)}\mathbf{B}}$ - given by tensor $H^1$ Lagrange basis\\
 
 \item ${\color{applegreen}\mathbf{D}}$ - given by quadrature weights and product\\
 
@@ -548,7 +526,7 @@ end
 \end{center}
 \end{frame}
 
-%------------------------------------------------
+%-------------------------------------------------------------------------------
 
 \begin{frame}
 \begin{center}
@@ -565,7 +543,7 @@ Goal: decrease spectral radius with preconditioners
 \end{center}
 \end{frame}
 
-%------------------------------------------------
+%-------------------------------------------------------------------------------
 
 \begin{frame}
 \begin{center}
@@ -592,7 +570,23 @@ with a symbol given by
 \end{center}
 \end{frame}
 
-%------------------------------------------------
+%-------------------------------------------------------------------------------
+
+\begin{frame}
+\begin{center}
+\frametitle{Error Symbol}
+
+\includegraphics[height=5.2cm]{../img/convergenceFactors}\\
+{\small Iterations Required to Target Error Tolerances}\\
+
+~\\
+
+Maximum spectral radius of error propagation operator determines convergence rate
+
+\end{center}
+\end{frame}
+
+%-------------------------------------------------------------------------------
 
 \begin{frame}
 \begin{center}
@@ -619,7 +613,7 @@ with an error symbol given by
 \end{center}
 \end{frame}
 
-%------------------------------------------------
+%-------------------------------------------------------------------------------
 
 \begin{frame}
 \begin{center}
@@ -636,7 +630,7 @@ Moderate reduction in spectral radius of symbol
 \end{center}
 \end{frame}
 
-%------------------------------------------------
+%-------------------------------------------------------------------------------
 
 \begin{frame}
 \begin{center}
@@ -665,7 +659,7 @@ $\beta_k = \frac{c}{2} \frac{T_k \left( \eta \right)}{T_{k + 1} \left( \eta \rig
 \end{center}
 \end{frame}
 
-%------------------------------------------------
+%-------------------------------------------------------------------------------
 
 \begin{frame}
 \begin{center}
@@ -686,7 +680,7 @@ with $\tilde{\color{burgundy}A}_J$ being the symbol of the Jacobi preconditioner
 \end{center}
 \end{frame}
 
-%------------------------------------------------
+%-------------------------------------------------------------------------------
 
 \begin{frame}
 \begin{center}
@@ -703,9 +697,9 @@ Improved reduction in spectral radius of symbol
 \end{center}
 \end{frame}
 
-%------------------------------------------------
+%-------------------------------------------------------------------------------
 \section{LFA of Multigrid Methods}
-%------------------------------------------------
+%-------------------------------------------------------------------------------
 
 \begin{frame}
 \begin{center}
@@ -738,7 +732,7 @@ Grid transfer operators and coarse representation differentiate\\$h$-multigrid a
 \end{center}
 \end{frame}
 
-%------------------------------------------------
+%-------------------------------------------------------------------------------
 
 \begin{frame}
 \begin{center}
@@ -767,7 +761,7 @@ The definition of the symbol follows naturally:\\
 \end{center}
 \end{frame}
 
-%------------------------------------------------
+%-------------------------------------------------------------------------------
 
 \subsection{{\textit P}-Multigrid}
 
@@ -797,7 +791,7 @@ $p$-multigrid prolongation can be represented as an interpolation\\from the coar
 \end{center}
 \end{frame}
 
-%------------------------------------------------
+%-------------------------------------------------------------------------------
 
 \begin{frame}
 \begin{center}
@@ -814,7 +808,7 @@ Significant reduction in spectral radius
 \end{center}
 \end{frame}
 
-%------------------------------------------------
+%-------------------------------------------------------------------------------
 
 \begin{frame}
 \begin{center}
@@ -825,7 +819,6 @@ Significant reduction in spectral radius
 \begin{tabular}{l c c}
   \toprule
   $p_{\text{fine}}$ to $p_{\text{coarse}}$  &  LFA  &  libCEED  \\
-  %\cmidrule(lr){2-3} \cmidrule(lr){4-5} \cmidrule(lr){6-7}
   \toprule
   $p = 2$ to $p = 1$   &  0.312  &  0.301  \\
   \midrule
@@ -840,7 +833,7 @@ Significant reduction in spectral radius
 \end{center}
 \label{table:two_grid_3d_jacobi}
 \end{table}
-{\small LFA and experimental two-grid convergence factors with Jacobi smoothing for 3D Laplacian with $\omega = 1.0$}\\
+{\small LFA and experimental two-grid convergence factors with Jacobi smoothing\\for 3D Laplacian with $\omega = 1.0$}\\
 
 ~\\
 
@@ -853,7 +846,7 @@ f \left( x, y, z \right) = x y z \sin \left( \pi x \right) \sin \left( \pi \left
 \end{center}
 \end{frame}
 
-%------------------------------------------------
+%-------------------------------------------------------------------------------
 
 \begin{frame}
 \begin{center}
@@ -861,31 +854,34 @@ f \left( x, y, z \right) = x y z \sin \left( \pi x \right) \sin \left( \pi \left
 
 \begin{table}[ht!]
 \begin{center}
-\begin{tabular}{l cc cc cc}
+\begin{tabular}{l ccc ccc}
   \toprule
-  $p_{\text{fine}}$ to $p_{\text{coarse}}$  &  \multicolumn{2}{c}{$k = 2$}  &  \multicolumn{2}{c}{$k = 3$}  &  \multicolumn{2}{c}{$k = 4$}  \\
-  %\cmidrule(lr){2-3} \cmidrule(lr){4-5} \cmidrule(lr){6-7}
-                      &  LFA  &  libCEED  &  LFA  &  libCEED  &  LFA  &  libCEED  \\
+  $p_{\text{fine}}$ to $p_{\text{coarse}}$  &  \multicolumn{3}{c}{$k = 3$}  &  \multicolumn{3}{c}{$k = 4$}  \\
+                      &  LFA    &  libCEED  &  its  &  LFA   &  libCEED  &  its  \\
   \toprule
-  $p = 2$ to $p = 1$  &  0.253 & 0.222  &  0.076 & 0.058  &  0.041 & 0.033  \\
+  $p = 2$ to $p = 1$  &  0.076  &  0.058    &  9    &  0.041 &  0.033    &  7    \\
   \midrule
-  $p = 4$ to $p = 2$  &  0.277 & 0.251  &  0.111 & 0.097  &  0.062 & 0.050  \\
-  $p = 4$ to $p = 1$  &  0.601 & 0.587  &  0.416 & 0.398  &  0.295 & 0.276  \\
+  $p = 4$ to $p = 2$  &  0.111  &  0.097    &  10   &  0.062  &  0.050   &  8    \\
+  $p = 4$ to $p = 1$  &  0.416  &  0.398    &  25   &  0.295  &  0.276   &  18   \\
   \midrule
-  $p = 8$ to $p = 4$  &  0.398 & 0.391  &  0.197 & 0.195  &  0.121 & 0.110  \\
-  $p = 8$ to $p = 2$  &  0.748 & 0.743  &  0.611 & 0.603  &  0.506 & 0.469  \\
-  $p = 8$ to $p = 1$  &  0.920 & 0.914  &  0.871 & 0.861  &  0.827 & 0.814  \\
+  $p = 8$ to $p = 4$  &  0.197  &  0.195    &  15   &  0.121  &  0.110   &  11   \\
+  $p = 8$ to $p = 2$  &  0.611  &  0.603    &  46   &  0.506  &  0.469   &  31   \\
+  $p = 8$ to $p = 1$  &  0.871  &  0.861    &  154  &  0.827  &  0.814   &  112  \\
   \bottomrule
 \end{tabular}
 \end{center}
 \label{table:two_grid_3d_chebyshev}
 \end{table}
-{\small LFA and experimental two-grid convergence factors with Chebyshev smoothing for 3D Laplacian}\\
+{\small LFA and experimental two-grid convergence factors with\\Chebyshev smoothing for 3D Laplacian}\\
+
+~\\
+
+Iterations required to reach $10$x reduction in error grows with\\rapid coarsening\\
 
 \end{center}
 \end{frame}
 
-%------------------------------------------------
+%-------------------------------------------------------------------------------
 
 \subsection{{\textit H}-Multigrid}
 
@@ -915,7 +911,7 @@ $h$-multigrid prolongation can be represented as an interpolation\\from the coar
 \end{center}
 \end{frame}
 
-%------------------------------------------------
+%-------------------------------------------------------------------------------
 
 \begin{frame}
 \begin{center}
@@ -932,7 +928,7 @@ Significant reduction in spectral radius
 \end{center}
 \end{frame}
 
-%------------------------------------------------
+%-------------------------------------------------------------------------------
 
 \begin{frame}
 \begin{center}
@@ -943,7 +939,6 @@ Significant reduction in spectral radius
 \begin{tabular}{l cc cc cc}
   \toprule
   $p, d$  &  \multicolumn{2}{c}{$\nu = \left( 0, 1 \right)$}  &  \multicolumn{2}{c}{$\nu = \left( 1, 1 \right)$}  &  \multicolumn{2}{c}{$\nu = \left( 2, 2 \right)$}  \\
-  %\cmidrule(lr){2-3} \cmidrule(lr){4-5} \cmidrule(lr){6-7}
                       &  $\rho$  &  $\omega$  &  $\rho$ & $\omega$  &  $\rho$ & $\omega$  \\
   \toprule
   $p = 2, d = 1$  &  0.821 & 1.000  &  0.821 & 1.000  &  1.279 & 1.000   \\
@@ -969,9 +964,9 @@ Results agree with previous work \cite{he2020two}\\
 \end{center}
 \end{frame}
 
-%------------------------------------------------
+%-------------------------------------------------------------------------------
 \section{LFA of BDDC}
-%------------------------------------------------
+%-------------------------------------------------------------------------------
 
 \begin{frame}
 \begin{center}
@@ -987,7 +982,7 @@ BDDC is non-overlapping domain decomposition method by Dohrmann \cite{dohrmann20
 \end{center}
 \end{frame}
 
-%------------------------------------------------
+%-------------------------------------------------------------------------------
 
 \begin{frame}
 \begin{center}
@@ -1009,7 +1004,7 @@ Remaining interface nodes replicated across broken interface
 \end{center}
 \end{frame}
 
-%------------------------------------------------
+%-------------------------------------------------------------------------------
 
 \begin{frame}
 \begin{center}
@@ -1033,58 +1028,113 @@ Injection operator $\mathbf{R}_i$ maps from global space to broken space,\\provi
 \end{center}
 \end{frame}
 
-%------------------------------------------------
+%-------------------------------------------------------------------------------
 
 \begin{frame}
 \begin{center}
-\frametitle{Lumped BDDC}
+\frametitle{Injection Operators}
 
-\begin{equation}
-\mathbf{R}_1 = \diag \left( \left[ \frac{1}{\lvert \mathcal{N} \left( x_i \right) \rvert} \right] \right)
-\end{equation}
+\begin{columns}[onlytextwidth]
+  \begin{column}{0.49\textwidth}
+  \begin{center}
 
-where $\lvert \mathcal{N} \left( x_i \right) \rvert$ is node multiplicity across broken spaces\\
+  \begin{equation}
+  \mathbf{R}_1 = \diag \left( \left[ \frac{1}{\lvert \mathcal{N} \left( x_i \right) \rvert} \right] \right)
+  \end{equation}
+
+  where $\lvert \mathcal{N} \left( x_i \right) \rvert$ is node multiplicity across broken spaces\\
+  \end{center}
+  \end{column}
+
+  \begin{column}{0.45\textwidth}
+  \begin{center}
+  \begin{equation}
+  \begin{gathered}
+  \mathbf{R}_2 = \mathbf{R}_1 - \mathbf{J}^T \boldsymbol{\mathcal{H}}^T\\
+  \boldsymbol{\mathcal{H}}^e = - {\color{burgundy}\mathbf{A}}_{\text{I}, \text{I}}^{e, -1} {\color{burgundy}\mathbf{A}}_{\Gamma, \text{I}}^{e, T}
+  \end{gathered}
+  \end{equation}
+
+  where $\boldsymbol{\mathcal{H}}$ is a harmonic extension,\\$\mathbf{J}$ a map over the interfaces
+  \end{center}
+  \end{column}
+\end{columns}
 
 ~\\
 
 ~\\
 
-Equivalent to FETI-DP, except for some eigenvalues equal to $0$ and $1$ \cite{li2007use}\\
+Lumped BDDC with $\mathbf{R}_1$ cheaper to setup but poorer conditioning\\
 
 ~\\
 
-Cheaper setup than original BDDC but worse conditioning
+Dirichlet BDDC with $\mathbf{R}_2$ equivalent to Dirichlet FETI-DP \cite{li2007use}
 
 \end{center}
 \end{frame}
 
-%------------------------------------------------
+%-------------------------------------------------------------------------------
 
 \begin{frame}
 \begin{center}
-\frametitle{Dirichlet BDDC}
+\frametitle{Fast Diagonalization}
+
+For separable problems of the form
+
+\vspace{-4mm}
 
 \begin{equation}
-\begin{gathered}
-\mathbf{R}_2 = \mathbf{R}_1 - \mathbf{J}^T \boldsymbol{\mathcal{H}}^T, \hspace{10mm} \boldsymbol{\mathcal{H}}^e = - {\color{burgundy}\mathbf{A}}_{\text{I}, \text{I}}^{e, -1} {\color{burgundy}\mathbf{A}}_{\Gamma, \text{I}}^{e, T}\\
-\mathbf{J}^{e, T} v \left( x \right) = \sum_{i \in \mathcal{N} \left( x \right)} \left( \frac{v^j \left( x \right)}{\lvert \mathcal{N} \left( x \right) \rvert} - \frac{v^i \left( x \right)}{\lvert \mathcal{N} \left( x \right) \rvert} \right), \forall x \in \Gamma^e
-\end{gathered}
+\mathbf{A} = a \mathbf{M} + b \mathbf{K}
 \end{equation}
 
-~\\
+Fast Diagonalization provides fast approximate solver
 
-Harmonic extension with mapping of jump over broken interfaces\\to minimize energy norm\\
+\vspace{-4mm}
 
-~\\
+\begin{equation}
+\mathbf{A}^{-1} = \mathbf{S}^T \left( a \mathbf{I} + b \boldsymbol{\Lambda} \right)^{-1} \mathbf{S}
+\label{eq:fdminverse}
+\end{equation}
 
-~\\
+where
 
-Equivalent to original BDDC, except for some eigenvalues equal to $1$ \cite{li2007use}
+\vspace{-4mm}
+
+\begin{equation}
+\mathbf{S} \mathbf{M} \mathbf{S}^T = \mathbf{I}, \hspace{2mm} \mathbf{S} \mathbf{K} \mathbf{S}^T = \boldsymbol{\Lambda}
+\end{equation}
 
 \end{center}
 \end{frame}
 
-%------------------------------------------------
+%-------------------------------------------------------------------------------
+
+\begin{frame}
+\begin{center}
+\frametitle{Fast Diagonalization}
+
+\begin{itemize}
+
+\item Tensor product bases have tensor product diagonalizations\\
+
+~\\
+
+\item Convergence impact of approximate solver formulations is\\ongoing research\\
+
+~\\
+
+\item Cheaper to compute fast diagonalization solver than invert\\assembled subdomain matrices\\
+
+~\\
+
+\item Reusing diagonalization for both subdomain solvers mitigates expensive setup cost of Dirichlet BDDC\\
+
+\end{itemize}
+
+\end{center}
+\end{frame}
+
+%-------------------------------------------------------------------------------
 
 \begin{frame}
 \begin{center}
@@ -1124,7 +1174,7 @@ Symbols of injection operators are relatively straightforward\\
 \end{center}
 \end{frame}
 
-%------------------------------------------------
+%-------------------------------------------------------------------------------
 
 \begin{frame}
 \begin{center}
@@ -1135,7 +1185,6 @@ Symbols of injection operators are relatively straightforward\\
 \begin{tabular}{l ccc ccc}
   \toprule
   $m$  &  \multicolumn{3}{c}{Lumped BDDC}  &  \multicolumn{3}{c}{Dirichlet BDDC}  \\
-  %\cmidrule(lr){2-3} \cmidrule(lr){4-5} \cmidrule(lr){6-7}
                       &  $\lambda_{\min}$  &  $\lambda_{\max}$  &  $\kappa$ & $\lambda_{\min}$  &  $\lambda_{\max}$ & $\kappa$  \\
   \toprule
   $m = 4$   &  1.000  &   4.444  &   4.444  &  1.000  &  2.351  &  2.351  \\
@@ -1156,7 +1205,7 @@ Exactly reproduces original work on LFA of low-order subdomains
 \end{center}
 \end{frame}
 
-%------------------------------------------------
+%-------------------------------------------------------------------------------
 
 \begin{frame}
 \begin{center}
@@ -1167,7 +1216,6 @@ Exactly reproduces original work on LFA of low-order subdomains
 \begin{tabular}{l ccc ccc}
   \toprule
   $p$  &  \multicolumn{3}{c}{Lumped BDDC}  &  \multicolumn{3}{c}{Dirichlet BDDC}  \\
-  %\cmidrule(lr){2-3} \cmidrule(lr){4-5} \cmidrule(lr){6-7}
                       &  $\lambda_{\min}$  &  $\lambda_{\max}$  &  $\kappa$ & $\lambda_{\min}$  &  $\lambda_{\max}$ & $\kappa$  \\
   \toprule
   $p = 2$   &  1.000  &    2.800  &    2.800  &  1.000  &  2.042  &  2.042  \\
@@ -1188,7 +1236,7 @@ Single high-order element subdomains less well conditioned
 \end{center}
 \end{frame}
 
-%------------------------------------------------
+%-------------------------------------------------------------------------------
 
 \begin{frame}
 \begin{center}
@@ -1206,7 +1254,7 @@ Dirichlet BDDC important for single high-order element subdomains
 \end{center}
 \end{frame}
 
-%------------------------------------------------
+%-------------------------------------------------------------------------------
 
 \begin{frame}
 \begin{center}
@@ -1236,7 +1284,7 @@ Dirichlet BDDC important for single high-order element subdomains
 \end{center}
 \end{frame}
 
-%------------------------------------------------
+%-------------------------------------------------------------------------------
 
 \begin{frame}
 \begin{center}
@@ -1244,26 +1292,27 @@ Dirichlet BDDC important for single high-order element subdomains
 
 \begin{table}[ht!]
 \begin{center}
-\begin{tabular}{l cc}
+\begin{tabular}{l ccc cc}
   \toprule
-  $p_{\text{fine}}$ to $p_{\text{coarse}}$  & $\rho_{\min}$ & $\omega_{\text{opt}}$  \\
+  $p_{\text{fine}}$ to $p_{\text{coarse}}$  & \multicolumn{3}{c}{Dirichlet BDDC} & \multicolumn{2}{c}{Chebyshev}  \\
+   &  $\rho$ & $\omega_{\text{opt}}$  & its  & $\rho$  &  its  \\
   \toprule
-  $p = 2$ to $p = 1$   &  0.121 & 0.66  \\
+  $p = 2$ to $p = 1$   &  0.121  &  0.66  &  11  &  0.075  &  9    \\
   \midrule
-  $p = 4$ to $p = 2$   &  0.272 & 0.48  \\
-  $p = 4$ to $p = 1$   &  0.281 & 0.47  \\
+  $p = 4$ to $p = 2$   &  0.272  &  0.48  &  18  &  0.085  &  10   \\
+  $p = 4$ to $p = 1$   &  0.281  &  0.47  &  19  &  0.219  &  16   \\
   \midrule
-  $p = 8$ to $p = 4$   &  0.409 & 0.38  \\
-  $p = 8$ to $p = 1$   &  0.462 & 0.32  \\
+  $p = 8$ to $p = 4$   &  0.409  &  0.38  &  26  &  0.110  &  11   \\
+  $p = 8$ to $p = 1$   &  0.462  &  0.32  &  30  &  0.795  &  101  \\
   \midrule
-  $p = 16$ to $p = 8$  &  0.504 & 0.32  \\
-  $p = 16$ to $p = 1$  &  0.597 & 0.23  \\
+  $p = 16$ to $p = 8$  &  0.504  &  0.32  &  34  &  0.435  &  28   \\
+  $p = 16$ to $p = 1$  &  0.597  &  0.23  &  45  &  0.959  &  551  \\
   \bottomrule
 \end{tabular}
 \end{center}
-\label{table:two_grid_bddc_smoother}
+\label{table:two_grid_bddc_smoother_vs_cubic_chebyshev}
 \end{table}
-{\small Two-Grid Convergence Factor for $p$-Multigrid with BDDC Smoother for 2D Laplacian}\\
+{\small Two-Grid Convergence Factor for $p$-Multigrid with BDDC\\vs Cubic Chebyshev Smoothing for 2D Laplacian}\\
 
 ~\\
 
@@ -1272,9 +1321,46 @@ Weighted Dirichlet BDDC smoother better supports rapid coarsening\\
 \end{center}
 \end{frame}
 
-%------------------------------------------------
+%-------------------------------------------------------------------------------
+
+\begin{frame}
+\begin{center}
+\frametitle{BDDC Smoother for $P$-Multigrid}
+
+\begin{table}[ht!]
+\begin{center}
+\begin{tabular}{l ccc cc}
+  \toprule
+  $p_{\text{fine}}$ to $p_{\text{coarse}}$  & \multicolumn{3}{c}{Dirichlet BDDC} & \multicolumn{2}{c}{Chebyshev}  \\
+   &  $\rho$ & $\omega_{\text{opt}}$  & its  & $\rho$  &  its  \\
+  \toprule
+  $p = 2$ to $p = 1$   &  0.121  &  0.66  &  11  &  0.252  &  17   \\
+  \midrule
+  $p = 4$ to $p = 2$   &  0.272  &  0.48  &  18  &  0.281  &  19   \\
+  $p = 4$ to $p = 1$   &  0.281  &  0.47  &  19  &  0.424  &  27   \\
+  \midrule
+  $p = 8$ to $p = 4$   &  0.409  &  0.38  &  26  &  0.278  &  18   \\
+  $p = 8$ to $p = 1$   &  0.462  &  0.32  &  30  &  0.873  &  170  \\
+  \midrule
+  $p = 16$ to $p = 8$  &  0.504  &  0.32  &  34  &  0.613  &  48   \\
+  $p = 16$ to $p = 1$  &  0.597  &  0.23  &  45  &  0.975  &  910  \\
+  \bottomrule
+\end{tabular}
+\end{center}
+\label{table:two_grid_bddc_smoother_vs_quadratic_chebyshev}
+\end{table}
+{\small Two-Grid Convergence Factor for $p$-Multigrid with BDDC\\vs Quadratic Chebyshev Smoothing for 2D Laplacian}\\
+
+~\\
+
+Weighted Dirichlet BDDC smoother better supports rapid coarsening\\
+
+\end{center}
+\end{frame}
+
+%-------------------------------------------------------------------------------
 \section{Summary}
-%------------------------------------------------
+%-------------------------------------------------------------------------------
 
 \begin{frame}
 \begin{center}
@@ -1286,26 +1372,63 @@ Weighted Dirichlet BDDC smoother better supports rapid coarsening\\
 
 ~\\
 
-\item High-order matrix-free representations require preconditioned iterative solvers\\
+\item High-order matrix-free representations require preconditioned\\iterative solvers\\
 
 ~\\
 
-\item Local Fourier Analysis (LFA) provides sharp convergence estimates for these preconditioners\\
+\item Local Fourier Analysis (LFA) provides sharp convergence estimates\\for these preconditioners\\
 
 ~\\
 
-\item We developed LFA of $p$-multigrid and Balancing Domain Decomposition by Constraints (BDDC) on high-order element subdomains\\
+\item We develop LFA of $p$-multigrid and Balancing Domain Decomposition by Constraints (BDDC) on high-order element subdomains\\
 
 ~\\
 
-\item Further, we investigated LFA of $p$-multigrid with a BDDC smoother
+\item Finally, we investigated LFA of $p$-multigrid with a BDDC smoother
 
 \end{itemize}
 
 \end{center}
 \end{frame}
 
-%------------------------------------------------
+%-------------------------------------------------------------------------------
+
+\begin{frame}
+\begin{center}
+\frametitle{Future Work}
+
+\begin{flushleft}
+Local Fourier Analysis of\\
+\end{flushleft}
+
+~\\
+
+\begin{itemize}
+
+\item $hp$-multigrid methods\\
+
+~\\
+
+\item BDDC with inexact subdomain solvers\\
+
+~\\
+
+\item mixed finite elements or modal bases\\
+
+~\\
+
+\item BDDC with enriched primal spaces\\
+
+~\\
+
+\item overlapping domain decomposition methods\\
+
+\end{itemize}
+
+\end{center}
+\end{frame}
+
+%-------------------------------------------------------------------------------
 
 \begin{frame}[noframenumbering]
 \titlepage % Print the title page
@@ -1320,8 +1443,8 @@ Weighted Dirichlet BDDC smoother better supports rapid coarsening\\
 \titlepage % Print the title page
 \end{frame}
 
-%------------------------------------------------
-
-%----------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
 
 \end{document}
+
+%-------------------------------------------------------------------------------

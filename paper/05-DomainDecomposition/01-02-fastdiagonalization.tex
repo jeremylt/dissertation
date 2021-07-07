@@ -29,7 +29,7 @@ S M S^T = I,  &  S K S^T = \Lambda.
 In higher dimensions this diagonalization is given by tensor products of the one dimensional diagonalization, and we have
 \begin{equation}
 \begin{array}{c c}
-\mathbf{M}   = \mathbf{S}^{-1} \mathbf{I} \mathbf{S}^{-T},  &  \mathbf{K} = \mathbf{S}^{-1} \mathbf{\Lambda} \mathbf{S}^{-T}  \\
+\mathbf{M}   = \mathbf{S}^{-1} \mathbf{I} \mathbf{S}^{-T},  &  \mathbf{K} = \mathbf{S}^{-1} \boldsymbol{\Lambda} \mathbf{S}^{-T}  \\
 \end{array}
 \end{equation}
 where
@@ -37,19 +37,19 @@ where
 \begin{array}{c}
 \mathbf{S}       = \left( S \otimes S \otimes S \right)  \\
 \mathbf{I}       = \left( I \otimes I \otimes I \right)  \\
-\mathbf{\Lambda} = \left( \Lambda \otimes I \otimes I \right) + \left( I \otimes \Lambda \otimes I \right) + \left( I \otimes I \otimes \Lambda \right)  \\.
+\boldsymbol{\Lambda} = \left( \Lambda \otimes I \otimes I \right) + \left( I \otimes \Lambda \otimes I \right) + \left( I \otimes I \otimes \Lambda \right).
 \end{array}
 \end{equation}
 
 If $\mathbf{M}$ and $\mathbf{K}$ are invertible on the domain, then the inverse of $\mathbf{M}$ and $\mathbf{K}$ are given by
 \begin{equation}
 \begin{array}{c c}
-\mathbf{M}^{-1} = \mathbf{S}^T \mathbf{I} \mathbf{S},  &  \mathbf{K}^{-1} = \mathbf{S}^T \mathbf{\Lambda}^{+} \mathbf{S}.
+\mathbf{M}^{-1} = \mathbf{S}^T \mathbf{I} \mathbf{S},  &  \mathbf{K}^{-1} = \mathbf{S}^T \boldsymbol{\Lambda}^{+} \mathbf{S}.
 \end{array}
 \end{equation}
 
 However, for a single element with no boundary conditions, the Laplacian is singular and no inverse exists.
-Fischer and Lottes \cite{fischer2005hybrid} compute the pseudo-inverse of the diagonal $\mathbf{\Lambda}^{+}$, which is given by taking the reciprocal of the non-zero values in $\mathbf{\Lambda}$.
+Fischer and Lottes \cite{fischer2005hybrid} compute the pseudo-inverse of the diagonal $\boldsymbol{\Lambda}^{+}$, which is given by taking the reciprocal of the non-zero values in $\boldsymbol{\Lambda}$.
 We instead compute an approximate inverse to the Laplacian by finding the true inverse of a perturbed Laplacian, given by $\boldsymbol{\mathcal{K}} = \mathbf{K} + \epsilon \mathbf{I}$.
 We denote this approximate inverse by $\boldsymbol{\mathcal{K}}^+$.
 
@@ -61,12 +61,12 @@ For separable problems that can be expressed as a linear combination of the mass
 \end{equation}
 the FDM can provide a fast direct solver if the problem is invertible or a fast approximate inverse if the problem is not.
 \begin{equation}
-\mathbf{A}^{-1} = \mathbf{S}^T \left( a \mathbf{I} + b \mathbf{\Lambda} \right)^{-1} \mathbf{S}
+\mathbf{A}^{-1} = \mathbf{S}^T \left( a \mathbf{I} + b \boldsymbol{\Lambda} \right)^{-1} \mathbf{S}
 \label{eq:fdminverse}
 \end{equation}
 
 Note that the inverse given in Equation \ref{eq:fdminverse} is similar to the element operator form given in Equation \ref{eq:localoperator}.
-If we have an element operator defined by ${\color{burgundy}\mathbf{A}}^e = a \mathbf{M} + b \mathbf{K}$, then we can define an element inverse operator as ${\color{burgundy}\mathbf{A}}^{e, -1} = {\color{blue(ncs)}\mathbf{B}}^T {\color{applegreen}\mathbf{D}} {\color{blue(ncs)}\mathbf{B}}$, with ${\color{blue(ncs)}\mathbf{B}} = \mathbf{S}$ and ${\color{applegreen}\mathbf{D}} = \left( a \mathbf{I} + b \mathbf{\Lambda} \right)^{-1}$.
+If we have an element operator defined by ${\color{burgundy}\mathbf{A}}^e = a \mathbf{M} + b \mathbf{K}$, then we can define an element inverse operator as ${\color{burgundy}\mathbf{A}}^{e, -1} = {\color{blue(ncs)}\mathbf{B}}^T {\color{applegreen}\mathbf{D}} {\color{blue(ncs)}\mathbf{B}}$, with ${\color{blue(ncs)}\mathbf{B}} = \mathbf{S}$ and ${\color{applegreen}\mathbf{D}} = \left( a \mathbf{I} + b \boldsymbol{\Lambda} \right)^{-1}$.
 If the operator is not invertible, such as the Laplacian on a single element subdomain, we can still compute the approximate element inverse in this form.
 
 This discussion of the FDM has, thus far, neglected the effects of irregular geometry, varying coefficients, or more complex PDEs.
@@ -95,15 +95,15 @@ where $\text{nnz} \left( {\color{applegreen}\mathbf{D}} \right)$ is the number o
 This average element coefficient is used to compute the approximate subdomain inverse diagonal
 \begin{equation}
 \begin{array}{c c}
-\mathbf{\Lambda}^e = \bar{k}^e \mathbf{\Lambda},  &  \mathbf{\Lambda}^{e, +} = \frac{1}{\bar{k}^e} \mathbf{\Lambda}^{+}
+\boldsymbol{\Lambda}^e = \bar{k}^e \boldsymbol{\Lambda},  &  \boldsymbol{\Lambda}^{e, +} = \frac{1}{\bar{k}^e} \boldsymbol{\Lambda}^{+}
 \end{array}
 \end{equation}
 where the value of $\mathbf{\Lambda}$ is given by
 \begin{equation}
 \begin{array}{c}
-\mathbf{\Lambda}_N      = \left( I \otimes I \otimes I \right)  \\
-\mathbf{\Lambda}_D      = \left( \Lambda \otimes I \otimes I\right) + \left( I \otimes \Lambda \otimes I\right) + \left( I \otimes I \otimes \Lambda \right)  \\
-\mathbf{\Lambda}_{N, D} = \mathbf{\Lambda}_N + \mathbf{\Lambda}_D  \\
+\boldsymbol{\Lambda}_N      = \left( I \otimes I \otimes I \right)  \\
+\boldsymbol{\Lambda}_D      = \left( \Lambda \otimes I \otimes I\right) + \left( I \otimes \Lambda \otimes I\right) + \left( I \otimes I \otimes \Lambda \right)  \\
+\boldsymbol{\Lambda}_{N, D} = \boldsymbol{\Lambda}_N + \boldsymbol{\Lambda}_D  \\
 \end{array}
 \end{equation}
 based upon if the diagonal operator ${\color{applegreen}\mathbf{D}}$ has interpolated values, derivatives, or both, respectively, at quadrature points.
@@ -144,15 +144,15 @@ where ${\color{blue(ncs)}\mathbf{B}}$ is a basis interpolating to the eigenspace
 ${\color{applegreen}\mathbf{D}}$ is computed from the eigenvalues of this diagonalization and the average element coefficient value, from Definition \ref{def:averageelementcoefficient},
 \begin{equation}
 \begin{array}{c c}
-\mathbf{\Lambda}^e = \bar{k}^e \mathbf{\Lambda},  &  \mathbf{\Lambda}^{e, +} = \frac{1}{\bar{k}^e} \mathbf{\Lambda}^{+}
+\boldsymbol{\Lambda}^e = \bar{k}^e \boldsymbol{\Lambda},  &  \boldsymbol{\Lambda}^{e, +} = \frac{1}{\bar{k}^e} \boldsymbol{\Lambda}^{+}
 \end{array}
 \end{equation}
 where the value of $\mathbf{\Lambda}$ is given by
 \begin{equation}
 \begin{array}{c}
-\mathbf{\Lambda}_N      = \left( I \otimes I \otimes I \right)  \\
-\mathbf{\Lambda}_D      = \left( \Lambda \otimes I \otimes I\right) + \left( I \otimes \Lambda \otimes I\right) + \left( I \otimes I \otimes \Lambda \right)  \\
-\mathbf{\Lambda}_{N, D} = \mathbf{\Lambda}_N + \mathbf{\Lambda}_D  \\
+\boldsymbol{\Lambda}_N      = \left( I \otimes I \otimes I \right)  \\
+\boldsymbol{\Lambda}_D      = \left( \Lambda \otimes I \otimes I\right) + \left( I \otimes \Lambda \otimes I\right) + \left( I \otimes I \otimes \Lambda \right)  \\
+\boldsymbol{\Lambda}_{N, D} = \boldsymbol{\Lambda}_N + \boldsymbol{\Lambda}_D  \\
 \end{array}
 \end{equation}
 based upon if the weak form for operator ${\color{burgundy}\mathbf{A}}^e$ has interpolated values, derivatives, or both, respectively, at quadrature points.
@@ -184,15 +184,15 @@ where ${\color{blue(ncs)}\mathbf{B}}$ is a basis interpolating to the eigenspace
 ${\color{applegreen}\mathbf{D}}$ is computed from the eigenvalues of this diagonalization and the average element coefficient value, from Definition \ref{def:averageelementcoefficient},
 \begin{equation}
 \begin{array}{c c}
-\mathbf{\Lambda}^e = \bar{k}^e \mathbf{\Lambda},  &  \mathbf{\Lambda}^{e, +} = \frac{1}{\bar{k}^e} \mathbf{\Lambda}^{+}
+\boldsymbol{\Lambda}^e = \bar{k}^e \boldsymbol{\Lambda},  &  \boldsymbol{\Lambda}^{e, +} = \frac{1}{\bar{k}^e} \boldsymbol{\Lambda}^{+}
 \end{array}
 \end{equation}
 where the value of $\mathbf{\Lambda}$ is given by
 \begin{equation}
 \begin{array}{c}
-\mathbf{\Lambda}_N      = \left( I \otimes I \otimes I \right)  \\
-\mathbf{\Lambda}_D      = \left( \Lambda \otimes I \otimes I\right) + \left( I \otimes \Lambda \otimes I\right) + \left( I \otimes I \otimes \Lambda \right)  \\
-\mathbf{\Lambda}_{N, D} = \mathbf{\Lambda}_N + \mathbf{\Lambda}_D  \\
+\boldsymbol{\Lambda}_N      = \left( I \otimes I \otimes I \right)  \\
+\boldsymbol{\Lambda}_D      = \left( \Lambda \otimes I \otimes I\right) + \left( I \otimes \Lambda \otimes I\right) + \left( I \otimes I \otimes \Lambda \right)  \\
+\boldsymbol{\Lambda}_{N, D} = \boldsymbol{\Lambda}_N + \boldsymbol{\Lambda}_D  \\
 \end{array}
 \end{equation}
 based upon if the weak form for operator ${\color{burgundy}\mathbf{A}}^e$ has interpolated values, derivatives, or both, respectively, at quadrature points.
