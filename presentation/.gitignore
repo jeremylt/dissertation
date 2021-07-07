@@ -4,6 +4,9 @@
 **/*.lof
 **/*.log
 **/*.lot
+**/*.nav
 **/*.out
+**/*.snm
 **/*.toc
 **/*.pdf
+**/*.vrb
