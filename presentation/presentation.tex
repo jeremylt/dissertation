@@ -239,6 +239,10 @@ Weak form for an arbitrary second order PDE \cite{brown2010efficient}:\\
 \label{eq:weak_form}
 \end{equation}
 
+\begin{flushleft}
+where
+\end{flushleft}
+
 \begin{itemize}
 
 \item $\cdot$ - contraction over fields\\
@@ -246,6 +250,10 @@ Weak form for an arbitrary second order PDE \cite{brown2010efficient}:\\
 \item $:$ - contraction over fields and spatial dimensions\\
 
 \end{itemize}
+
+~\\
+
+Note: pointwise functions $f_0$ and $f_1$ do not depend upon discretization\\
 
 \end{center}
 \end{frame}
@@ -274,6 +282,8 @@ Galerkin form for an arbitrary second order PDE:\\
 \item ${\color{applegreen}\mathbf{W}}^e$ - quadrature weights\\
 
 \item $\Lambda$ - pointwise multiplication at quadrature points\\
+
+\item $u^e = {\color{blue(ncs)}\mathbf{N}}^e \mathcal{E}^e u$ and $\nabla u^e = \lbrace {\color{blue(ncs)}\mathbf{D}}_i^e \mathcal{E}^e u \rbrace_{i = 0}^{d - 1}$
 
 \end{itemize}
 
@@ -378,13 +388,15 @@ Our function can be diagonalized by the standard Fourier modes:
 
 ~\\
 
+~\\
+
 If for all grid functions $\varphi \left( \theta, x \right)$
+
+\vspace{-4mm}
 
 \begin{equation}
 L_h \varphi \left( \theta, x \right) = \tilde{L}_h \left( \theta \right) \varphi \left( \theta, x \right)
 \end{equation}
-
-~\\
 
 then $\tilde{L}_h \left( \theta \right) = \sum_{\kappa \in V} s_\kappa e^{\imath \theta \kappa}$ is the {\bf symbol} of $L_h$\\
 
@@ -397,7 +409,7 @@ then $\tilde{L}_h \left( \theta \right) = \sum_{\kappa \in V} s_\kappa e^{\imath
 \begin{center}
 \frametitle{LFA Background}
 
-For a $q \times q$ system of equations, the matrix symbol is given by
+For a $q \times q$ system of equations, the matrix symbol is given by:
 
 \begin{equation}
 \mathbf{L}_h =
@@ -438,11 +450,8 @@ where
 \end{flushleft}
 
 \begin{equation}
-{\color{burgundy}\mathbf{A}}^e = {\color{blue(ncs)}\mathbf{B}}^T {\color{applegreen}\mathbf{D}} {\color{blue(ncs)}\mathbf{B}}
-\label{eq:localoperator}
-\end{equation}
-
-\begin{equation}
+{\color{burgundy}\mathbf{A}}^e = {\color{blue(ncs)}\mathbf{B}}^T {\color{applegreen}\mathbf{D}} {\color{blue(ncs)}\mathbf{B}},
+\hspace{5mm}
 \mathbf{Q} =
 \begin{bmatrix}
     \mathbf{I}   \\
@@ -455,7 +464,6 @@ where
     0      && 0      && \cdots && 1      \\
     1      && 0      && \cdots && 0      \\
 \end{bmatrix}
-\label{eq:fouriermodelocalization1d}
 \end{equation}
 
 \end{center}
@@ -552,9 +560,7 @@ end
 
 ~\\
 
-low frequencies - $\theta \in T^{\text{low}} = \left[ - \pi / 2, \pi / 2 \right)^d$\\
-
-high frequencies - $\theta \in T^{\text{high}} = \left[ - \pi / 2, 3 \pi / 2 \right)^d \setminus T^{\text{low}}$
+Goal: decrease spectral radius with preconditioners
 
 \end{center}
 \end{frame}
@@ -567,11 +573,17 @@ high frequencies - $\theta \in T^{\text{high}} = \left[ - \pi / 2, 3 \pi / 2 \ri
 
 Error propagation operator for smoothers given by
 
+\vspace{-4mm}
+
 \begin{equation}
 \mathbf{S} = \mathbf{I} - \mathbf{M}^{-1} {\color{burgundy}A}
 \end{equation}
 
+~\\
+
 with a symbol given by
+
+\vspace{-4mm}
 
 \begin{equation}
 \tilde{\mathbf{S}} \left( \boldsymbol{\theta}, \omega \right) = \mathbf{I} - \tilde{\mathbf{M}}^{-1} \left( \boldsymbol{\theta}, \omega \right) \tilde{{\color{burgundy}A}} \left( \boldsymbol{\theta} \right)
@@ -588,11 +600,17 @@ with a symbol given by
 
 Jacobi smoothing given by
 
+\vspace{-4mm}
+
 \begin{equation}
 \mathbf{M}^{-1} = \omega \hspace{1mm} \diag \left( {\color{burgundy}A} \right)^{-1}
 \end{equation}
 
+~\\
+
 with an error symbol given by
+
+\vspace{-4mm}
 
 \begin{equation}
 \tilde{\mathbf{S}} \left( \boldsymbol{\theta}, \omega \right) = \mathbf{I} - \omega \hspace{1mm} \left( \mathbf{Q}^T \diag \left( {\color{burgundy}A}^e \right) \mathbf{Q} \right)^{-1} \tilde{{\color{burgundy}A}} \left( \boldsymbol{\theta} \right)
@@ -613,9 +631,7 @@ with an error symbol given by
 
 ~\\
 
-low frequencies - $\theta \in T^{\text{low}} = \left[ - \pi / 2, \pi / 2 \right)^d$\\
-
-high frequencies - $\theta \in T^{\text{high}} = \left[ - \pi / 2, 3 \pi / 2 \right)^d \setminus T^{\text{low}}$
+Moderate reduction in spectral radius of symbol
 
 \end{center}
 \end{frame}
@@ -682,9 +698,7 @@ with $\tilde{\color{burgundy}A}_J$ being the symbol of the Jacobi preconditioner
 
 ~\\
 
-low frequencies - $\theta \in T^{\text{low}} = \left[ - \pi / 2, \pi / 2 \right)^d$\\
-
-high frequencies - $\theta \in T^{\text{high}} = \left[ - \pi / 2, 3 \pi / 2 \right)^d \setminus T^{\text{low}}$
+Improved reduction in spectral radius of symbol
 
 \end{center}
 \end{frame}
@@ -730,7 +744,7 @@ Grid transfer operators and coarse representation differentiate\\$h$-multigrid a
 \begin{center}
 \frametitle{Two-Grid Multigrid Error}
 
-The definition of the symbol follows naturally\\
+The definition of the symbol follows naturally:\\
 
 \begin{equation}
 \tilde{\mathbf{E}}_{\text{2MG}} \left( \boldsymbol{\theta} \right) = \tilde{{\color{burgundy}\mathbf{S}}}_f \left( \boldsymbol{\theta}, \omega \right) \left( \mathbf{I} - \tilde{{\color{burgundy}\mathbf{P}}}_{\text{ctof}} \left( \boldsymbol{\theta} \right) \tilde{{\color{burgundy}\mathbf{A}}}_c^{-1} \left( \boldsymbol{\theta} \right) \tilde{{\color{burgundy}\mathbf{R}}}_{\text{ftoc}} \left( \boldsymbol{\theta} \right) \tilde{{\color{burgundy}\mathbf{A}}}_f \left( \boldsymbol{\theta} \right) \right) \tilde{{\color{burgundy}\mathbf{S}}}_f \left( \boldsymbol{\theta}, \omega \right)
@@ -771,8 +785,8 @@ $p$-multigrid prolongation can be represented as an interpolation\\from the coar
   \begin{column}{0.45\textwidth}
   \begin{equation}
   \begin{gathered}
-  {\color{burgundy}\mathbf{P}}_{\text{ctof}} = \mathbf{P}_f^T \mathbf{G}_f^T {\color{burgundy}\mathbf{P}}_e \mathbf{G}_c \mathbf{P}_c\\
-  {\color{burgundy}\mathbf{P}}_e = {\color{blue(ncs)}\mathbf{I}} {\color{applegreen}\mathbf{D}}_{\text{scale}} {\color{blue(ncs)}\mathbf{B}}_{\text{ctof}}
+  {\color{burgundy}\mathbf{P}}_{\text{ctof}} = \mathbf{P}_f^T \mathbf{G}_f^T {\color{burgundy}\mathbf{P}}^e \mathbf{G}_c \mathbf{P}_c\\
+  {\color{burgundy}\mathbf{P}}^e = {\color{blue(ncs)}\mathbf{I}} {\color{applegreen}\mathbf{D}}_{\text{scale}} {\color{blue(ncs)}\mathbf{B}}_{\text{ctof}}
   \end{gathered}
   \end{equation}
 
@@ -791,13 +805,11 @@ $p$-multigrid prolongation can be represented as an interpolation\\from the coar
 
 \includegraphics[height=3.9cm]{../img/pmultigridSymbol1D}
 \includegraphics[height=3.9cm]{../img/pmultigridSymbol2D}
-{\small $p$-multigrid with third order Chebyshev on quadratic to linear elements}\\
+{\small $p$-multigrid with third order Chebyshev on quartic to quadratic elements}\\
 
 ~\\
 
-low frequencies - $\theta \in T^{\text{low}} = \left[ - \pi / 2, \pi / 2 \right)^d$\\
-
-high frequencies - $\theta \in T^{\text{high}} = \left[ - \pi / 2, 3 \pi / 2 \right)^d \setminus T^{\text{low}}$
+Significant reduction in spectral radius
 
 \end{center}
 \end{frame}
@@ -891,8 +903,8 @@ $h$-multigrid prolongation can be represented as an interpolation\\from the coar
   \begin{column}{0.45\textwidth}
   \begin{equation}
   \begin{gathered}
-  {\color{burgundy}\mathbf{P}}_{\text{ctof}} = \mathbf{P}_f^T \mathbf{G}_f^T {\color{burgundy}\mathbf{P}}_e \mathbf{G}_c \mathbf{P}_c\\
-  {\color{burgundy}\mathbf{P}}_e = {\color{blue(ncs)}\mathbf{I}} {\color{applegreen}\mathbf{D}}_{\text{scale}} {\color{blue(ncs)}\mathbf{B}}_{\text{ctof}}
+  {\color{burgundy}\mathbf{P}}_{\text{ctof}} = \mathbf{P}_f^T \mathbf{G}_f^T {\color{burgundy}\mathbf{P}}^e \mathbf{G}_c \mathbf{P}_c\\
+  {\color{burgundy}\mathbf{P}}^e = {\color{blue(ncs)}\mathbf{I}} {\color{applegreen}\mathbf{D}}_{\text{scale}} {\color{blue(ncs)}\mathbf{B}}_{\text{ctof}}
   \end{gathered}
   \end{equation}
 
@@ -915,9 +927,7 @@ $h$-multigrid prolongation can be represented as an interpolation\\from the coar
 
 ~\\
 
-low frequencies - $\theta \in T^{\text{low}} = \left[ - \pi / 2, \pi / 2 \right)^d$\\
-
-high frequencies - $\theta \in T^{\text{high}} = \left[ - \pi / 2, 3 \pi / 2 \right)^d \setminus T^{\text{low}}$
+Significant reduction in spectral radius
 
 \end{center}
 \end{frame}
@@ -968,11 +978,33 @@ Results agree with previous work \cite{he2020two}\\
 \frametitle{BDDC Overview}
 
 \includegraphics[height=4.5cm]{../img/HighOrderBDDCMeshInterface}\\
-{\small High-Order Single Element Subdomain}\\
+{\small High-Order Single Element Subdomains}\\
 
 ~\\
 
-BDDC is non-overlapping domain decomposition method by Dohrmann \cite{dohrmann2003preconditioner}
+BDDC is non-overlapping domain decomposition method by Dohrmann \cite{dohrmann2003preconditioner}\\
+
+\end{center}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\begin{center}
+\frametitle{Broken Subdomains}
+
+\includegraphics[height=4.5cm]{../img/HighOrderBDDCMeshPrimal}
+\hspace{10mm}
+\includegraphics[height=4.5cm]{../img/HighOrderBDDCMeshInterfaceBroken}\\
+{\small Non-Overlapping Domain Decomposition of High-Order Mesh}\\
+
+~\\
+
+Global problem only "partially subassembled" on primal ($\Pi$) vertices\\
+
+~\\
+
+Remaining interface nodes replicated across broken interface
 
 \end{center}
 \end{frame}
@@ -983,19 +1015,20 @@ BDDC is non-overlapping domain decomposition method by Dohrmann \cite{dohrmann20
 \begin{center}
 \frametitle{Subassembled Problem}
 
-\includegraphics[height=4.5cm]{../img/HighOrderBDDCMeshPrimal}
-\hspace{10mm}
-\includegraphics[height=4.5cm]{../img/HighOrderBDDCMeshInterfaceBroken}\\
-{\small Non-Overlapping Domain Decomposition of High-Order Mesh}\\
-
 \begin{equation}
-\hat{\color{burgundy}\mathbf{A}} = \sum_{e = 1}^N \mathbf{R}^{e, T} \hat{\color{burgundy}\mathbf{A}}^e \mathbf{R}^e, \hspace{10mm}
+\hat{\color{burgundy}\mathbf{A}}^{-1} = \sum_{e = 1}^N \mathbf{R}^{e, T}_i \hat{\color{burgundy}\mathbf{A}}^{e, -1} \mathbf{R}^e_i, \hspace{10mm}
 \hat{\color{burgundy}\mathbf{A}}^e =
 \left[ \begin{array}{c c}
 {\color{burgundy}\mathbf{A}}_{\text{r}, \text{r}}^e  &  \hat{\color{burgundy}\mathbf{A}}_{\Pi, \text{r}}^{e, T}  \\
 \hat{\color{burgundy}\mathbf{A}}_{\Pi, \text{r}}^e   &  \hat{\color{burgundy}\mathbf{A}}_{\Pi, \Pi}^e            \\
 \end{array} \right]
 \end{equation}
+
+Partially subassembled problem is easier to invert\\
+
+~\\
+
+Injection operator $\mathbf{R}_i$ maps from global space to broken space,\\provides different BDDC variants
 
 \end{center}
 \end{frame}
@@ -1010,7 +1043,7 @@ BDDC is non-overlapping domain decomposition method by Dohrmann \cite{dohrmann20
 \mathbf{R}_1 = \diag \left( \left[ \frac{1}{\lvert \mathcal{N} \left( x_i \right) \rvert} \right] \right)
 \end{equation}
 
-where $\lvert \mathcal{N} \left( x_i \right) \rvert$ is multiplicity across broken spaces\\
+where $\lvert \mathcal{N} \left( x_i \right) \rvert$ is node multiplicity across broken spaces\\
 
 ~\\
 
@@ -1034,7 +1067,7 @@ Cheaper setup than original BDDC but worse conditioning
 \begin{equation}
 \begin{gathered}
 \mathbf{R}_2 = \mathbf{R}_1 - \mathbf{J}^T \boldsymbol{\mathcal{H}}^T, \hspace{10mm} \boldsymbol{\mathcal{H}}^e = - {\color{burgundy}\mathbf{A}}_{\text{I}, \text{I}}^{e, -1} {\color{burgundy}\mathbf{A}}_{\Gamma, \text{I}}^{e, T}\\
-\mathbf{J}^{e, T} v \left( x \right) = \sum_{i \in \mathcal{N} \left( x \right)} \left( \frac{v^e \left( x \right)}{\lvert \mathcal{N} \left( x \right) \rvert} - \frac{v^i \left( x \right)}{\lvert \mathcal{N} \left( x \right) \rvert} \right), \forall x \in \Gamma^e
+\mathbf{J}^{e, T} v \left( x \right) = \sum_{i \in \mathcal{N} \left( x \right)} \left( \frac{v^j \left( x \right)}{\lvert \mathcal{N} \left( x \right) \rvert} - \frac{v^i \left( x \right)}{\lvert \mathcal{N} \left( x \right) \rvert} \right), \forall x \in \Gamma^e
 \end{gathered}
 \end{equation}
 
