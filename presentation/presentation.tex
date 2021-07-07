@@ -1179,7 +1179,62 @@ Dirichlet BDDC important for single high-order element subdomains
 \begin{center}
 \frametitle{BDDC Smoother for $P$-Multigrid}
 
-New Data Goes Here\\
+\begin{columns}[onlytextwidth]
+  \begin{column}{0.49\textwidth}
+  \begin{center}
+  \includegraphics[width=1.0\textwidth]{../img/DirichletBDDCHighOrderNoRelaxation}
+  {\small Symbol of Error Operator for Dirichlet BDDC of 2D Laplacian for $p = 4$}
+  \end{center}
+  \end{column}
+
+  \begin{column}{0.45\textwidth}
+  \begin{center}
+  Dirichlet BDDC smoother still has large spectral radius, so we introduce relaxation parameter\\
+
+  ~\\
+
+  \begin{equation}
+  \tilde{\mathbf{E}} \left( \boldsymbol{\theta}, \omega \right) = \mathbf{I} - \omega \tilde{\mathbf{M}}_2^{-1} \tilde{{\color{burgundy}A}} \left( \boldsymbol{\theta} \right)
+  \end{equation}
+  \end{center}
+  \end{column}
+\end{columns}
+
+\end{center}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\begin{center}
+\frametitle{BDDC Smoother for $P$-Multigrid}
+
+\begin{table}[ht!]
+\begin{center}
+\begin{tabular}{l cc}
+  \toprule
+  $p_{\text{fine}}$ to $p_{\text{coarse}}$  & $\rho_{\min}$ & $\omega_{\text{opt}}$  \\
+  \toprule
+  $p = 2$ to $p = 1$   &  0.121 & 0.66  \\
+  \midrule
+  $p = 4$ to $p = 2$   &  0.272 & 0.48  \\
+  $p = 4$ to $p = 1$   &  0.281 & 0.47  \\
+  \midrule
+  $p = 8$ to $p = 4$   &  0.409 & 0.38  \\
+  $p = 8$ to $p = 1$   &  0.462 & 0.32  \\
+  \midrule
+  $p = 16$ to $p = 8$  &  0.504 & 0.32  \\
+  $p = 16$ to $p = 1$  &  0.597 & 0.23  \\
+  \bottomrule
+\end{tabular}
+\end{center}
+\label{table:two_grid_bddc_smoother}
+\end{table}
+{\small Two-Grid Convergence Factor for $p$-Multigrid with BDDC Smoother for 2D Laplacian}\\
+
+~\\
+
+Weighted Dirichlet BDDC smoother better supports rapid coarsening\\
 
 \end{center}
 \end{frame}
