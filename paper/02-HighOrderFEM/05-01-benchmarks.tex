@@ -1,0 +1,28 @@
+The CEED uses Bakeoff Problems (BPs) to test and compare the performance of high-order finite element implementations.
+The definitions of these bakeoff problems are given on the CEED website \cite{ceed-bps} and are sumarize in Table \ref{table:ceedbps}.
+
+\begin{table}[ht!]
+\begin{center}
+\begin{tabular}{l l c c}
+  \toprule
+  BP  & Problem         & components & quadrature points  \\
+  \toprule
+  BP1 & mass matix      & $1$        & $q = p + 2$        \\
+  BP2 & mass matix      & $3$        & $q = p + 2$        \\
+  \midrule
+  BP3 & stiffness matix & $1$        & $q = p + 2$        \\
+  BP4 & stiffness matix & $3$        & $q = p + 2$        \\
+  \midrule
+  BP5 & stiffness matix & $1$        & $q = p + 1$        \\
+  BP6 & stiffness matix & $3$        & $q = p + 1$        \\
+  \bottomrule
+\end{tabular}
+\end{center}
+\caption{CEED Bakeoppf Problems}
+\label{table:ceedbps}
+\end{table}
+
+In these BPs, the stiffness matrix is given by the Laplacian.
+These problems use nodal bases on the Gauss-Legendre-Lobatto points with order $p$ nodal basis functions, and for BP5 and BP6 the quadrature points are collocated with the nodal points.
+
+TODO: ADD PERFORMANCE PLOTS

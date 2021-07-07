@@ -8,8 +8,6 @@ E_{H^1 \left( \Omega \right)} \leq C \left( p \right) h^{\text{min} \left( k, p 
 where $p$ is the polynomial order of the mesh, $h$ is the size of the finite elements, and $k$ is the order of the Sobolev space to which the true solution belongs.
 The coefficient $C$ does depend upon the polynomial order of the finite element basis, but in practice the exponential term dominates this error approximation.
 
-EXPAND SPECTRAL ACCURACY AND LIMITATIONS THEREIN
-
 In practical problems, the smoothness of the solution may prevent spectral convergence from being achieved; however, high-order finite elements will still offer convergence that is no worse than the convergence on a comparable low-order mesh with a larger number of elements.
 In those cases, high-order finite elements implemented in a matrix-free fashion still offer the storage and FLOPs benefits detailed above in Section \ref{sec:storageandflops}.
 The convergence of high-order methods have been extensively investigated; for further discussion, see \cite{babuska1982rates}, among others.
