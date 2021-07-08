@@ -125,7 +125,7 @@ This work is supported by the Exascale Computing Project (17-SC-20-SC), a collab
 
 ~\\
 
-\item Further, we investigate LFA of $p$-multigrid with a BDDC smoother
+\item We investigate LFA of $p$-multigrid with a BDDC smoother
 
 \end{itemize}
 
@@ -142,7 +142,7 @@ Transparency and reproducibility are the lifeblood of scientific advancement\\
 
 ~\\
 
-All software and data used in this dissertation is open source\\
+All software and data used in this dissertation is open source:\\
 
 ~\\
 
@@ -231,7 +231,7 @@ where
 
 ~\\
 
-Note: pointwise functions $f_0$ and $f_1$ do not depend upon discretization\\
+Note: pointwise functions $f_0$ and $f_1$ don't depend upon the discretization\\
 
 \end{center}
 \end{frame}
@@ -307,7 +307,7 @@ Galerkin form for an arbitrary second order PDE:\\
 
 ~\\
 
-\item High-order operators are ill conditioned\\
+\item High-order operators are ill-conditioned\\
 
 ~\\
 
@@ -349,7 +349,7 @@ where
 
 \item $s_\kappa \in \mathbb{R}$ are constant coefficients
 
-\item $w_h \left( x \right)$ is a $l^2$ function on $G_h$
+\item $w_h \left( x \right)$ is an $l^2$ function on $G_h$
 
 \end{itemize}
 
@@ -453,7 +453,7 @@ where
 \begin{center}
 \frametitle{LFA of High-Order FEM}
 
-Symbol naturally extends to multiple components and higher dimensions\\
+Natural extension to multiple components and higher dimensions:\\
 
 ~\\
 
@@ -577,7 +577,7 @@ with a symbol given by
 \frametitle{Error Symbol}
 
 \includegraphics[height=5.2cm]{../img/convergenceFactors}\\
-{\small Iterations Required to Target Error Tolerances}\\
+{\small Iterations required to target error tolerances}\\
 
 ~\\
 
@@ -973,11 +973,11 @@ Results agree with previous work \cite{he2020two}\\
 \frametitle{BDDC Overview}
 
 \includegraphics[height=4.5cm]{../img/HighOrderBDDCMeshInterface}\\
-{\small High-Order Single Element Subdomains}\\
+{\small High-order single element subdomains}\\
 
 ~\\
 
-BDDC is non-overlapping domain decomposition method by Dohrmann \cite{dohrmann2003preconditioner}\\
+BDDC - non-overlapping domain decomposition method by Dohrmann \cite{dohrmann2003preconditioner}\\
 
 \end{center}
 \end{frame}
@@ -991,7 +991,7 @@ BDDC is non-overlapping domain decomposition method by Dohrmann \cite{dohrmann20
 \includegraphics[height=4.5cm]{../img/HighOrderBDDCMeshPrimal}
 \hspace{10mm}
 \includegraphics[height=4.5cm]{../img/HighOrderBDDCMeshInterfaceBroken}\\
-{\small Non-Overlapping Domain Decomposition of High-Order Mesh}\\
+{\small Non-overlapping domain decomposition of high-order mesh}\\
 
 ~\\
 
@@ -1023,7 +1023,7 @@ Partially subassembled problem is easier to invert\\
 
 ~\\
 
-Injection operator $\mathbf{R}_i$ maps from global space to broken space,\\provides different BDDC variants
+Injection operator $\mathbf{R}_i$ maps from global space to broken space\\and provides different BDDC variants
 
 \end{center}
 \end{frame}
@@ -1123,7 +1123,7 @@ where
 
 ~\\
 
-\item Cheaper to compute fast diagonalization solver than invert\\assembled subdomain matrices\\
+\item Cheaper to compute Fast Diagonalization solver than invert\\assembled subdomain matrices\\
 
 ~\\
 
@@ -1196,7 +1196,7 @@ Symbols of injection operators are relatively straightforward\\
 \end{center}
 \label{table:macro_element_bddc}
 \end{table}
-{\small Condition numbers and maximal eigenvalues for low-order macro-elements}\\
+{\small Condition numbers and maximal eigenvalues\\for low-order macro-elements}\\
 
 ~\\
 
@@ -1227,7 +1227,7 @@ Exactly reproduces original work on LFA of low-order subdomains
 \end{center}
 \label{table:high_order_element_bddc}
 \end{table}
-{\small Condition numbers and maximal eigenvalues for single high-order element subdomains}\\
+{\small Condition numbers and maximal eigenvalues\\for single high-order element subdomains}\\
 
 ~\\
 
@@ -1240,12 +1240,12 @@ Single high-order element subdomains less well conditioned
 
 \begin{frame}
 \begin{center}
-\frametitle{High vs Low Order BDDC}
+\frametitle{Low vs High-Order BDDC}
 
 \includegraphics[height=5.3cm]{../img/lowVsHighLumped_tall}
 \hspace{0.3cm}
 \includegraphics[height=5.3cm]{../img/lowVsHighDirichlet_tall}
-{\small Low-Order and High-Order Subdomain Condition Number}\\
+{\small Low-order and high-order subdomain condition number}\\
 
 ~\\
 
@@ -1264,7 +1264,7 @@ Dirichlet BDDC important for single high-order element subdomains
   \begin{column}{0.49\textwidth}
   \begin{center}
   \includegraphics[width=1.0\textwidth]{../img/DirichletBDDCHighOrderNoRelaxation}
-  {\small Symbol of Error Operator for Dirichlet BDDC of 2D Laplacian for $p = 4$}
+  {\small Symbol of error operator for Dirichlet BDDC of 2D Laplacian for $p = 4$}
   \end{center}
   \end{column}
 
@@ -1312,7 +1312,7 @@ Dirichlet BDDC important for single high-order element subdomains
 \end{center}
 \label{table:two_grid_bddc_smoother_vs_cubic_chebyshev}
 \end{table}
-{\small Two-Grid Convergence Factor for $p$-Multigrid with BDDC\\vs Cubic Chebyshev Smoothing for 2D Laplacian}\\
+{\small Two-grid convergence factor for $p$-multigrid with BDDC\\vs cubic Chebyshev smoothing for 2D Laplacian}\\
 
 ~\\
 
@@ -1349,7 +1349,7 @@ Weighted Dirichlet BDDC smoother better supports rapid coarsening\\
 \end{center}
 \label{table:two_grid_bddc_smoother_vs_quadratic_chebyshev}
 \end{table}
-{\small Two-Grid Convergence Factor for $p$-Multigrid with BDDC\\vs Quadratic Chebyshev Smoothing for 2D Laplacian}\\
+{\small Two-grid convergence factor for $p$-multigrid with BDDC\\vs quadratic Chebyshev smoothing for 2D Laplacian}\\
 
 ~\\
 
