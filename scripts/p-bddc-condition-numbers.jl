@@ -5,7 +5,6 @@ using CSV
 using DataFrames
 
 # setup
-numberfineelements1d = 1
 dimension = 2
 mesh = Mesh2D(1.0, 1.0)
 conditionnumbers = DataFrame()

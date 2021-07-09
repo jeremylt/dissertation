@@ -13,7 +13,7 @@ These methods can be used as solvers or as preconditioners for other iterative s
 Geometric multigrid has become a common component in many high performance computing applications and is available in many packages, such as PETSc.
 May et.al. \cite{may2016extreme} highlighted several benefits to geometric multigrid in extreme scale computing.
 Specifically, geometric multigrid has a scalable setup phase, the ability to use highly performance matrix-free smoothers on all levers, and the ability to use identical stencils (or functions that apply the action of the stencil matrix-free) for all coarse level operators.
-Geometric multigrid is therefore seen as "undoubtedly {\textit the preconditioner of choice}" for elliptic problems due to this scalability and resolution independent convergence.
+Geometric multigrid is therefore seen as "undoubtedly {\textit{the preconditioner of choice}}" for elliptic problems due to this scalability and resolution independent convergence.
 
 H-multigrid, which is the typical type of geometric multigrid used for low-order discretizations, coarsens the mesh by aggregating multiple elements.
 P-multigrid, developed by R{\o}nquist and Patera \cite{ronquist1987spectral}, is instead based on decreasing the order of the bases in high-order or spectral finite element discretizations.
