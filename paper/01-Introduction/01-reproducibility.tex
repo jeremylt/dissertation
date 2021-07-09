@@ -5,7 +5,7 @@ The Local Fourier Analysis can be reproduced with the Julia package \href{https:
 LFAToolkit.jl is a toolkit for analyzing the performance of preconditioners for arbitrary, user provided weak forms of second order partial differential equations.
 
 The implementation of the high-order matrix-free finite element operators can be found in the \href{https://www.github.com/CEED/libCEED}{libCEED} GitHub repository, along with benchmarking, fluid dynamics, and solid mechanics mini-applications.
-libCEED \cite{libceed-user-manual} \cite{scipy2020} is a low-level API library for the efficient high-order discretization methods developed by the ECP co-design Center for Efficient Exascale Discretizations (CEED).
+libCEED \cite{libceed} \cite{libceed-user-manual} \cite{scipy2020} is a low-level API library for the efficient high-order discretization methods developed by the ECP co-design Center for Efficient Exascale Discretizations (CEED).
 While the focus is on high-order finite elements, the approach used in libCEED is mostly algebraic and thus applicable to other discretizations in factored form.
 
 Finally, the linear and non-linear solver and preconditioning infrastructure can be found in the scientific toolkit \href{https://www.mcs.anl.gov/petsc/}{PETSc} \cite{petsc-user-ref}.

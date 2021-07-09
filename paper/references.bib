@@ -55,6 +55,42 @@
   year = {2020}
 }
 
+@article{fischer2020scalability,
+  title = {Scalability of High-Performance {PDE} Solvers},
+  author = {
+    Fischer, Paul and
+    Min, Misun and
+    Rathnayake, Thilina and
+    Dutta, Som and
+    Kolev, Tzanio and
+    Dobrev, Veselin and
+    Camier, Jean-Sylvain and
+    Kronbichler, Martin and
+    Warburton, Tim and
+    Swirydowicz, Kasia and
+    Brown, Jed
+  },
+  doi = {10.1177%2F1094342020915762},
+  url = {https://www.osti.gov/biblio/1660236},
+  journal = {International Journal of High Performance Computing Applications},
+  number = 5,
+  volume = 34,
+  year = {2020},
+  month = {6}
+}
+
+@book{deville2002highorder,
+  title = {High-order methods for incompressible fluid flow},
+  author = {
+    Deville, Michel O and
+    Fischer, Paul F and
+    Mund, Ernest H
+  },
+  year = {2002},
+  publisher = {Cambridge University Press},
+  isbn = {0-521-45309-7}
+}
+
 % ------------------------------------------------------------------------------
 % Hardware constraints
 % ------------------------------------------------------------------------------
@@ -340,7 +376,93 @@
   publisher = {Springer}
 }
 
+@incollection{stuben1982multigrid,
+  title = {Multigrid methods: Fundamental algorithms, model problem analysis and applications},
+  author = {
+    St{\"u}ben, Klaus and
+    Trottenberg, Ulrich
+  },
+  booktitle = {Multigrid methods},
+  pages = {1--176},
+  year = {1982},
+  publisher = {Springer}
+}
+
+@book{briggs2000multigrid,
+  title = {A multigrid tutorial},
+  author = {
+    Briggs, William L and
+    Henson, Van Emden and
+    McCormick, Steve F
+  },
+  year = {2000},
+  publisher = {SIAM}
+}
+
+@article{kronbichler2019multigrid,
+  title={Multigrid for matrix-free high-order finite element computations on graphics processors},
+  author={Kronbichler, Martin and Ljungkvist, Karl},
+  journal={ACM Transactions on Parallel Computing (TOPC)},
+  volume={6},
+  number={1},
+  pages={1--32},
+  year={2019},
+  publisher={ACM New York, NY, USA},
+  doi={10.1145/3322813}
+}
+
+@article{yserentant1993old,
+  title = {Old and new convergence proofs for multigrid methods},
+  author = {Yserentant, Harry},
+  journal = {Acta numerica},
+  volume = {2},
+  pages = {285--326},
+  year = {1993},
+  publisher = {Cambridge University Press}
+}
+
 % -- Domain Decomposition ------------------------------------------------------
+@book{dryja1989towards,
+  title = {Towards a unified theory of domain decomposition algorithms for elliptic problems},
+  author = {
+    Dryja, Maksymilian and
+    Widlund, Olof B
+  },
+  year = {1989},
+  publisher = {New York University, Courant Institute of Mathematical Sciences, Division of~…}
+}
+
+@book{schwarz1972gesammelte,
+  title =  {Gesammelte mathematische abhandlungen},
+  author = {Schwarz, Hermann Amandus},
+  volume = {2},
+  year = {1890},
+  publisher = {Springer},
+  pages = {133--143},
+  origdate = {1870},
+  origtitle = {Vierteljahrsschrift der Naturforschenden Gesellschaft},
+  origlocation = {Zurich}
+}
+
+@article{widlund1987additive,
+  title = {An additive variant of the Schwarz alternating method for the case of many subregions},
+  author = {
+    Widlund, Olof and
+    Dryja, Maksymilian
+  },
+  year = {1987},
+  publisher = {Department of Computer Science, Courant Institute}
+}
+
+@article{dryja1989additive,
+  title = {An additive Schwarz algorithm for two-and three-dimensional finite element elliptic problems},
+  author = {Dryja, Maksymilian},
+  journal = {Domain decomposition methods},
+  pages = {168--172},
+  year = {1989},
+  publisher = {Society for Industrial and Applied Mathematics Philadelphia, Pennsylvania}
+}
+
 @article{fischer1997overlapping,
   title = "An overlapping {S}chwarz method for spectral element solution of the incompressible {Navier-Stokes} equations",
   author = {Fischer, Paul F},
@@ -390,14 +512,18 @@
 }
 
 @article{farhat2000scalable,
-  title={A scalable dual-primal domain decomposition method},
-  author={Farhat, Charbel and Lesoinne, Michael and Pierson, Kendall},
-  journal={Numerical linear algebra with applications},
-  volume={7},
-  number={7-8},
-  pages={687--714},
-  year={2000},
-  publisher={Wiley Online Library}
+  title = {A scalable dual-primal domain decomposition method},
+  author = {
+    Farhat, Charbel and
+    Lesoinne, Michael and
+    Pierson, Kendall
+  },
+  journal = {Numerical linear algebra with applications},
+  volume = {7},
+  number = {7-8},
+  pages = {687--714},
+  year = {2000},
+  publisher =   {Wiley Online Library}
 }
 
 @article{fragakis2003mosaic,
@@ -429,25 +555,25 @@
 }
 
 @article{mandel1993balancing,
-  title={Balancing domain decomposition},
-  author={Mandel, Jan},
-  journal={Communications in numerical methods in engineering},
-  volume={9},
-  number={3},
-  pages={233--241},
-  year={1993},
-  publisher={Wiley Online Library}
+  title = {Balancing domain decomposition},
+  author = {Mandel, Jan},
+  journal = {Communications in numerical methods in engineering},
+  volume = {9},
+  number = {3},
+  pages = {233--241},
+  year = {1993},
+  publisher = {Wiley Online Library}
 }
 
 @article{mandel2007bddc,
-  title={{BDDC} and {FETI-DP} under minimalist assumptions},
-  author={Mandel, Jan and Soused{\'\i}k, Bed{\v{r}}ich},
-  journal={Computing},
-  volume={81},
-  number={4},
-  pages={269--280},
-  year={2007},
-  publisher={Springer}
+  title = {{BDDC} and {FETI-DP} under minimalist assumptions},
+  author = {Mandel, Jan and Soused{\'\i}k, Bed{\v{r}}ich},
+  journal = {Computing},
+  volume = {81},
+  number = {4},
+  pages = {269--280},
+  year = {2007},
+  publisher = {Springer}
 }
 
 @article{rixen1999theoretical,
@@ -520,12 +646,12 @@
 }
 
 @techreport{couzy1995spectral,
-  title={Spectral element discretization of the unsteady {Navier-Stokes} equations and its iterative solution on parallel computers},
-  author={
+  title = {Spectral element discretization of the unsteady {Navier-Stokes} equations and its iterative solution on parallel computers},
+  author = {
     Couzy, Wouter
   },
-  year={1995},
-  institution={EPFL}
+  year = {1995},
+  institution = {EPFL}
 }
 
 @article{pavarino2010bddc,
@@ -728,35 +854,53 @@
   mrreviewer = {Dietrich Braess},
 }
 
+@phdthesis{rittich2018extending,
+  title = {Extending and automating {F}ourier analysis for multigrid methods},
+  author = {Rittich, Hannah},
+  year = {2018},
+  school = {Universit{\"a}t Wuppertal, Fakult{\"a}t f{\"u}r Mathematik und Naturwissenschaften}
+}
+
+@article{maclachlan2011overlapping,
+  author = {MacLachlan, Scott P. and Oosterlee, C. W.},
+  title = {Local {Fourier} analysis for multigrid with overlapping smoothers applied to systems of {PDEs}},
+  journal = {Numerical Linear Algebra with Applications},
+  volume = {18},
+  number = {4},
+  pages = {751-774},
+  keywords = {multigrid, finite-element discretizations, local Fourier analysis},
+  doi = {10.1002/nla.762},
+  year = {2011}
+}
+
 % ------------------------------------------------------------------------------
 % High-Order
 % ------------------------------------------------------------------------------
 
 @article{babuska1982rates,
-  title={On the rates of convergence of the finite element method},
-  author={Babuska, Ivo and Szabo, Barna},
-  journal={International Journal for Numerical Methods in Engineering},
-  volume={18},
-  number={3},
-  pages={323--341},
-  year={1982},
+  title = {On the rates of convergence of the finite element method},
+  author = {Babuska, Ivo and Szabo, Barna},
+  journal = {International Journal for Numerical Methods in Engineering},
+  volume = {18},
+  number = {3},
+  pages = {323--341},
+  year = {1982},
 }
 
 @article{guo1986hp,
-  title={The hp version of the finite element method},
-  author={Guo, B and Babu{\v{s}}ka, I},
-  journal={Computational Mechanics},
-  volume={1},
-  number={1},
-  pages={21--41},
-  year={1986},
-  publisher={Springer}
+  title = {The hp version of the finite element method},
+  author = {Guo, B and Babu{\v{s}}ka, I},
+  journal = {Computational Mechanics},
+  volume = {1},
+  number = {1},
+  pages = {21--41},
+  year = {1986},
+  publisher = {Springer}
 }
 
 % ------------------------------------------------------------------------------
 % Software
 % ------------------------------------------------------------------------------
-
 @misc{libceed-user-manual,
   author       = {Abdelfattah, Ahmad and
                   Barra, Valeria and
@@ -778,6 +922,34 @@
   version      = {0.9},
   doi          = {10.5281/zenodo.4302737},
   url          = {https://doi.org/10.5281/zenodo.4302737}
+}
+
+@article{libceed,
+  doi = {10.21105/joss.02945},
+  url = {https://doi.org/10.21105/joss.02945},
+  year = {2021},
+  publisher = {The Open Journal},
+  volume = {6},
+  number = {63},
+  pages = {2945},
+  author = {
+    Jed Brown and
+    Ahmad Abdelfattah and
+    Valeria Barra and
+    Natalie Beams and
+    Jean-Sylvain Camier and
+    Veselin Dobrev and
+    Yohann Dudouit and
+    Leila Ghaffari and
+    Tzanio Kolev and
+    David Medina and
+    Will Pazner and
+    Thilina Ratnayaka and
+    Jeremy Thompson and
+    Stan Tomov
+  },
+  title = {libCEED: Fast algebra for high-order element-based discretizations},
+  journal = {Journal of Open Source Software}
 }
 
 @TechReport{petsc-user-ref,
@@ -826,7 +998,6 @@
 % ------------------------------------------------------------------------------
 % Navier Stokes
 % ------------------------------------------------------------------------------
-
 @article{giraldoetal2010,
   title = {Semi-Implicit Formulations of the {Navier-Stokes} Equations: Application to Nonhydrostatic Atmospheric Modeling},
   author = {
@@ -869,13 +1040,12 @@
   journal = {Communications in Computational Physics},
   publisher = {Cambridge University Press},
   year = {2011},
-  pages=  {807--827}
+  pages =   {807--827}
 }
 
 % ------------------------------------------------------------------------------
 % CEED Project
 % ------------------------------------------------------------------------------
-
 @misc{ceed-bps,
   title = {{CEED} Bake-off Problems (Benchmarks)},
   howpublished = {\url{https://ceed.exascaleproject.org/bps/}},
@@ -885,10 +1055,9 @@
 % ------------------------------------------------------------------------------
 % Personal Papers
 % ------------------------------------------------------------------------------
-
 @inproceedings{mehraban2021simulating,
-  title={Simulating Compressible and Nearly-Incompressible Linear Elasticity Using an Efficient Parallel Scalable Matrix-Free High-Order Finite Element Method},
-  author={
+  title = {Simulating Compressible and Nearly-Incompressible Linear Elasticity Using an Efficient Parallel Scalable Matrix-Free High-Order Finite Element Method},
+  author = {
     Mehraban, Arash and
     Thompson, Jeremy and
     Brown, Jed and
@@ -896,9 +1065,9 @@
     Barra, Valeria and
     Tufo, Henry
   },
-  booktitle={14th WCCM-ECCOMAS Congress 2020},
-  volume={1400},
-  year={2021}
+  booktitle = {14th WCCM-ECCOMAS Congress 2020},
+  volume = {1400},
+  year = {2021}
 }
 
 @inproceedings{imece2020,
