@@ -1,14 +1,14 @@
 The symbol of the partially subassembled problem is delicate to compute because it requires both modes in the broken element space and the global primal variable space.
 We will form the symbol of the three components of the partially subassembled problem, ${\color{burgundy}\mathbf{A}}_{r, r}^{-1}$, $\hat{\mathbf{S}}_{\Pi}^{-1}$, and $\hat{{\color{burgundy}\mathbf{A}}}_{\Pi, r}$, separately.
 
-The Fourier modes on each broken element subdomain are separate, so the mode mapping operator $\mathbf{Q}$ is not used for the symbol of the subdomain solver.
+The Fourier modes on each broken element subdomain are separate, so the mode localization operator $\mathbf{Q}$ is not used for the symbol of the subdomain solver.
 The subdomain solver is completely in the broken element space and therefore has a very straightforward symbol, given by
 \begin{equation}
 \tilde{\color{burgundy}\mathbf{A}}_{\text{r}, \text{r}}^{-1} \left( \boldsymbol{\theta} \right) = {\color{burgundy}\mathbf{A}}_{\text{r}, \text{r}}^{-1} \odot \left[ e^{\imath \left( \mathbf{x}_j - \mathbf{x}_i \right) \cdot \boldsymbol{\theta} / \mathbf{h}} \right]
 \end{equation}
 where $\mathbf{x}_i$ and $\mathbf{x}_j$ are the coordinates for the nodes in the partially subassembled space.
 
-On the other hand, the Schur complement spans the entire primal space and requires the mode mapping operator for the primal space $\mathbf{Q}_{\Pi}$.
+On the other hand, the Schur complement spans the entire primal space and requires the mode localization operator for the primal space $\mathbf{Q}_{\Pi}$.
 The symbol of the Schur complement is given by
 \begin{equation}
 \tilde{\hat{\mathbf{S}}}_{\Pi}^{-1} \left( \boldsymbol{\theta} \right) = \left( \mathbf{Q}_{\Pi}^T \left( \hat{\mathbf{S}}_{\Pi} \odot \left[ e^{\imath \left( \mathbf{x}_j - \mathbf{x}_i \right) \cdot \boldsymbol{\theta} / \mathbf{h}} \right] \right) \mathbf{Q}_{\Pi} \right)^{-1}
@@ -16,7 +16,7 @@ The symbol of the Schur complement is given by
 where $\mathbf{x}_i$ and $\mathbf{x}_j$ are the coordinates for the nodes in the primal space.
 The primal vertex solve is global across the entire problem, so the corresponding Fourier modes are mapped to the global problem before being solved exactly.
 
-For the mixed primal and subdomain operators, we use the Fourier mode mapping only on the modes corresponding to the primal vertices, giving us
+For the mixed primal and subdomain operators, we use the Fourier mode localization operator only on the modes corresponding to the primal vertices, giving us
 \begin{equation}
 \tilde{\hat{\color{burgundy}\mathbf{A}}}\color{black}_{\text{r}, \Pi} \left( \boldsymbol{\theta} \right) = \left( \hat{\color{burgundy}\mathbf{A}}_{\text{r}, \Pi} \odot \left[ e^{\imath \left( \mathbf{x}_j - \mathbf{x}_i \right) \cdot \boldsymbol{\theta} / \mathbf{h}} \right] \right) \mathbf{Q}_{\Pi}
 \end{equation}
@@ -54,7 +54,7 @@ and the symbol of the mixed primal and subdomain operators are given by
 \tilde{\hat{\color{burgundy}\mathbf{A}}}\color{black}_{\text{r}, \Pi} \left( \boldsymbol{\theta} \right) = \left( \hat{\color{burgundy}\mathbf{A}}_{\text{r}, \Pi} \odot \left[ e^{\imath \left( \mathbf{x}_j - \mathbf{x}_i \right) \cdot \boldsymbol{\theta} / \mathbf{h}} \right] \right) \mathbf{Q}_{\Pi}
 \end{equation}
 and $\tilde{\hat{\color{burgundy}\mathbf{A}}}\color{black}_{\text{r}, \Pi}^T \left( \boldsymbol{\theta} \right)$ is given by the conjugate transpose.
-The portion of the mode mapping operator on the primal nodes and modes is denoted $\mathbf{Q}_{\Pi}$.
+The portion of the mode localization operator on the primal nodes and modes is denoted $\mathbf{Q}_{\Pi}$.
 The coordinates $\mathbf{x}_i$ and $\mathbf{x}_j$ are given in the partially subassembled space or primal space, as appropriate.
 \label{def:subassembled_symbol}
 \end{definition}

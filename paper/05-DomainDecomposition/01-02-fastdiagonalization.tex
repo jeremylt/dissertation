@@ -53,7 +53,22 @@ Fischer and Lottes \cite{fischer2005hybrid} compute the pseudo-inverse of the di
 We instead compute an approximate inverse to the Laplacian by finding the true inverse of a perturbed Laplacian, given by $\boldsymbol{\mathcal{K}} = \mathbf{K} + \epsilon \mathbf{I}$.
 We denote this approximate inverse by $\boldsymbol{\mathcal{K}}^+$.
 
-ToDo: ADD FIGURE SHOWING EFFECT OF PSEUDO-INVERSE VS INVERSE OF PERTURBED OPERATOR.
+\begin{figure}[!ht]
+  \centering
+  \subfloat[1D Subdomain Error]{\includegraphics[width=0.48\textwidth]{../img/subdomainError2D}\label{fig:subdomain_pseudoinverse_2d}}
+  \hfill
+  \subfloat[2D Subdomain Error]{\includegraphics[width=0.48\textwidth]{../img/subdomainError3D}\label{fig:subdomain_pseudoinverse_3d}}
+  \caption{Subdomain Pseudo-inverse Comparison}
+  \label{fig:subdomain_pseudoinverse}
+\end{figure}
+
+In Figure \ref{fig:subdomain_pseudoinverse}, we compare the these two methods of forming a pesudo-inverse of the Laplacian on a reference element.
+We attempt to invert the action of the Laplacian, $\mathbf{K} \mathbf{u}$, on a two and three dimensional reference element with polynomial bases of varying order with Dirichlet boundary conditions on the primal vertices.
+The values in the vector $\mathbf{u}$ are given by $f \left( \mathbf{x} \right) = - \sum_d \mathbf{x}_d^2$.
+
+Figure \ref{fig:subdomain_pseudoinverse_2d} shows the difference in the $L^2$ norm of the error between forming the pseudo-inverse by taking the reciprocal of the non-zero values in the eigenvalues of the two dimensional Laplacian and using the true inverse of the two dimensional Laplacian with a perturbation given by $\boldsymbol{\mathcal{K}} = \mathbf{K} + 1^{-6} \mathbf{I}$.
+Figure \ref{fig:subdomain_pseudoinverse_3d} shows the difference in the $L^2$ norm of the error between forming the pseudo-inverse by taking the reciprocal of the non-zero values in the eigenvalues of the three dimensional Laplacian and using the true inverse of the three dimensional Laplacian with a perturbation given by $\boldsymbol{\mathcal{K}} = \mathbf{K} + 1^{-8} \mathbf{I}$.
+In both figures we see that forming the pseudo-inverse on the reference element by computing the true inverse of the perturbed Laplacian results in a more accurate subdomain inverse.
 
 For separable problems that can be expressed as a linear combination of the mass and Laplacian matrices
 \begin{equation}
