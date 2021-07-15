@@ -1,26 +1,26 @@
 High-order matrix-free finite element operators offer superior performance on modern high performance computing hardware when compared to assembled sparse matrices, both with respect to floating point operations needed for operator evaluation and the memory transfer needed for a matrix-vector product.
 However, high-order matrix-free operators require iterative solvers, such as Krylov subspace methods, and these methods converge slowly for ill-conditioned operators, such as high-order finite element operators.
-Preconditioning techniques can significantly improve the converge of these iterative solvers for high-order matrix-free finite element operators.
-In particular, $p$-multigrid and domain decomposition methods are particularly well suited for problems on unstructured meshes, but these methods have parameters that require careful tuning to ensure proper convergence.
-Local Fourier Analysis of these preconditioners analyzes the frequency modes found in the error on each iteration and can provide sharp convergence estimates.
+Preconditioning techniques can significantly improve the convergence of these iterative solvers for high-order matrix-free finite element operators.
+In particular, $p$-multigrid and domain decomposition methods are particularly well suited for problems on unstructured meshes, but these methods can have parameters that require careful tuning to ensure proper convergence.
+Local Fourier Analysis of these preconditioners analyzes the frequency modes found in the error following the application of these methods and can provide sharp convergence estimates and parameter tuning while only requiring computation on a single representative element or macro-element patch.
 
-In the remainder of Chapter \ref{ch:Introduction} we provide some brief notes on the reproducibility of the work in this dissertation and provide context for this work with relation to previous work.
+In the remainder of Chapter \ref{ch:Introduction} we provide some brief notes on the reproducibility of the work in this dissertation and provide context for this work ins relation to previous work.
 
 In Chapter \ref{ch:HighOrderFEM}, we present a representation of arbitrary second-order partial differential equations for high-order finite element discretizations that facilitates matrix-free implementation.
 This representation is used by the Center for Efficient Exascale Discretizations to provide performance portable high-order matrix-free implementations of finite element operators for arbitrary second order partial differential equations.
 
-In Chapter \ref{ch:LocalFourierAnalysis}, we develop Local Fourier Analysis of finite element operators represented in this fashion and provide examples of preconditioning Jacobi and Chebyshev semi-iterative method smoothers, which are commonly used in multigrid methods.
+In Chapter \ref{ch:LocalFourierAnalysis}, we develop Local Fourier Analysis of finite element operators represented in this fashion and provide examples of preconditioning with Jacobi and the Chebyshev semi-iterative method, which are commonly used as smoothers in multigrid methods.
 
 In Chapter \ref{ch:MultigridMethods}, this Local Fourier Analysis is expanded to create the Local Fourier Analysis of $p$-multigrid for Continuous Galerkin discretizations.
 This Local Fourier Analysis of $p$-multigrid is validated with numerical experiments.
-Furthermore, we extend this Local Fourier Analysis to reproduce previous work with h-multigrid by using macro-elements consisting of multiple low-order finite elements.
+Furthermore, we extend this Local Fourier Analysis to reproduce previous work with $h$-multigrid by using macro-elements consisting of multiple low-order finite elements.
 
-In Chapter \ref{ch:DomainDecomposition}, we extend this Local Fourier Analysis framework to lumped and Dirichlet versions of Balancing Domain Decomposition by Constraints preconditioners.
-With macro-elements consisting of multiple low-order finite elements, we can exactly reproduce previous work on the Local Fourier Analysis of Balancing Domain Decomposition by Constraints.
+In Chapter \ref{ch:DomainDecomposition}, we develop the Local Fourier Analysis of the lumped and Dirichlet versions of Balancing Domain Decomposition by Constraints preconditioners.
 By using Fast Diagonalization Method approximate subdomain solvers, the increased setup costs for the Dirichlet Balancing Domain Decomposition by Constraints preconditioner, relative to the lumped variant, can be substantially reduced, which makes Dirichlet Balancing Domain Decomposition by Constraints an attractive preconditioner.
+We validate this work against previous numerical experiments on high-order finite elements, and we can exactly reproduce previous work on the Local Fourier Analysis of Balancing Domain Decomposition by Constraints by using macro-elements consisting of multiple low-order finite elements.
 
 The performance of $p$-multigrid in parallel is partially determined by the number of multigrid levels.
-A larger number of multigrid levels requires additional global communication on parallel machines, but aggressive coarsening that is not supported by the smoother in the multigrid method can lead to gaps in the error frequency modes targeted by the total multigrid method, which results in degraded convergence.
+A larger number of multigrid levels requires additional global communication on parallel machines, but aggressive coarsening is not supported by traditional polynomial smoothers, which leads to gaps in the error frequency modes targeted by the total multigrid method and degraded convergence.
 Dirichlet Balancing Domain Decomposition by Constraints can be used as a smoother for $p$-multigrid to target a wider range of error mode frequencies than polynomial smoothers such as the Chebyshev semi-iterative method, which facilitates more aggressive coarsening.
 We provide Local Fourier Analysis of $p$-multigrid with Dirichlet Balancing Domain Decomposition by Constraints smoothing to demonstrate the suitability of this combination for preconditioning high-order matrix-free finite element discretizations.
 

@@ -29,6 +29,9 @@ CG improves upon Steepest Descent by taking the search directions to be A-orthog
 \beta_{k + 1} = \frac{\mathbf{r}_k^T \mathbf{r}_k}{\mathbf{r}_k^T \mathbf{r}_k}
 \end{equation}
 
+Detailed convergence analysis for CG is complex and we omit it here.
+In general though, operators with a highly elliptic spectum, which results in a high condition number, have poorer convergence with CG, while operators, or preconditioned operators, that are closer to the identity operator converge much more quickly \cite{golub1989matrix}.
+
 There are more flexible Krylov methods that work for a more general set of operators, such as Generalized Minimum Residual (GMRES).
 We restrict ourselves to CG; however, many of our observations and techniques are applicable to a wider range of Krylov methods or iterative solvers, such as GMRES.
 We will note when our analysis or techniques can be easily generalized.

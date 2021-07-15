@@ -1,9 +1,9 @@
-High-order finite element methods offer accuracy advantages over low-order finite elements \cite{demkowicz1989toward, oden1989toward, rachowicz1989toward}, especially with the spectral convergence properties.
+High-order finite element methods offer accuracy advantages over low-order finite elements \cite{demkowicz1989toward, oden1989toward, rachowicz1989toward} and have spectral convergence properties.
 However, high-order finite elements are less common because a linear operator or the Jacobian of a non-linear operator rapidly loses sparsity in a sparse matrix representation.
-Matrix-free formulations of these methods \cite{brown2010efficient, deville2002highorder, knoll2004jacobian}, provide efficient implementations of these methods on modern hardware \cite{libceed-user-manual, fischer2020scalability, kronbichler2019multigrid}.
+Matrix-free formulations of these methods \cite{brown2010efficient, deville2002highorder, knoll2004jacobian}, provide efficient implementations of these methods on modern hardware \cite{libceed-user-manual, fischer2020scalability, kronbichler2019multigrid} with better performance than sparse matrix representations, both in terms of storage and floating point operations required to execute a matrix-vector product.
 
-However, high-order discretizations of PDE operators tend to be ill conditioned, and iterative solvers, such as Krylov subspace methods like the Conjugate Gradient method \cite{hestenes1952methods, shewchuk1994introduction}, are sensitive to the spectrum and condition number of the operator.
-Preconditioning these high-order PDE operators in necessary to ensure fast convergence of iterative solvers.
+However, high-order discretizations of PDE operators tend to be ill-conditioned, and iterative solvers, such as Krylov subspace methods like the Conjugate Gradient method \cite{hestenes1952methods, shewchuk1994introduction}, are sensitive to the spectrum and condition number of the operator.
+Preconditioning these high-order PDE operators is necessary to ensure fast convergence of iterative solvers.
 
 \subsection{Multigrid Methods}
 
@@ -11,34 +11,34 @@ Multigrid methods \cite{brandt1982guide, briggs2000multigrid, stuben1982multigri
 These methods can be used as solvers or as preconditioners for other iterative solvers.
 
 Geometric multigrid has become a common component in many high performance computing applications and is available in many packages, such as PETSc.
-May et.al. \cite{may2016extreme} highlighted several benefits to geometric multigrid in extreme scale computing.
+May et al. \cite{may2016extreme} highlighted several benefits to geometric multigrid in extreme scale computing.
 Specifically, geometric multigrid has a scalable setup phase, the ability to use highly performance matrix-free smoothers on all levers, and the ability to use identical stencils (or functions that apply the action of the stencil matrix-free) for all coarse level operators.
 Geometric multigrid is therefore seen as "undoubtedly {\textit{the preconditioner of choice}}" for elliptic problems due to this scalability and resolution independent convergence.
 
-H-multigrid, which is the typical type of geometric multigrid used for low-order discretizations, coarsens the mesh by aggregating multiple elements.
-P-multigrid, developed by R{\o}nquist and Patera \cite{ronquist1987spectral}, is instead based on decreasing the order of the bases in high-order or spectral finite element discretizations.
+$H$-multigrid, which is the typical type of geometric multigrid used for low-order discretizations, coarsens the mesh by aggregating multiple elements.
+$P$-multigrid, developed by R{\o}nquist and Patera \cite{ronquist1987spectral}, is instead based on decreasing the order of the bases in high-order or spectral finite element discretizations.
 
-Davydov, et. al. \cite{davydov2019matrix} used matrix-free high-order finite element methods for h-multigrid preconditioning for hyperelasticity at finite stain, but p-multigrid can be a more natural fit for matrix-free high-order methods, especially on unstructured meshes where aggregating fine grid elements to form the coarse grid representation can be somewhat complex.
+Davydov, et al. \cite{davydov2019matrix} used matrix-free high-order finite element methods for $h$-multigrid preconditioning for hyperelasticity at finite stain, but $p$-multigrid can be a more natural fit for matrix-free high-order methods, especially on unstructured meshes where aggregating fine grid elements to form the coarse grid representation can be somewhat complex.
 
 Algebraic Multigrid (AMG) is based on applying multigrid ideas directly to an assembled matrix representation of the discrete finite element operator.
-Heys et. al. \cite{heys2005algebraic} investigated AMG for high-order discretizations with some level of success; however this approach relies upon assembling the high-order operator, which discards the performance benefits of a matrix-free representation.
-We restrict our use of AMG to the coarse grid solver as part of p-multigrid.
-The coarse grid with linear elements has substantially fewer degrees of freedom, by a factor of approximately $p^3 / 2^3$, which makes assembly and efficient direct solution of the coarse grid far more tractable.
+Heys et al. \cite{heys2005algebraic} investigated AMG for high-order discretizations with some level of success; however this approach relies upon assembling the high-order operator, which discards the performance benefits of a matrix-free representation.
+We restrict our use of AMG to the coarse grid solver as part of $p$-multigrid or domain decomposition.
+The coarse grid with linear elements has substantially fewer degrees of freedom, by a factor of approximately $p^3 / 2^3$ for $p$-multigrid, which makes assembly and efficient direct solution of the coarse grid far more tractable.
 
-The coarse grid solve on linear elements with AMG can be very efficient, and the application of the operator on the fine grid is very efficient with a matrix-free representation, but intermediate grids between the coarsest and finest levels are less efficient representations.
+The coarse grid solve on linear elements with AMG can be very efficient, and the application of the operator on the fine grid is very efficient with a matrix-free representation, but intermediate grids between the coarsest and finest levels less less efficient representations.
 Furthermore, an increased number of levels requires additional global communication, which can become a bottleneck in parallel applications.
-We are therefore interested in geometric multigrid with aggressive p-coarsening from the high-order fine grid directly to the linear coarse grid representation.
+We are therefore interested in geometric multigrid with aggressive $p$-coarsening from the high-order fine grid directly to the linear coarse grid representation.
 
 Polynomial smoothers can be applied matrix-free and offer competitive smoothing properties when compared to Gauss-Seidel \cite{adams2003parallel}.
-Furthermore, Brannick et.al. \cite{brannick2015polynomial} investigated polynomial smoothers for aggressive coarsening in h-multigrid and found Chebyshev adequate in this context; however our analysis indicates that Chebyshev is not an appropriate smoother for aggressive p-coarsening.
-We need a better smoother for rapid p-coarsening, and we turn to domain decomposition methods.
+Furthermore, Brannick et al. \cite{brannick2015polynomial} investigated polynomial smoothers for aggressive coarsening in $h$-multigrid and found Chebyshev adequate in this context; however our analysis indicates that Chebyshev is not an appropriate smoother for aggressive $p$-coarsening.
+We need a better smoother for rapid $p$-coarsening directly to linear elements, and we turn to domain decomposition methods to find this improved smoother.
 
 \subsection{Domain Decomposition Methods}
 
 Domain decomposition methods are popular techniques for preconditioning high-order finite element and spectral element discretizations.
 Dryja and Widlund surveyed many of the domain decomposition techniques in an effort to unify existing theory \cite{dryja1989towards}.
 
-Schwartz methods for domain decomposition were first developed by Hermann Schwarz \cite{schwarz1972gesammelte} as an alternating method in which solutions in overlapping subregions of the global problem were solved while using previous solutions in neighboring subregions as boundary conditions for the current subregion.
+Schwartz methods for domain decomposition were first developed by Hermann Schwarz \cite{schwarz1972gesammelte} as an alternating method in which solutions in overlapping subregions of the global problem were solved while using previous solutions in neighboring subregions as boundary conditions for the current subregion problem.
 In this original formulation, the algorithm is a multiplicative Schwarz method.
 
 Dryja and Widlund \cite{widlund1987additive,dryja1989additive} developed the additive variant of the Schwarz method.
