@@ -36,8 +36,7 @@ These definitions are extended to $d$ dimensions by taxing the neighborhood $V \
 For standard coarsening in the analysis of h-multigrid, low frequencies are given by $\boldsymbol{\theta} \in T^{\text{low}} = \left[ - \pi / 2, \pi / 2 \right)^d$ and high frequencies are given by $\boldsymbol{\theta} \in \left[ - \pi, \pi \right)^d \ T^{\text{low}}$, or equivalently via periodicity, $\theta \in T^{\text{high}} = \left[ - \pi / 2, 3 \pi / 2 \right)^d \setminus T^{\text{low}}$.
 
 We can compute the symbol of a $p \times p$ linear system of operators representing a discretized PDE.
-We start with a system of equations representing a Galerkin operator, such as in Equation \ref{eq:jacobian_form}.
-We omit boundary terms in this derivation, as they are not present on the infinite uniform grid $G_h$.
+We start with a system of equations representing a Galerkin operator, such as in Equation \ref{eq:jacobian_form}, but we omit boundary terms in this derivation, as they are not present on the infinite uniform grid $G_h$.
 
 Using the algebraic representation of PDE operators given in Chapter \ref{ch:HighOrderFEM}, the PDE operator ${\color{burgundy}\mathbf{A}}$ is of the form
 \begin{equation}
@@ -49,7 +48,7 @@ ${\color{burgundy}\mathbf{A}}^e = {\color{blue(ncs)}\mathbf{B}}^T {\color{appleg
 \end{equation}
 where $\mathbf{P}$ and $\mathbf{G}$ represent the element assembly operators, ${\color{blue(ncs)}\mathbf{B}}$ is a basis operator which computes the values and derivatives of the basis functions at the quadrature points, and ${\color{applegreen}\mathbf{D}}$ is a block diagonal operator which provides the pointwise application of the bilinear form on the quadrature points, to include quadrature weights and the change in coordinates between the physical and reference space.
 
-We focus on local Fourier analysis of the element operator, ${\color{burgundy}\mathbf{A}}^e$, on the mesh grid with points given by $x_i$, for $i \in \left\lbrace 1, 2, \dots, p + 1 \right\rbrace$, where $p$ is the polynomial degree of the basis.
+We focus on LFA of the element operator, ${\color{burgundy}\mathbf{A}}^e$, on the mesh grid with points given by $x_i$, for $i \in \left\lbrace 1, 2, \dots, p + 1 \right\rbrace$, where $p$ is the polynomial degree of the basis.
 We first develop the local Fourier analysis in 1D for scalar operators and then extend this analysis to more general operators.
 
 In one dimension, the nodes on the left and right boundaries of the element map to the same Fourier mode when localized to nodes unique to a single finite element, so we can compute the symbol matrix as
@@ -103,10 +102,10 @@ ${\color{burgundy}\mathbf{A}}^e$ is the finite element operator for the element 
 \label{def:high_order_symbol}
 \end{definition}
 
-Note that this LFA notation is applicable to any second-order PDE with a weak form that can be represented by Equation \ref{eq:jacobian_form}.
-This representation is used in \href{https://www.github.com/jeremylt/LFAToolkit.jl}{LFAToolkit.jl}, where the users provide the finite element basis ${\color{blue(ncs)}\mathbf{B}}$, the node to mode mapping $\mathbf{Q}$, and the pointwise representation of the weak form ${\color{applegreen}\mathbf{D}}$, and the software can provide the LFA of the PDE with various preconditioners.
+Note that this LFA framework is applicable to any second-order PDE with a weak form that can be represented by Equation \ref{eq:jacobian_form}.
+This representation is used in \href{https://www.github.com/jeremylt/LFAToolkit.jl}{LFAToolkit.jl}, where the users provide the finite element basis ${\color{blue(ncs)}\mathbf{B}}$, the Fourier mode localization operator $\mathbf{Q}$, and the pointwise representation of the weak form ${\color{applegreen}\mathbf{D}}$, and the software provides the LFA of the PDE operator and various preconditioners.
 
-As we develop LFA of various preconditioners and smoothers in this notation throughout this chapter and the following chapters, we will the standard test problem of the scalar diffusion operator to illustrate the properties of this analysis for these techniques.
+As we develop LFA of various preconditioners and smoothers in this framework throughout this chapter and the following chapters, we will use the scalar diffusion operator as our standard test case to illustrate the properties these techniques with this analysis.
 
 \begin{figure}[!h]
   \centering
