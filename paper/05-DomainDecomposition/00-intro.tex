@@ -6,5 +6,5 @@ Domain decomposition techniques decompose the domain $\Omega$ into a series of s
 Some techniques use overlapping subdomains, such as additive Schwartz methods, which are popular for high-order and spectral finite elements \cite{fischer1997overlapping} and have been used as smoothers in multigrid methods \cite{fischer2005hybrid}.
 In BDDC, we instead use non-overlapping subdomains with an energy minimization problem to resolve jumps in the values of degrees of freedom over subdomain interfaces.
 
-LFA of BDDC was introduced by Brown, He, and MacLachlan \cite{brown2019local}.
+Local Fourier Analysis (LFA) of BDDC was introduced by Brown, He, and MacLachlan \cite{brown2019local}.
 We will discuss implementing BDDC in a matrix-free fashion and re-derive the LFA of BDDC in the context of high-order elements, with single element and macro-element subdomains.
