@@ -1,5 +1,5 @@
 Both $h$-multigrid and $p$-multigrid follow the same general algorithm, with differences in the grid transfer operators and coarse grid representation.
-Application of multigrid follows the algorithm \ref{def:multigrid_algorithm}, similar to the presentation in \cite{brandt1982guide}.
+Application of multigrid follows the algorithm given by Definition \ref{def:multigrid_algorithm}, similar to the presentation in \cite{brandt1982guide}.
 \begin{definition}[Multigrid Algorithm]\label{def:multigrid_algorithm}
 ~\\
 \begin{algorithmic}[1]
@@ -11,12 +11,13 @@ Application of multigrid follows the algorithm \ref{def:multigrid_algorithm}, si
 \State $\mathbf{u}_k \gets \mathbf{u}_k + \hat{\mathbf{M}}^{-1} \left( \mathbf{b} - {\color{burgundy}\mathbf{A}}_f \mathbf{u}_k \right)$ \Comment{post-smooth $\nu$ times}
 \end{algorithmic}
 \end{definition}
-where ${\color{burgundy}\mathbf{A}}_f$ is the operator on the fine grid, ${\color{burgundy}\mathbf{P}}_{\text{ctof}}$ is the coarse to fine grid prolongation operator, ${\color{burgundy}\mathbf{R}}_{\text{ftoc}}$ the fine to coarse grid restriction operator, $\hat{\mathbf{M}}$ a separate preconditioner used for smoothing, and ${\color{burgundy}\mathbf{A}}_c$ represents solving the error correction problem on the coarse grid, which may involve recursively applying the multigrid algorithm.
+In this algorithm, ${\color{burgundy}\mathbf{A}}_f$ is the operator on the fine grid, ${\color{burgundy}\mathbf{P}}_{\text{ctof}}$ is the coarse to fine grid prolongation operator, ${\color{burgundy}\mathbf{R}}_{\text{ftoc}}$ the fine to coarse grid restriction operator, $\hat{\mathbf{M}}$ a separate preconditioner used for smoothing, and ${\color{burgundy}\mathbf{A}}_c$ represents solving the error correction problem on the coarse grid, which may involve recursively applying the multigrid algorithm.
 
 For $h$-multigrid, the restriction operator represents agregating multiple fine grid elements into larger coarse grid elements and the prolongation operator is given by the transpose.
-This process requires careful knowledge about the mesh and can be complex on fully unstructured meshes.
+This process requires knowledge about neighboring elements on the mesh and can be complex on fully unstructured meshes.
 
-For $p$-multigrid with nodal bases, the prolongation operator interpolates using the lower order basis functions to the higher order basis nodes and is defined by
+For $p$-multigrid with nodal bases, the prolongation operator interpolates from the coarse grid to the fine grid, evaluating the lower-order basis functions on the higher-order basis nodes.
+Prolongation to a basis that is a single order higher is defined by
 \begin{equation}
 \mathbf{P}_{p - 1}^p = \Lambda \left( m_p^{-1} \right) \mathcal{E}_p^T \sum_e \mathbf{N}_{p - 1}^p \mathcal{E}^e_{p - 1}
 \label{mg_prolong}
