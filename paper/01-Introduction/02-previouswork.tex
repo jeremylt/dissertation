@@ -55,25 +55,25 @@ This technique was developed as a modification to the earlier Balancing Domain D
 BDDC is closely related to the Dual Primal version of Finite Element Tearing and Interconnecting (FETI-DP) developed by Dohrmann \cite{farhat1991method}.
 BDDC is formulated in terms of the energy minimization problem across subdomain interfaces rather than in terms of Lagrange multipliers, as seen in FETI-DP.
 Connections have been established between FETI techniques and Neumann-Neumann domain decomposition methods \cite{klawonn2001feti}, and operators preconditioned with BDDC and FETI-DP have been shown to have the same spectrum, under certain assumptions \cite{mandel2007bddc}.
-In this work, the 'lumped' and 'Dirichlet' nomenclature from FETI-DP is used to describe two variants of the BDDC algorithm.
-The lumped BDDC variant employs a naive injection operator into the subassembled problem space with is cheaper to setup and apply while the Dirichlet BDDC variant create a harmonic extension for the jump in values across the broken subdomain interface which ultimately better controls the condition number of the preconditioned operator.
+In this dissertation, the 'lumped' and 'Dirichlet' nomenclature from FETI-DP is used to describe two variants of the BDDC algorithm.
+The lumped BDDC variant employs a naive injection operator into the subassembled problem space which is cheaper to setup and apply while the Dirichlet BDDC variant creates a harmonic extension for the jump in values across the broken subdomain interface which ultimately better controls the condition number of the preconditioned operator.
 
-Fischer, Miller, and Tufo \cite{fischer2000overlapping} paired this overlapping additive Schwarz preconditioner with a fast subdomain solver based upon the Fast Diagonalization Method (FDM) by Lynch \cite{lynch1964direct}.
+Fischer, Miller, and Tufo \cite{fischer2000overlapping} paired their overlapping additive Schwarz preconditioner with a fast approximate subdomain solver based upon the Fast Diagonalization Method (FDM) by Lynch \cite{lynch1964direct}.
 The use of inexact subdomain solvers for BDDC was explored by Li and Widlund \cite{li2007use}.
-In this work, multigrid v-cycles were used to solve the partially assembled subdomain problems.
+In this work, multigrid v-cycles were used to solve the partially assembled subdomain problems, while we investigate the use of a FDM based subdomain solver.
 
 We explore the use of FDM based approximate subdomain solvers for BDDC with subdomains consisting of single high-order finite elements.
 This approach was successfully employed by Pavarino, Widlund, and Zampini for nearly incompressible elasticity problems in three dimensions \cite{pavarino2010bddc}.
 
 With finite elements using high-order tensor product discretizations, the construction of these FDM approximate subdomain solvers should help reduce the setup cost for Dirichlet BDDC when compared to lumped BDDC, as solver ingredients can be reused between the subassembled problem solver and the subdomain interior solver used in the harmonic extension problem.
-Furthermore, this problem should be cheaper to set up and factoring the dense matrix representation of these problems, as the FDM approximate subdomain solvers are based around simultaneous diagonalization of the one dimensional mass and stiffness problems.
+Furthermore, this problem should be cheaper to set up than factoring the dense matrix representation of these problems, as the FDM approximate subdomain solvers are based around simultaneous diagonalization of the one dimensional mass and stiffness problems.
 
-BDDC can be used as a preconditioner for an iterative solver; however we are interested in combining BDDC with p-multigrid.
+BDDC can be used as a preconditioner for an iterative solver; however we are interested in combining BDDC with $p$-multigrid.
 As mentioned above, multigrid methods can provide effective subdomain solvers for BDDC, but using BDDC as a smoother for multigrid methods is novel.
-BDDC has improved smoothing properties when compared to polynomial smoothers, which facilitates rapid coarsening in p-multigrid.
-Additionally, BDDC has reduced communication requirements when compared to polynomial smoothers that deliver comparable smoothing properties for more conservative p-coarsening.
+BDDC has improved smoothing properties when compared to polynomial smoothers, which facilitates rapid coarsening in $p$-multigrid.
+Additionally, BDDC has reduced communication requirements when compared to polynomial smoothers that deliver comparable smoothing properties for more conservative $p$-coarsening.
 
-The combination of BDDC as a smoother for p-multigrid, especially with aggressive coarsening strategies, is novel work.
+The combination of BDDC as a smoother for $p$-multigrid, especially with aggressive coarsening strategies, is novel work.
 
 \subsection{Local Fourier Analysis}
 
@@ -83,19 +83,19 @@ LFA is based on the finite difference stencil or the single element operator mat
 
 We create a new LFA framework for representing LFA of arbitrary second-order PDEs discretized with high-order finite elements, where the PDE has an arbitrary number of components and the problem is in any number of dimensions.
 
-We develop LFA of p-multigrid with arbitrary second-order PDEs using high-order finite element discretizations.
-Although van der Vegt and Rhebergen \cite{van2011discrete} discussed LFA of p-multigrid for the discontinuous Galerkin method, this formulation cannot be extended to the continuous Galerkin method.
-Our LFA of p-multigrid on high-order finite element discretizations for the continuous Galerkin method is novel work.
+We develop LFA of $p$-multigrid with arbitrary second-order PDEs using high-order finite element discretizations.
+Although van der Vegt and Rhebergen \cite{van2011discrete} discussed LFA of $p$-multigrid for the discontinuous Galerkin method, this formulation cannot be extended to the continuous Galerkin method.
+Our LFA of $p$-multigrid on high-order finite element discretizations for the continuous Galerkin method is novel work.
 
-LFA of h-multigrid with high-order finite elements was developed in \cite{he2020two} for Lagrange bases with uniformly spaced nodes.
-We extend this framework to reproduce this previous work on the LFA of h-multigrid for high-order finite element discretizations.
+LFA of $h$-multigrid with high-order finite elements was developed in \cite{he2020two} for Lagrange bases with uniformly spaced nodes.
+We extend this framework to reproduce this previous work on the LFA of $h$-multigrid for high-order finite element discretizations.
 Furthermore, our LFA framework can reproduce LFA of finite difference discretizations if the finite difference stencil can be represented as a finite element discretization.
 
 We also develop LFA of lumped and Dirichlet BDDC with arbitrary second-order PDEs using subdomains consisting of single high-order elements with exact and inexact subdomain solvers.
 The LFA of lumped and Dirichlet BDDC with exact subdomain solvers was introduced by Brown, He, and MacLachlan \cite{brown2019local} for subdomains consisting of multiple low-order finite elements, and we extend our framework to reproduce this previous work.
 
-This new LFA of p-multigrid and LFA of BDDC on single high-order element subdomains is combined to provide estimates for p-multigrid with BDDC smoothing.
+This new LFA of $p$-multigrid and LFA of BDDC on single high-order element subdomains is combined to provide estimates for $p$-multigrid with BDDC smoothing.
 
 This work is available in an open source Julia package, LFAToolkit.jl \cite{thompson2021toolkit}.
-Several software packages have been developed for LFA of h-multigrid methods \cite{rittich2018extending,kahl2020automated,wienands2004practical}, however, to the best of our knowledge, no packages support LFA of p-multigrid methods, especially with arbitrary PDEs.
+Several software packages have been developed for LFA of $h$-multigrid methods \cite{rittich2018extending,kahl2020automated,wienands2004practical}, however, to the best of our knowledge, no packages support LFA of $p$-multigrid methods, especially with arbitrary PDEs.
 We are similarly unaware of packages that provide LFA of BDDC, for high or low-order element subdomains.
