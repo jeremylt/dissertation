@@ -18,7 +18,7 @@ Pressure is given by the equation of state
    P = \left( {c_p}/{c_v} -1\right) \left( E - {\mathbf{U} \cdot \mathbf{U}}/{(2 \rho)} - \rho g z \right) \, ,
    \label{eq:ns_state}
 \end{equation}
-where $c_p$ is the specific heat at constant pressure and $c_v$ is the specific heat at constant volume (that define $\gamma = c_p / c_v$, the specific heat ratio).
+where $c_p$ is the specific heat at constant pressure and $c_v$ is the specific heat at constant volume (that defines $\gamma = c_p / c_v$, the specific heat ratio).
 
 The system in Equation \ref{eq:ns} can be rewritten in vector form
 \begin{equation}
@@ -57,11 +57,11 @@ where the flux and the source terms, respectively, are given by
     \end{aligned}
 \end{equation}
 
-Let the discrete solution be
+The discrete solution is therefore given by
 \begin{equation}
    \mathbf{q}_N (\mathbf{x},t)^{(e)} = \sum_{k = 1}^{p + 1}\phi_k (\mathbf{x})\mathbf{q}_k^{(e)}
 \end{equation}
-with $p + 1$ being the number of nodes on the element $e$ and $\phi$ represents the finite elment basis functions.
+where $p + 1$ is the number of nodes on the element $e$ and $\phi$ represents the finite elment basis functions.
 
 For the time discretization, we use two types of time-stepping schemes, explicit and implicit.
 
@@ -135,5 +135,8 @@ where $\mathbf{F}(\mathbf q_N) \cdot \hat{\mathbf{n}}$ is typically replaced wit
 \label{fig:vortices}
 \end{figure}
 
+\subsubsection{Ongoing Research}
+
 Figure \ref{fig:vortices} shows an atmospheric simulation where vortices develop as a cold air bubble drops to the ground.
 This mini-application can run on host or device processors and supports stabilization techniques such as streamline-upwind (SU) and streamline-upwind Petrov-Galerkin (SUPG).
+Ongoing research includes the stabalization techniques and preconditioning.

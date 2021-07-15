@@ -1,5 +1,5 @@
 The developments in HPC hardware over the last thirty years make high-order matrix-free finite element operators increasingly attractive.
-Two key performance metrics for HPC hardware are FLOPs and memory and network bandwidth.
+Two key performance metrics for HPC hardware are Floating Point Operatons per Second (FLOPs) and memory and network bandwidth.
 FLOPs is the more widely popularized of these two metrics, but memory and network bandwidth is a common bottleneck in HPC application codes. 
 
 The Top 500 \cite{meuertop500} list tracks the 500 supercomputers with the highest peak FLOPs, as measured by High-Performance Linpack (HPL) \cite{petitethpl}.
@@ -52,5 +52,5 @@ This problem is exacerbated by network latency, which is decreasing at a rate of
 \end{figure}
 
 Using data from \cite{kruppcomparison}, we can see in Figure \ref{fig:peakratio} that AMD, NVIDIA, and Intel top of the line hardware has demonstrated a steady decrease in system balance, the ratio of maximum memory bandwidth to FLOPs, over the last 13 years.
-HPC applications need to be careful to control the memory bandwidth required for their codes to better realize the FLOPs capabilities of HPC hardware.
-High-order matrix-free finite element operators provide one way to reduce memory bandwidth requirements for HPC application codes.
+HPC applications need to be careful to control the memory bandwidth required so that their codes can better realize the FLOPs capabilities of HPC hardware.
+High-order matrix-free finite element operators provide one way to reduce memory bandwidth requirements and better utilize FLOPs for HPC application codes on modern hardware.
