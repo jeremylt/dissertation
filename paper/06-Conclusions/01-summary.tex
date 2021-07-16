@@ -1,7 +1,7 @@
 High-order matrix-free finite element operators offer superior performance on modern high performance computing hardware when compared to assembled sparse matrices, both with respect to floating point operations needed for operator evaluation and the memory transfer needed for a matrix-vector product.
 However, high-order matrix-free operators require iterative solvers, such as Krylov subspace methods, and these methods converge slowly for ill-conditioned operators, such as high-order finite element operators.
 Preconditioning techniques can significantly improve the converge of these iterative solvers for high-order matrix-free finite element operators.
-In particular, $p$-multigrid and domain decomposition methods are particularly well suited for problems on unstructured meshes, but these methods have parameters that require careful tuning to ensure proper convergence.
+In particular, $p$-multigrid and domain decomposition methods are particularly well suited for problems on unstructured meshes, but these methods have parameters that may require careful tuning to ensure proper convergence.
 Local Fourier Analysis (LFA) of these preconditioners analyzes the frequency modes found in the error on each iteration and can provide sharp convergence estimates.
 
 In Chapter \ref{ch:HighOrderFEM}, we presented a representation of arbitrary second-order partial differential equations for high-order finite element discretizations that facilitates matrix-free implementation.
@@ -16,7 +16,7 @@ In Chapter \ref{ch:MultigridMethods}, this LFA was expanded to create the LFA of
 This LFA of $p$-multigrid was validated with numerical experiments.
 Furthermore, we extended this LFA to reproduce previous work with h-multigrid by using macro-elements consisting of multiple low-order finite elements.
 
-In Chapter \ref{ch:DomainDecomposition}, we extended this LFA to lumped and Dirichlet versions of Balancing Domain Decomposition by Constraints (BDDC) preconditioners.
+In Chapter \ref{ch:DomainDecomposition}, we also developed the LFA of lumped and Dirichlet versions of Balancing Domain Decomposition by Constraints (BDDC) preconditioners.
 With macro-elements consisting of multiple low-order finite elements, we can exactly reproduce previous work on the LFA of BDDC.
 By using Fast Diagonalization Method (FDM) approximate subdomain solvers, the increased setup costs for the DirichletBDDC preconditioner, relative to the lumped variant, can be substantially reduced, which makes BDDC an attractive preconditioner.
 
