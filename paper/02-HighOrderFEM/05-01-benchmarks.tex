@@ -23,7 +23,8 @@ The definitions of these bakeoff problems are given on the CEED website \cite{ce
 \end{table}
 
 In these BPs, the stiffness matrix is given by the Laplacian.
-These problems use nodal bases on the Gauss-Legendre-Lobatto points with order $p$ nodal basis functions, and for BP5 and BP6 the quadrature points are collocated with the nodal points.
+These problems use nodal bases on the Gauss-Legendre-Lobatto points with order $p$ nodal basis functions with $q$ quadrature points in each dimension for a total of $\left( p + 1 \right)^d$ nodes and $q^d$ quadrature points, where $d$ is the dimension of the problem.
+For BP5 and BP6 the quadrature points are collocated with the nodal points.
 Since the collocated quadrature is appropriate for a smaller range of practical applications, we will focus on results for BP1, BP2, BP3, and BP4.
 
 \begin{figure}[ht!]
