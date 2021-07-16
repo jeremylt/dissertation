@@ -24,5 +24,51 @@ The definitions of these bakeoff problems are given on the CEED website \cite{ce
 
 In these BPs, the stiffness matrix is given by the Laplacian.
 These problems use nodal bases on the Gauss-Legendre-Lobatto points with order $p$ nodal basis functions, and for BP5 and BP6 the quadrature points are collocated with the nodal points.
+Since the collocated quadrature is appropriate for a smaller range of practical applications, we will focus on results for BP1, BP2, BP3, and BP4.
 
-TODO: ADD PERFORMANCE PLOTS
+\begin{figure}[ht!]
+\includegraphics[width=.99\linewidth]{../img/xsmmBlockedBP1Clip}
+\caption{CEED Benchmark BP1}
+\label{fig:bp1}
+\end{figure}
+
+\begin{figure}[ht!]
+\includegraphics[width=.99\linewidth]{../img/xsmmBlockedBP2Clip}
+\caption{CEED Benchmark BP2}
+\label{fig:bp2}
+\end{figure}
+
+\begin{figure}[ht!]
+\includegraphics[width=.99\linewidth]{../img/xsmmBlockedBP3Clip}
+\caption{CEED Benchmark BP3}
+\label{fig:bp3}
+\end{figure}
+
+\begin{figure}[ht!]
+\includegraphics[width=.99\linewidth]{../img/xsmmBlockedBP4Clip}
+\caption{CEED Benchmark BP4}
+\label{fig:bp4}
+\end{figure}
+
+The performance study was conducted on a machine with two-socket AMD EPYC 7452 machine.
+Figures \ref{fig:bp1}, \ref{fig:bp2}, \ref{fig:bp3}, and \ref{fig:bp4} show the results of this performance study.
+Each socket contains 32 CPU cores with a base clock speed of 2.35 GHz and 128 MB of L3 cache.
+The NPS4 BIOS configuration was used and processes were bound to cores.
+MPICH-3.3.2 was used with PETSc \cite{petsc-user-ref} version 3.14 and libCEED \cite{libceed} version 0.7.
+
+libCEED used the blocked LIBXSMM \cite{libxsmm} backend, \lstinline{\cpu\self\xsmm\blocked}.
+In the blocked backends, elements are interlaced in 8 element batches to facilitate vectorization, and LIBXSMM Just in Time (JiT) compilation of small matrix-matrix product kernels using Advanced Vector Extensions (AVX) instructions to provide high-performance tensor product evaluations on CPU architecture.
+
+Figure \ref{fig:bp1} shows the results for CEED BP1.
+As anticipated, we see higher throughput as the polynomial order of the basis increases.
+The high throughput with low latency indicates that this architecture demonstrates good string scaling, while high throughput with high latency would indicate that the architecture weak scales effectively.
+
+In Figure \ref{fig:bp2} we see the results for CEED BP2.
+For this problem, throughput starts to drop off as the polynomial order of the bases increases above $p = 6$.
+This is because the 8 element batch on the 3 component vector problem is large enough to spill out of the cache on this architecture.
+This is an indication that for this polynomial order the single element batching strategy used by the serial element processing LIBXSMM backend, \lstinline{\cpu\self\xsmm\serial}, would be more appropriate.
+
+In Figure \ref{fig:bp3} and Figure \ref{fig:bp4}, we see a similar behavior, but for the more computationally intensive Laplacian rather than the mass matrix.
+In this case, the throughput in the 3 component vector problem drops off after the polynomial order of the bases increases above $p = 5$.
+
+The specific performance tradeoffs depend upon the hardware, and these benchmark problems help inform users about the performance capabilities of their hardware for high-order matrix-free representations of PDE operators.

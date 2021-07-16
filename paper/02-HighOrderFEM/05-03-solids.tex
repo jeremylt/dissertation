@@ -255,7 +255,7 @@ with full Dirichlet boundary conditions on the outside of the box.
 The performance study was conducted on a machine with two-socket AMD EPYC 7452 machine.
 Each socket contains 32 CPU cores with a base clock speed of 2.35 GHz and 128 MB of L3 cache.
 The NPS4 BIOS configuration was used and processes were bound to cores.
-MPICH-3.3.2 was used with PETSc version 3.14 and libCEED version 0.7.
+MPICH-3.3.2 was used with PETSc \cite{petsc-user-ref} version 3.14 and libCEED \cite{libceed} version 0.7.
 
 In Figure \ref{fig:error-time} and Figure \ref{fig:error-cost} we investigate Pareto optimal configurations.
 A point is Pareto optimal if we cannot decrease error, along the $y$ axis, without increasing cost in terms time, along the $x$ axis.
@@ -316,7 +316,7 @@ on the left end of the device we apply a zero Dirichlet boundary condition and o
 We use a Poisson's ration of $\nu = 0.49$ and Young's Modulus of $E = 1.0$ MPa.
 
 The performance study was conducted on a machine with a single AMD RYZEN 7 3700X 8-core 3.6GHz (4.4 GHz Max Boost) Socket AM4 65W 100-1000000711BOX Desktop Processor with G.SKILL Ripjaws V Series 32GB (2 x 16GB) 288-Pin DDR4 SDRAM DDR4 3200 (PC4 25600) Desktop Memory Model F4-3200C16D-32GV.
-The performance study used PETSc version 3.13 and libCEED version 0.6.
+The performance study used PETSc \cite{petsc-user-ref} version 3.13 and libCEED \cite{libceed} version 0.6.
 
 \begin{figure}
  \begin{center}
