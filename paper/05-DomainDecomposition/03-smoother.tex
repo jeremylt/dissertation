@@ -66,18 +66,18 @@ The primal space is significantly smaller than the global problem, which means t
   \toprule
   $p_{\text{fine}}$ to $p_{\text{coarse}}$  & $\rho_{\min}$ & $\omega_{\text{opt}}$  \\
   \toprule
-  $p = 2$ to $p = 1$   &    0.601 & 0.25  \\
+  $p = 2$ to $p = 1$   &  0.601 & 0.25  \\
   \midrule
-  $p = 3$ to $p = 2$   &    0.723 & 0.15  \\
-  $p = 3$ to $p = 1$   &    0.723 & 0.15  \\
+  $p = 3$ to $p = 2$   &  0.723 & 0.15  \\
+  $p = 3$ to $p = 1$   &  0.723 & 0.15  \\
   \midrule
-  $p = 4$ to $p = 3$   &    0.903 & 0.05  \\
-  $p = 4$ to $p = 2$   &    0.903 & 0.05  \\
-  $p = 4$ to $p = 1$   &    0.903 & 0.05  \\
+  $p = 4$ to $p = 3$   &  0.903 & 0.05  \\
+  $p = 4$ to $p = 2$   &  0.903 & 0.05  \\
+  $p = 4$ to $p = 1$   &  0.903 & 0.05  \\
   \midrule
-  $p = 8$ to $p = 4$   &  102.837 & 0.10  \\
-  $p = 8$ to $p = 2$   &  217.299 & 0.10  \\
-  $p = 8$ to $p = 1$   &  338.015 & 0.10  \\
+  $p = 8$ to $p = 4$   &  0.980 & 0.01  \\
+  $p = 8$ to $p = 2$   &  0.980 & 0.01  \\
+  $p = 8$ to $p = 1$   &  0.980 & 0.01  \\
   \bottomrule
 \end{tabular}
 \end{center}
@@ -87,7 +87,7 @@ The primal space is significantly smaller than the global problem, which means t
 
 In Table \ref{table:two_grid_bddc_smoother_3d}, we see the two-grid convergence factor for $p$-multigrid with the weighted Dirichlet BDDC smoother for the three dimensional Laplacian.
 As anticipated, a primal space consisting only of element vertices on the corners in three dimensions is inadequate for fourth-order or higher elements.
-Technically, a Richardson iteration with fourth-order elements will converge, but as seen in Table \ref{table:error_tolerance}, this iteration will converge very slowly.
+Technically, a Richardson iteration with fourth-order or eight-order elements with the weighting factors given above will converge, but as seen in Table \ref{table:error_tolerance}, this iteration will converge very slowly.
 However, a vertex only primal space is still sufficient for cubic and quadratic elements.
 
 TODO: EXPANSION OF DISCUSSION AND ELASTICITY EXAMPLE
