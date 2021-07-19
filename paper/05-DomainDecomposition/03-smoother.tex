@@ -89,3 +89,28 @@ In Table \ref{table:two_grid_bddc_smoother_3d}, we see the two-grid convergence 
 As anticipated, a primal space consisting only of element vertices on the corners in three dimensions is inadequate for fourth-order or higher elements.
 Technically, a Richardson iteration with fourth-order or eight-order elements with the weighting factors given above will converge, but as seen in Table \ref{table:error_tolerance}, this iteration will converge very slowly.
 However, a vertex only primal space is still sufficient for cubic and quadratic elements.
+
+\begin{table}[ht!]
+\begin{center}
+\begin{tabular}{l cc}
+  \toprule
+  $p_{\text{fine}}$ to $p_{\text{coarse}}$  & $\rho_{\min}$ & $\omega_{\text{opt}}$  \\
+  \toprule
+  $p = 2$ to $p = 1$   &  0.785 & 0.12  \\
+  \midrule
+  $p = 3$ to $p = 2$   &  0.875 & 0.07  \\
+  $p = 3$ to $p = 1$   &  0.884 & 0.06  \\
+  \midrule
+  $p = 4$ to $p = 3$   &  0.960 & 0.02  \\
+  $p = 4$ to $p = 2$   &  0.960 & 0.02  \\
+  $p = 4$ to $p = 1$   &  0.960 & 0.02  \\
+  \bottomrule
+\end{tabular}
+\end{center}
+\caption{Two-Grid Convergence Factor for $p$-Multigrid with BDDC Smoother for Linear Elasticity}
+\label{table:two_grid_bddc_smoother_3d_lin_elas}
+\end{table}
+
+In Table \ref{table:two_grid_bddc_smoother_3d_lin_elas}, we see the two-grid convergence factor for $p$-multigrid with the weighted Dirichlet BDDC smoother for the three dimensional linear elasticity problem.
+The linear elasticity problem is more complex, and we see a decreased effectiveness in the preconditioner.
+For practical problems, an enriched primal space is even more important for proper convergence.

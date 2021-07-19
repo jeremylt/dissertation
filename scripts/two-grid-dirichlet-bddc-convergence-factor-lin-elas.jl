@@ -83,7 +83,7 @@ for finep = 2:4
 
         # compute smoothing factor
         # -- setup
-        numbersteps = 32
+        numbersteps = 8
         maxeigenvalue = 0
         θ_min = -π / 2
         θ_min_high = π / 2
@@ -98,7 +98,7 @@ for finep = 2:4
         # -- compute
         maxeigenvalue = zeros(num_ω, num_v)
         θ_maxeigenvalue = -1 * ones(num_ω, num_v, dimension)
-        # -- 2D --
+        # -- 3D --
         for i = 1:numbersteps, j = 1:numbersteps, k = 1:numbersteps
             θ = [θ_range[i], θ_range[j], θ_range[k]]
             if sqrt(abs(θ[1])^2 + abs(θ[2])^2 + abs(θ[3])^2) > π / 128
