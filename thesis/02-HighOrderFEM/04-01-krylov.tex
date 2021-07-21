@@ -33,4 +33,4 @@ Detailed convergence analysis for CG is complex and we omit it here.
 In general though, operators with a highly elliptic spectum, which results in a high condition number, have poorer convergence with CG, while operators, or preconditioned operators, that are closer to the identity operator converge much more quickly \cite{golub1989matrix}.
 
 There are more flexible Krylov methods that work for a more general set of operators, such as Generalized Minimum Residual (GMRES).
-We restrict ourselves to CG; however, many of our observations and techniques are applicable to a wider range of Krylov methods or iterative solvers, such as GMRES.
+Our preconditioners in Chapter \ref{ch:MultigridMethods} and Chapter \ref{ch:DomainDecomposition} maintain the symmetric positive-definite property required for CG, but they are also applicable to a wider range of Krylov methods or iterative solvers, such as GMRES.

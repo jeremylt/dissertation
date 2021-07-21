@@ -1,5 +1,5 @@
 High-order finite elements offer high accuracy and exponential convergence.
-The spectral convergence properties of high order finite elements have been extensively discussed, such as in \cite{guo1986hp}.
+The spectral convergence properties of high-order finite elements have been extensively discussed, such as in \cite{guo1986hp}.
 In general, the discretization error in the finite element approximation is given by
 \begin{equation}
 E_{H^1 \left( \Omega \right)} \leq C \left( p \right) h^{\text{min} \left( k, p + 1 \right)}
@@ -10,8 +10,8 @@ The coefficient $C$ does depend upon the polynomial order of the finite element 
 
 In practical problems, the smoothness of the solution may prevent spectral convergence from being achieved; however, high-order finite elements will still offer convergence that is no worse than the convergence on a comparable low-order mesh with a larger number of elements.
 In those cases, high-order finite elements implemented in a matrix-free fashion still offer the storage and FLOPs benefits detailed above in Section \ref{sec:storageandflops}.
-The convergence of high-order methods have been extensively investigated; for further discussion, see \cite{babuska1982rates}, among others.
+For furthe discussion of the convergence of high-order methods, see \cite{babuska1982rates}, among others.
 
 Demkowicz, Oden, and Rachowicz, et al. discussed $hp$ adaptivity in the context of minimizing the total number of degrees of freedom (DoFs) required to achieve a target accuracy \cite{demkowicz1989toward, oden1989toward, rachowicz1989toward}.
 However, in $hp$ adaptivity, the polynomial order of each finite element may differ.
-While problems utilizing these types of discretizations can be implemented in a matrix-free fashion with the preconditioners discussed in Chapter \ref{ch:MultigridMethods} and Chapter \ref{ch:DomainDecomposition}, we instead focus on meshes where all elements have the same polynomial order in order to simplify the analysis and implementation details.
+While problems utilizing these types of discretizations can be implemented in a matrix-free fashion with the preconditioners discussed in Chapter \ref{ch:MultigridMethods} and Chapter \ref{ch:DomainDecomposition}, we instead focus on meshes where all elements have the same polynomial order as to simplify the analysis and implementation details.

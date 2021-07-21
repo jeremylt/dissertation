@@ -43,7 +43,7 @@ Schwartz methods for domain decomposition were first developed by Hermann Schwar
 In the original formulation, this algorithm is a multiplicative Schwarz method.
 
 Dryja and Widlund \cite{widlund1987additive,dryja1989additive} developed the additive variant of the Schwarz method.
-This method is an iterative technique in which the solution is a sum of the projections into the overlapping subspaces, and this modification preserves the symmetric positive definite property of PDE operators, which allows the additive Schwarz method to be used as a preconditioner for the Conjugate Gradient method.
+This method is an iterative technique in which the solution is a sum of the projections into the overlapping subspaces, and this modification preserves the symmetric positive-definite property of PDE operators, which allows the additive Schwarz method to be used as a preconditioner for the Conjugate Gradient method.
 
 Fischer and Lottes \cite{fischer1997overlapping,fischer2005hybrid} used overlapping additive Schwarz as a preconditioner for the Poisson pressure solve in the spectral element formulation of the incompressible Navier-Stokes equations.
 In this work, the overlap between subdomains was successfully reduced to one or two nodes per subdomain; however, $\left( p + 2 \right)^3 - p^3$ or $\left( p + 1 \right)^3 - p^3$, where $p$ is the polynomial order of the high-order or spectral element basis, can be a rather substantial number of nodes that require additional communication across subdomains in the additive Schwarz method.

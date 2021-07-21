@@ -11,16 +11,16 @@ The compressible Navier-Stokes equations in conservative form are given by
    \end{aligned}
 \label{eq:ns}
 \end{equation}
-where $\boldsymbol{\sigma} = \mu \left( \nabla \mathbf{u} + \left( \nabla \mathbf{u} \right)^T + \lambda \left( \nabla \cdot \mathbf{u} \right) \mathbf{I}_3 \right)$ is the Cauchy (symmetric) stress tensor, with $\mu$ the dynamic viscosity coefficient, and $\lambda = - 2/3$ the Stokes hypothesis constant.
+where $\boldsymbol{\sigma} = \mu \left( \nabla \mathbf{u} + \left( \nabla \mathbf{u} \right)^T + \lambda \left( \nabla \cdot \mathbf{u} \right) \mathbf{I}_3 \right)$ is the Cauchy (symmetric) stress tensor, $\mu$ is the dynamic viscosity coefficient, and $\lambda = - 2/3$ is the Stokes hypothesis constant.
 In Equation \ref{eq:ns}, $\rho$ represents the volume mass density, $\mathbf{U}$ the momentum density (defined as $\mathbf{U} = \rho \mathbf{u}$, where $\mathbf{u}$ is the vector velocity field), $E$ the total energy density (defined as $E = \rho e$, where $e$ is the total energy), $\mathbf{I}_3$ represents the $3 \times 3$ identity matrix, $g$ the gravitational acceleration constant, $\mathbf{\hat{k}}$ the unit vector in the $z$ direction, $k$ the thermal conductivity constant, $T$ represents the temperature, and $P$ the pressure.
 Pressure is given by the equation of state
 \begin{equation}
    P = \left( {c_p}/{c_v} -1\right) \left( E - {\mathbf{U} \cdot \mathbf{U}}/{(2 \rho)} - \rho g z \right) \, ,
    \label{eq:ns_state}
 \end{equation}
-where $c_p$ is the specific heat at constant pressure and $c_v$ is the specific heat at constant volume (that defines $\gamma = c_p / c_v$, the specific heat ratio).
+where $c_p$ is the specific heat at constant pressure and $c_v$ is the specific heat at constant volume, which defines the specific heat ratio, $\gamma = c_p / c_v$.
 
-The system in Equation \ref{eq:ns} can be rewritten in vector form
+The system of equations in Equation \ref{eq:ns} can be rewritten in vector form
 \begin{equation}
    \frac{\partial \mathbf{q}}{\partial t} + \nabla \cdot \mathbf{F}(\mathbf{q}) -S(\mathbf{q}) = 0 \, ,
 \label{eq:vector-ns}
@@ -37,7 +37,7 @@ for the state variables 5-dimensional vector
                \leftarrow\textrm{ volume mass density}\\
                \leftarrow\textrm{ momentum density}\\
                \leftarrow\textrm{ energy density}
-           \end{array}
+           \end{array},
 \end{equation}
 where the flux and the source terms, respectively, are given by
 \begin{equation}
@@ -47,7 +47,7 @@ where the flux and the source terms, respectively, are given by
         \mathbf{U}\\
         {(\mathbf{U} \otimes \mathbf{U})}/{\rho} + P \mathbf{I}_3 -  \boldsymbol{\sigma} \\
         {(E + P)\mathbf{U}}/{\rho} - \mathbf{u}  \cdot \boldsymbol{\sigma} - k \nabla T
-    \end{pmatrix} ,\\
+    \end{pmatrix} ,\hspace{5mm}
     S(\mathbf{q}) &=
     - \begin{pmatrix}
         0\\
@@ -59,7 +59,7 @@ where the flux and the source terms, respectively, are given by
 
 The discrete solution is therefore given by
 \begin{equation}
-   \mathbf{q}_N (\mathbf{x},t)^{(e)} = \sum_{k = 1}^{p + 1}\phi_k (\mathbf{x})\mathbf{q}_k^{(e)}
+   \mathbf{q}_N (\mathbf{x},t)^{(e)} = \sum_{k = 1}^{p + 1}\phi_k (\mathbf{x})\mathbf{q}_k^{(e)},
 \end{equation}
 where $p + 1$ is the number of nodes on the element $e$ and $\phi$ represents the finite elment basis functions.
 
@@ -67,7 +67,7 @@ For the time discretization, we use two types of time-stepping schemes, explicit
 
 \subsubsection{Explicit Time-Stepping Formulation}
 
-The explicit formulation for the adaptive Runge-Kutta-Fehlberg (RKF4-5) method is given by
+The explicit formulation for the adaptive Runge-Kutta-Fehlberg (RKF) method is given by
 \begin{equation}
        \mathbf{q}_N^{n+1} = \mathbf{q}_N^n + \Delta t \sum_{i=1}^{s} b_i k_i \, ,
 \end{equation}
@@ -128,14 +128,14 @@ Integrating by parts on the divergence term, we arrive at the weak form,
    \label{eq:weak-vector-ns}
 \end{equation}
 where $\mathbf{F}(\mathbf q_N) \cdot \hat{\mathbf{n}}$ is typically replaced with a boundary condition.
+We can solve Equation \ref{eq:weak-vector-ns} with a Galerkin discretization or a stabilized formulation.
 
+\subsubsection{Ongoing Research}
 \begin{figure}[ht!]
 \includegraphics[width=.99\linewidth]{../img/Vortices}
 \caption{Vortices Developing as a Cold Air Bubble Drops to the Ground}
 \label{fig:vortices}
 \end{figure}
-
-\subsubsection{Ongoing Research}
 
 Figure \ref{fig:vortices} shows an atmospheric simulation where vortices develop as a cold air bubble drops to the ground.
 This mini-application can run on host or device processors and supports stabilization techniques such as streamline-upwind (SU) and streamline-upwind Petrov-Galerkin (SUPG).

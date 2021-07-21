@@ -1,5 +1,5 @@
 When the PDE in Equation \ref{eq:weak_form} is linear, the pointwise functions $f_0$ and $f_1$ are also linear and Krylov subspace methods can be used to solve the Galerkin system of equations in Equation \ref{eq:galerkin_form}.
-When the PDE is non-linear, the Galerkin system in Equation \ref{eq:galerkin_form} provides the residual evaluator for a non-linear solver and Jacobian can be represented in a similar fashion as Equation \ref{eq:galerkin_form}, based upon the weak form
+When the PDE is non-linear, the Galerkin system in Equation \ref{eq:galerkin_form} provides the residual evaluator for a non-linear solver and Jacobian of this non-linear residual can be represented in a similar fashion as Equation \ref{eq:galerkin_form}, based upon the weak form
 \begin{equation}
 \langle v, J \left( u \right) w \rangle = \int_{\Omega}
 \left[ \begin{array}{c c}

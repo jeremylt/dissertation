@@ -3,7 +3,7 @@ If we consider Lagrange basis functions $\lbrace \phi_i \rbrace_{i = 1}^{p + 1}$
 Additionally, the quadrature weight matrix is given by $W_{i j} = w_i \delta_{i j}$.
 
 We can define the corresponding matrices for problems in higher dimensions via tensor products.
-For the specific case of 3D, we have
+For the specific case of three dimensions, we have
 \begin{equation}
 \begin{tabular}{c}
 $\mathbf{N}   = N \otimes N \otimes N$ \\
@@ -17,7 +17,7 @@ $\mathbf{W}   = W \otimes W \otimes W$
 The basis operations in Equation \ref{eq:basis_ops} are defined on a reference element $\hat{K} = \left[ -1, 1 \right]^3$.
 
 In finite element and spectral element methods, we partition the domain $\Omega$ into a set of $E$ elements, denoted $\lbrace K^e \rbrace_{e = 1}^E$ with coordinate mapping to the reference element given by $X : \hat{K} \rightarrow K^e$.
-The Jacobian of this mapping is given by $J_{i j} = \partial x_i / \partial X_j$, where $X$ is the reference coordinates and $x$ the physical coordinates.
+The Jacobian of this mapping is given by $J_{i j} = \partial x_i / \partial X_j$, where $X$ are the reference coordinates and $x$ the physical coordinates.
 We can invert the Jacobian and compute the derivatives of the physical coordinates in the reference space at every quadrature point.
 \begin{equation}
 \mathbf{D}_i^e = \Lambda \left( \frac{\partial X_0}{\partial x_i} \right) \mathbf{D}_0 + \Lambda \left( \frac{\partial X_1}{\partial x_i} \right) \mathbf{D}_1 + \Lambda \left( \frac{\partial X_2}{\partial x_i} \right) \mathbf{D}_2
@@ -31,7 +31,7 @@ With matrix-free implementations, this global assembly operator is instead used 
 Notice that the local restriction operators do not assume a structured mesh, a conforming mesh, or consistent polynomial order bases for each element.
 
 With these definitions, we can represent the Galerkin system of equations corresponding to the weak form of arbitrary second order PDEs.
-The weak form of PDEs is linear in test functions and can be expressed as pointwise operations where functions of $u$ and $\nabla u$ are contracted with $v$ and $\nabla v$.
+The weak form of PDEs is linear in test functions and can be expressed as pointwise operations where functions of the unknown solution and its derivatives, $u$ and $\nabla u$, are contracted with the test functions and their derivatives, $v$ and $\nabla v$.
 
 Consider the weak form of an arbitrary PDE
 \begin{equation}

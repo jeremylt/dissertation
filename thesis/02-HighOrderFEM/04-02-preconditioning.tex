@@ -1,5 +1,5 @@
-The iteration count to reach convergence for Krylov subspace methods is based, in part, upon condition number of the operator \cite{luenberger1973introduction} and high-order finite element operators have notoriously poor condition numbers \cite{hu1998bounds}.
-Preconditioners help control the condition number of high-order finite elements implemented in a matrix-free fashion, and we can reduce total iteration count and thus total time to solution for these operators.
+The iteration count to reach convergence for Krylov subspace methods is based, in part, upon condition number of the operator \cite{luenberger1973introduction}, and high-order finite element operators have notoriously poor condition numbers \cite{hu1998bounds}.
+Preconditioners help control the condition number of high-order finite elements implemented in a matrix-free fashion and therefore reduce total iteration count and total time to solution for these operators.
 
 Suppose we are solving the linear system given by
 \begin{equation}
@@ -17,9 +17,9 @@ via our Krylov method instead.
 We will focus on left preconditioning, where $\mathbf{M}_R = \mathbf{I}$ and $\mathbf{M}_L^{-1} \approx {\color{burgundy}\mathbf{A}}^{-1}$.
 Therefore, we will adopt the notation $\mathbf{M}_L = \mathbf{M}$.
 
-Specifically, we will investigate preconditioning techniques that can implemented predominately or exclusively in a matrix-free fashion, again to retain the benefits offered by high-order matrix-free finite element discretizations on modern HPC hardware.
+Specifically, we will investigate preconditioning techniques that can implemented predominately or exclusively in a matrix-free fashion, again to retain the performance benefits offered by high-order matrix-free finite element discretizations on modern HPC hardware.
 
-Note that preconditioning CG is more restrictive than other Krylov methods as the CG algorithm requires preconditioners to preserve the symmetric positive definite property of the operator representing the Galerkin system.
+Note that preconditioning CG is more restrictive than other Krylov methods as the CG algorithm requires preconditioners to preserve the symmetric positive-definite property of the operator representing the Galerkin system.
 As a result, preconditioning techniques used for CG can also be applied to more general Krylov methods, such as GMRES.
 
 We consider multigrid and domain decomposition preconditioners, with a specific focus on $p$-multigrid and Dirichlet Balancing Domain Decomposition by Constraints.

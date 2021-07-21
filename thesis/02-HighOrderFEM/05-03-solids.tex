@@ -1,5 +1,5 @@
 The solid mechanics mini-application solves the steady-state static momentum balance equations using unstructured high-order finite element spatial discretizations.
-As with the fluid dynamics mini-application, the solid mechanics elasticity mini-application has been developed using PETSc so that the pointwise physics are separated from the parallelization, meshing, and solver concerns.
+As with the fluid dynamics mini-application, the solid mechanics elasticity mini-application has been developed using PETSc so that the pointwise physics ${\color{applegreen}\mathbf{D}}$ are separated from the parallelization, meshing, and solver concerns.
 This mini-application uses $p$-multigrid preconditioning as described in Chapter \ref{ch:MultigridMethods}.
 
 In this mini-application, we consider three formulations used in solid mechanics applications: linear elasticity, Neo-Hookean hyperelasticity at small strain, and Neo-Hookean hyperelasticity at finite strain.
@@ -102,10 +102,8 @@ We use the compressible Neo-Hookean model,
 where $J = \lvert \mathbf F \rvert = \sqrt{\lvert \mathbf C \rvert}$ is the determinant of deformation, volumetric change.
 $\lambda$ and $\mu$ are the Lamé parameters in the infinitesimal strain limit, given by
 \begin{equation}
-\begin{split}
-\lambda & = \frac{E \nu}{\left( 1 + \nu \right) \left( 1 - 2 \nu \right)} \\
-\mu & = \frac{E}{2 \left( 1 + \nu \right)}
-\end{split}
+\lambda = \frac{E \nu}{\left( 1 + \nu \right) \left( 1 - 2 \nu \right)}, \hspace{5mm}
+\mu = \frac{E}{2 \left( 1 + \nu \right)},
 \end{equation}
 where $E$ is the Young's modulus and $\nu$ is the Poisson's ratio for the materiel.
 
@@ -174,7 +172,7 @@ One can linearize Equation \ref{eq:neo-hookean-stress} around $\mathbf E = 0$, f
 which is the St. Venant-Kirchoff model.
 This model has constitutive linearization without geometric linearization, as mentioned in Figure \ref{fig:hyperelastic-cd}.
 
-This model can be used for geometrically nonlinear mechanics such as snap-through of thin structures, but is inappropriate for large strain.
+This model can be used for geometrically nonlinear mechanics such as snap-through of thin structures, but it is inappropriate for large strain.
 
 \subsubsection{Hyperelasticity at Small Strain}
 
@@ -252,7 +250,7 @@ e^{4 x} \sin \left( 2 y \right) \cos \left( 3 z \right) \\
 \end{equation}
 with full Dirichlet boundary conditions on the outside of the box.
 
-The performance study was conducted on a machine with two-socket AMD EPYC 7452 machine.
+The performance study was conducted on a two-socket AMD EPYC 7452 machine.
 Each socket contains 32 CPU cores with a base clock speed of 2.35 GHz and 128 MB of L3 cache.
 The NPS4 BIOS configuration was used and processes were bound to cores.
 MPICH-3.3.2 was used with PETSc \cite{petsc-user-ref} version 3.14 and libCEED \cite{libceed} version 0.7.
@@ -265,26 +263,24 @@ Note that as we approach the incompressible limit, we omit linear elements to av
  \begin{center}
       \includegraphics[width=1\textwidth]{../img/error-time.pdf}
 \end{center}
-\caption{
-Error versus time for $\nu = 0.3$, $\nu = 0.49$, $\nu = 0.49999$ and $\nu = 0.499999$.
-The Pareto optimal configurations are toward the lower left of each pane, with $p = 3$ and $p = 4$ giving the fastest solutions for any error tolerance, while low-order elements ($p = 1$ and $p = 2$) are increasingly further from the Pareto front for larger values of $\nu$.
-Each horizontal series of the same color represents strong scaling of a given resolution $h$ and $p$; cf. \autoref{fig:error-cost} to quantify the cost of suboptimal strong scaling.
-}
+\caption{Error vs Time for $\nu = 0.3$, $\nu = 0.49$, $\nu = 0.49999$ and $\nu = 0.499999$}
     \label{fig:error-time}
 \end{figure}
+
+In Figure \ref{fig:error-time}, the Pareto optimal configurations are toward the lower left of each pane, with $p = 3$ and $p = 4$ giving the fastest solutions for any error tolerance, while low-order elements ($p = 1$ and $p = 2$) are increasingly further from the Pareto front for larger values of $\nu$.
+Each horizontal series of the same color represents strong scaling of a given resolution $h$ and $p$.
 
 \begin{figure}[pbt!]
  \begin{center}
       \includegraphics[width=1\textwidth]{../img/error-cost.pdf}
 \end{center}
-\caption{
-Error versus cost for $\nu = 0.3$, $\nu = 0.49$, $\nu = 0.49999$ and $\nu = 0.499999$.
-The Pareto optimal configurations are toward the lower left of each pane indicate higher order $p$ is most cost-efficient.
-Each horizontal series of the same color represents a strong scaling study at fixed $h$ and $p$, with perfect strong scaling manifesting when all the dots are collocated.
-The more expensive models tend to exhibit better strong scaling because they have more work over which to amortize the inherent communication costs, while small models are much more cost-efficient to run on a single core.
-}
+\caption{Error vs Cost for $\nu = 0.3$, $\nu = 0.49$, $\nu = 0.49999$ and $\nu = 0.499999$}
     \label{fig:error-cost}
 \end{figure}
+
+In Figure \ref{fig:error-cost}, the Pareto optimal configurations are toward the lower left of each pane indicate higher order $p$ is most cost-efficient.
+Each horizontal series of the same color represents a strong scaling study at fixed $h$ and $p$, with perfect strong scaling manifesting when all the dots are collocated.
+The more expensive models tend to exhibit better strong scaling because they have more work over which to amortize the inherent communication costs, while small models are much more cost-efficient to run on a single core.
 
 In addition, we conducted an $h$-refinement study for polynomials of order 1 through 4 for the compressible case with $\nu = 0.3$ to determine the global rate of convergence of our implementation as the grid size is decreased.
 Figure \ref{fig:lin-elas-conv} is a \texttt{log-log} plot of $h$ versus $L^2$ error that represents the convergence of our implementation using grid sizes $h = 1/3$ to $h = 1/80$ for $\nu = 0.3$.
@@ -294,14 +290,11 @@ Figure \ref{fig:lin-elas-conv} is a \texttt{log-log} plot of $h$ versus $L^2$ er
       \includegraphics[width=1\textwidth]{../img/conv.pdf}
 \end{center}
 \caption{
-\texttt{log-log} plot of $L^2$ Error vs. $h$, where $h = 1/n$, for polynomials of order 1-4 in the compressible case $\nu = 0.3$.
-For each polynomial order, we calculate the slope of the line that is the best fit in the least square sense.
-The slopes are 2.07, 4.00, 4.45, 4.75 for polynomials of order 1 through 4 respectively.
-The stagnation for $p = 3$ and $p = 4$ are due to fixed algebraic tolerances across all runs.
-}
+\texttt{log-log} Plot of $L^2$ Error vs $h$ for Polynomial Orders 1-4 with $\nu = 0.3$}
     \label{fig:lin-elas-conv}
 \end{figure}
 
+In Figure \ref{fig:lin-elas-conv}, for each polynomial order, we calculate the slope of the line that is the best fit in the least square sense.
 The slopes of the lines of best fit in the least square sense in Figure \ref{fig:lin-elas-conv} are 2.07, 4.00, 4.45, 4.75 for polynomials of order 1 through 4 respectively.
 We notice stagnation of the solver for $h = 1/40$ and $h = 1/80$ respectively with $p = 3$ and $p = 4$ due to the default tolerances that we used for the iterative solver.
 For polynomial of order 1, we notice accelerated convergence behavior for coarse meshes, therefore they are not considered in the computation of the slope.
@@ -311,47 +304,47 @@ We observed the expected spectral convergence; fixing the grid size constant whi
 
 In this section, we provide results for a performance study with Neo-Hookean hyperelasticity at finite strain.
 
-For this test case, we simulate an assistive finger device shown in Figure \ref{fig:hyper-cylinder}.
-on the left end of the device we apply a zero Dirichlet boundary condition and on the right we apply a non-homogeneous Dirichlet boundary condition in the negative $y$ direction, downward, simulating a tube bending problem.
-We use a Poisson's ration of $\nu = 0.49$ and Young's Modulus of $E = 1.0$ MPa.
-
-The performance study was conducted on a machine with a single AMD RYZEN 7 3700X 8-core 3.6GHz (4.4 GHz Max Boost) Socket AM4 65W 100-1000000711BOX Desktop Processor with G.SKILL Ripjaws V Series 32GB (2 x 16GB) 288-Pin DDR4 SDRAM DDR4 3200 (PC4 25600) Desktop Memory Model F4-3200C16D-32GV.
-The performance study used PETSc \cite{petsc-user-ref} version 3.13 and libCEED \cite{libceed} version 0.6.
-
-\begin{figure}
+\begin{figure}[ht!]
  \begin{center}
       \includegraphics[width=0.45\textwidth]{../img/cylinder.pdf}
 \end{center}
-\caption{Hexahedral mesh for cylindrical tube bending problem. The length of the tube is 100mm, with circular cross-section with inner diameter 10mm and outer diameter 15mm.  The left wall is fixed, while the right wall is displaced in the negative $Y$ direction by 50mm.}
+\caption{Hexahedral Mesh for Cylindrical Tube Bending Problem}
     \label{fig:hyper-cylinder}
 \end{figure}
 
-\begin{figure}[ht]
+For this test case, we simulate an assistive finger device shown in Figure \ref{fig:hyper-cylinder}.
+The length of the tube is 100mm, with circular cross-section with inner diameter 10mm and outer diameter 15mm.
+On the left end of the device we apply a zero Dirichlet boundary condition and on the right we apply a non-homogeneous Dirichlet boundary condition of 50mm in the negative $y$ direction, downward, simulating a tube bending problem.
+We use a Poisson's ration of $\nu = 0.49$ and Young's Modulus of $E = 1.0$ MPa.
+
+The performance study was conducted on a machine with a single AMD RYZEN 7 3700X 8-core 3.6GHz (4.4 GHz Max Boost) Socket AM4 65W 100-1000000711BOX Desktop Processor with G.SKILL Ripjaws V Series 32GB (2 x 16GB) 288-Pin DDR4 SDRAM DDR4 3200 (PC4 25600) Desktop Memory Model F4-3200C16D-32GV.
+PETSc \cite{petsc-user-ref} version 3.13 was used with libCEED \cite{libceed} version 0.6.
+
+\begin{figure}[ht!]
 \begin{center}
-\includegraphics[angle=0,width=1\linewidth]{../img/tube27.png}
+\includegraphics[angle=0,width=0.55\linewidth]{../img/tube27.png}
 \end{center}
-\caption{$1\times$ displacement magnitude for deformed mesh for PETSc (displacement magnitude contour in mm)}
+\caption{Displacement Magnitude in mm for Deformed Mesh}
 \label{fig:hyper-press} 
 \end{figure}
 
 Figure \ref{fig:hyper-press} shows the final displacement of the tube in the simulation.
 
 \begin{table}[ht!]
-\centering
-{\small
- \begin{tabular}{c c c c c c} 
- \hline
+\begin{center}
+\begin{tabular}{c c c c c c} 
+ \toprule
  Elem & Nodes & dof & Load Increments & Time & np \\ [0.5ex] 
- \hline
+ \midrule
 736   &  7,434 &  22,302 & 500  &  474.05   & 8\\ 
 5,550 & 52,920 & 158,760 & 750  &  8,749.68 & 8\\
- \hline
- \end{tabular}
- }
+ \bottomrule
+\end{tabular}
+\end{center}
 \caption{CPU Time with $\nu = 0.49$}
  \label{table:hyper-meshSizes}
 \end{table}
 
 In Table \ref{table:hyper-meshSizes}, we see the the total CPU item required to complete the simulation.
 This simulation is currently performing poorly in the nearly incompressible regime, due to the large number of load increments required.
-Improved load increment strategies are an are of ongoing research for this mini-application.
+Improved load increment strategies are an area of ongoing research for this mini-application.
