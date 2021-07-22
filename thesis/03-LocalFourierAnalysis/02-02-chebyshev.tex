@@ -1,9 +1,9 @@
 Damped Jacobi is based on the degree 1 polynomial with the root at $\alpha = 1 / \omega > 0$.
 For $\nu = 1$ smoothing passes, this polynomial is minimal on the interval $\left[ \alpha - c, \alpha + c \right]$, for any $c > 0$.
-However, for $\nu \geq 2$ smoothing passes, the Jacobi smoother is a degree $\nu$ polynomial that is not minimal on this interval.
+However, for $\nu \geq 2$ sequential applications of the preconditioner, such as in multiple smoothing passes for a multigrid cycle, the Jacobi smoother is a degree $\nu$ polynomial that is not minimal on this interval.
 Chebyshev smoothers are based on a stable recurrence relation for any polynomial order that is minimal for a target interval on the positive real axis, which should include all eigenvalues corresponding to Fourier modes that the smoother is responsible for reducing.
 
-It is well known that polynomial smoothers allow more aggressive coarsening than Jacobi \cite{brannick2015polynomial}, although this will not prove sufficient for our agressive coarsening directly to linear elements.
+It is well known that polynomial smoothers allow more aggressive coarsening than Jacobi \cite{brannick2015polynomial}, although this will not prove sufficient for our aggressive coarsening directly to linear elements.
 For further discussion of the error propagation properties of the Chebyshev semi-iterative method, see \cite{gutknecht2002revisited}.
 
 We use the Jacobi preconditioned operator, $\left( \diag {\color{burgundy}\mathbf{A}} \right)^{-1} {\color{burgundy}\mathbf{A}}$, in this Chebyshev iteration instead of the finite element operator ${\color{burgundy}\mathbf{A}}$, similar to the discussion in \cite{adams2003parallel}.
@@ -64,7 +64,7 @@ with $\tilde{\color{burgundy}\mathbf{A}}_J = \left( \mathbf{Q}^T \diag \left( {\
   \caption{Spectrum of Chebyshev Preconditioner Symbol}
 \end{figure}
 
-Using Definition \ref{def:chebyshev_symbol}, in Figure \ref{fig:chebyshev_spectrum_1d} we see the spectrum of the symbol of third order Chebyshev polynomial smoothing for the one dimensional scalar diffusion operator and in \ref{fig:chebyshev_spectrum_2d} we see the spectral radius of the symbol of third order Chebyshev polynomial smoothing for the two dimensional scalar diffusion operator.
+Using Definition \ref{def:chebyshev_symbol}, in Figure \ref{fig:chebyshev_spectrum_1d} we see the spectrum of the symbol of third-order Chebyshev polynomial smoothing for the one dimensional scalar diffusion operator and in \ref{fig:chebyshev_spectrum_2d} we see the spectral radius of the symbol of third-order Chebyshev polynomial smoothing for the two dimensional scalar diffusion operator.
 Again, in both cases we use a fourth-order $H^1$ Lagrange finite element basis on the Gauss-Lobatto points.
 When compared to Figures \ref{fig:jacobi_spectrum_1d} and \ref{fig:jacobi_spectrum_2d}, we can see that smoothing based upon the Chebyshev semi-iterative method offers better error reduction than weighted or unweighted Jacobi, albeit at a higher computational cost.
 

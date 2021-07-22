@@ -32,7 +32,7 @@ where $L_h^{i, j}$, $i, j \in \left\lbrace 1, 2, \dots, q \right\rbrace$ is give
 The symbol of $\mathbf{L}_h$, denoted $\tilde{\mathbf{L}}_h$, is a $q \times q$ matrix valued function of $\theta$ given by $\left[ \tilde{\mathbf{L}}_h \right]_{i, j} = \tilde{L}_h^{i, j} \left( \theta \right)$.
 Note that for a system of equations representing an error propagation operator in a relaxation scheme, the spectral radius of the symbol matrix determines now rapidly the scheme decreases error at a target frequency.
 
-These definitions are extended to $d$ dimensions by taxing the neighborhood $V \subset \mathbb{Z}^d$ and letting $\boldsymbol{\theta} \in \left[ - \pi, \pi \right)^d$.
+These definitions are extended to $d$ dimensions by taking the neighborhood $V \subset \mathbb{Z}^d$ and letting $\boldsymbol{\theta} \in \left[ - \pi, \pi \right)^d$.
 For standard coarsening in the analysis of h-multigrid, low frequencies are given by $\boldsymbol{\theta} \in T^{\text{low}} = \left[ - \pi / 2, \pi / 2 \right)^d$ and high frequencies are given by $\boldsymbol{\theta} \in \left[ - \pi, \pi \right)^d \ T^{\text{low}}$, or equivalently via periodicity, $\theta \in T^{\text{high}} = \left[ - \pi / 2, 3 \pi / 2 \right)^d \setminus T^{\text{low}}$.
 
 We can compute the symbol of a $p \times p$ linear system of operators representing a discretized PDE.
@@ -49,11 +49,12 @@ ${\color{burgundy}\mathbf{A}}^e = {\color{blue(ncs)}\mathbf{B}}^T {\color{appleg
 where $\mathbf{P}$ and $\mathbf{G}$ represent the element assembly operators, ${\color{blue(ncs)}\mathbf{B}}$ is a basis operator which computes the values and derivatives of the basis functions at the quadrature points, and ${\color{applegreen}\mathbf{D}}$ is a block diagonal operator which provides the pointwise application of the bilinear form on the quadrature points, to include quadrature weights and the change in coordinates between the physical and reference space.
 
 We focus on LFA of the element operator, ${\color{burgundy}\mathbf{A}}^e$, on the mesh grid with points given by $x_i$, for $i \in \left\lbrace 1, 2, \dots, p + 1 \right\rbrace$, where $p$ is the polynomial degree of the basis.
-We first develop the local Fourier analysis in 1D for scalar operators and then extend this analysis to more general operators.
+We first develop the LFA in one dimension for scalar operators and then extend this analysis to more general operators.
 
 In one dimension, the nodes on the left and right boundaries of the element map to the same Fourier mode when localized to nodes unique to a single finite element, so we can compute the symbol matrix as
 \begin{equation}
 \tilde{{\color{burgundy}\mathbf{A}}} = \mathbf{Q}^T \left( {\color{burgundy}\mathbf{A}}^e \odot \left[ e^{\imath \left( x_j - x_i \right) \theta / h} \right] \right) \mathbf{Q}
+\label{eq:elementsymbol1d}
 \end{equation}
 where $\odot$ represents pointwise multiplication of the elements, $h$ is the length of the element, and $i, j \in \left\lbrace 1, 2, \dots, p + 1 \right\rbrace$.
 In the pointwise product ${\color{burgundy}\mathbf{A}}^e \odot \left[ e^{\imath \left( x_j - x_i \right) \theta / h} \right]$, the $\left( i, j \right)$ entry is given by $\left[ {\color{burgundy}\mathbf{A}}^e \right]_{i, j} e^{\imath \left( x_j - x_i \right) \theta / h}$.
@@ -76,7 +77,7 @@ $\mathbf{Q}$ is a $\left( p + 1 \right) \times p$ matrix that localizes Fourier 
 
 The computation of this symbol matrix extends to more complex PDE with multiple components and in higher dimensions.
 
-Multiple components are supported by extending the $p \times p$ system of Toeplitz operators in Equation \ref{eq:fouriermodelocalization1d} to a $\left( n \cdot p \right) \times \left( n \cdot p \right)$ system of operators, where $n$ is the number of components in the PDE.
+Multiple components are supported by extending the $p \times p$ system of Toeplitz operators in Equation \ref{eq:elementsymbol1d} to a $\left( n \cdot p \right) \times \left( n \cdot p \right)$ system of operators, where $n$ is the number of components in the PDE.
 The localization operator $\mathbf{Q}$ for a multi-component PDE is given by $\mathbf{Q}_n = \mathbf{I}_n \otimes \mathbf{Q}$.
 In general, we omit the subscript indicating the number of components for the localization operator.
 
@@ -92,7 +93,7 @@ and the localization in three dimensions is given by
 Again, we generally omit the subscript indicating the dimension of the Fourier mode localization operator.
 
 \begin{definition}[Symbol of High-Order Finite Element Operators]
-The symbol matrix of a finite element operator for an arbitrary second order PDE with any number of components, basis order, and dimension is given by
+The symbol matrix of a finite element operator for an arbitrary second-order PDE with any number of components, basis order, and dimension is given by
 \begin{equation}
 \tilde{{\color{burgundy}\mathbf{A}}} \left( \boldsymbol{\theta} \right) = \mathbf{Q}^T \left( {\color{burgundy}\mathbf{A}}^e \odot \left[ e^{\imath \left( \mathbf{x}_j - \mathbf{x}_i \right) \cdot \boldsymbol{\theta} / \mathbf{h}} \right] \right) \mathbf{Q}
 \label{eq:symbolhighorder}
@@ -102,7 +103,7 @@ ${\color{burgundy}\mathbf{A}}^e$ is the finite element operator for the element 
 \label{def:high_order_symbol}
 \end{definition}
 
-Note that this LFA framework is applicable to any second-order PDE with a weak form that can be represented by Equation \ref{eq:jacobian_form}.
+Note that this LFA framework is applicable to any second-order PDE with a weak form that can be represented by the matrix-free representation given by Equation \ref{eq:galerkin_form} or Equation \ref{eq:jacobian_form}.
 This representation is used in \href{https://www.github.com/jeremylt/LFAToolkit.jl}{LFAToolkit.jl}, where the users provide the finite element basis ${\color{blue(ncs)}\mathbf{B}}$, the Fourier mode localization operator $\mathbf{Q}$, and the pointwise representation of the weak form ${\color{applegreen}\mathbf{D}}$, and the software provides the LFA of the PDE operator and various preconditioners.
 
 As we develop LFA of various preconditioners and smoothers in this framework throughout this chapter and the following chapters, we will use the scalar diffusion operator as our standard test case to illustrate the properties these techniques with this analysis.
@@ -115,7 +116,7 @@ As we develop LFA of various preconditioners and smoothers in this framework thr
   \caption{Spectrum of Scalar Diffusion Operator Symbol}
 \end{figure}
 
-We see the spectrum of the 1D scalar diffusion operator in Figure \ref{fig:diffusion_spectrum_1d} and the spectral radius of the symbol of the 2D scalar diffusion operator in Figure \ref{fig:diffusion_spectrum_2d}.
+We see the spectrum of the one dimensional scalar diffusion operator in Figure \ref{fig:diffusion_spectrum_1d} and the spectral radius of the symbol of the two dimensional scalar diffusion operator in Figure \ref{fig:diffusion_spectrum_2d}.
 In both cases, we used a fourth-order $H^1$ Lagrange finite element basis on the Gauss-Lobatto points.
 These plots were generated with \href{https://www.github.com/jeremylt/LFAToolkit.jl}{LFAToolkit.jl}.
 Various preconditioning techniques will reduce the spectral radius of this symbol, each with different effectiveness in different frequency ranges.

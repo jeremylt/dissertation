@@ -30,7 +30,7 @@ When using an assembled matrix to represent a finite element operator, this glob
 With matrix-free implementations, this global assembly operator is instead used to assemble the action of the finite element operator on each element into the action of the finite element operator on the entire mesh.
 Notice that the local restriction operators do not assume a structured mesh, a conforming mesh, or consistent polynomial order bases for each element.
 
-With these definitions, we can represent the Galerkin system of equations corresponding to the weak form of arbitrary second order PDEs.
+With these definitions, we can represent the Galerkin system of equations corresponding to the weak form of arbitrary second-order PDEs.
 The weak form of PDEs is linear in test functions and can be expressed as pointwise operations where functions of the unknown solution and its derivatives, $u$ and $\nabla u$, are contracted with the test functions and their derivatives, $v$ and $\nabla v$.
 
 Consider the weak form of an arbitrary PDE
