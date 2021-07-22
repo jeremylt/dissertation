@@ -15,7 +15,7 @@ Then we consider linear elasticity in three dimensions.
     \subfloat[Convergence for $p = 4$ to $p = 1$, $\nu = 1$]{\includegraphics[width=0.48\textwidth]{../img/two_grid_converge_4_to_1}\label{fig:two_grid_4_1}} \\
     \subfloat[Convergence for $p = 4$ to $p = 2$, $\nu = 2$]{\includegraphics[width=0.48\textwidth]{../img/two_grid_converge_4_to_2_2smooth}\label{fig:two_grid_4_2_2smooth}}
     \subfloat[Convergence for $p = 4$ to $p = 1$, $\nu = 2$]{\includegraphics[width=0.48\textwidth]{../img/two_grid_converge_4_to_1_2smooth}\label{fig:two_grid_4_1_2smooth}} \\
-  \caption{Two-Grid Analysis for Jacobi Smoothing for High-Order Finite Elements for the 1D Laplacian}
+  \caption{Two-Grid Analysis for $P$-Multigrid with Jacobi Smoothing for the 1D Laplacian}
 \end{figure}
 
 In Figure \ref{fig:two_grid_4_2} and Figure \ref{fig:two_grid_4_1} we plot the two-grid convergence factor for $p$-multigrid with a single iteration of Jacobi pre and post-smoothing for the one dimensional Laplacian as a function of the Jacobi smoothing parameter $\omega$,
@@ -50,7 +50,7 @@ In contrast to the previous work on $h$-multigrid for high-order finite elements
   \bottomrule
 \end{tabular}
 \end{center}
-\caption{Two-Grid Convergence Factor and Optimal Jacobi Smoothing Parameter for the 1D Laplacian}
+\caption{Two-Grid Convergence Factor and Optimal Jacobi Smoothing Parameter for $P$-Multigrid with Jacobi Smoothing for the 1D Laplacian}
 \label{table:two_grid_1d}
 \end{table}
 
@@ -67,7 +67,7 @@ Optimal parameter estimation is an open question for high-order $p$-multigrid, b
   \centering
     \subfloat[Convergence for $p = 4$ to $p = 2$, $\nu = 1$]{\includegraphics[width=0.48\textwidth]{../img/two_grid_converge_4_to_2_chebyshev}\label{fig:two_grid_4_2_chebyshev}}
     \subfloat[Convergence for $p = 4$ to $p = 1$, $\nu = 1$]{\includegraphics[width=0.48\textwidth]{../img/two_grid_converge_4_to_1_chebyshev}\label{fig:two_grid_4_1_chebyshev}}
-  \caption{Two-Grid Analysis for Chebyshev Smoothing for High-Order Finite Elements for the 1D Laplacian}
+  \caption{Two-Grid Analysis for $P$-Multigrid with Chebyshev Smoothing for the 1D Laplacian}
 \end{figure}
 
 In Figure \ref{fig:two_grid_4_2_chebyshev} and Figure \ref{fig:two_grid_4_1_chebyshev} we plot the two-grid convergence factor for $p$-multigrid with Chebyshev pre and post-smoothing for the one dimensional Laplacian as a function of the Chebyshev order, $k$.
@@ -97,7 +97,7 @@ As expected, the two-grid convergence factor decreases as we coarsen more rapidl
   \bottomrule
 \end{tabular}
 \end{center}
-\caption{Two-Grid Convergence Factor with Chebyshev Smoothing for 1D Laplacian}
+\caption{Two-Grid Convergence Factor for $P$-Multigrid with Chebyshev Smoothing for 1D Laplacian}
 \label{table:two_grid_1d_chebyshev}
 \end{table}
 
@@ -136,7 +136,7 @@ From this table, we can see that the effectiveness of higher order Chebyshev smo
   \bottomrule
 \end{tabular}
 \end{center}
-\caption{Two-Grid Convergence Factor with Chebyshev Smoothing for 1D Laplacian with Modified Lower Eigenvalue Bound}
+\caption{Two-Grid Convergence Factor for $P$-Multigrid with Chebyshev Smoothing for 1D Laplacian with Modified Lower Eigenvalue Bound}
 \label{table:two_grid_1d_chebyshev_eigenvalues}
 \end{table}
 
@@ -164,7 +164,7 @@ Also, the effect of underestimating the optimal Jacobi smoothing parameter, $\om
   \subfloat[Convergence for $p = 4$ to $p = 1$, $\nu = 1$]{\includegraphics[width=0.48\textwidth]{../img/two_grid_converge_4_to_1_1_smooth_2d}\label{fig:two_grid_converge_4_to_1_1_smooth_2d}} \\
   \subfloat[Convergence for $p = 4$ to $p = 2$, $\nu = 2$]{\includegraphics[width=0.48\textwidth]{../img/two_grid_converge_4_to_1_2_smooth_2d}\label{fig:two_grid_converge_4_to_2_2_smooth_2d}}
   \subfloat[Convergence for $p = 4$ to $p = 1$, $\nu = 2$]{\includegraphics[width=0.48\textwidth]{../img/two_grid_converge_4_to_1_2_smooth_2d}\label{fig:two_grid_converge_4_to_1_2_smooth_2d}} \\
-  \caption{Two-Grid Convergence for High-Order Finite Elements for the 2D Laplacian}
+  \caption{Two-Grid Convergence for $P$-Multigrid with Jacobi Smoothing for the 2D Laplacian}
 \end{figure}
 
 \begin{table}[ht!]
@@ -186,7 +186,7 @@ Also, the effect of underestimating the optimal Jacobi smoothing parameter, $\om
   \bottomrule
 \end{tabular}
 \end{center}
-\caption{Two-Grid Convergence Factor and Optimal Jacobi Smoothing Parameter for 2D Laplacian}
+\caption{Two-Grid Convergence Factor and Optimal Jacobi Smoothing Parameter for $P$-Multigrid with Jacobi Smoothing for 2D Laplacian}
 \label{table:two_grid_2d}
 \end{table}
 
@@ -219,7 +219,7 @@ The results in Table \ref{table:two_grid_2d} provide the LFA convergence factor 
   \bottomrule
 \end{tabular}
 \end{center}
-\caption{Two-Grid Convergence Factor with Chebyshev Smoothing for 2D Laplacian}
+\caption{Two-Grid Convergence Factor for $P$-Multigrid with Chebyshev Smoothing for 2D Laplacian}
 \label{table:two_grid_2d_chebyshev}
 \end{table}
 
@@ -252,7 +252,7 @@ The two-grid convergence factor still degrades and the effectiveness of higher o
   \bottomrule
 \end{tabular}
 \end{center}
-\caption{Two-Grid Convergence Factor with Chebyshev Smoothing for 2D Laplacian with Modified Lower Eigenvalue Bound}
+\caption{Two-Grid Convergence Factor for $P$-Multigrid with Chebyshev Smoothing for 2D Laplacian with Modified Lower Eigenvalue Bound}
 \label{table:two_grid_2d_chebyshev_eigenvalues}
 \end{table}
 
@@ -284,7 +284,7 @@ The derivation of the linear elasticity problem was given in Section \ref{sec:ap
   \bottomrule
 \end{tabular}
 \end{center}
-\caption{Two-Grid Convergence Factor with Chebyshev Smoothing for 3D Linear Elasticity}
+\caption{Two-Grid Convergence Factor for $P$-Multigrid with Chebyshev Smoothing for 3D Linear Elasticity}
 \label{table:two_grid_3d_linear_elasticity}
 \end{table}
 

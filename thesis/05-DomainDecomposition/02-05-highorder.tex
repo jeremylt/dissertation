@@ -15,7 +15,7 @@ This approach has been investigated for solid mechanics problems, such as in \ci
   \bottomrule
 \end{tabular}
 \end{center}
-\caption{Condition Numbers and Maximal Eigenvalues for Single High-Order Element Subdomains}
+\caption{Condition Numbers and Maximal Eigenvalues for BDDC with Single High-Order Element Subdomains}
 \label{table:high_order_element_bddc}
 \end{table}
 
@@ -29,7 +29,7 @@ With single high-order element subdomains, the Fast Diagonalization Method appro
   \subfloat[Lumped BDDC]{\includegraphics[width=0.48\textwidth]{../img/lowVsHighLumped}\label{fig:lumped_bddc_comparison}}
   \hfill
   \subfloat[Dirichlet BDDC]{\includegraphics[width=0.48\textwidth]{../img/lowVsHighDirichlet}\label{fig:dirichlet_bddc_comparison}}
-  \caption{Low-Order and High-Order Subdomain Condition Number Comparison}
+  \caption{Low-Order and High-Order Subdomain BDDC Condition Number Comparison}
 \end{figure}
 
 In Figure \ref{fig:lumped_bddc_comparison} we compare the growth of the condition number for the lumped BDDC preconditioned operator for a subdomain consisting of several linear elements and a subdomain consisting of a single high-order element for the two-dimensional Poisson problem.
@@ -40,7 +40,7 @@ In contrast with Figure \ref{fig:lumped_bddc_comparison}, we see that the condit
 
 \begin{figure}[!ht]
   \centering\includegraphics[width=0.52\textwidth]{../img/lowVsHighDirichletBounds}
-  \caption{Low-Order and High-Order Subdomain Condition Number Bounds}
+  \caption{Low-Order and High-Order Subdomain Dirichlet BDDC Condition Number Bounds}
   \label{fig:dirichlet_bddc_bounds}
 \end{figure}
 
