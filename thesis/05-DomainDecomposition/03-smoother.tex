@@ -16,10 +16,10 @@ In Figure \ref{fig:unrelaxed_bddc} we see the symbol of the error operator for D
 \begin{equation}
 \tilde{\mathbf{E}} \left( \boldsymbol{\theta} \right) = \mathbf{I} - \tilde{\mathbf{M}}_2^{-1} \tilde{{\color{burgundy}A}} \left( \boldsymbol{\theta} \right),
 \end{equation}
-for the two dimensional Laplacian
-This error operator has a spectral radius greater than one, indicating that the Dirichlet BDDC preconditioner as described above may not be an appropriate smoother for $p$-multigrid.
+for the two-dimensional Laplacian.
+The error operator's symbol has a spectral radius greater than one, indicating that the Dirichlet BDDC preconditioner as described above may not be an appropriate smoother for $p$-multigrid.
 
-However, if we introduce a relaxation parameter, $\omega$, as used in the Jacobi preconditioner, then we see an improved spectral radius in Figure \ref{fig:relaxed_bddc} for the error operator.
+However, if we introduce a relaxation parameter, $\omega$, as used in the Jacobi preconditioner, then we see an improved spectral radius in Figure \ref{fig:relaxed_bddc} for the symbol of the error operator.
 The symbol of the error operator with a relaxation parameter is given by
 \begin{equation}
 \tilde{\mathbf{E}} \left( \boldsymbol{\theta}, \omega \right) = \mathbf{I} - \omega \tilde{\mathbf{M}}_2^{-1} \tilde{{\color{burgundy}A}} \left( \boldsymbol{\theta} \right).
@@ -51,14 +51,14 @@ The symbol of the error operator with a relaxation parameter is given by
 \label{table:two_grid_bddc_smoother}
 \end{table}
 
-In Table \ref{table:two_grid_bddc_smoother}, we see the two-grid convergence factor for $p$-multigrid with the weighted Dirichlet BDDC smoother for the two dimensional Laplacian.
-When compared to Table \ref{table:two_grid_2d_chebyshev}, we can see that the weighted Dirichlet BDDC smoother provides a significantly improved two-grid convergence factor for aggressive coarsening with high-order elements when compared to fourth order Chebyshev smoothing.
-Additionally, the weighted Dirichlet BDDC smoother provides analogous two-grid convergence factors when compared to more conservative coarsening strategies with second or third order Chebyshev smoothing.
+In Table \ref{table:two_grid_bddc_smoother}, we see the two-grid convergence factor for $p$-multigrid with the weighted Dirichlet BDDC smoother for the two-dimensional Laplacian.
+When compared to Table \ref{table:two_grid_2d_chebyshev}, we can see that the weighted Dirichlet BDDC smoother provides a significantly improved two-grid convergence factor for aggressive coarsening with high-order elements when compared to fourth-order Chebyshev smoothing.
+Additionally, the weighted Dirichlet BDDC smoother provides analogous two-grid convergence factors when compared to more conservative coarsening strategies with second or third-order Chebyshev smoothing.
 
-Even when Dirichlet BDDC smoothing provides analogous convergence factors to third or fourth order Chebyshev smoothing, the Dirichlet BDDC smoother offers benefits in global communication requirements.
-A $k$th order Chebyshev smoother requires $k$ full operator evaluations, each of which requires global communication.
+Even when Dirichlet BDDC smoothing provides analogous convergence factors to third or fourth-order Chebyshev smoothing, the Dirichlet BDDC smoother offers benefits in global communication requirements.
+A $k$th-order Chebyshev smoother requires $k$ full operator evaluations, each of which requires global communication.
 In contrast, the application of the Dirichlet BDDC smoother requires two applications of the subassembled operator on the primal space, one solve of the Schur complement on the primal space, and the global communication from the transpose injection operation.
-The primal space is significantly smaller than the global problem, which means that much less communication is required to apply the Dirichlet BDDC smoother compared to a third or fourth order Chebyshev smoother.
+The primal space is significantly smaller than the global problem, which means that much less communication is required to apply the Dirichlet BDDC smoother compared to a third or fourth-order Chebyshev smoother.
 
 \begin{table}[ht!]
 \begin{center}
@@ -85,7 +85,7 @@ The primal space is significantly smaller than the global problem, which means t
 \label{table:two_grid_bddc_smoother_3d}
 \end{table}
 
-In Table \ref{table:two_grid_bddc_smoother_3d}, we see the two-grid convergence factor for $p$-multigrid with the weighted Dirichlet BDDC smoother for the three dimensional Laplacian.
+In Table \ref{table:two_grid_bddc_smoother_3d}, we see the two-grid convergence factor for $p$-multigrid with the weighted Dirichlet BDDC smoother for the three-dimensional Laplacian.
 As anticipated, a primal space consisting only of element vertices on the corners in three dimensions is inadequate for fourth-order or higher elements.
 Technically, a Richardson iteration with fourth-order or eight-order elements with the weighting factors given above will converge, but as seen in Table \ref{table:error_tolerance}, this iteration will converge very slowly.
 However, a vertex only primal space is still sufficient for cubic and quadratic elements.
@@ -111,6 +111,6 @@ However, a vertex only primal space is still sufficient for cubic and quadratic 
 \label{table:two_grid_bddc_smoother_3d_lin_elas}
 \end{table}
 
-In Table \ref{table:two_grid_bddc_smoother_3d_lin_elas}, we see the two-grid convergence factor for $p$-multigrid with the weighted Dirichlet BDDC smoother for the three dimensional linear elasticity problem.
+In Table \ref{table:two_grid_bddc_smoother_3d_lin_elas}, we see the two-grid convergence factor for $p$-multigrid with the weighted Dirichlet BDDC smoother for the three-dimensional linear elasticity problem.
 The linear elasticity problem is more complex, and we see a decreased effectiveness in the preconditioner.
 For practical problems, an enriched primal space is even more important for proper convergence.

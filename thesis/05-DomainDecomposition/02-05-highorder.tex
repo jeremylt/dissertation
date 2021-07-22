@@ -1,4 +1,4 @@
-Single high-order elements can represent an equivalent number of degrees of freedom.
+Single high-order element subdomains can be used in place of subdomains consisting of multiple low-order elements.
 This approach has been investigated for solid mechanics problems, such as in \cite{pavarino2010bddc}; although, this work incorporated additional primal degrees of freedom from average values across subdomain edges and faces.
 
 \begin{table}[ht!]
@@ -19,7 +19,7 @@ This approach has been investigated for solid mechanics problems, such as in \ci
 \label{table:high_order_element_bddc}
 \end{table}
 
-Table \ref{table:high_order_element_bddc} shows the maximal eigenvalues and condition numbers for the symbol of the BDDC preconditioned operator $\tilde{\mathbf{M}}^{-1}_i \left( \boldsymbol{\theta} \right) \tilde{{\color{burgundy}\mathbf{A}}} \left( \boldsymbol{\theta} \right)$ for the two dimensional Poisson problem on single high-order element subdomains with varying polynomial orders.
+Table \ref{table:high_order_element_bddc} shows the maximal eigenvalues and condition numbers for the symbol of the BDDC preconditioned operator $\tilde{\mathbf{M}}^{-1}_i \left( \boldsymbol{\theta} \right) \tilde{{\color{burgundy}\mathbf{A}}} \left( \boldsymbol{\theta} \right)$ for the two-dimensional Poisson problem on single high-order element subdomains with varying polynomial orders.
 
 The improved condition number, and therefore convergence, of the Dirichlet BDDC compared to the lumped BDDC is more significant for high-order elements.
 With single high-order element subdomains, the Fast Diagonalization Method approximate inverse subdomain solver can be used for both the subdomain subassembled inverse and subdomain interior inverse, which eliminates the advantage in reduced setup costs for lumped BDDC.
@@ -32,10 +32,10 @@ With single high-order element subdomains, the Fast Diagonalization Method appro
   \caption{Low-Order and High-Order Subdomain Condition Number Comparison}
 \end{figure}
 
-In Figure \ref{fig:lumped_bddc_comparison} we compare the growth of the condition number for the lumped BDDC preconditioned operator for a subdomain consisting of several linear elements and a subdomain consisting of a single high-order element for the two dimensional Poisson problem.
+In Figure \ref{fig:lumped_bddc_comparison} we compare the growth of the condition number for the lumped BDDC preconditioned operator for a subdomain consisting of several linear elements and a subdomain consisting of a single high-order element for the two-dimensional Poisson problem.
 The condition number grows much more rapidly for a high-order subdomain with an equivalent number of degrees of freedom.
 
-In Figure \ref{fig:dirichlet_bddc_comparison} we compare the growth of the condition number for the Dirichlet BDDC preconditioned operator for a subdomain consisting of several linear elements and a subdomain consisting of a single high-order element for the two dimensional Poisson problem.
+In Figure \ref{fig:dirichlet_bddc_comparison} we compare the growth of the condition number for the Dirichlet BDDC preconditioned operator for a subdomain consisting of several linear elements and a subdomain consisting of a single high-order element for the two-dimensional Poisson problem.
 In contrast with Figure \ref{fig:lumped_bddc_comparison}, we see that the condition number of the preconditioned operator on the high-order subdomain grows only slightly faster than the condition number of the low-order subdomain.
 
 \begin{figure}[!ht]
@@ -51,7 +51,7 @@ The condition numbers of the Dirichlet BDDC preconditoner operator is bounded by
 where $\mathcal{C} > 0$ is independent of the polynomial order $p$, the element size $h$, and the subdomain size $H$ \cite{klawonn2008spectral}.
 In Figure \ref{fig:dirichlet_bddc_bounds}, we can see that our LFA-predicted condition numbers closely agree with this bound.
 
-Klawonn, Pavarino, and Rheinbach investigated the performance of BDDC and FETI-DP preconditioners for the two dimensional Poisson problem with discontinuous coefficients \cite{klawonn2008spectral} and provided some experimentally derived maximal eigenvalues and condition numbers for the two dimensional Poisson problem.
+Klawonn, Pavarino, and Rheinbach investigated the performance of BDDC and FETI-DP preconditioners for the two-dimensional Poisson problem with discontinuous coefficients \cite{klawonn2008spectral} and provided some experimentally derived maximal eigenvalues and condition numbers for the two-dimensional Poisson problem.
 
 \begin{table}[ht!]
 \begin{center}

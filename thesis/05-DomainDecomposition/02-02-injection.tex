@@ -23,9 +23,10 @@ The symbol of the scaled injection operator is given by
 \begin{bmatrix}
 \mathbf{I} &                 \\
            & \mathbf{Q}_{r}  \\
-\end{bmatrix}
+\end{bmatrix} \mathbf{P}_\pi,
 \end{equation}
 where $\mathbf{R}_{1, r}$ gives the portion of the scaled injection operator acting on the subassembled nodes and $\mathbf{Q}_r$ gives the portion of the Fourier mode localization operator that localizes the Fourier modes on the subassembled nodes.
+$\mathbf{P}_\pi$ is a permutation matrix that re-orders the Fourier modes to agree with the order given for high-order operators in Definition \ref{def:high_order_symbol}.
 \label{def:scaled_injection_symbol}
 \end{definition}
 
@@ -39,7 +40,7 @@ where
 \begin{equation}
 \tilde{{\color{burgundy}\mathbf{A}}}_{I, I}^{-1} \left( \boldsymbol{\theta} \right) = {\color{burgundy}\mathbf{A}}_{I, I}^{e, -1} \odot \left[ e^{\imath \left( \mathbf{x}_j - \mathbf{x}_i \right) \cdot \boldsymbol{\theta} / \mathbf{h}} \right],
 \hspace{5mm}
-\tilde{{\color{burgundy}\mathbf{A}}}_{\Gamma, I}^T \left( \boldsymbol{\theta} \right) = {\color{burgundy}\mathbf{A}}_{\Gamma, I}^{e, T} \odot \left[ e^{\imath \left( \mathbf{x}_j - \mathbf{x}_i \right) \cdot \boldsymbol{\theta} / \mathbf{h}} \right]
+\tilde{{\color{burgundy}\mathbf{A}}}_{\Gamma, I}^T \left( \boldsymbol{\theta} \right) = {\color{burgundy}\mathbf{A}}_{\Gamma, I}^{e, T} \odot \left[ e^{\imath \left( \mathbf{x}_j - \mathbf{x}_i \right) \cdot \boldsymbol{\theta} / \mathbf{h}} \right].
 \end{equation}
 
 The jump mapping is a pointwise scaling operator, so it is its own symbol, just as $\mathbf{R}_1$ is its own symbol.
@@ -63,13 +64,14 @@ The symbol of the harmonic injection operator is given by
 \begin{bmatrix}
 \mathbf{I} &                 \\
            & \mathbf{Q}_{r}  \\
-\end{bmatrix}
+\end{bmatrix} \mathbf{P}_\pi,
 \end{equation}
 where $\mathbf{R}_{1, r}$ gives the portion of the scaled injection operator acting on the subassembled nodes, $\mathbf{J}^T_r$ gives the portion of the jump mapping acting on the subassembled nodes, $\boldsymbol{\mathcal{H}}^T_r$ gives the portion of the harmonic extension acting on subassembled nodes, and $\mathbf{Q}_r$ gives the portion of the Fourier mode localization operator that localizes the Fourier modes on the subassembled nodes.
+$\mathbf{P}_\pi$ is a permutation matrix that re-orders the Fourier modes to agree with the order given for high-order operators in Definition \ref{def:high_order_symbol}.
 
 The symbol of the harmonic extension is given by the symbols of the local operators,
 \begin{equation}
-\tilde{\boldsymbol{\mathcal{H}}} = - \tilde{{\color{burgundy}\mathbf{A}}}_{I, I}^{-1} \tilde{{\color{burgundy}\mathbf{A}}}_{\Gamma, I}^T
+\tilde{\boldsymbol{\mathcal{H}}} = - \tilde{{\color{burgundy}\mathbf{A}}}_{I, I}^{-1} \tilde{{\color{burgundy}\mathbf{A}}}_{\Gamma, I}^T,
 \end{equation}
 where
 \begin{equation}

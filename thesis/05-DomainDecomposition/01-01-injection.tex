@@ -9,7 +9,7 @@ The scaled injection operator, $\mathbf{R}_1$ is defined as the mapping between 
 For interior and vertex degrees of freedom, the sparse matrix representation of $\mathbf{R}_1$ would contain a single entry with a value of $1$, while each column corresponding to a duplicated degree of freedom has $\lvert \mathcal{N} \left( x \right) \rvert$ entries, each given by $1 / \lvert \mathcal{N} \left( x \right) \rvert$.
 
 \begin{definition}[Scaled Injection Operator]
-The scaled injection operator, $\mathbf{R}_1$, is given by the mapping from the global problem space to the broken space where each degree of freedom is scaled by its multiplicity in the broken space, denoted by $\lvert \mathcal{N} \left( x \right) \rvert$.
+The scaled injection operator, $\mathbf{R}_1$, is given by the mapping from the global problem space to the broken space where each degree of freedom is scaled by the reciprocal of its multiplicity in the broken space, denoted by $\lvert \mathcal{N} \left( x \right) \rvert^{-1}$.
 \label{def:scaledinjection}
 \end{definition}
 

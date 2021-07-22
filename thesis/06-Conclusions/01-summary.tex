@@ -1,11 +1,11 @@
 High-order matrix-free finite element operators offer superior performance on modern high performance computing hardware when compared to assembled sparse matrices, both with respect to floating point operations needed for operator evaluation and the memory transfer needed for a matrix-vector product.
 However, high-order matrix-free operators require iterative solvers, such as Krylov subspace methods, and these methods converge slowly for ill-conditioned operators, such as high-order finite element operators.
 Preconditioning techniques can significantly improve the converge of these iterative solvers for high-order matrix-free finite element operators.
-In particular, $p$-multigrid and domain decomposition methods are particularly well suited for problems on unstructured meshes, but these methods have parameters that may require careful tuning to ensure proper convergence.
+In particular, $p$-multigrid and domain decomposition methods are particularly well suited for problems on unstructured meshes, but these methods may have parameters that require careful tuning to ensure proper convergence.
 Local Fourier Analysis (LFA) of these preconditioners analyzes the frequency modes found in the error on each iteration and can provide sharp convergence estimates.
 
 In Chapter \ref{ch:HighOrderFEM}, we presented a representation of arbitrary second-order partial differential equations for high-order finite element discretizations that facilitates matrix-free implementation.
-This representation is used by the Center for Efficient Exascale Discretizations to provide performance portable high-order matrix-free implementations of finite element operators for arbitrary second order partial differential equations.
+This representation is used by the Center for Efficient Exascale Discretizations to provide performance portable high-order matrix-free implementations of finite element operators for arbitrary second-order partial differential equations.
 We presented the benefits of high-order matrix-free finite element discretizations and provided some examples of mini-applications using these formulations.
 
 In Chapter \ref{ch:LocalFourierAnalysis}, we developed LFA of finite element operators represented in this fashion.
@@ -14,13 +14,13 @@ We provided examples of preconditioning Jacobi and Chebyshev semi-iterative meth
 
 In Chapter \ref{ch:MultigridMethods}, this LFA was expanded to create the LFA of $p$-multigrid for Continuous Galerkin discretizations.
 This LFA of $p$-multigrid was validated with numerical experiments.
-Furthermore, we extended this LFA to reproduce previous work with h-multigrid by using macro-elements consisting of multiple low-order finite elements.
+Furthermore, we extended this LFA to reproduce previous work with $h$-multigrid by using macro-elements consisting of multiple low-order finite elements.
 
 In Chapter \ref{ch:DomainDecomposition}, we also developed the LFA of lumped and Dirichlet versions of Balancing Domain Decomposition by Constraints (BDDC) preconditioners.
 With macro-elements consisting of multiple low-order finite elements, we can exactly reproduce previous work on the LFA of BDDC.
-By using Fast Diagonalization Method (FDM) approximate subdomain solvers, the increased setup costs for the DirichletBDDC preconditioner, relative to the lumped variant, can be substantially reduced, which makes BDDC an attractive preconditioner.
+By using Fast Diagonalization Method (FDM) approximate subdomain solvers, the increased setup costs for the Dirichlet BDDC preconditioner, relative to the lumped variant, can be substantially reduced, which makes BDDC an attractive preconditioner.
 
 The performance of $p$-multigrid in parallel is partially determined by the number of multigrid levels.
-A larger number of multigrid levels requires additional global communication on parallel machines, but aggressive coarsening that is not supported by the smoother in the multigrid method can lead to gaps in the error frequency modes targeted by the total multigrid method, which results in degraded convergence.
+A larger number of multigrid levels requires additional global communication on parallel machines, but aggressive coarsening that is not supported by the smoother in the multigrid method can lead to a gap between the error frequency modes targeted by the smoother and the coarse grid solver, which results in degraded convergence.
 Dirichlet BDDC can be used as a smoother for $p$-multigrid to target a wider range of error mode frequencies than polynomial smoothers such as the Chebyshev semi-iterative method, which facilitates more aggressive coarsening.
-We provided LoFA of $p$-multigrid with Dirichlet BDDC smoothing to demonstrate the suitability of this combination for preconditioning high-order matrix-free finite element discretizations.
+We provided LFA of $p$-multigrid with Dirichlet BDDC smoothing to demonstrate the suitability of this combination for preconditioning high-order matrix-free finite element discretizations.

@@ -1,7 +1,7 @@
 For high-order matrix-free BDDC, we decompose the domain $\Omega$ into a series of subdomains $\Omega^e$ given by the individual elements, and we utilize four non-exclusive spaces on each subdomain.
-Figure \ref{fig:bddc_mesh_not_decomposed} shows a global mesh before decomposition, consisting of four quadratic elements in two dimensions, in this example.
+Figure \ref{fig:bddc_mesh_not_decomposed} shows a global mesh before decomposition, consisting of four quadratic elements in two dimensions in this case.
 
-The interface between subdomains is given by $\Gamma = \bigcup \partial \Omega^e \backslash \partial \Omega$ and the interface of subdomain $\Omega^e$ is given by $\Gamma^e = \delta \Omega^e \bigcap \Gamma$.
+The interface between subdomains is given by $\Gamma = \bigcup \partial \Omega^e \backslash \partial \Omega$, and the interface of subdomain $\Omega^e$ is given by $\Gamma^e = \delta \Omega^e \bigcap \Gamma$.
 The interior of each subdomain, $\text{I}$, is given by the remaining degrees of freedom on the element.
 In Figure \ref{fig:bddc_mesh_interface}, the interface degrees of freedom, $\Gamma$, for each subdomain have been highlighted and the interior $\text{I}$ is given by the remainder of each subdomain.
 
@@ -26,7 +26,7 @@ Each subdomain problem could therefore be written as
 \end{equation}
 where ${\color{burgundy}\mathbf{A}}^e = {\color{blue(ncs)}\mathbf{B}}^T {\color{applegreen}\mathbf{D}} {\color{blue(ncs)}\mathbf{B}}$, as shown in Equation \ref{eq:localoperator}.
 
-This subdomain problem can be assembled into the global problem in the typical finite element approach given by Equation \ref{eq:libceed_representation}, but in BDDC we create a partially subassembled problem that is easier to invert than the global problem by duplicating broken degrees of freedom along the subdomain boundaries.
+This subdomain problem can be assembled into the global problem in the typical finite element approach given by the matrix-free form in Equation \ref{eq:libceed_representation}, but in BDDC we instead create a partially subassembled problem that is easier to invert than the global problem by duplicating broken degrees of freedom along the subdomain boundaries.
 Only the corner, or vertex, degrees of freedom from each element are assembled into a global coarse problem while the remaining degrees of freedom on the subdomain interfaces are duplicated in each subdomain.
 The solutions on the global coarse problem and broken subdomain problems are used to construct an approximate solution to the true assembled global problem.
 
@@ -50,11 +50,11 @@ where
 and $\mathbf{R}^e$ is the subdomain injection operator. 
 In this formulation, the broken degrees of freedom found on the portion of subdomain interface given by $\Gamma^e - \Pi^e$ are duplicated for each subdomain.
 In Figure \ref{fig:bddc_mesh_broken_interface} the duplicated degrees of freedom across each subdomain interface have been highlighted.
-This duplication reduces the amount of global communication required to solve the subassemebled problem, which makes BDDC attractive as a preconditioner for high-order finite element methods.
+This duplication reduces the amount of global communication required to solve the subassembled problem, which makes BDDC attractive as a preconditioner for high-order finite element methods.
 
 There are BDDC formulations which enrich the primal space with edge or face averages to improve convergence.
 We forgo these formulations to simplify the analysis; however these formulations can become increasingly attractive with large, high-order subdomains in three dimensions.
-There is no fundamental barrier to extending the LFA of BDDC described below for formulations that use edge or face averages to improve convergence.
+There is no fundamental barrier to extending the LFA of BDDC described below to formulations that use edge or face averages to improve convergence.
 
 \begin{definition}[Balancing Domain Decomposition by Constraints Preconditioner]
 The action of the BDDC preconditioner is given by

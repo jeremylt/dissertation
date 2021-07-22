@@ -15,9 +15,9 @@ Another popular family of domain decomposition method is Schwartz methods, such 
 Developing the LFA of Schwartz methods, or other overlapping domain decomposition techniques, would help quantify convergence differences between overlapping methods and BDDC and facilitate a broader comparison between these two types of methods in terms of both convergence rates and global communication required.
 
 This LFA framework is designed to support applications.
-The results form the LFA in this dissertation indicates two new areas of note for application development.
+The results from the LFA in this dissertation indicate two new areas of note for application development.
 
-First, this LFA indicates that using Dirichlet BDDC with single high-order element subdomains is an attractive preconditioner.
+First, this LFA indicates that using matrix-free Dirichlet BDDC with single high-order element subdomains is an attractive preconditioner.
 Single high-order element subdomains can use the FDM to provide high-order matrix-free subdomain solvers.
 Furthermore, using a FDM based subdomain solver can eliminate the increased setup time for Dirichlet BDDC compared to lumped BDDC.
 A fully matrix-free BDDC implementation using libCEED and PETSc is in development and will be a novel implementation.
