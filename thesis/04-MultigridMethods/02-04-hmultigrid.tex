@@ -1,6 +1,6 @@
 In $h$-multigrid, the different grids have the same polynomial order of finite elements but these elements are amalgamated into increasingly larger elements.
 For LFA of $h$-multigrid, we introduce the concept of macro-element bases.
-With macro-element bases, the grid transfer operators can be still represented elementwise and can thus be easily represented in the form of Equation \ref{eq:libceed_representation}.
+With macro-element bases, the grid transfer operators can be still represented elementwise and can thus be easily represented in the matrix-free form of Equation \ref{eq:libceed_representation}.
 
 A macro-element basis is formed by amalgamating two or more finite element bases.
 Each sub-element has separate quadrature spaces, so the basis functions for each sub-element, are defined as zero on the portions of the domain not included in the given sub-element.

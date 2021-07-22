@@ -1,6 +1,5 @@
 In this section, we present numerical results for this analysis for the scalar Laplacian in one and two dimensions with $H^1$ Lagrange bases on Gauss-Lobatto points with Gauss-Legendre quadrature.
-Next, we validate these results with numerical experiments for the scalar Laplacian in three dimensions.
-Lastly, we consider linear elasticity in three dimensions.
+Then we consider linear elasticity in three dimensions.
 
 % -----------------------------------------------------------------------------
 \subsubsection{Scalar Laplacian - 1D Convergence Factors}\label{sec:1dresults}
@@ -57,7 +56,7 @@ In contrast to the previous work on $h$-multigrid for high-order finite elements
 
 The results in Table \ref{table:two_grid_1d} provide the LFA convergence factor and optimal values of $\omega$ for two-grid high-order $p$-multigrid for a variety of polynomial orders and coarsening factors.
 
-Traditional estimates of the optimal smoothing parameter based upon extremal eigevalues of the preconditioned operatro are incompatible with this LFA framework.
+Traditional estimates of the optimal smoothing parameter based upon extremal eigenvalues of the preconditioned operator are incompatible with this LFA framework.
 Optimal parameter estimation is an open question for high-order $p$-multigrid, but optimization techniques, such as those discussed in \cite{brown2021tuning}, can be used to tune these parameters, especially for more complex PDEs.
 
 % -----------------------------------------------------------------------------
@@ -264,7 +263,8 @@ As in one dimension, increasing the lower eigenvalue estimate results in better 
 \subsubsection{Linear Elasticity - 3D Convergence Factors}\label{sec:solidsresults}
 % -----------------------------------------------------------------------------
 
-To demonstrate the suitability of this LFA formulation for more complex PDE, we consider linear elasticity in three dimensions given in Section \ref{sec:app-solid}.
+To demonstrate the suitability of this LFA formulation for more complex PDE, we consider linear elasticity in three dimensions.
+The derivation of the linear elasticity problem was given in Section \ref{sec:app-solid}.
 
 \begin{table}[ht!]
 \begin{center}

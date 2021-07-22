@@ -1,9 +1,9 @@
 Multigrid methods are popular multi-level techniques that provide resolution independent convergence rates.
-$p$-type multigrid, developed by Ronquist and Patera \cite{ronquist1987spectral}, is a natural choice for high-order finite elements on an unstructured mesh and can be implemented with operators represented as in Equation \ref{eq:libceed_representation}.
+$p$-type multigrid, developed by Ronquist and Patera \cite{ronquist1987spectral}, is a natural choice for high-order finite elements on an unstructured mesh and can be implemented with operators represented in the matrix-free form given in Equation \ref{eq:libceed_representation}.
 Ronquist and Patera declared $p$-multigrid \textit{sensibly independent} of the number of elements and polynomial degree of the element bases.
 
+In a recent publication, Davydow et al. use $h$-multigrid for matrix-free finite elements in solid mechanics; however $p$-multigrid can offer more flexibility with respect to meshes in comparison to $h$-multigrid as it does not require aggregation of multiple elements into larger elements, which can be difficult on more complex geometry.
 There has been work by Heys, Manteuffel, McCormick, and Olson demonstrating the feasibility of algebraic multigrid (AMG) for high-order finite elements \cite{heys2005algebraic}; however, AMG requires assembly of the finite element operator, which defeats the benefits of matrix-free implementations.
-In a recent publication, Davydow et al. use $h$-multigrid for matrix-free finite elements in solid mechanics; however $p$-multigrid can offer more flexibility with respect to meshes in comparison to $h$-multigrid as it does not require aggregation of multiple elements into larger elements.
 
 In this chapter we introduce LFA of $p$-multigrid and generalize this analysis to reproduce previous work on $h$-multigrid.
 We provide convergence factors for aggressive coarsening with Jacobi and Chebyshev semi-iterative smoothers as a baseline to compare with Balancing Domain Decomposition by Constraints smoothing.
