@@ -50,7 +50,7 @@ Dryja and Widlund introduced an additional subspace, the coarse space given by c
 This substructuring improves the Schwarz method's global transmission of information across the domain and thus provides an improved rate of convergence. 
 
 Fischer and Lottes \cite{fischer1997overlapping,fischer2005hybrid} used overlapping additive Schwarz with a coarse grid space as a preconditioner for the Poisson pressure solve in the spectral element formulation of the incompressible Navier-Stokes equations.
-In this work, the overlap between subdomains was successfully reduced to one or two nodes per subdomain; however, $\left( p + 3 \right)^3 - \left( p + 1 \right)^3$ or $\left( p + 2 \right)^3 - \left( p + 1 \right)^3$, where $p$ is the polynomial order of the high-order or spectral element basis, can be a rather substantial number of nodes that require additional communication across subdomains in the additive Schwarz method.
+In this work, the overlap between subdomains was successfully reduced to one or two nodes per subdomain; however, $\left( p + 3 \right)^3 - \left( p + 1 \right)^3$ or $\left( p + 5 \right)^3 - \left( p + 1 \right)^3$, where $p$ is the polynomial order of the high-order or spectral element basis, can be a rather substantial number of nodes that require additional communication across subdomains in the additive Schwarz method.
 Furthermore, the increase in the subdomain sizes makes each sudomain problem more expensive to solve.
 Because of this additional communication and more expensive subdomain solves, we investigate non-overlapping domain decomposition techniques.
 
