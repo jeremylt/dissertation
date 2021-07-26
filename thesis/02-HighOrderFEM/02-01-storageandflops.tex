@@ -4,8 +4,8 @@ We consider the approximate number of bytes required for storage and FLOPs requi
 High-order finite element discretizations are less common than low-order finite elements, in part, because a linear operator or the Jacobian of a non-linear operator rapidly loses sparsity in a sparse matrix representation.
 Matrix-free implementations with tensor product finite element bases can overcome this issue by exploiting the tensor product structure to reduce both the data storage requirements and the FLOPs required to apply a matrix-vector product.
 
-With a sparse matrix representation, application of the finite element operator for a single element requires $\mathcal{O} \left( p^6 \right)$ matrix entries and $\mathcal{O} \left( p^6 \right)$ floating point operations.
-In contrast, application of the matrix-free operator for a single tensor product element requires $\mathcal{O} \left( p^3 \right)$ floating point values and $\mathcal{O} \left( p^{d + 1} \right)$ FLOPs.
+With a sparse matrix representation, application of the finite element operator for a single hexahedral element requires $\mathcal{O} \left( \left( p + 1 \right)^6 \right)$ matrix entries and $\mathcal{O} \left( \left( p + 1 \right)^6 \right)$ floating point operations, where $p$ is the polynomial order of the finite element basis.
+In contrast, application of the matrix-free operator for a single tensor product element requires $\mathcal{O} \left( \left( p + 1 \right)^3 \right)$ floating point values and $\mathcal{O} \left( \left( p + 1 \right)^{d + 1} \right)$ FLOPs.
 When multiple components in the PDE use the same finite element bases, the coefficients in this complexity analysis further favor matrix-free operator implementations.
 
 \begin{figure}[ht!]
