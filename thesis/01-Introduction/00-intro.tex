@@ -24,7 +24,7 @@ The performance of $p$-multigrid in parallel is partially determined by the numb
 A larger number of multigrid levels requires additional neighbor communication on parallel machines, which is a bottleneck on modern HPC hardware.
 Furthermore, these intermediate representations are less computationally efficient than the fine grid representation.
 However, aggressive coarsening is not supported by traditional polynomial smoothers; aggressive coarsening leaves the smoother responsible for wide range of error frequency modes, which causes degraded smoothing unless a very high order smoother is used.
-Dirichlet BDDC can be used as a smoother for $p$-multigrid to target a wider range of error mode frequencies than polynomial smoothers such as the Chebyshev semi-iterative method, which facilitates more aggressive coarsening.
+Dirichlet BDDC can be used as a smoother for $p$-multigrid to more efficiently target error mode frequencies than polynomial smoothers such as the Chebyshev semi-iterative method, which facilitates more aggressive coarsening.
 We provide LFA of $p$-multigrid with Dirichlet BDDC smoothing to demonstrate the suitability of this combination for preconditioning high-order matrix-free finite element discretizations.
 
 Finally, in Chapter \ref{ch:Conclusions} we provide concluding remarks and areas for future research.
