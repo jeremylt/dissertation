@@ -5,9 +5,10 @@ The LFA can be reproduced with the Julia package \href{https://www.github.com/je
 LFAToolkit.jl is a toolkit for analyzing the performance of preconditioners for arbitrary, user provided weak forms of second order PDEs.
 
 The implementation of the high-order matrix-free finite element operators can be found in the \href{https://www.github.com/CEED/libCEED}{libCEED} GitHub repository, along with the benchmarking, fluid dynamics, and solid mechanics mini-applications.
-libCEED \cite{libceed, libceed-user-manual, scipy2020} is a low-level API library for the efficient high-order discretization methods developed by the ECP co-design Center for Efficient Exascale Discretizations (CEED).
+libCEED \cite{libceed, libceed-user-manual, scipy2020} is a low-level library for the efficient high-order discretization methods developed by the ECP co-design Center for Efficient Exascale Discretizations (CEED).
+LibCEED has multiple backends that can be selected at runtime, and these backends target CPU architectures, NVIDIA GPUs, and AMD GPUs.
 While the focus is on high-order finite elements, the approach used in libCEED is mostly algebraic and thus applicable to other discretizations in factored form.
 
-Finally, the linear and non-linear solver and preconditioning infrastructure can be found in \href{https://www.mcs.anl.gov/petsc/}{PETSc} \cite{petsc-user-ref}, the Portable, Extensible Toolkit for Scientific Computation).
+Finally, the linear and nonlinear solver and preconditioning infrastructure can be found in \href{https://www.mcs.anl.gov/petsc/}{PETSc} \cite{petsc-user-ref}, the Portable, Extensible Toolkit for Scientific Computation).
 PETSc is a suite of data structures and routines for the scalable, parallel solution of scientific applications modeled by partial differential equations.
 It supports MPI, and GPUs through CUDA, HIP, or OpenCL, as well as hybrid MPI-GPU parallelism.

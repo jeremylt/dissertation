@@ -1,4 +1,4 @@
-High-order finite element discretizations offer accuracy advantages over low-order finite elements \cite{demkowicz1989toward, oden1989toward, rachowicz1989toward} and have spectral convergence properties.
+High-order finite element discretizations offer accuracy advantages over low-order finite elements \cite{demkowicz1989toward, oden1989toward, rachowicz1989toward} and have spectral convergence properties for sufficiently smooth problems.
 However, high-order finite elements are less common because a linear operator or the Jacobian of a non-linear operator rapidly loses sparsity in a sparse matrix representation.
 Matrix-free formulations of these methods \cite{brown2010efficient, deville2002highorder, knoll2004jacobian} provide efficient implementations of these methods on modern hardware \cite{libceed-user-manual, fischer2020scalability, kronbichler2019multigrid} with better performance than sparse matrix representations, both in terms of storage and floating point operations required to execute a matrix-vector product.
 
@@ -12,8 +12,8 @@ These methods can be used as solvers or as preconditioners for other iterative s
 
 Geometric multigrid has become a common component in many high performance computing applications and is available in many packages, such as PETSc.
 May et al. \cite{may2016extreme} highlighted several benefits to geometric multigrid in extreme scale computing.
-Specifically, geometric multigrid has a scalable setup phase, the ability to use highly performance matrix-free smoothers on all levels, and the ability to use identical stencils (or functions that apply the action of the stencil matrix-free) for all coarse level operators.
-Geometric multigrid is therefore seen as "undoubtedly {\textit{the preconditioner of choice}}" for elliptic problems due to this scalability and resolution independent convergence.
+Specifically, geometric multigrid has a scalable setup phase, the ability to use high performance matrix-free smoothers on all levels, and the ability to use identical stencils (or functions that apply the action of the stencil matrix-free) for all coarse level operators.
+Geometric multigrid is therefore seen as ``undoubtedly {\textit{the preconditioner of choice}}" for elliptic problems due to this scalability and resolution independent convergence.
 
 $H$-multigrid, which is the typical type of geometric multigrid used for low-order discretizations, coarsens the mesh by aggregating multiple elements.
 $P$-multigrid, developed by R{\o}nquist and Patera \cite{ronquist1987spectral}, is instead based on decreasing the order of the bases in high-order or spectral finite element discretizations.
@@ -23,30 +23,31 @@ Davydov, et al. \cite{davydov2019matrix} used $h$-multigrid preconditioning with
 Algebraic Multigrid (AMG) is based on applying multigrid ideas directly to an assembled matrix representation of the discrete finite element operator.
 Heys et al. \cite{heys2005algebraic} investigated AMG for high-order discretizations with some level of success; however this approach relies upon assembling the high-order operator, which discards the performance benefits of using a matrix-free representation.
 We restrict our use of AMG to the coarse grid solver as part of $p$-multigrid or domain decomposition.
-The coarse grid with linear elements has substantially fewer degrees of freedom, by a factor of approximately $p^3 / 2^3$ for $p$-multigrid, which makes assembly and efficient direct solution of the coarse grid far more tractable.
+The coarse grid with linear elements has substantially fewer degrees of freedom, by a factor of approximately $\left( p + 1 \right)^3 / 2^3$ for $p$-multigrid, which makes assembly and efficient direct solution of the coarse grid far more tractable.
 
-The coarse grid solve on linear elements with AMG can be very efficient, and the application of the operator on the fine grid is very efficient with a matrix-free representation, but the intermediate grids between the coarsest and finest levels have less efficient representations.
+The coarse grid solve on linear elements with AMG can be relatively fast, and the application of the operator on the fine grid is very efficient with a matrix-free representation, but the intermediate grids between the coarsest and finest levels have less efficient matrix-free representations.
 Furthermore, an increased number of levels requires additional global communication, which can become a bottleneck in parallel applications.
 We are therefore interested in geometric multigrid with aggressive $p$-coarsening from the high-order fine grid directly to the linear coarse grid representation.
 
 Polynomial smoothers are common in multigrid methods.
 They can be applied matrix-free and offer competitive smoothing properties when compared to Gauss-Seidel \cite{adams2003parallel}.
-Brannick et al. \cite{brannick2015polynomial} investigated polynomial smoothers for aggressive coarsening in $h$-multigrid and found Chebyshev adequate in this context; however our analysis indicates that Chebyshev is not an appropriate smoother for aggressive $p$-coarsening.
+Brannick et al. \cite{brannick2015polynomial} investigated polynomial smoothers for aggressive coarsening in $h$-multigrid and found that a rather high degree is needed for Chebyshev smoothers to support aggressive $h$-coarsening.
+Our analysis indicates that Chebyshev is not an appropriate smoother for aggressive $p$-coarsening.
 We need a better smoother to support rapid $p$-coarsening directly to linear elements, and we turn to domain decomposition methods to find this improved smoother.
 
 \subsection{Domain Decomposition Methods}
 
 Domain decomposition methods are popular techniques for preconditioning high-order finite element and spectral element discretizations.
-Dryja and Widlund surveyed many of the domain decomposition techniques in an effort to unify existing theory \cite{dryja1989towards} and we outline the development of these methods below.
+Toselli and Widlund surveyed many of the domain decomposition techniques \cite{toselli2005domain} and we outline the development of these methods below.
 
 Schwartz methods for domain decomposition were first developed by Hermann Schwarz \cite{schwarz1972gesammelte} as an alternating method in which solutions in overlapping subregions of the global problem were solved while using previous solutions in neighboring subregions as boundary conditions for the current subregion problem.
 In the original formulation, this algorithm is a multiplicative Schwarz method.
 
 Dryja and Widlund \cite{widlund1987additive,dryja1989additive} developed the additive variant of the Schwarz method.
-This method is an iterative technique in which the solution is a sum of the projections into the overlapping subspaces, and this modification preserves the symmetric positive-definite property of PDE operators, which allows the additive Schwarz method to be used as a preconditioner for the Conjugate Gradient method.
+This method is an iterative technique in which the solution is a sum of the projections into the overlapping subspaces, and this modification preserves the symmetric positive-definite property of PDE operators, which allows the additive Schwarz method to be used as a preconditioner for the Conjugate Gradient method in parallel solvers.
 
 Fischer and Lottes \cite{fischer1997overlapping,fischer2005hybrid} used overlapping additive Schwarz as a preconditioner for the Poisson pressure solve in the spectral element formulation of the incompressible Navier-Stokes equations.
-In this work, the overlap between subdomains was successfully reduced to one or two nodes per subdomain; however, $\left( p + 2 \right)^3 - p^3$ or $\left( p + 1 \right)^3 - p^3$, where $p$ is the polynomial order of the high-order or spectral element basis, can be a rather substantial number of nodes that require additional communication across subdomains in the additive Schwarz method.
+In this work, the overlap between subdomains was successfully reduced to one or two nodes per subdomain; however, $\left( p + 3 \right)^3 - \left( p + 1 \right)^3$ or $\left( p + 2 \right)^3 - \left( p + 1 \right)^3$, where $p$ is the polynomial order of the high-order or spectral element basis, can be a rather substantial number of nodes that require additional communication across subdomains in the additive Schwarz method.
 Because of this additional communication, we investigate non-overlapping domain decomposition techniques.
 
 Specifically, we are interested in the Balancing Domain Decomposition By Constraints (BDDC) method.
@@ -56,21 +57,21 @@ This technique was developed as a modification to the earlier Balancing Domain D
 BDDC is closely related to the Dual Primal version of Finite Element Tearing and Interconnecting (FETI-DP) developed by Farhat, Lesoinne, and Pierson \cite{farhat1991method}.
 BDDC is formulated in terms of the energy minimization problem across subdomain interfaces rather than in terms of Lagrange multipliers, as seen in FETI-DP.
 Connections have been established between FETI techniques and Neumann-Neumann domain decomposition methods \cite{klawonn2001feti}, and operators preconditioned with BDDC and FETI-DP have been shown to have the same spectrum, under certain assumptions \cite{mandel2007bddc}.
-In this dissertation, the 'lumped' and 'Dirichlet' nomenclature from FETI-DP is used to describe two variants of the BDDC algorithm.
-The lumped BDDC variant employs a naive injection operator into the subassembled problem space which is cheaper to setup and apply while the Dirichlet BDDC variant creates a harmonic extension for the jump in values across the broken subdomain interface which ultimately better controls the condition number of the preconditioned operator.
+In this dissertation, the `lumped' and `Dirichlet` nomenclature from FETI-DP is used to describe two variants of the BDDC algorithm.
+The lumped BDDC variant employs a naive injection operator into the subassembled problem space that is cheaper to setup and apply while the Dirichlet BDDC variant creates a harmonic extension for the jump in values across the broken subdomain interface, which ultimately better controls the condition number of the preconditioned operator.
 
 Fischer, Miller, and Tufo \cite{fischer2000overlapping} paired their overlapping additive Schwarz preconditioner with a fast approximate subdomain solver based upon the Fast Diagonalization Method (FDM) by Lynch \cite{lynch1964direct}.
-The use of inexact subdomain solvers for BDDC was explored by Li and Widlund \cite{li2007use}.
-In this work, multigrid v-cycles were used to solve the partially assembled subdomain problems, while we investigate the use of a FDM based subdomain solver.
+The use of inexact subdomain solvers for BDDC was explored by Li and Widlund \cite{li2007use} and Dohrmann \cite{dohrmann2007approximate}.
+In Li and Widlund's work, multigrid v-cycles were used to solve the partially assembled subdomain problems, while we investigate the use of a FDM based subdomain solver.
 
 Specifically, we explore the use of FDM based approximate subdomain solvers for BDDC with subdomains consisting of single high-order finite elements.
-Single high-order element subdomains were successfully employed by Pavarino, Widlund, and Zampini for nearly incompressible elasticity problems in three dimensions \cite{pavarino2010bddc}.
+The analysis of single high-order element subdomains was developed by Pavarino, Widlund, and Zampini, and they demonstrated numerical results for nearly incompressible elasticity problems in three dimensions \cite{pavarino2010bddc}.
 
-With finite elements using high-order tensor product discretizations, the construction of these FDM approximate subdomain solvers helps reduce the setup cost for Dirichlet BDDC when compared to lumped BDDC, as solver ingredients can be reused between the subassembled problem solver and the subdomain interior solver used in the harmonic extension problem.
-Furthermore, this problem is cheaper to set up than factoring the dense matrix representation of these problems, as the FDM approximate subdomain solvers are based around simultaneous diagonalization of the one dimensional mass and stiffness problems.
+With finite elements using high-order tensor product discretizations, the construction of these FDM approximate subdomain solvers is cheaper to set up than factoring the dense matrix representation of these problems, as the FDM approximate subdomain solvers are based around simultaneous diagonalization of the one dimensional mass and stiffness problems.
+Furthermore, the FDM solvers eliminate the increase in setup cost for Dirichlet BDDC when compared to lumped BDDC, as solver ingredients can be reused between the subassembled problem solver and the subdomain interior solver used in the harmonic extension problem.
 
 BDDC can be used as a preconditioner for an iterative solver; however we are interested in combining BDDC with $p$-multigrid.
-As mentioned above, multigrid methods have been used to provide effective subdomain solvers for BDDC, but using BDDC as a smoother for multigrid methods is novel.
+As mentioned above and also shown by Klawonn, Reinbach, and Pavarino \cite{klawonn2008exact}, multigrid methods have been used to provide effective subdomain solvers for BDDC, but using BDDC as a smoother for multigrid methods is novel.
 BDDC has improved smoothing properties when compared to polynomial smoothers, which facilitates rapid coarsening in $p$-multigrid.
 Additionally, BDDC has reduced communication requirements when compared to polynomial smoothers that deliver comparable smoothing properties with conservative $p$-coarsening.
 

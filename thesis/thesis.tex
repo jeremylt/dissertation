@@ -46,10 +46,11 @@
 
 \abstract{ %\OnePageChapter	% if this abstract goes under 1 page
 High-order matrix-free finite element operators offer superior performance on modern high performance computing hardware when compared to assembled sparse matrices, both with respect to floating point operations needed for operator evaluation and the memory transfer needed for a matrix-vector product.
-However, high-order matrix-free operators require iterative solvers, such as Krylov subspace methods, and these methods converge slowly for ill-conditioned operators, such as high-order finite element operators and preconditioning techniques are needed to improve the convergence of these iterative solvers.
+However, high-order matrix-free operators require iterative solvers, such as Krylov subspace methods, and these methods converge slowly for ill-conditioned operators.
+Preconditioning techniques are needed to improve the convergence of these iterative solvers independent of problem size and resolution.
 
-$p$-multigrid and domain decomposition methods are particularly well suited for problems on unstructured meshes, but these methods can involve parameters that require careful tuning to ensure proper convergence.
-Local Fourier Analysis (LFA) of these preconditioners describes how these methods effect frequency modes in the error and can provide sharp convergence estimates and parameter tuning while only requiring computation on a single representative element or macro-element patch.
+$P$-multigrid and domain decomposition methods are particularly well suited for problems on unstructured meshes, but these methods can involve parameters that require careful tuning to ensure proper convergence.
+Local Fourier Analysis (LFA) of these preconditioners describes how these methods affect frequency modes in the error for the operator defined on an infinite or periodic domain and can provide sharp convergence estimates and parameter tuning while only requiring computation on a single representative element or macro-element patch.
 
 We develop LFA of high-order finite element operators, focusing on multigrid and domain decomposition preconditioning techniques.
 The LFA of $p$-multigrid is validated with numerical experiments, and we extend this LFA to reproduce previous work with $h$-multigrid by using macro-elements consisting of multiple low-order finite elements.
