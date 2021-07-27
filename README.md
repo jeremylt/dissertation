@@ -1,5 +1,7 @@
 # PhD Dissertation - Jeremy L Thompson
 
+[![DOI](https://zenodo.org/badge/344299179.svg)](https://zenodo.org/badge/latestdoi/344299179)
+
 ## Organization
 
 The final PDFs for the thesis and presentation are in the `pdf` folder.
