@@ -2,6 +2,7 @@
 
 ## Organization
 
+The final PDFs for the thesis and presentation are in the `pdf` folder.
 The raw LaTeX source for this dissertation can be found in the `thesis` and `presentation` folders.
 The images and charts can be found in the `img` folder.
 The data and scripts for all charts and analysis in this dissertation can be found in the `data`, `scripts`, and `jupyter` folders.
