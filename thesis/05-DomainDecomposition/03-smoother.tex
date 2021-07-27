@@ -1,5 +1,5 @@
 Jacobi and Chebyshev smoothers provided rather poor convergence factors for $p$-multigrid with aggressive coarsening.
-In this section, we explore using BDDC on single high-order element subdomains as a smoother for $p$-multigrid.
+In this section, we explore using BDDC on single high-order element subdomains as a smoother for a $p$-multigrid v-cycle with aggressive coarsening.
 
 Given the ill-conditioning seen in Figure \ref{fig:lumped_bddc_comparison} for the lumped BDDC preconditioned operator with single high-order element subdomains, we restrict our analysis to Dirichlet BDDC.
 As mentioned in Section \ref{sec:fdm_subdomain}, the higher setup cost associated with Dirichlet BDDC for subdomains consisting of multiple low-order elements can be eliminated with the use of FDM approximate solvers for the broken subdomain and subdomain interior problems.

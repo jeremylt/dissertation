@@ -1,8 +1,9 @@
 Inexact solvers for the subdomain problems ${\color{burgundy}\mathbf{A}}_{\text{r}, \text{r}}^{-1}$ were discussed by Li and Widlund in \cite{li2007use}.
 Here we introduce an inexact subdomain solver based on the Fast Diagonalization Method (FDM).
+We use FDM on the full high-order element subdomain and use Lagrange multipliers to constrain the primal values to provide a Dirichlet solver on the broken subdomain interior.
 
 The FDM is a fast exact solver for separable problems with a tensor product representation introduced by Lynch, Rice, and Thomas \cite{lynch1964direct}.
-Fast diagonalization has been an effective inexact solver as part of additive overlapping Schwarz problems for spectral element discretizations for Poisson and Helmholtz equations, as well as Naiver-Stokes problems, as shown by Fischer and Lottes \cite{fischer2005hybrid}.
+Fast diagonalization has been an effective inexact solver as part of additive overlapping Schwarz problems for spectral element discretizations for Poisson and Helmholtz equations, as well as the pressure solve in Naiver-Stokes problems, as shown by Fischer and Lottes \cite{fischer2005hybrid}.
 
 Let $M$ and $K$ be the one-dimensional mass and Laplacian matrices, respectively, given by
 \begin{equation}
@@ -49,7 +50,7 @@ If $\mathbf{M}$ and $\mathbf{K}$ are invertible on the domain, then the inverse 
 \end{equation}
 
 However, for a single element with no boundary conditions, the Laplacian is singular and no inverse exists.
-Fischer and Lottes \cite{fischer2005hybrid} compute the pseudo-inverse of the diagonal $\boldsymbol{\Lambda}^{+}$, which is given by taking the reciprocal of the non-zero values in $\boldsymbol{\Lambda}$.
+Fischer and Lottes \cite{fischer2005hybrid} describe computing the pseudo-inverse of the diagonal $\boldsymbol{\Lambda}^{+}$, which is given by taking the reciprocal of the non-zero values in $\boldsymbol{\Lambda}$.
 We instead compute an approximate inverse to the Laplacian by finding the true inverse of a perturbed Laplacian, given by $\boldsymbol{\mathcal{K}} = \mathbf{K} + \epsilon \mathbf{I}$.
 We denote this approximate inverse by $\mathbf{K}^+$.
 
@@ -62,7 +63,20 @@ We denote this approximate inverse by $\mathbf{K}^+$.
   \label{fig:subdomain_pseudoinverse}
 \end{figure}
 
-In Figure \ref{fig:subdomain_pseudoinverse}, we compare these two methods of forming a pesudo-inverse of the Laplacian on a reference element.
+We are specifically interested in using the pseudo-inverse on a single element to form an approximate inverse on the broken subdomain interior.
+We therefore form the approximate inverse of a separable operator on an element as
+\begin{equation}
+  {\color{burgundy}\mathbf{A}}^e_{\text{r}, \text{r}} = \boldsymbol{\mathcal{R}}^T
+  \left[ \begin{array}{c c}
+  {\color{burgundy}\mathbf{A}}^e  &  \boldsymbol{\mathcal{V}}^T  \\
+  \boldsymbol{\mathcal{V}}        &  \mathbf{0}                  \\
+  \end{array} \right]
+  \boldsymbol{\mathcal{R}},
+  \label{eq:saddle-point}
+\end{equation}
+where $\boldsymbol{\mathcal{R}}$ is an injection operator from the broken element space to the full element augmented with duplicate primal nodes to constrain and $\boldsymbol{\mathcal{V}}$ is the primal restriction operator, which restricts to the duplicated primal vertices from the full broken space with Dirichlet boundary conditions.
+
+In Figure \ref{fig:subdomain_pseudoinverse}, we compare these two methods of forming a pesudo-inverse of the Laplacian on the broken subdomain interior for a reference element.
 We attempt to invert the action of the Laplacian, $\mathbf{K} \mathbf{u}$, on a two and three-dimensional reference element with polynomial bases of varying order with Dirichlet boundary conditions on the primal vertices.
 The values in the vector $\mathbf{u}$ are given by $f \left( \mathbf{x} \right) = - \sum_d \left( \mathbf{x}_d + 1 \right) \left( \mathbf{x}_d - 1 \right)$.
 
@@ -88,7 +102,7 @@ This discussion of the FDM has, thus far, neglected the effects of irregular geo
 These effects destroy the separability of this problem and the FDM cannot be used as fast direct solver for these problems.
 However, as discussed by Li and Widlund in \cite{li2007use}, an inexact subdomain solver is adequate when BDDC is used as a preconditioner.
 
-Couzy in \cite{couzy1995spectral} and Fischer, Miller, and Tofu in \cite{fischer2000overlapping} presented a simple modification to the FDM to address irregular geometry.
+Couzy in \cite{couzy1995spectral} and Fischer, Miller, and Tufo in \cite{fischer2000overlapping} presented a simple modification to the FDM to address irregular geometry.
 In their work, the Poisson problem is defined on a regular parallelepiped with average dimensions in each coordinate direction that match the finite element with the more complex geometry.
 Here we present a further generalization which allows us to create an approximate FDM subdomain solver, ${\color{burgundy}\mathbf{A}}_{\text{r}, \text{r}}^{-1}$.
 
@@ -123,19 +137,7 @@ where the value of $\mathbf{\Lambda}$ is given by
 \end{equation}
 based upon if the diagonal operator ${\color{applegreen}\mathbf{D}}$ has interpolated values, derivatives, or both, respectively, at quadrature points.
 
-We have an approximate FDM inverse for the entire subdomain, ${\color{burgundy}\mathbf{A}}^{e, +} = {\color{blue(ncs)}\mathbf{B}}^T {\color{applegreen}\mathbf{D}} {\color{blue(ncs)}\mathbf{B}}$, but we need a subdomain solver for only the broken space, ${\color{burgundy}\mathbf{A}}^{-1, e}_{\text{r}, \text{r}}$.
-We form a saddle point problem to constrain the subdomain vertex nodes and form a Dirichlet problem from the full subdomain Neumann problem.
-The subdomain problem is therefore given by
-
-\begin{equation}
-{\color{burgundy}\mathbf{A}}^e_{\text{r}, \text{r}} = \boldsymbol{\mathcal{R}}^T
-\left[ \begin{array}{c c}
-{\color{burgundy}\mathbf{A}}^e  &  \boldsymbol{\mathcal{V}}^T  \\
-\boldsymbol{\mathcal{V}}        &  \mathbf{0}                  \\
-\end{array} \right]
-\boldsymbol{\mathcal{R}},
-\end{equation}
-where $\boldsymbol{\mathcal{R}}$ is an injection operator from the broken element space to the full element augmented with duplicate primal nodes to constrain and $\boldsymbol{\mathcal{V}}$ is the primal restriction operator, which restricts to the duplicated primal vertices from the full broken space.
+We restrict this approximate solver on the full element to the nodes unique to the broken subdomain with a saddle point problem, as above in Equation \ref{eq:saddle-point}.
 
 \begin{definition}[Fast Diagonalization Method Approximate Subdomain Solver]
 The Fast Diagonalization Method approximate inverse subdomain solver is given by the direct sum of element subdomain solvers of the form

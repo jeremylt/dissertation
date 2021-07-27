@@ -1,5 +1,5 @@
 The libCEED \cite{libceed-user-manual} fluid dynamics mini-application solves the time-dependent Navier-Stokes equations of compressible gas dynamics in a static Eulerian three-dimensional frame using unstructured high-order finite element spatial discretizations and explicit or implicit high-order time-stepping.
-Moreover, since the Navier-Stokes example has been developed using PETSc, the pointwise physics represented in the quadrature point function ${\color{applegreen}\mathbf{D}}$ are separated from the parallelization, meshing, and linear and non-linear solvers.
+Moreover, since the Navier-Stokes example has been developed using PETSc with libCEED, the definition of the action of the matrix-free operators are separated from the parallelization, meshing, and linear and non-linear solvers.
 
 The mathematical formulation used in the fluid dynamics mini-application is similar to the discussion in \cite{giraldoetal2010}.
 The compressible Navier-Stokes equations in conservative form are given by
@@ -12,7 +12,7 @@ The compressible Navier-Stokes equations in conservative form are given by
 \label{eq:ns}
 \end{equation}
 where $\boldsymbol{\sigma} = \mu \left( \nabla \mathbf{u} + \left( \nabla \mathbf{u} \right)^T + \lambda \left( \nabla \cdot \mathbf{u} \right) \mathbf{I}_3 \right)$ is the Cauchy (symmetric) stress tensor, $\mu$ is the dynamic viscosity coefficient, and $\lambda = - 2/3$ is the Stokes hypothesis constant.
-In Equation \ref{eq:ns}, $\rho$ represents the volume mass density, $\mathbf{U}$ the momentum density (defined as $\mathbf{U} = \rho \mathbf{u}$, where $\mathbf{u}$ is the vector velocity field), $E$ the total energy density (defined as $E = \rho e$, where $e$ is the total energy), $\mathbf{I}_3$ represents the $3 \times 3$ identity matrix, $g$ the gravitational acceleration constant, $\mathbf{\hat{k}}$ the unit vector in the $z$ direction, $k$ the thermal conductivity constant, $T$ represents the temperature, and $P$ the pressure.
+In Equation \ref{eq:ns}, $\rho$ represents the volume mass density, $\mathbf{U}$ the momentum density (defined as $\mathbf{U} = \rho \mathbf{u}$, where $\mathbf{u}$ is the vector velocity field), $E$ the total energy density (defined as $E = \rho e$, where $e$ is the total specific energy), $\mathbf{I}_3$ represents the $3 \times 3$ identity matrix, $g$ the gravitational acceleration constant, $\mathbf{\hat{k}}$ the unit vector in the $z$ direction, $k$ the thermal conductivity constant, $T$ represents the temperature, and $P$ the pressure.
 Pressure is given by the equation of state
 \begin{equation}
    P = \left( {c_p}/{c_v} -1\right) \left( E - {\mathbf{U} \cdot \mathbf{U}}/{(2 \rho)} - \rho g z \right) \, ,
@@ -83,8 +83,9 @@ where
 \end{equation}
 and with
 \begin{equation}
-       f(t^n, \mathbf{q}_N^n) = - [\nabla \cdot \mathbf{F}(\mathbf{q}_N)]^n + [S(\mathbf{q}_N)]^n \, .
+       f(t^n, \mathbf{q}_N^n) \mathbf{M}  = - [\nabla \cdot \mathbf{F}(\mathbf{q}_N)]^n + [S(\mathbf{q}_N)]^n \,,
 \end{equation}
+where $\mathbf{M}$ is the mass matrix for the system.
 Note that any explicit time-stepping scheme available in PETSc can be chosen at runtime.
 
 \subsubsection{Implicit Time-Stepping Formulation}
@@ -139,4 +140,5 @@ We can solve Equation \ref{eq:weak-vector-ns} with a Galerkin discretization or 
 
 Figure \ref{fig:vortices} shows an atmospheric simulation where vortices develop as a cold air bubble drops to the ground.
 This mini-application can run on host or device processors and supports stabilization techniques such as streamline-upwind (SU) and streamline-upwind Petrov-Galerkin (SUPG).
-Ongoing research includes the stabalization techniques and preconditioning.
+For discussion of these stabilization techniques, see \cite{hughes2010stabilized}.
+Ongoing research for this mini-application includes the stabilization techniques and preconditioning.

@@ -26,5 +26,5 @@ where $\mathbf{N}_{p - 1}^p$ interpolates from a basis of degree $p - 1$ to degr
 To preserve symmetry and prevent aliasing, the restriction operator is defined as the transpose of the prolongation operator, $\mathbf{R}_{p - 1}^p = \left( \mathbf{P}_{p - 1}^p \right)^T$.
 These operators can be implemented in a matrix-free fashion.
 
-Even with modest order finite elements, such as degree $4$, $p$-multigrid can substantially reduce the size of the global solution vector, by a factor of approximately $\left( p + 1 \right)^3 / 8$.
-Thus, assembly of the finite element operator on the coarse grid, ${\color{burgundy}\mathbf{A}}_c$, becomes tractable and direct solvers such as AMG can be used to solve the coarse problem.
+Even with modest order finite elements, such as degree $4$, $p$-multigrid can substantially reduce the size of the global solution vector, by a factor of approximately $\left( p + 1 \right)^3 / 8$, assuming a linear coarse grid representation.
+While the coarse grid solver may use a matrix-free representation, assembly of the finite element operator on the coarse grid, ${\color{burgundy}\mathbf{A}}_c$, becomes tractable and assembled matrix-based methods, such as direct solvers and AMG, can be used to solve the coarse problem.

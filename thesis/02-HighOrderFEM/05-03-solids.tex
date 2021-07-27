@@ -1,5 +1,5 @@
 The solid mechanics mini-application solves the steady-state static momentum balance equations using unstructured high-order finite element spatial discretizations.
-As with the fluid dynamics mini-application, the solid mechanics elasticity mini-application has been developed using PETSc so that the pointwise physics ${\color{applegreen}\mathbf{D}}$ are separated from the parallelization, meshing, and solver concerns.
+As with the fluid dynamics mini-application, the solid mechanics elasticity mini-application has been developed using PETSc with libCEED so that the matrix-free operator application is separated from the parallelization, meshing, and solver concerns.
 This mini-application uses $p$-multigrid preconditioning as described in Chapter \ref{ch:MultigridMethods}.
 
 In this mini-application, we consider three formulations used in solid mechanics applications: linear elasticity, Neo-Hookean hyperelasticity at small strain, and Neo-Hookean hyperelasticity at finite strain.
@@ -7,7 +7,7 @@ We provide the strong and weak forms of the static balance of linear momentum in
 The stress-strain relationship for each of the material models is provided.
 Due to the nonlinearity of material models in Neo-Hookean hyperelasticity, the Newton linearization of the material models is also provided.
 
-Linear elasticity and small-strain hyperelasticity can both by obtained from the finite-strain hyperelastic formulation by linearization of geometric and constitutive nonlinearities.
+Linear elasticity and small-strain hyperelasticity can both be obtained from the finite-strain hyperelastic formulation by linearization of geometric and constitutive nonlinearities.
 The effect of these linearizations is sketched in Figure \ref{fig:hyperelastic-cd}, where $\boldsymbol \sigma$ and $\boldsymbol \epsilon$ are stress and strain, respectively, in the small strain regime, while $\mathbf S$ and $\mathbf E$ are their finite-strain generalizations, the second Piola-Kirchoff tensor and Green-Lagrange strain tensor, respectively, defined in the initial configuration, and $\mathsf C$ is a linearized constitutive model.
 
 \begin{figure}
@@ -30,9 +30,9 @@ $$
 \subsubsection{Hyperelasticity at Finite Strain}
 
 In the total Lagrangian approach for the Neo-Hookean hyperelasticity problem, the discrete equations are formulated with respect to the initial configuration.
-In this formulation, we solve for displacement $\mathbf u \left( \mathbf X \right)$ in the reference frame $\mathbf X$.
+In this formulation, we solve for displacement $\mathbf u \left( \mathbf X \right)$ in the initial frame $\mathbf X$.
 The notation for elasticity at finite strain is inspired by \cite{holzapfel2000nonlinear} to distinguish between the current and initial configurations.
-We denote the reference frame by capital letters and the current frame by lower case letters.
+We denote the initial frame by capital letters and the current frame by lower case letters.
 
 The strong form of the static balance of linear-momentum at finite strain is given by
 \begin{equation}
@@ -73,7 +73,7 @@ In particular, given an orthogonal transformation $Q$, we require
    Q \mathbf S \left( \mathbf E \right) Q^T = \mathbf S \left( Q \mathbf E Q^T \right),
    \label{eq:elastic-invariance}
 \end{equation}
-which means that we can change our reference frame before or after computing $\mathbf S$ and get the same result.
+which means that we can change our initial frame before or after computing $\mathbf S$ and get the same result.
 Materials with constitutive relations in which $\mathbf S$ is uniquely determined by $\mathbf E$ while satisfying the invariance property given by Equation \ref{eq:elastic-invariance} are known as Cauchy elastic materials.
 
 We define a strain energy density functional $\Phi \left( \mathbf E \right) \in \mathbb{R}$ and obtain the strain energy from its gradient,
@@ -111,7 +111,7 @@ To evaluate Equation \ref{eq:strain-energy-grad}, we make use of
 \begin{equation}
    \frac{\partial J}{\partial \mathbf E} = \frac{\partial \sqrt{\lvert \mathbf C \rvert}}{\partial \mathbf E} = \lvert \mathbf C \rvert^{-1/2} \lvert \mathbf C \rvert \mathbf C^{-1} = J \mathbf C^{-1},
 \end{equation}
-where the factor of $\frac 1 2$ has been absorbed due to the fact that$\mathbf C = \mathbf I_3 + 2 \mathbf E$.
+where the factor of $\frac 1 2$ has been absorbed due to the fact that $\mathbf C = \mathbf I_3 + 2 \mathbf E$.
 Carrying through the differentiation in Equation \ref{eq:strain-energy-grad} for the model in Equation \ref{eq:neo-hookean-energy}, we arrive at
 \begin{equation}
    \mathbf S = \lambda \log J \mathbf C^{-1} + \mu (\mathbf I_3 - \mathbf C^{-1})

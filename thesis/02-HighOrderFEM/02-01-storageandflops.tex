@@ -4,8 +4,8 @@ We consider the approximate number of bytes required for storage and FLOPs requi
 High-order finite element discretizations are less common than low-order finite elements, in part, because a linear operator or the Jacobian of a non-linear operator rapidly loses sparsity in a sparse matrix representation.
 Matrix-free implementations with tensor product finite element bases can overcome this issue by exploiting the tensor product structure to reduce both the data storage requirements and the FLOPs required to apply a matrix-vector product.
 
-With a sparse matrix representation, application of the finite element operator for a single hexahedral element requires $\mathcal{O} \left( \left( p + 1 \right)^6 \right)$ matrix entries and $\mathcal{O} \left( \left( p + 1 \right)^6 \right)$ floating point operations, where $p$ is the polynomial order of the finite element basis.
-In contrast, application of the matrix-free operator for a single tensor product element requires $\mathcal{O} \left( \left( p + 1 \right)^3 \right)$ floating point values and $\mathcal{O} \left( \left( p + 1 \right)^{d + 1} \right)$ FLOPs.
+With a sparse matrix representation, application of the finite element operator for a single tensor product element requires $\mathcal{O} \left( \left( p + 1 \right)^{2 d} \right)$ matrix entries and $\mathcal{O} \left( \left( p + 1 \right)^{2 d} \right)$ floating point operations, where $p$ is the polynomial order of the finite element basis and $d$ is the dimension.
+In contrast, application of the matrix-free operator for a single tensor product element requires $\mathcal{O} \left( \left( p + 1 \right)^d \right)$ floating point values and $\mathcal{O} \left( \left( p + 1 \right)^{d + 1} \right)$ FLOPs.
 When multiple components in the PDE use the same finite element bases, the coefficients in this complexity analysis further favor matrix-free operator implementations.
 
 \begin{figure}[ht!]
@@ -25,5 +25,5 @@ As seen in Figure \ref{fig:assembledvsmatrixfree}, the balance between bandwidth
 Matrix-free finite element operator implementations allow for greater arithmetic intensity at high-order, which allows these operators to achieve performance that is closer to the peak performance for this hardware.
 
 It is important to note that generation of high quality hexahedral meshes for tensor product finite elements is a time intensive process when compared to the generation of simplex meshes.
-However, it is possible to generate meshes comprised predominately, but not necessarily exclusively, of high quality hexahedral elements with initial refinement of a simplex mesh without the costly process of fully converting a simplex mesh into only hexahedral elements.
+However, it is possible to generate meshes comprised predominately, but not necessarily exclusively, of high quality hexahedral elements with little additional effort when compared to the creation of a simplex mesh.
 Thus, the performance benefits of high-order matrix-free finite elements with tensor product representations can be realized without the substantial additional effort required to generate a mesh exclusively composed of high quality hexahedral elements.

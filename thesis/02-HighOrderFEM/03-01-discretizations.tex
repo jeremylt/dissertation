@@ -16,13 +16,13 @@ $\mathbf{W}   = W \otimes W \otimes W$
 \end{equation}
 The basis operations in Equation \ref{eq:basis_ops} are defined on a reference element $\hat{K} = \left[ -1, 1 \right]^3$.
 
-In finite element and spectral element methods, we partition the domain $\Omega$ into a set of $E$ elements, denoted $\lbrace K^e \rbrace_{e = 1}^E$ with coordinate mapping to the reference element given by $X : \hat{K} \rightarrow K^e$.
+In finite element and spectral element methods, we partition the domain $\Omega$ into a set of $E$ elements, denoted $\lbrace K^e \rbrace_{e = 1}^E$ with coordinate mapping from the reference element to the physical elements given by $X : \hat{K} \rightarrow K^e$.
 The Jacobian of this mapping is given by $J_{i j} = \partial x_i / \partial X_j$, where $X$ are the reference coordinates and $x$ the physical coordinates.
-We can invert the Jacobian and compute the derivatives of the physical coordinates in the reference space at every quadrature point.
+We can invert the Jacobian and compute the derivatives of the reference coordinates in the physical space at every quadrature point.
 \begin{equation}
 \mathbf{D}_i^e = \Lambda \left( \frac{\partial X_0}{\partial x_i} \right) \mathbf{D}_0 + \Lambda \left( \frac{\partial X_1}{\partial x_i} \right) \mathbf{D}_1 + \Lambda \left( \frac{\partial X_2}{\partial x_i} \right) \mathbf{D}_2
 \end{equation}
-where $\Lambda \left( X \right)_{i j} = X_i \delta_{i j}$ expresses pointwise multiplication of $J_{i j}^{-1}$ at quadrature points as a diagonal matrix.
+where $\Lambda \left( X \right)_{i j} = x_i \delta_{i j}$ expresses pointwise multiplication of $J_{i j}^{-1}$ at quadrature points as a diagonal matrix.
 With this coordinate mapping, element integration weights become $\mathbf{W}^e = W \Lambda \left( \lvert J^e \left( q \right) \rvert \right)$.
 
 A global assembly operator is defined as $\mathcal{E}^T = \left[ \mathcal{E}^e \right]^T$, where $\mathcal{E}^e$ represents local restriction operators extracting degrees of freedom that correspond to element $e$ from the global solution vector.
@@ -33,11 +33,11 @@ Notice that the local restriction operators do not assume a structured mesh, a c
 With these definitions, we can represent the Galerkin system of equations corresponding to the weak form of arbitrary second-order PDEs.
 The weak form of PDEs is linear in test functions and can be expressed as pointwise operations where functions of the unknown solution and its derivatives, $u$ and $\nabla u$, are contracted with the test functions and their derivatives, $v$ and $\nabla v$.
 
-Consider the weak form of an arbitrary PDE
+Consider the weak form of an arbitrary PDE whose weak form requires one weak derivative
 \begin{equation}
 \begin{array}{c}
 \text{find } u \in V \text{ such that for all } v \in V\\
-\langle v, u \rangle = \int_{\Omega} v \cdot f_0 \left( u, \nabla u \right) + \nabla v : f_1 \left( u, \nabla u \right) = 0
+\langle v, u \rangle = \int_{\Omega} v \cdot f_0 \left( u, \nabla u \right) + \nabla v : f_1 \left( u, \nabla u \right) = 0,
 \end{array}
 \label{eq:weak_form}
 \end{equation}

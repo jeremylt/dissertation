@@ -11,10 +11,10 @@ CG relies upon the observation that for symmetric positive-definite systems, sol
 \boldsymbol{\phi} \left( \mathbf{u} \right) = \frac{1}{2} \mathbf{u}^T {\color{burgundy}\mathbf{A}} \mathbf{u} - \mathbf{u}^T \mathbf{b}.
 \end{equation}
 
-The gradient of this quadratic form is given by $\boldsymbol{\phi}' \left( \mathbf{u}_k \right) = \mathbf{b} - {\color{burgundy}\mathbf{A}} \mathbf{u}_k$.
+The negative gradient of this quadratic form is given by $\boldsymbol{\phi}' \left( \mathbf{u}_k \right) = \mathbf{b} - {\color{burgundy}\mathbf{A}} \mathbf{u}_k = \mathbf{r}_k$.
 This gradient provides the direction of steepest descent, so CG chooses the appropriate step size in the direction of the gradient, which is equivalent to choosing the appropriate weight for each basis vector in the current Krylov subspace.
 
-In the method of Steepest Descent, the iterates $\mathbf{u}^k$ are given by traversing the direction of steepest descent until the gradient of the orthogonal to the search direction.
+In the method of Steepest Descent, the iterates $\mathbf{u}^k$ are given by traversing the direction of steepest descent until the gradient of $\boldsymbol{\phi}$ is orthogonal to the search direction.
 \begin{equation}
 \mathbf{u}_{k + 1} = \mathbf{u}_k + \alpha_k \mathbf{u}_k, \hspace{4mm}
 \alpha_k = \frac{\mathbf{r}_k^T \mathbf{r}_k}{\mathbf{r}_k^T {\color{burgundy}\mathbf{A}} \mathbf{r}_k}
@@ -23,14 +23,18 @@ The convergence of the method of Steepest Descent can be slow, especially when t
 
 CG improves upon Steepest Descent by taking the search directions to be A-orthogonal, which helps improve convergence.
 \begin{equation}
-\mathbf{u}_{k + 1} = \mathbf{u}_k + \alpha_k + \mathbf{d}_k, \hspace{4mm}
+\mathbf{u}_{k + 1} = \mathbf{u}_k + \alpha_k \mathbf{d}_k, \hspace{4mm}
 \alpha_k  = \frac{\mathbf{r}_k^T \mathbf{r}_k}{\mathbf{d}_k^T {\color{burgundy}\mathbf{A}} \mathbf{d}_k}, \hspace{4mm}
 \mathbf{d}_{k + 1} = \mathbf{r}_{k + 1} + \beta_{k + 1} \mathbf{d}_k, \hspace{4mm}
-\beta_{k + 1} = \frac{\mathbf{r}_k^T \mathbf{r}_k}{\mathbf{r}_k^T \mathbf{r}_k}
+\beta_{k + 1} = \frac{\mathbf{r}_{k + 1}^T \mathbf{r}_{k + 1}}{\mathbf{r}_k^T \mathbf{r}_k}
 \end{equation}
 
-Detailed convergence analysis for CG is complex and we omit it here.
-In general though, operators with a highly elliptic spectum, which results in a high condition number, have poorer convergence with CG, while operators, or preconditioned operators, that are closer to the identity operator converge much more quickly \cite{golub1989matrix}.
+Convergence analysis for CG is complex and we omit the discussion here; for details, see Saad \cite{saad2003iterative}.
+In general, the convergence of CG is bounded by the condition number of the operator, $\kappa \left( {\color{burgundy}\mathbf{A}} \right)$.
+\begin{equation}
+\left\lvert \mathbf{u} - \mathbf{u}_k \right\rvert_{\color{burgundy}\mathbf{A}} \leq 2 \left( \frac{\sqrt{\kappa} - 1}{\sqrt{\kappa} + 1} \right)^k \left\lvert \mathbf{u} - \mathbf{u}_0 \right\rvert_{\color{burgundy}\mathbf{A}}
+\end{equation}
+Operators with a high condition number have poorer convergence with CG, while operators, or preconditioned operators, that are closer to the identity operator converge much more quickly \cite{golub1989matrix}.
 
 There are more flexible Krylov methods that work for a more general set of operators, such as Generalized Minimum Residual (GMRES).
 Our preconditioners in Chapter \ref{ch:MultigridMethods} and Chapter \ref{ch:DomainDecomposition} maintain the symmetric positive-definite property required for CG, but they are also applicable to a wider range of Krylov methods or iterative solvers, such as GMRES.

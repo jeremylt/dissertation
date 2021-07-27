@@ -3,6 +3,7 @@ This framework for LFA of arbitrary order finite element discretizations has sev
 The work in this dissertation focused on LFA of nodal finite element discretizations where all fields used the same discretization.
 One natural extension of this work is the LFA of PDEs discretized with mixed finite element methods, such as those seen in solid mechanics applications with a continuous displacement space and a discontinuous pressure space.
 Another natural extension is the LFA of PDE with modal or hierarchical bases, where the basis is not associated with nodal locations.
+Lastly, this framework naturally extends to analyzing highly stretched elements, such as boundary layer elements in fluid dynamics applications.
 
 We described the LFA of $p$-multigrid and $h$-multigrid methods.
 This framework can also analyze $hp$-multigrid methods, where the prolongation operator is again defined by the evaluation of the coarse grid basis on the fine grid macro-element space.
@@ -10,9 +11,10 @@ Exploration of these techniques with LFA is an area for future work.
 
 Currently, our LFA of BDDC is restricted to primal spaces only consisting of subdomain vertices, but it is common to augment these points with subdomain edge and face averages, especially in three dimensional problems.
 Extending the LFA to use richer primal spaces would allow for more general and practical analysis.
+Furthermore, this LFA would facilitate comparisons between different primal space enrichment strategies.
 
-Another popular family of domain decomposition method is Schwartz methods, such as additive Schwartz.
-Developing the LFA of Schwartz methods, or other overlapping domain decomposition techniques, would help quantify convergence differences between overlapping methods and BDDC and facilitate a broader comparison between these two types of methods in terms of both convergence rates and global communication required.
+Another popular family of domain decomposition method is Schwarz methods, such as additive Schwarz.
+Developing the LFA of Schwarz methods, or other overlapping domain decomposition techniques, would help quantify convergence differences between overlapping methods and BDDC and facilitate a broader comparison between these two types of methods in terms of both convergence rates and global communication required.
 
 This LFA framework is designed to support applications.
 The results from the LFA in this dissertation indicate two new areas of note for application development.

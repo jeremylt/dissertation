@@ -6,7 +6,7 @@ The first injection operator, $\mathbf{R}_1$, the scaled injection operator, res
 Let $\mathcal{N} \left( x \right)$ denote the set of subdomains that contain a broken copy of degree of freedom $x$ in the broken space.
 If $x \in \Pi^e$ or $x \in \text{I}^e$, then $\lvert \mathcal{N} \left( x \right) \rvert = 1$, otherwise $\lvert \mathcal{N} \left( x \right) \rvert$ is the number of subdomains that contain $x$.
 The scaled injection operator, $\mathbf{R}_1$ is defined as the mapping between the global degrees of freedom and the broken space where each element is scaled by $1 / \lvert \mathcal{N} \left( x \right) \rvert$.
-For interior and vertex degrees of freedom, the sparse matrix representation of $\mathbf{R}_1$ would contain a single entry with a value of $1$, while each column corresponding to a duplicated degree of freedom has $\lvert \mathcal{N} \left( x \right) \rvert$ entries, each given by $1 / \lvert \mathcal{N} \left( x \right) \rvert$.
+For interior and vertex degrees of freedom, the sparse matrix representation of $\mathbf{R}_1$ would contain a row with a single entry of value $1$, while each column corresponding to a duplicated degree of freedom has $\lvert \mathcal{N} \left( x \right) \rvert$ entries, each given by $1 / \lvert \mathcal{N} \left( x \right) \rvert$.
 
 \begin{definition}[Scaled Injection Operator]
 The scaled injection operator, $\mathbf{R}_1$, is given by the mapping from the global problem space to the broken space where each degree of freedom is scaled by the reciprocal of its multiplicity in the broken space, denoted by $\lvert \mathcal{N} \left( x \right) \rvert^{-1}$.
@@ -25,14 +25,7 @@ The lumped BDDC preconditioner is given by
 An operator preconditioned with the lumped BDDC preconditioner has the same eigenvalues as the lumped FETI-DP preconditioned operator, with the exception of some eigenvalues that are equal to $0$ and $1$ \cite{li2007use}.
 
 The second injection operator, $\mathbf{R}_2$, the harmonic injection operator, results in the Dirichlet BDDC preconditioner, $\mathbf{M}^{-1}_2$.
-
 This injection operator uses a discrete harmonic extension of the interface values to minimize the energy norm of the result, which leads to a better stability bound, as shown by Toselli and Widlund \cite{toselli2006domain}.
-Let $\boldsymbol{\mathcal{H}}$ be given by a direct sum of local operators $\boldsymbol{\mathcal{H}}^e = - {\color{burgundy}\mathbf{A}}_{\text{I}, \text{I}}^{e, -1} {\color{burgundy}\mathbf{A}}_{\Gamma, \text{I}}^{e, T}$.
-This operator solves a local Dirichlet problem given by mapping the jump over subdomain interfaces for duplicated values to the subdomain interior.
-The jump mapping is given by
-\begin{equation}
-\mathbf{J}^{e, T} v \left( x \right) = \sum_{i \in \mathcal{N} \left( x \right)} \left( \frac{v^e \left( x \right)}{\lvert \mathcal{N} \left( x \right) \rvert} - \frac{v^i \left( x \right)}{\lvert \mathcal{N} \left( x \right) \rvert} \right), \forall x \in \Gamma^e.
-\end{equation}
 
 \begin{definition}[Harmonic Injection Operator]
 The harmonic injection operator is given by $\mathbf{R}_2 = \mathbf{R}_1 - \mathbf{J}^T \boldsymbol{\mathcal{H}}^T$, where $\boldsymbol{\mathcal{H}}$ is given by a direct sum of local operators $\boldsymbol{\mathcal{H}}^e = - {\color{burgundy}\mathbf{A}}_{\text{I}, \text{I}}^{e, -1} {\color{burgundy}\mathbf{A}}_{\Gamma, \text{I}}^{e, T}$ and
